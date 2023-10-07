@@ -1,0 +1,1 @@
+const theme = { borderRadius: { none: '0' } }; export default theme;

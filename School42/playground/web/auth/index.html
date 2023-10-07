@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 300px;
+            margin: auto;
+            margin-top: 100px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <hr>
+        
+        <h2>Sign up</h2>
+        <button id="signupGoogle">Sign up with Google</button>
+        <button id="signupFacebook">Sign up with Facebook</button>
+    </div>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            
+            // You should perform actual authentication here, e.g., sending data to a server
+            
+            // For this example, let's consider a simple hardcoded check
+            if (username === "user" && password === "password") {
+                alert("Login successful!");
+            } else {
+                alert("Login failed. Please check your credentials.");
+            }
+        });
+        
+    </script>
+<script>
+    // Existing login form code
+    
+    // Google Sign Up
+    document.getElementById("signupGoogle").addEventListener("click", function() {
+        // You would integrate Google Sign Up API here
+        // For example, using Google's OAuth 2.0 flow
+        
+        // Simulated success for the example
+        alert("Sign up with Google successful!");
+    });
+    
+    // Facebook Sign Up
+    document.getElementById("signupFacebook").addEventListener("click", function() {
+        // You would integrate Facebook Sign Up API here
+        // For example, using Facebook Login (OAuth 2.0)
+        
+        // Simulated success for the example
+        alert("Sign up with Facebook successful!");
+    });
+</script>
+    
+</body>
+</html>
+
+

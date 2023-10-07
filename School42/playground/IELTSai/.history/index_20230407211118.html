@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essay Checker App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3s4xpI2tn1jDo3Jsz" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/src/css/styles.css">
+    <script src="firebase.js"></script>
+
+</head>
+<body>
+    <!-- Your app's HTML content goes here -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBud7S48ZOZx5Bfz4Z2iL8DhG4yXK70xG/YhZfqh3ePtJNfM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <script src="dist/bundle.js"></script>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">IELTSai</h1>
+        <form id="essay-form">
+            <div class="mb-3">
+                <label for="essay-text" class="form-label"></label>
+                <grammarly-editor-plugin>
+                    <textarea id="essay-text"></textarea>
+                </grammarly-editor-plugin>
+            </div>
+            <button id="check-button" type="button">Check Essay</button>
+        </form>
+    </div>
+</body>
+<!-- Add this inside the <body> tag in index.html -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="#">IELTSai</a>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/src/views/settings.html">Settings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/src/views/history.html">History</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/src/views/statistics.html">Statistics</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+</html>
