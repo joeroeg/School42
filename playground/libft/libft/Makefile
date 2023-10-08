@@ -1,0 +1,77 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: device <device@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/29 19:12:37 by hzhukov           #+#    #+#              #
+#    Updated: 2023/04/03 13:55:17 by device           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = libft.a
+SO_NAME = libft.so
+
+
+SRCS =	ft_atoi.c \
+		ft_bzero.c \
+		ft_isalnum.c \
+		ft_isalpha.c \
+		ft_isascii.c \
+		ft_isdigit.c \
+		ft_isprint.c \
+		ft_strlcat.c \
+		ft_strlcpy.c \
+		ft_strlen.c \
+		ft_strncmp.c \
+		ft_tolower.c \
+		ft_toupper.c \
+		ft_strchr.c \
+		ft_strrchr.c\
+		ft_strnstr.c\
+		ft_memset.c\
+		ft_memcpy.c\
+		ft_memmove.c\
+		ft_memchr.c\
+		ft_memcmp.c\
+		ft_calloc.c\
+		ft_strdup.c\
+		ft_substr.c\
+		ft_strjoin.c\
+		ft_strtrim.c\
+		ft_split.c\
+		ft_strmapi.c\
+		ft_striteri.c\
+		ft_putchar_fd.c\
+		ft_putstr_fd.c\
+		ft_putendl_fd.c\
+		ft_putnbr_fd.c\
+		ft_itoa.c\
+
+OBJS = $(SRCS:.c=.o)
+
+HEADER = libft.h
+
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
+LIBS = -lbsd -lncurses
+LDFLAGS = -shared -nostartfiles
+
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
+
+$(SO_NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(SO_NAME) $(OBJS) $(LIBS)
+
+all: $(NAME) $(SO_NAME)
+
+clean:
+	/bin/rm -f $(OBJS)
+
+fclean: clean
+	/bin/rm -f $(NAME) $(SO_NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean res
