@@ -1,31 +1,16 @@
 #include <string.h>
 #include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
 
-char    *ft_strcpy(char *s1, const char *s2)
+int	ft_atoi(const char *string)
 {
-    char *start_s1 = s1;
-
-        while (*s2)
-        {
-            *s1 = *s2;
-            s1++;
-            s2++;
-        }
-        // if string is not null terminated then start_s1 will point to -> Hello, world!Hello, world!
-        *s1 = '\0';
-    return (start_s1);
+    if (*string == isspace)
+        string++;
 }
 
 int main()
 {
-    int i = 0;
-    char source[] = "Hello, world!";  // Source string
-    char destination[13];  // Destination buffer of insufficient size
-
-    ft_strcpy(destination, source);
-
-    // Printing the destination string
-    printf("Destination: %s\n", destination);
-
-    return 0;
+    char *s = " -1234";
+    printf("atoi: %d", atoi(s));
 }
