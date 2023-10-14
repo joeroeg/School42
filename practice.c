@@ -1,16 +1,22 @@
-#include <string.h>
 #include <stdio.h>
-#include <ctype.h>
-#include <stdlib.h>
 
-int	ft_atoi(const char *string)
-{
-    if (*string == isspace)
-        string++;
-}
+int main() {
+    int numbers[5];  // Create an array to hold the numbers
 
-int main()
-{
-    char *s = " -1234";
-    printf("atoi: %d", atoi(s));
+    printf("Enter 5 numbers:\n");
+
+    // Loop to take input from the user and store in the array
+    for (int i = 0; i < 5; i++) {
+        printf("Enter number %d: ", i + 1);
+        scanf("%d", &numbers[i]);  // Read a number and store in the array
+    }
+
+    // Print the array to verify the input
+    printf("Numbers entered: ");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\n");
+
+    return 0;
 }
