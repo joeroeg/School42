@@ -5,9 +5,4 @@
         "stdbool.h": "c",
         "unistd.h": "c"
     }
-
-    "code-runner.executorMap": {
-        "python": "/usr/bin/python3.10"
-    }
-    
 }

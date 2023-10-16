@@ -1,19 +1,11 @@
 {
     "configurations": [
-        {
-            "type": "lldb",
-            "request": "attach",
-            "name": "Attach",
-            "program": "${workspaceFolder}/playground/-/K&R_C/a.out",
-        },
-        
-        
         
     {
         "name": "(gdb) Launch",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/playground/-/K&R_C/a.out",
+        "program": "${workspaceFolder}/a.out",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${fileDirname}",
