@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 11:35:26 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/16 11:59:54 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/16 14:24:53 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/16 15:42:33 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
+
+	int	ft_isascii(int c)
+	{
+		return (!(c & ~0x7F));
+	}
+
 #include <stdio.h>
 
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned char	*p;
-	size_t			i;
+int main() {
+    unsigned char test_char = 'A';
+    printf("Is '%c' ASCII? %s\n", test_char, ft_isascii(test_char) ? "Yes" : "No");
 
-	p = (unsigned char *)s;
-	i = 0;
-	while (i < n)
-	{
-		p[i] = 0;
-		i++;
-	}
+    test_char = '§';  // A non-ASCII character
+
+    printf("Is '%c' ASCII? %s\n", test_char, ft_isascii(test_char) ? "Yes" : "No");
+
+    return 0;
 }
