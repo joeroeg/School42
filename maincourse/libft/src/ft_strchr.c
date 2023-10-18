@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 20:29:00 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:20:30 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/17 20:09:01 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/18 18:43:37 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *neddle, size_t len)
+char	*ft_strchr(const char *s, int c)
 {
+	char	target;
 	size_t	i;
-	size_t	j;
-	size_t	length;
 
-	if (!neddle[0])
-		return ((char *)haystack);
-	length = ft_strlen(neddle);
+	target = (char)c;
 	i = 0;
-	while (i < len && haystack[i])
+	while (s[i] != '\0')
 	{
-		j = 0;
-		while (i + j < len && haystack[i + j] == neddle[j] && j < length)
-			j++;
-		if (j == length)
-			return ((char *)haystack + i);
+		if (s[i] == target)
+			return ((char *)(s + i));
 		i++;
 	}
+	if (target == '\0')
+		return ((char *)(s + i));
 	return (NULL);
 }
-
