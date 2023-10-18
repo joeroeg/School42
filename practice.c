@@ -1,43 +1,24 @@
-#include <stddef.h>
-
-void* bit_memset_zero(void* ptr, size_t size_in_bits, size_t num_times) {
-    unsigned char* byte_ptr = (unsigned char*)ptr;
-    size_t num_bytes = (size_in_bits + 7) / 8;  // Round up to the nearest byte
-
-    for (size_t i = 0; i < num_bytes; ++i) {
-        for (size_t j = 0; j < 8 && i * 8 + j < size_in_bits; ++j) {
-            if (num_times > 0) {
-                byte_ptr[i] &= ~(1 << j);  // Set bit to 0
-                num_times--;
-            } else {
-                return ptr;  // All bits set 0, return
-            }
-        }
-    }
-
-    return ptr;
-}
-
 #include <stdio.h>
 
-void print_buffer(const unsigned char* buffer, size_t size_in_bits) {
-    printf("Buffer content: ");
-    for (size_t i = 0; i < size_in_bits / 8; ++i) {
-        printf("%02x ", buffer[i]);
-    }
-    printf("\n");
-}
-
 int main() {
-    unsigned char buffer[2] = {0xFF, 0xFF};  // Initialize buffer: 11111111 11111111
+    double num1, num2;
+    printf("Enter two decimal numbers: ");
+    scanf("%lf %lf", &num1, &num2);
 
-    printf("Before: ");
-    print_buffer(buffer, 16);  // Print initial buffer content
+    int result = (int)num1 & (int)num2; // Logic AND
+    printf("Result of AND operation: %d\n", result);
 
-    bit_memset_zero(buffer, 16, 10);  // Set first 10 bits to 0
+    result = (int)num1 | (int)num2; // Logic OR
+    printf("Result of OR operation: %d\n", result);
 
-    printf("After: ");
-    print_buffer(buffer, 16);  // Print updated buffer content
+    result = (int)num1 ^ (int)num2; // Logic XOR
+    printf("Result of XOR operation: %d\n", result);
+
+    result = ~(int)num1; // Logic NOT
+    printf("Result of NOT operation for num1: %d\n", result);
+
+    result = ~(int)num2; // Logic NOT
+    printf("Result of NOT operation for num2: %d\n", result);
 
     return 0;
 }
