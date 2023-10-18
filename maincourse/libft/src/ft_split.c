@@ -6,13 +6,13 @@
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:35:15 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:20:12 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:28:30 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_words(const char *str, char c)
+static int	count(const char *str, char c)
 {
 	int	i;
 	int	trigger;
@@ -40,8 +40,12 @@ static char	*word_dup(const char *str, int start, int finish)
 
 	i = 0;
 	word = malloc((finish - start + 1) * sizeof(char));
+	if (!word)
+		return (0);
 	while (start < finish)
+	{
 		word[i++] = str[start++];
+	}
 	word[i] = '\0';
 	return (word);
 }
@@ -53,12 +57,15 @@ char	**ft_split(char const *s, char c)
 	int		index;
 	char	**split;
 
-	if (!s || !(split = malloc((count_words(s, c) + 1) * sizeof(char *))))
+	if (!s)
 		return (0);
-	i = 0;
+	split = malloc((count(s, c) + 1) * sizeof(char *));
+	if (!split)
+		return (0);
+	i = -1;
 	j = 0;
 	index = -1;
-	while (i <= ft_strlen(s))
+	while (++i <= ft_strlen(s))
 	{
 		if (s[i] != c && index < 0)
 			index = i;
@@ -67,7 +74,6 @@ char	**ft_split(char const *s, char c)
 			split[j++] = word_dup(s, index, i);
 			index = -1;
 		}
-		i++;
 	}
 	split[j] = 0;
 	return (split);

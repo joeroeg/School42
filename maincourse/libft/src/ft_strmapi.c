@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:41:53 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:20:28 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:34:34 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char			*str;
 	unsigned int	i;
 
-	if (!s || !f || !(str = ft_strdup(s)))
+	if (!s || !f)
+		return (0);
+	str = ft_strdup(s);
+	if (!str)
 		return (0);
 	i = 0;
 	while (str[i])

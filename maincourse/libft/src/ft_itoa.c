@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:39:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 19:14:29 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:16:17 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ char	*convert_to_string(int n, size_t size)
 	else
 		nbr = -(long)n;
 	*(str + size--) = '\0';
-
 	while (nbr > 0)
 	{
 		*(str + size--) = nbr % 10 + '0';
@@ -72,4 +71,3 @@ char	*ft_itoa(int n)
 	size = calculate_size(n);
 	return (convert_to_string(n, size));
 }
-

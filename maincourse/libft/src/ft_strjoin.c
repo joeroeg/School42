@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:30:26 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:20:22 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:30:26 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
-	if (!s1 || !s2
-		|| !(new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
-		return (0);
+	if (!s1 || !s2)
+		return (NULL);
+	new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (new_str == NULL)
+		return (NULL);
 	i = 0;
 	while (s1[i] != '\0')
 	{
