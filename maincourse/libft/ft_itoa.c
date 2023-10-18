@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 20:47:06 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:20:18 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/18 17:39:44 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/18 18:20:56 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *str)
+char	*ft_itoa(int n)
 {
-	size_t	length;
-	char	*dup_str;
-	size_t	i;
+	char	*str;
+	long	nbr;
+	size_t	size;
 
-	length = 0;
-	while (str[length] != '\0')
-		length++;
-	dup_str = (char *)malloc((length + 1) * sizeof(char));
-	if (dup_str == NULL)
-		return (NULL);
-	i = 0;
-	while (i < length)
+	nbr = n;
+	size = n > 0 ? 0 : 1;
+	nbr = nbr > 0 ? nbr : -nbr;
+	while (n)
 	{
-		dup_str[i] = str[i];
-		i++;
+		n /= 10;
+		size++;
 	}
-	dup_str[i] = '\0';
-	return (dup_str);
+	if (!(str = (char *)malloc(size + 1)))
+		return (0);
+	*(str + size--) = '\0';
+	while (nbr > 0)
+	{
+		*(str + size--) = nbr % 10 + '0';
+		nbr /= 10;
+	}
+	if (size == 0 && str[1] == '\0')
+		*(str + size) = '0';
+	else if (size == 0 && str[1] != '\0')
+		*(str + size) = '-';
+	return (str);
 }

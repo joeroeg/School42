@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 20:47:06 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:20:18 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/18 18:07:51 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/18 18:20:51 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *str)
+void	ft_putnbr_fd(int nb, int fd)
 {
-	size_t	length;
-	char	*dup_str;
-	size_t	i;
+	unsigned int	nbr;
 
-	length = 0;
-	while (str[length] != '\0')
-		length++;
-	dup_str = (char *)malloc((length + 1) * sizeof(char));
-	if (dup_str == NULL)
-		return (NULL);
-	i = 0;
-	while (i < length)
+	if (nb < 0)
 	{
-		dup_str[i] = str[i];
-		i++;
+		ft_putchar_fd('-', fd);
+		nbr = (unsigned int)(nb * -1);
 	}
-	dup_str[i] = '\0';
-	return (dup_str);
+	else
+		nbr = (unsigned int)nb;
+	if (nbr >= 10)
+		ft_putnbr_fd(nbr / 10, fd);
+	ft_putchar_fd((char)(nbr % 10 + 48), fd);
 }

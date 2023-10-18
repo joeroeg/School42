@@ -6,7 +6,7 @@
 #    By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:24:38 by hezhukov          #+#    #+#              #
-#    Updated: 2023/10/17 20:50:57 by hezhukov         ###   ########.fr        #
+#    Updated: 2023/10/18 18:20:59 by hezhukov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,16 +37,16 @@ SRCS =	ft_atoi.c \
 		ft_calloc.c \
 		ft_strdup.c \
 		ft_substr.c \
-		# ft_strjoin.c \
-		# ft_strtrim.c \
-		# ft_split.c \
-		# ft_strmapi.c \
-		# ft_striteri.c \
-		# ft_putchar_fd.c \
-		# ft_putstr_fd.c \
-		# ft_putendl_fd.c \
-		# ft_putnbr_fd.c \
-		# ft_itoa.c \
+		ft_strjoin.c \
+		ft_strtrim.c \
+		ft_split.c \
+		ft_itoa.c \
+		ft_strmapi.c \
+		ft_putchar_fd.c \
+		ft_putstr_fd.c \
+		ft_putendl_fd.c \
+		ft_putnbr_fd.c \
+		ft_striteri.c \
 
 OBJS = $(SRCS:.c=.o)
 
