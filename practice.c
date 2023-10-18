@@ -1,24 +1,24 @@
+#include <stddef.h>
 #include <stdio.h>
 
-int main() {
-    double num1, num2;
-    printf("Enter two decimal numbers: ");
-    scanf("%lf %lf", &num1, &num2);
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*p;
+	size_t			i;
 
-    int result = (int)num1 & (int)num2; // Logic AND
-    printf("Result of AND operation: %d\n", result);
+	p = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		p[i] = 0;
+		i++;
+	}
+}
 
-    result = (int)num1 | (int)num2; // Logic OR
-    printf("Result of OR operation: %d\n", result);
-
-    result = (int)num1 ^ (int)num2; // Logic XOR
-    printf("Result of XOR operation: %d\n", result);
-
-    result = ~(int)num1; // Logic NOT
-    printf("Result of NOT operation for num1: %d\n", result);
-
-    result = ~(int)num2; // Logic NOT
-    printf("Result of NOT operation for num2: %d\n", result);
-
-    return 0;
+int main()
+{
+    char str[] = "hello world";
+    printf("before ft_bzero: %s\n", str);
+    ft_bzero(str, 1);
+    printf("after ft_bzero: %s\n", str);
 }
