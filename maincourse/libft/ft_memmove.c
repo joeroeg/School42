@@ -1,18 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 13:14:00 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/17 17:21:51 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/17 17:27:32 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/17 17:37:29 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalpha(int c)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	return (((unsigned)c | 32) - 'a' < 26);
+	unsigned char		*destination;
+	const unsigned char	*source;
+
+	destination = dest;
+	source = src;
+	if (destination == source)
+	{
+		return (destination);
+	}
+	if (destination < source)
+		while (n--)
+			*destination++ = *source++;
+	else if (destination > source)
+	{
+		destination += n;
+		source += n;
+		while (n--)
+			*(--destination) = *(--source);
+	}
+	return (destination);
 }

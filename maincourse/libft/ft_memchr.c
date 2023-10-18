@@ -1,45 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 13:09:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/17 17:21:55 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/17 19:11:54 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/17 19:20:13 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(char c)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	return (c == '\f' || c == '\n' || c == '\r'
-		|| c == '\t' || c == '\v' || c == ' ');
-}
+	const unsigned char	*src;
+	unsigned char		uc;
+	size_t				i;
 
-int	ft_atoi(const char *nptr)
-{
-	int		output;
-	int		negative;
-	size_t	i;
-
-	output = 0;
-	negative = 1;
+	src = s;
+	uc = (unsigned char)c;
 	i = 0;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	while (i < n)
 	{
-		if (nptr[i] == '-')
-			negative = -1;
+		if (src[i] == uc)
+			return ((void *)(src + i));
 		i++;
 	}
-	while (ft_isdigit(nptr[i]))
-	{
-		output *= 10;
-		output += nptr[i] - '0';
-		i++;
-	}
-	return (output * negative);
+	return (NULL);
 }

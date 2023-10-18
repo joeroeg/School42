@@ -1,45 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 13:09:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/17 17:21:55 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/17 19:23:02 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/17 19:24:57 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(char c)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	return (c == '\f' || c == '\n' || c == '\r'
-		|| c == '\t' || c == '\v' || c == ' ');
-}
+	const unsigned char	*src1;
+	const unsigned char	*src2;
+	size_t				i;
 
-int	ft_atoi(const char *nptr)
-{
-	int		output;
-	int		negative;
-	size_t	i;
-
-	output = 0;
-	negative = 1;
 	i = 0;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	src1 = s1;
+	src2 = s2;
+	while (i < n)
 	{
-		if (nptr[i] == '-')
-			negative = -1;
+		if (src1[i] != src2[i])
+			return ((src1[i] - src2[i]));
 		i++;
 	}
-	while (ft_isdigit(nptr[i]))
-	{
-		output *= 10;
-		output += nptr[i] - '0';
-		i++;
-	}
-	return (output * negative);
+	return (0);
 }

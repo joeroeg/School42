@@ -1,45 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 13:09:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/17 17:21:55 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/17 20:29:00 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/17 20:42:22 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(char c)
+char	*ft_strnstr(const char *haystack, const char *neddle, size_t len)
 {
-	return (c == '\f' || c == '\n' || c == '\r'
-		|| c == '\t' || c == '\v' || c == ' ');
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int		output;
-	int		negative;
 	size_t	i;
+	size_t	j;
+	size_t	length;
 
-	output = 0;
-	negative = 1;
+	if (!neddle[0])
+		return ((char *)haystack);
+	length = ft_strlen(neddle);
 	i = 0;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	while (i < len && haystack[i])
 	{
-		if (nptr[i] == '-')
-			negative = -1;
+		j = 0;
+		while (i + j < len && haystack[i + j] == neddle[j] && j < length)
+			j++;
+		if (j == length)
+			return ((char *)haystack + i);
 		i++;
 	}
-	while (ft_isdigit(nptr[i]))
-	{
-		output *= 10;
-		output += nptr[i] - '0';
-		i++;
-	}
-	return (output * negative);
+	return (NULL);
 }
+

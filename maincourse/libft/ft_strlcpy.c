@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 13:14:00 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/17 17:21:51 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/17 17:37:19 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/17 19:10:39 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalpha(int c)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	return (((unsigned)c | 32) - 'a' < 26);
+	size_t	srclen;
+
+	srclen = ft_strlen(src);
+	if (!dst || !src)
+		return (0);
+	if (dstsize == 0)
+		return (srclen);
+	if (srclen < dstsize)
+	{
+		ft_memmove(dst, src, srclen + 1);
+	}
+	else
+	{
+		ft_memmove(dst, src, dstsize);
+		dst[dstsize - 1] = '\0';
+	}
+	return (srclen);
 }

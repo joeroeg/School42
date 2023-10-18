@@ -1,45 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 13:09:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/17 17:21:55 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/17 19:29:34 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/17 20:00:10 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(char c)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	return (c == '\f' || c == '\n' || c == '\r'
-		|| c == '\t' || c == '\v' || c == ' ');
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int		output;
-	int		negative;
+	size_t	dest_len;
+	size_t	src_len;
+	size_t	total_len;
 	size_t	i;
+	size_t	j;
 
-	output = 0;
-	negative = 1;
-	i = 0;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	if (size == 0)
+		return (ft_strlen(src));
+	dest_len = ft_strlen(dest);
+	src_len = ft_strlen(src);
+	total_len = dest_len + src_len;
+	i = dest_len;
+	j = 0;
+	if (size <= dest_len)
+		return (src_len + size);
+	while (src[i - dest_len] && i < size - 1)
 	{
-		if (nptr[i] == '-')
-			negative = -1;
+		dest[i] = src[i - dest_len];
 		i++;
 	}
-	while (ft_isdigit(nptr[i]))
-	{
-		output *= 10;
-		output += nptr[i] - '0';
-		i++;
-	}
-	return (output * negative);
+	dest[i] = '\0';
+	return (total_len);
 }

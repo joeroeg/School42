@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_islower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 13:14:00 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/17 17:21:51 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/17 20:12:14 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/17 20:14:42 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalpha(int c)
+int	ft_islower(int c)
 {
-	return (((unsigned)c | 32) - 'a' < 26);
+	return ((unsigned) c - 'a' < 26);
 }

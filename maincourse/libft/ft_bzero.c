@@ -6,12 +6,11 @@
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:35:26 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/16 11:59:54 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:21:54 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

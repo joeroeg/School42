@@ -1,45 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 13:09:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/17 17:21:55 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/10/17 20:43:35 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/10/17 20:46:42 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(char c)
+void	*ft_calloc(size_t count, size_t size)
 {
-	return (c == '\f' || c == '\n' || c == '\r'
-		|| c == '\t' || c == '\v' || c == ' ');
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int		output;
-	int		negative;
+	size_t	total_size;
+	void	*ptr;
 	size_t	i;
 
-	output = 0;
-	negative = 1;
+	total_size = count * size;
+	ptr = malloc(total_size);
+	if (ptr == NULL)
+		return (NULL);
 	i = 0;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	while (i < total_size)
 	{
-		if (nptr[i] == '-')
-			negative = -1;
+		((char *)ptr)[i] = 0;
 		i++;
 	}
-	while (ft_isdigit(nptr[i]))
-	{
-		output *= 10;
-		output += nptr[i] - '0';
-		i++;
-	}
-	return (output * negative);
+	return (ptr);
 }
