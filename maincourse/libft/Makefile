@@ -6,7 +6,7 @@
 #    By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:24:38 by hezhukov          #+#    #+#              #
-#    Updated: 2023/10/18 19:46:12 by hezhukov         ###   ########.fr        #
+#    Updated: 2023/10/18 20:26:52 by hezhukov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ DIR_OBJS = obj
 
 SRCS = $(wildcard $(DIR_SRCS)/*.c)
 OBJS = $(SRCS:$(DIR_SRCS)/%.c=$(DIR_OBJS)/%.o)
+
+BONUS_SRCS = $(wildcard $(DIR_SRCS)/bonus/*.c)
+BONUS_OBJS = $(BONUS_SRCS:$(DIR_SRCS)/%.c=$(DIR_OBJS)/%.o)
 
 INCLUDES = -Iincludes
 
@@ -29,16 +32,19 @@ $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@ar rcs $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(BONUS_OBJS)
+	@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 	@ranlib $(NAME)
 
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(BONUS_OBJS)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+bonus: $(BONUS_OBJS)
+
+.PHONY: all clean fclean re bonus
+
