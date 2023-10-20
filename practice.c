@@ -1,24 +1,22 @@
-#include <stddef.h>
+#include <memory.h>
+#include <string.h>
 #include <stdio.h>
 
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned char	*p;
-	size_t			i;
-
-	p = (unsigned char *)s;
-	i = 0;
-	while (i < n)
-	{
-		p[i] = 0;
-		i++;
-	}
-}
+char str1[7] = "abcdef";
 
 int main()
 {
-    char str[] = "hello world";
-    printf("before ft_bzero: %s\n", str);
-    ft_bzero(str, 1);
-    printf("after ft_bzero: %s\n", str);
+
+   printf( "The string: %s\n", str1 );
+   memcpy( (str1+6), str1, 10 );
+   printf( "New string: %s\n", str1 );
+
+   strcpy_s( str1, sizeof(str1), "aabbcc" );   // reset string
+
+
+   printf("\nstr1: %s\n", str1);
+   printf( "The string: %s\n", str1 );
+   memmove( (str1+6), str1, 10 );
+   printf( "New string: %s\n", str1 );
+
 }
