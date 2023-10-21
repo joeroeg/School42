@@ -3,33 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:18:43 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:44:07 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/20 15:12:34 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *str, int c)
+char *ft_strrchr(const char *s, int c)
 {
-	char	target;
-	size_t	i;
-	ssize_t	last_occurrence;
+    int length = ft_strlen(s);
+    int last = length - 1;
 
-	target = (char)c;
-	i = 0;
-	last_occurrence = -1;
-	while (str[i] != '\0')
+    if (c == '\0')
+		return (char *)(s + length);
+
+    while (last >= 0)
 	{
-		if (str[i] == target)
-			last_occurrence = (ssize_t)i;
-		i++;
-	}
-	if (target == '\0')
-		return ((char *)(str + i));
-	if (last_occurrence != -1)
-		return ((char *)(str + last_occurrence));
-	return (NULL);
+		if (s[last] == c)
+			return (char *)(s + last);
+		last--;
+    }
+    return (NULL);
 }

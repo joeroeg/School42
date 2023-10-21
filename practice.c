@@ -1,22 +1,42 @@
-#include <memory.h>
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
-char str1[7] = "abcdef";
+void *ft_memchr(const void *s, int c, size_t n) {
+    const unsigned char *source;
+    unsigned char character;
+    size_t i;
 
-int main()
-{
+    source = s;
+    character = (unsigned char)c;
+    i = 0;
+    while (i < n) {
+        if (source[i] == character)
+            return ((void *)(source + i));
+        i++;
+    }
+    return (NULL);
+}
 
-   printf( "The string: %s\n", str1 );
-   memcpy( (str1+6), str1, 10 );
-   printf( "New string: %s\n", str1 );
+char *ft_strchr(const char *s, int c) {
+    while (*s && c != *s)
+        s++;
+    if (*s == c)
+        return ((char *)s);
+    return (0);
+}
 
-   strcpy_s( str1, sizeof(str1), "aabbcc" );   // reset string
+int main() {
+    const char *str = "Hello, World!";
+    int character = '\0';
 
+    // Using ft_memchr on a null-terminated string
+    void *result = ft_memchr(str, character, strlen(str));
 
-   printf("\nstr1: %s\n", str1);
-   printf( "The string: %s\n", str1 );
-   memmove( (str1+6), str1, 10 );
-   printf( "New string: %s\n", str1 );
+    if (result != NULL) {
+        printf("Character '%c' found at position: %ld\n", character, (char *)result - str);
+    } else {
+        printf("Character '%c' not found in the string.\n", character);
+    }
 
+    return 0;
 }

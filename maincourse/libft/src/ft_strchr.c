@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:09:01 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:43:37 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/20 19:56:59 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,9 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	target;
-	size_t	i;
-
-	target = (char)c;
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == target)
-			return ((char *)(s + i));
-		i++;
-	}
-	if (target == '\0')
-		return ((char *)(s + i));
-	return (NULL);
+	while (*s && c != *s)
+		s++;
+	if (*s == c)
+		return ((char *)s);
+	return (0);
 }
