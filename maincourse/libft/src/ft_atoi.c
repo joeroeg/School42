@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:09:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:20:59 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:45:34 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,18 @@ int	ft_atoi(const char *nptr)
 	output = 0;
 	negative = 1;
 	i = 0;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
 	{
-		if (nptr[i] == '-')
+		if (*nptr == '-')
 			negative = -1;
-		i++;
+		nptr++;
 	}
-	while (ft_isdigit(nptr[i]))
+	while (ft_isdigit(*nptr))
 	{
-		output *= 10;
-		output += nptr[i] - '0';
-		i++;
+		output = output * 10 + (*nptr - '0');
+		nptr++;
 	}
 	return (output * negative);
 }

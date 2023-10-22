@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 // void *ft_memchr(const void *s, int c, size_t n) {
 //     const unsigned char *source;
@@ -124,21 +126,58 @@ char	*ft_strnstr(const char *haystack, const char *neddle, size_t len)
 	return (NULL); // return NULL
 }
 
-
-
-int main()
+static int	ft_isspace(char c)
 {
-    // char	s1[] = "abcdefg";
-    // char	s2[] = "d";
-    char   s1[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', '\0'};
-    char   s2[] = {'d', '\0'};
-
-    size_t	size = 7;
-
-    char *result_custom;
-    char *result_expected;
-
-    printf("%s\n", result_custom = ft_strnstr(s1, s2, size));
-    printf("%s\n", result_expected = strstr(s1, s2));
+	return (c == '\f' || c == '\n' || c == '\r'
+		|| c == '\t' || c == '\v' || c == ' ');
 }
+
+int	ft_atoi(const char *nptr)
+{
+	int		output;
+	int		negative;
+	size_t	i;
+
+	output = 0;
+	negative = 1;
+	i = 0;
+	while (isspace(*nptr++))
+		// nptr++;
+	if (*nptr == '-' || *nptr == '+')
+	{
+		if (*nptr == '-')
+			negative = -1;
+		nptr++;
+	}
+	while (isdigit(*nptr))
+	{
+		output = output * 10 + (*nptr - '0');
+		nptr++;
+	}
+	return (output * negative);
+}
+
+	
+int main(void)
+{
+	char *str = "   -1234";
+	printf("%d\n", ft_atoi(str));
+	printf("%d\n", atoi(str));
+}
+
+// int main()
+// {
+//     // char	s1[] = "abcdefg";
+//     // char	s2[] = "d";
+//     char   s1[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', '\0'};
+//     char   s2[] = {'d', '\0'};
+
+//     size_t	size = 7;
+
+//     char *result_custom;
+//     char *result_expected;
+
+//     printf("%s\n", result_custom = ft_strnstr(s1, s2, size));
+//     printf("%s\n", result_expected = strstr(s1, s2));
+// }
 
