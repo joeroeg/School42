@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 14:36:07 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/09/17 17:22:40 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:34:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char *ft_strstr(char *str, char *to_find)
     }
 
     return (0);
-
+}
 /*
 #include <stdio.h>
 #include <string.h>
