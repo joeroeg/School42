@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:43:35 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:20:58 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/22 15:42:49 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,12 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	size_t	total_size;
 	void	*ptr;
-	size_t	i;
 
 	total_size = count * size;
 	ptr = malloc(total_size);
 	if (ptr == NULL)
 		return (NULL);
-	i = 0;
-	while (i < total_size)
-	{
-		((char *)ptr)[i] = 0;
-		i++;
-	}
+	else
+        ft_memset(ptr, 0, total_size);
 	return (ptr);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:47:06 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:20:18 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/22 16:06:44 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,12 @@
 char	*ft_strdup(const char *str)
 {
 	size_t	length;
-	char	*dup_str;
-	size_t	i;
+	char	*duplicate;
 
-	length = 0;
-	while (str[length] != '\0')
-		length++;
-	dup_str = (char *)malloc((length + 1) * sizeof(char));
-	if (dup_str == NULL)
+	length = ft_strlen(str);
+	duplicate = malloc(length + 1);
+	if (!duplicate)
 		return (NULL);
-	i = 0;
-	while (i < length)
-	{
-		dup_str[i] = str[i];
-		i++;
-	}
-	dup_str[i] = '\0';
-	return (dup_str);
+	ft_strlcpy(duplicate, str, length + 1);
+	return (duplicate);
 }

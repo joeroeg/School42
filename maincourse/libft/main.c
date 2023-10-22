@@ -64,15 +64,15 @@ void	ft_putnbr_fd(int n, int fd);
 // ft_toupper	int main(void)	{	for (int i = 0; i < 128; i++) { printf("%d - %c\n", i, ft_toupper(i)); } return 0; }
 // ft_tolower 	int main(void)	{	for (int i = 0; i < 128; i++) { printf("%d - %c\n", i, ft_tolower(i)); } return 0; }
 // ft_strchr	int main(void)	{	char string[] = "Hello World";	char ch = 'W';	char *ptr = ft_strchr(string, ch);	printf("before: %s \n", string);	printf("after: %s\n", ptr);	return 0;}
-// ft_substr    int main(void)  {	char str[] = "Hello World!";	char *substr;	substr = ft_substr(str, 6, 2);	printf("%s\n", substr);	free(substr);	return (0);}
 // ft_strncmp   int main(void)  {   char str1[] = "abcdef";    char str2[] = "abcdefghijklmnop";    ft_strncmp(str1, str2, 5);    strncmp(str1, str2, 5);    printf("ft_strncmp: %d\n", ft_strncmp(str1, str2, 6));    printf("   strncmp: %d\n", strncmp(str1, str2, 6));    return 0;}
+// ft_calloc    int main(void)  {   int* arr;    int num_elements = 10;    arr = (int*)ft_calloc(num_elements, sizeof(int));    if (arr == NULL) {        return 1;    }    for (int i = 0; i < num_elements; ++i) {        printf("%d\n", arr[i]);    }    free(arr);    return 0; }
+// ft_substr    int main(void)  {   char str[] = "Hello World!";    char *substr = ft_substr(str, 6, 6);    printf("%s\n", substr);    free(substr);    return (0);}
 
 /*
 // ft_strrchr 		int main(void)	{	char string[] = "This is a string";    char ch = 's'; char *result;    result = ft_strrchr(string, ch);    printf("%s\n", result);    return 0;}
 // ft_memcmp		int main(void)	{     // define two strblocks of memory     char str1[] = "abcdef";     char str2[] = "abcdez";       int result;     result = ft_memcmp(str1, str2, 6);    printf("result : %d\n", result);    return 0; }
 // ft_strnstr		int main(void)	{     const char s[] = "FUCK YOU LOVE strnstr!!!";     const char find[] = "L";     size_t slen = 11;       char* result = ft_strnstr(s, find, slen);     printf("%s\n", result);    return 0; }
 // ft_atoi			int main(int argc, char *argv[]){	if (argc == 2)	{		printf("%d\n", ft_atoi(argv[1]));	}	return 0;}
-// ft_calloc		int main(void	{    int *p1 = ft_calloc(4, sizeof(int));    int *p2 = ft_calloc(1, sizeof(int[4]));    int *p3 = ft_calloc(4, sizeof *p3);     if(p2) {        for(int n=0; n<4; ++n)            printf("p2[%d] == %d\n", n, p2[n]);    }     free(p1);    free(p2);    free(p3);}
 // ft_strdup		int main(void)	{    char *str1 = "Hello World!";    char *str2;    str2 = ft_strdup(str1);    printf("str1: %s\n", str1);    printf("str2: %s\n", str2);        free(str2);    return 0;}
 // ft_strjoin  		int main(void)	{	char s1[] = "Hello";	char s2[] = "World!";	char *str;	str = ft_strjoin(s1, s2);	printf("%s\n", str);	free(str);	return (0);}
 // ft_strtrim		int main(int argc, char **argv){	if (argc == 3)	{		char *result;		result = ft_strtrim(argv[1], argv[2]);		printf("%s", result);		free(result);	}	return 0;}
