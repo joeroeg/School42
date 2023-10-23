@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:35:15 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 19:28:30 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:45:46 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*word_dup(const char *str, int start, int finish)
 	i = 0;
 	word = malloc((finish - start + 1) * sizeof(char));
 	if (!word)
-		return (0);
+		return (NULL);
 	while (start < finish)
 	{
 		word[i++] = str[start++];
@@ -58,10 +58,10 @@ char	**ft_split(char const *s, char c)
 	char	**split;
 
 	if (!s)
-		return (0);
+		return (NULL);
 	split = malloc((count(s, c) + 1) * sizeof(char *));
 	if (!split)
-		return (0);
+		return (NULL);
 	i = -1;
 	j = 0;
 	index = -1;

@@ -33,14 +33,6 @@
 // 		return (0);
 // }
 
-// char *ft_strchr(const char *s, int c) {
-//     while (*s && c != *s)
-//         s++;
-//     if (*s == c)
-//         return ((char *)s);
-//     return (0);
-// }
-
 // int	ft_memcmp(const void *s1, const void *s2, size_t n)
 // {
 // 	const unsigned char	*source1;
@@ -183,14 +175,90 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (new_str);
 }
 
-int main(void)
+// void	*ft_memcpy(void *dest, const void *src, size_t n)
+// {
+// 	unsigned char		*d;
+// 	const unsigned char	*s;
+// 	d = dest;
+// 	s = src;
+// 	if (!dest && !src)
+// 		return (NULL);
+// 	while (n--)
+// 	{
+// 		*d++ = *s++;
+// 	}
+// 	return (dest);
+// }
+
+size_t	ft_strlen(const char *s)
 {
-    char str[] = "Hello World!";
-    char *substr = ft_substr(str, 6, 6);
-    printf("%s\n", substr);
-    free(substr);
-    return (0);
+	const char	*a;
+	a = s;
+	while (*s)
+		s++;
+	return (s - a);
 }
+
+// size_t	ft_strlcat(char *dest, const char *src, size_t size)
+// {
+// 	size_t	dest_len;
+// 	size_t	src_len;
+// 	size_t	total_len;
+// 	size_t	i;
+// 	size_t	j;
+// 	if (size == 0)
+// 		return (ft_strlen(src));
+// 	dest_len = ft_strlen(dest);
+// 	src_len = ft_strlen(src);
+// 	total_len = dest_len + src_len;
+// 	i = dest_len;
+// 	j = 0;
+// 	if (size <= dest_len)
+// 		return (src_len + size);
+// 	while (src[i - dest_len] && i < size - 1)
+// 	{
+// 		dest[i] = src[i - dest_len];
+// 		i++;
+// 	}
+// 	dest[i] = '\0';
+// 	return (total_len);
+// }
+
+// size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+// {
+// 	size_t	srclen;
+// 	srclen = ft_strlen(src);
+// 	if (!dst || !src)
+// 		return (0);
+// 	if (dstsize == 0)
+// 		return (srclen);
+// 	if (srclen < dstsize)
+// 	{
+// 		ft_memcpy(dst, src, srclen + 1);
+// 	}
+// 	else
+// 	{
+// 		ft_memcpy(dst, src, dstsize);
+// 		dst[dstsize - 1] = '\0';
+// 	}
+// 	return (srclen);
+// }
+
+// char	*ft_strjoin(char const *s1, char const *s2)
+// {
+// 	char	*new_str;
+// 	if (!s1 || !s2)
+// 		return (NULL);
+// 	size_t len1 = ft_strlen(s1);
+//     size_t len2 = ft_strlen(s2);
+// 	new_str = (char *)malloc(len1 + len2 + 1);
+// 	if (new_str == NULL)
+// 		return (NULL);
+// 	ft_strlcpy (new_str, s1, len1 + 1);
+// 	ft_strlcat (new_str, s2, len1 + len2 + 1);
+// 	new_str[len1 + len2] = '\0';
+// 	return (new_str);
+// }
 
 // int main()
 // {
@@ -205,3 +273,100 @@ int main(void)
 //     printf("%s\n", result_expected = strstr(s1, s2));
 // }
 
+// char *ft_strchr(const char *s, int c)
+// {
+//     while (*s && c != *s)
+//         s++;
+//     if (*s == c)
+//         return ((char *)s);
+//     return (0);
+// }
+
+// char	*ft_strtrim(char const *s1, char const *set)
+// {
+// 	size_t	len1;
+// 	if (!s1 || !set)
+// 		return (0);
+// 	while (*s1 && ft_strchr(set, *s1))
+// 		s1++;
+// 	len1 = ft_strlen(s1);
+// 	while (len1 && ft_strchr(set, s1[len1]))
+// 		len1--;
+// 	return (ft_substr(s1, 0, len1 + 1));
+// }
+
+static int	count(const char *str, char c)
+{
+	int	i;
+	int	trigger;
+
+	i = 0;
+	trigger = 0;
+	while (*str)
+	{
+		if (*str != c && trigger == 0)
+		{
+			trigger = 1;
+			i++;
+		}
+		else if (*str == c)
+			trigger = 0;
+		str++;
+	}
+	return (i);
+}
+
+static char	*word_dup(const char *str, int start, int finish)
+{
+	char	*word;
+	int		i;
+
+	i = 0;
+	word = malloc((finish - start + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
+	while (start < finish)
+	{
+		word[i++] = str[start++];
+	}
+	word[i] = '\0';
+	return (word);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	size_t	i;
+	size_t	j;
+	int		index;
+	char	**split;
+
+	if (!s)
+		return (NULL);
+	split = malloc((count(s, c) + 1) * sizeof(char *));
+	if (!split)
+		return (NULL);
+	i = -1;
+	j = 0;
+	index = -1;
+	while (++i <= ft_strlen(s))
+	{
+		if (s[i] != c && index < 0)
+			index = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+		{
+			split[j++] = word_dup(s, index, i);
+			index = -1;
+		}
+	}
+	split[j] = 0;
+	return (split);
+}
+
+int main()
+{
+	char str[] = "Hello World I am here";
+	char **result;
+	result = ft_split(str, ' ');
+	for (int i = 0; result[i]; i++)
+		printf("%s\n", result[i]);
+}
