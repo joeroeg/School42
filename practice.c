@@ -295,6 +295,27 @@ size_t	ft_strlen(const char *s)
 // 	return (ft_substr(s1, 0, len1 + 1));
 // }
 
+// static int	count(const char *str, char c)
+// {
+// 	int	i;
+// 	int	trigger;
+
+// 	i = 0;
+// 	trigger = 0;
+// 	while (*str)
+// 	{
+// 		if (*str != c && trigger == 0)
+// 		{
+// 			trigger = 1;
+// 			i++;
+// 		}
+// 		else if (*str == c)
+// 			trigger = 0;
+// 		str++;
+// 	}
+// 	return (i);
+// }
+
 static int	count(const char *str, char c)
 {
 	int	i;
@@ -339,6 +360,7 @@ char	**ft_split(char const *s, char c)
 	size_t	j;
 	int		index;
 	char	**split;
+	size_t	s_len;
 
 	if (!s)
 		return (NULL);
@@ -348,11 +370,12 @@ char	**ft_split(char const *s, char c)
 	i = -1;
 	j = 0;
 	index = -1;
-	while (++i <= ft_strlen(s))
+	s_len = ft_strlen(s);
+	while (++i <= s_len)
 	{
 		if (s[i] != c && index < 0)
 			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+		else if (s[i] == c || (i == s_len && index >= 0))
 		{
 			split[j++] = word_dup(s, index, i);
 			index = -1;
@@ -364,9 +387,9 @@ char	**ft_split(char const *s, char c)
 
 int main()
 {
-	char str[] = "Hello World I am here";
+	char str[] = "abc def ghi";
 	char **result;
 	result = ft_split(str, ' ');
-	for (int i = 0; result[i]; i++)
+	for (int i = 0; i < 3; i++)
 		printf("%s\n", result[i]);
 }

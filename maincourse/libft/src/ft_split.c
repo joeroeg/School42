@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:35:15 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/23 18:45:46 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:06:01 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,63 @@ static char	*word_dup(const char *str, int start, int finish)
 	return (word);
 }
 
-char	**ft_split(char const *s, char c)
-{
-	size_t	i;
-	size_t	j;
-	int		index;
-	char	**split;
+// char	**ft_split(char const *s, char c)
+// {
+// 	size_t	i;
+// 	size_t	j;
+// 	int		index;
+// 	char	**split;
 
-	if (!s)
-		return (NULL);
-	split = malloc((count(s, c) + 1) * sizeof(char *));
-	if (!split)
-		return (NULL);
-	i = -1;
-	j = 0;
-	index = -1;
-	while (++i <= ft_strlen(s))
+// 	if (!s)
+// 		return (NULL);
+// 	split = malloc((count(s, c) + 1) * sizeof(char *));
+// 	if (!split)
+// 		return (NULL);
+// 	i = -1;
+// 	j = 0;
+// 	index = -1;
+// 	while (++i <= ft_strlen(s))
+// 	{
+// 		if (s[i] != c && index < 0)
+// 			index = i;
+// 		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+// 		{
+// 			split[j++] = word_dup(s, index, i);
+// 			index = -1;
+// 		}
+// 	}
+// 	split[j] = 0;
+// 	return (split);
+// }
+
+char **ft_split(char const *s, char c) {
+    if (!s)
 	{
-		if (s[i] != c && index < 0)
-			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+        return NULL;
+    }
+
+    size_t num_substrings = count(s, c);
+    char **split = (char **)malloc((num_substrings + 1) * sizeof(char *));
+    if (!split) {
+        return NULL;
+    }
+
+    size_t j = 0;
+    size_t start = 0;
+
+    for (size_t i = 0; s[i] != '\0'; i++)
+	{
+        if (s[i] != c)
 		{
-			split[j++] = word_dup(s, index, i);
-			index = -1;
-		}
-	}
-	split[j] = 0;
-	return (split);
+            start = i;
+            while (s[i] != c && s[i] != '\0')
+			{
+                i++;
+            }
+            split[j] = word_dup(s, start, i);
+            j++;
+        }
+    }
+    split[num_substrings] = NULL;
+    return split;
 }

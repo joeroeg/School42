@@ -69,6 +69,8 @@ void	ft_putnbr_fd(int n, int fd);
 // ft_substr    int main(void)  {   char str[] = "Hello World!";    char *substr = ft_substr(str, 6, 6);    printf("%s\n", substr);    free(substr);    return (0);}
 // ft_strjoin  	int main(void)  {   char s1[] = "Hello";    char s2[] = "World!";    char *str;    str = ft_strjoin(s1, s2);    printf("%s\n", str);    free(str);	return (0);}
 // ft_strtrim	int main(int argc, char **argv){	if (argc == 3)	{		char *result;		result = ft_strtrim(argv[1], argv[2]);		printf("%s", result);		free(result);	}	return 0;}
+// ft_split		
+int main(void)	{     char a[] = "abc def ghi";     int i;           char** result = ft_split(a, ' ');       for (i=0; result[i]; i++)         printf("%s\n", result[i]);       return 0; }
 
 /*
 // ft_strrchr 		int main(void)	{	char string[] = "This is a string";    char ch = 's'; char *result;    result = ft_strrchr(string, ch);    printf("%s\n", result);    return 0;}
@@ -76,7 +78,6 @@ void	ft_putnbr_fd(int n, int fd);
 // ft_strnstr		int main(void)	{     const char s[] = "FUCK YOU LOVE strnstr!!!";     const char find[] = "L";     size_t slen = 11;       char* result = ft_strnstr(s, find, slen);     printf("%s\n", result);    return 0; }
 // ft_atoi			int main(int argc, char *argv[]){	if (argc == 2)	{		printf("%d\n", ft_atoi(argv[1]));	}	return 0;}
 // ft_strdup		int main(void)	{    char *str1 = "Hello World!";    char *str2;    str2 = ft_strdup(str1);    printf("str1: %s\n", str1);    printf("str2: %s\n", str2);        free(str2);    return 0;}
-// ft_split			int main(void)	{     char a[] = "This is a sample string for testing";     int i;           char** result = ft_split(a, ' ');       for (i=0; result[i]; i++)         printf("%s\n", result[i]);       return 0; }
 // ft_itoa			int	main(void)	{	int num = -0;	char *stringNumber = ft_itoa(num);	printf("The integer %d is converted to string as %s\n", num, stringNumber );	free(stringNumber);	return 0;}
 // ft_strmapi		int main(void)	{    char s[] = "This is a string";    char (*f) (unsigned int, char) = &change;    char *newString = ft_strmapi(s, f);    printf("Original string: %s\n", s);    printf("New string: %s\n", newString);    free(newString);    return 0;}
 // ft_putchar_fd	int main(int argc, char **argv){	int fd = open("myfile", O_WRONLY | O_CREAT);	ft_putchar_fd('c', fd);	close(fd);	return 0;}
