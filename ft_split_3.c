@@ -1,17 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 17:35:15 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/25 17:07:15 by hezhukov         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "libft.h"
-
+#include <stdlib.h>
+#include <stdio.h>
 static int	count(const char *str, char c)
 {
 	int	i;
@@ -79,4 +67,15 @@ char	**ft_split(char const *s, char c)
 	}
 	split[j] = 0;
 	return (split);
+}
+
+int main() {
+    const char* str = "abc__def";
+    char delimiter = '_';
+    
+    char** words = ft_split(str, delimiter);
+    for (int i = 0; words[i] != NULL; i++) {
+        printf("%s\n", words[i]);
+    }
+    return 0;
 }
