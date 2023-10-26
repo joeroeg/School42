@@ -3,71 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:39:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/19 14:41:45 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:16:51 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	calculate_size(int n)
+static size_t	count_digits(int n)
 {
-	size_t	size;
-	long	nbr;
+	size_t	i;
 
-	size = 0;
-	nbr = n;
-	if (n == 0)
-	{
-		size = 1;
-	}
-	else
-	{
-		if (n < 0)
-		{
-			size++;
-			nbr = -(long)n;
-		}
-		while (nbr > 0)
-		{
-			nbr /= 10;
-			size++;
-		}
-	}
-	return (size);
+
+	i = 1;
+	while (n /= 10)
+		i++;
+	return (i);
 }
 
-char	*convert_to_string(int n, size_t size)
+char *ft_itoa(int n)
 {
-	char	*str;
-	long	nbr;
+    char *output_string;
+    size_t number_length;
+    long int input_number;
 
-	str = (char *)malloc(size + 1);
-	if (str == NULL)
+    input_number = n;
+    number_length = count_digits(n);
+    if (n < 0)
+	{
+        input_number *= -1;
+		number_length++;
+	}
+	output_string = (char *)malloc(sizeof(char) * (number_length + 1));
+	if (!output_string)
 		return (NULL);
-	if (n >= 0)
-		nbr = n;
-	else
-		nbr = -(long)n;
-	*(str + size--) = '\0';
-	while (nbr > 0)
+    output_string[number_length] = 0;
+    while (number_length--)
 	{
-		*(str + size--) = nbr % 10 + '0';
-		nbr /= 10;
-	}
-	if (size == 0 && str[1] == '\0')
-		*(str + size) = '0';
-	else if (size == 0 && str[1] != '\0')
-		*(str + size) = '-';
-	return (str);
-}
-
-char	*ft_itoa(int n)
-{
-	size_t	size;
-
-	size = calculate_size(n);
-	return (convert_to_string(n, size));
+        output_string[number_length] = input_number % 10 + '0';
+        input_number /= 10;
+    }
+    if (n < 0)
+        output_string[0] = '-';
+    return (output_string);
 }

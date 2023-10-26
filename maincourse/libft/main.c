@@ -68,9 +68,8 @@ void	ft_putnbr_fd(int n, int fd);
 // ft_calloc    int main(void)  {   int* arr;    int num_elements = 10;    arr = (int*)ft_calloc(num_elements, sizeof(int));    if (arr == NULL) {        return 1;    }    for (int i = 0; i < num_elements; ++i) {        printf("%d\n", arr[i]);    }    free(arr);    return 0; }
 // ft_substr    int main(void)  {   char str[] = "Hello World!";    char *substr = ft_substr(str, 6, 6);    printf("%s\n", substr);    free(substr);    return (0);}
 // ft_strjoin  	int main(void)  {   char s1[] = "Hello";    char s2[] = "World!";    char *str;    str = ft_strjoin(s1, s2);    printf("%s\n", str);    free(str);	return (0);}
-// ft_strtrim	int main(int argc, char **argv){	if (argc == 3)	{		char *result;		result = ft_strtrim(argv[1], argv[2]);		printf("%s", result);		free(result);	}	return 0;}
-// ft_split		
-int main(void)	{     char a[] = "abc def ghi";     int i;           char** result = ft_split(a, ' ');       for (i=0; result[i]; i++)         printf("%s\n", result[i]);       return 0; }
+// ft_strtrim	int main(void) 	{	char str[] = "a-217)(*(^&%&^%$#13Hello Worlda-217)(*(^&%&^%$#13";	printf("%s\n", ft_strtrim(str, "a-217)(*(^&%&^%$#13"));}
+// ft_split		int main(void)	{	char a[] = "abc def ghi";     int i;           char** result = ft_split(a, ' ');       for (i=0; result[i]; i++)         printf("%s\n", result[i]);       return 0; }
 
 /*
 // ft_strrchr 		int main(void)	{	char string[] = "This is a string";    char ch = 's'; char *result;    result = ft_strrchr(string, ch);    printf("%s\n", result);    return 0;}

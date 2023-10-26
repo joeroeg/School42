@@ -392,3 +392,83 @@
 //     return 0;
 // }
 
+// static size_t	get_digits(int n)
+// {
+// 	size_t	i;
+// 	i = 1;
+// 	while (n /= 10)
+// 		i++;
+// 	return (i);
+// }
+
+// char *ft_itoa(int n) {
+//     char *str_num;
+//     size_t digits;
+//     long int num;
+//     num = n;
+//     digits = get_digits(n);
+//     if (n < 0) {
+//         num *= -1;
+//         digits++;
+//     }
+//     if (!(str_num = (char *)malloc(sizeof(char) * (digits + 1))))
+//         return NULL;
+//     str_num[digits] = 0;
+//     while (digits--) {
+//         str_num[digits] = num % 10 + '0';
+//         num = num / 10;
+//     }
+//     if (n < 0)
+//         str_num[0] = '-';
+//     return str_num;
+// }
+
+// int main() {
+// 	int n = -1234;
+// 	printf("%s\n", ft_itoa(n));
+// 	return 0;
+// }
+
+static size_t	count_digits(int n)
+{
+	size_t	i;
+
+
+	i = 1;
+	while (n /= 10)
+		i++;
+	return (i);
+}
+
+char *ft_itoa(int n) {
+    char *output_string;
+    size_t number_length;
+    long int input_number;
+
+    input_number = n;
+    number_length = count_digits(n);
+    if (n < 0)
+	{
+        input_number *= -1;
+		number_length++;
+	}
+	output_string = (char *)malloc(sizeof(char) * (number_length + 1));
+	if (!output_string)
+		return (NULL);
+    output_string[number_length] = 0;
+    while (number_length--)
+	{
+        output_string[number_length] = input_number % 10 + '0';
+        input_number /= 10;
+    }
+    if (n < 0)
+        output_string[0] = '-';
+    return (output_string);
+}
+
+int main()
+{
+	int n = -1234;
+	printf("%s\n", ft_itoa(n));
+	return 0;
+}
