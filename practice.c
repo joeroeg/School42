@@ -491,14 +491,44 @@ char *ft_strchr(const char *s, int c)
 //     return NULL;
 // }
 
-#include <stdio.h>
+// // Function to print the elements of the linked list
+// void printList(struct Node* head) {
+//     struct Node* current = head;
+//     while (current != NULL) {
+//         printf("%d -> ", current->data);
+//         current = current->next;
+//     }
+//     printf("NULL\n");
+// }
 
-int main() /* count characters in input */
-{
-    long nc;
+// int main() {
+//     struct Node* head = NULL; // Initialize an empty linked list
 
-    nc = 0;
-    while (getchar() != EOF)
-        ++nc;
-    printf("%ld\n", nc);
-}
+//     // Add nodes to the end of the linked list
+//     appendNode(&head, 10);
+//     appendNode(&head, 20);
+//     appendNode(&head, 30);
+
+//     // Print the linked list
+//     printf("Linked List: ");
+//     printList(head);
+
+//     // Clean up: Free the allocated memory for the linked list nodes
+//     struct Node* current = head;
+//     while (current != NULL) {
+//         struct Node* temp = current;
+//         current = current->next;
+//         free(temp);
+//     }
+
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+
