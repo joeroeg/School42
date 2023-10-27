@@ -273,14 +273,14 @@
 //     printf("%s\n", result_expected = strstr(s1, s2));
 // }
 
-// char *ft_strchr(const char *s, int c)
-// {
-//     while (*s && c != *s)
-//         s++;
-//     if (*s == c)
-//         return ((char *)s);
-//     return (0);
-// }
+char *ft_strchr(const char *s, int c)
+{
+    while (*s && c != *s)
+        s++;
+    if (*s == c)
+        return ((char *)s);
+    return (0);
+}
 
 // char	*ft_strtrim(char const *s1, char const *set)
 // {
@@ -429,46 +429,76 @@
 // 	return 0;
 // }
 
-static size_t	count_digits(int n)
+// static size_t	count_digits(int n)
+// {
+// 	size_t	i;
+// 	i = 1;
+// 	while (n /= 10)
+// 		i++;
+// 	return (i);
+// }
+
+// char *ft_itoa(int n) {
+//     char *output_string;
+//     size_t number_length;
+//     long int input_number;
+//     input_number = n;
+//     number_length = count_digits(n);
+//     if (n < 0)
+// 	{
+//         input_number *= -1;
+// 		number_length++;
+// 	}
+// 	output_string = (char *)malloc(sizeof(char) * (number_length + 1));
+// 	if (!output_string)
+// 		return (NULL);
+//     output_string[number_length] = 0;
+//     while (number_length--)
+// 	{
+//         output_string[number_length] = input_number % 10 + '0';
+//         input_number /= 10;
+//     }
+//     if (n < 0)
+//         output_string[0] = '-';
+//     return (output_string);
+// }
+
+// #include <stdio.h>
+// #include <string.h>
+
+// void *ft_memchr(const void *s, int c, size_t n);
+
+// int main() {
+//     int arr[] = {1, 2, 3, 4, 5};
+//     int arr2[] = "12345";
+//     char str[] = "Hello World!";
+//     printf("%s\n", ft_memchr(str, 'o', sizeof(str)));
+//     printf("%s\n", ft_strchr(str, 'o'));
+//     printf("%d\n", *(int *)ft_memchr(arr, 4, sizeof(arr)));
+//     printf("%d\n", *(int *)ft_memchr(arr2, '4', sizeof(arr2)));
+//     return 0;
+// }
+
+// void *ft_memchr(const void *s, int c, size_t n) {
+//     const unsigned char *string = (const unsigned char *)s;
+
+//     while (n--) {
+//         if (*string == c) {
+//             return (void *)string;
+//         }
+//         string++;
+//     }
+//     return NULL;
+// }
+
+#include <stdio.h>
+
+int main() /* count characters in input */
 {
-	size_t	i;
+    long nc;
 
-
-	i = 1;
-	while (n /= 10)
-		i++;
-	return (i);
-}
-
-char *ft_itoa(int n) {
-    char *output_string;
-    size_t number_length;
-    long int input_number;
-
-    input_number = n;
-    number_length = count_digits(n);
-    if (n < 0)
-	{
-        input_number *= -1;
-		number_length++;
-	}
-	output_string = (char *)malloc(sizeof(char) * (number_length + 1));
-	if (!output_string)
-		return (NULL);
-    output_string[number_length] = 0;
-    while (number_length--)
-	{
-        output_string[number_length] = input_number % 10 + '0';
-        input_number /= 10;
-    }
-    if (n < 0)
-        output_string[0] = '-';
-    return (output_string);
-}
-
-int main()
-{
-	int n = -1234;
-	printf("%s\n", ft_itoa(n));
-	return 0;
+    nc = 0;
+    while (getchar() != EOF)
+        ++nc;
+    printf("%ld\n", nc);
 }

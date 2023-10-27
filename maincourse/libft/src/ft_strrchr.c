@@ -6,25 +6,48 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:18:43 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/22 15:50:26 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:55:47 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char  *ft_strrchr(const char *s, int c)
+/*
+Description:
+`strrchr` is used to find the last occurrence of a character in a given null-terminated string.
+It returns a pointer to the last occurrence of the character, or `NULL` if the character is not found.
+
+Parameters:
+`str`: Pointer to the null-terminated string to search in.
+`c`: The character to find, specified as an int. This allows passing EOF and other special characters.
+
+Return Values:
+If the character is found, a pointer to the LAST occurrence is returned.
+If the character is not found, `NULL` is returned.
+If the character `c` is `\0`, the function returns a pointer to the null-terminator of the string.
+
+Example:
+input: str: "Hello World!"
+compute: `strrchr(str, 'o')`
+output: "orld!"
+*/
+
+char	*ft_strrchr(const char *s, int c)
 {
-    int length = ft_strlen(s);
-    int last = length - 1;
-
-    if (c == '\0')
-		return (char *)(s + length);
-
-    while (last >= 0)
-	{
-		if (s[last] == c)
-			return (char *)(s + last);
-		last--;
+    const char *last;
+	
+    if (!s)
+        return NULL;
+	last = NULL;
+    while (*s)
+    {
+        if (*s == (char)c)
+            last = s;
+        s++;
     }
-    return (NULL);
+    
+    if (c == '\0')
+        return (char *)s;
+    
+    return (char *)last;
 }

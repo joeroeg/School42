@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:09:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/22 13:56:44 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:38:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,28 @@ static int	ft_isspace(char c)
 		|| c == '\t' || c == '\v' || c == ' ');
 }
 
-int	ft_atoi(const char *nptr)
-{
-	int		output;
-	int		negative;
-	size_t	i;
 
-	output = 0;
-	negative = 1;
-	i = 0;
-	while (ft_isspace(*nptr))
-		nptr++;
-	if (*nptr == '-' || *nptr == '+')
+int	ft_atoi(const char *str)
+{
+	int		number;
+	int		sign;
+
+	number = 0;
+	sign = 1;
+	if (!str)
+		return (0);
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		if (*nptr == '-')
-			negative = -1;
-		nptr++;
+		if (*str == '-')
+			sign = -1;
+		str++;
 	}
-	while (ft_isdigit(*nptr))
+	while (ft_isdigit(*str))
 	{
-		output = output * 10 + (*nptr - '0');
-		nptr++;
+		number = number * 10 + (*str - '0');
+		str++;
 	}
-	return (output * negative);
+	return (number * sign);
 }

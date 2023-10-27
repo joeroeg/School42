@@ -38,7 +38,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (new_str);
 }
 
-static size_t	ft_countword(char const *s, char c)
+static size_t	count_words(char const *s, char c)
 {
 	size_t	count;
 
@@ -63,7 +63,7 @@ char	**ft_split(char const *s, char c)
 	size_t	word_len;
 	int		i;
 
-	lst = (char **)malloc((ft_countword(s, c) + 1) * sizeof(char *));
+	lst = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (!s || !lst)
 		return (0);
 	i = 0;

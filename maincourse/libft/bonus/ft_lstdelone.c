@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:01:22 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/18 20:24:20 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:49:12 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 void
 	ft_lstdelone(t_list *lst, void (*del)(void*))
