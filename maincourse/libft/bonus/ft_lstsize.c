@@ -6,14 +6,13 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:58:54 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/26 17:01:04 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:36:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int
-	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	size_t	i;
 

@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:30:26 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/23 14:34:48 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/28 19:46:24 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
+	size_t	len1;
+	size_t	len2;
 	char	*new_str;
 
 	if (!s1 || !s2)
 		return (NULL);
-	size_t len1 = ft_strlen(s1);
-    size_t len2 = ft_strlen(s2);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
 	new_str = (char *)malloc(len1 + len2 + 1);
 	if (new_str == NULL)
 		return (NULL);

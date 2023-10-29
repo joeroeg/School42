@@ -6,25 +6,24 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:57:53 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/26 17:02:17 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:41:48 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void
-	ft_lstadd_back(t_list **alst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
 
-	if (alst)
+	if (lst)
 	{
-		if (*alst)
+		if (*lst)
 		{
-			last = ft_lstlast(*alst);
+			last = ft_lstlast(*lst);
 			last->next = new;
 		}
 		else
-			*alst = new;
+			*lst = new;
 	}
 }

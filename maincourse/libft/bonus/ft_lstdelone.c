@@ -6,14 +6,13 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:01:22 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/26 16:49:12 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:57:50 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void
-	ft_lstdelone(t_list *lst, void (*del)(void*))
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
 	if (!del)
 		return ;

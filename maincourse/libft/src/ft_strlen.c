@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 15:53:13 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/26 18:17:12 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/28 19:50:09 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 size_t	ft_strlen(const char *s)
 {
 	const char	*a;
+
 	if (!s)
 		return (0);
 	a = s;

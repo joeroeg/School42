@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:09:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/26 19:38:25 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/28 19:20:47 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	ft_isspace(char c)
 	return (c == '\f' || c == '\n' || c == '\r'
 		|| c == '\t' || c == '\v' || c == ' ');
 }
-
 
 int	ft_atoi(const char *str)
 {
