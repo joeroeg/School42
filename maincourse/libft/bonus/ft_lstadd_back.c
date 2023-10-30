@@ -6,11 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:57:53 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/28 17:41:48 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:25:13 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_lstadd_back(&lst, new)
+function: add new to the end of lst
+output: lst->new
+*/
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {

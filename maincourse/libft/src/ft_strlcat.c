@@ -6,11 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 19:29:34 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/28 20:37:46 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:20:29 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_strlcat("Hello", " world", 11)
+function: concatenate "Hello" and " world" into "Hello world"
+output: 11
+*/
 
 size_t	find_dest_length(char *dest, size_t size)
 {
@@ -24,15 +30,15 @@ size_t	find_dest_length(char *dest, size_t size)
 	return (destination - dest);
 }
 
-size_t	concatenate(char *dest, const char *src, size_t dlen, size_t size)
+size_t	concatenate(char *dest, const char *src, size_t destlen, size_t size)
 {
 	char		*destination;
 	const char	*source;
 	size_t		remaining_space;
 
-	destination = dest + dlen;
+	destination = dest + destlen;
 	source = src;
-	remaining_space = size - dlen;
+	remaining_space = size - destlen;
 	while (*source != '\0')
 	{
 		if (remaining_space != 1)
@@ -43,16 +49,17 @@ size_t	concatenate(char *dest, const char *src, size_t dlen, size_t size)
 		source++;
 	}
 	*destination = '\0';
-	return (dlen + (source - src));
+	return (destlen + (source - src));
 }
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	size_t (dlen);
+	size_t	destlen;
+
 	if (!dest || !src)
 		return (0);
-	dlen = find_dest_length(dest, size);
-	if (size == 0 || size <= dlen)
-		return (dlen + ft_strlen(src));
-	return (concatenate(dest, src, dlen, size));
+	destlen = find_dest_length(dest, size);
+	if (size == 0 || size <= destlen)
+		return (destlen + ft_strlen(src));
+	return (concatenate(dest, src, destlen, size));
 }

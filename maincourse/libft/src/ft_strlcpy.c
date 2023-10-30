@@ -6,11 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:37:19 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/28 19:49:53 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:29:57 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_strlcpy("Hello", "World", 3)
+function: copy 3 characters from "World" to "Hello"
+output: Hel
+*/
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
@@ -22,12 +28,10 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	if (dstsize == 0)
 		return (srclen);
 	if (srclen < dstsize)
-	{
-		ft_memcpy(dst, src, srclen + 1);
-	}
+		ft_memmove(dst, src, srclen + 1);
 	else
 	{
-		ft_memcpy(dst, src, dstsize);
+		ft_memmove(dst, src, dstsize);
 		dst[dstsize - 1] = '\0';
 	}
 	return (srclen);

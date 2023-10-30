@@ -6,11 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:41:53 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/28 19:50:15 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:23:32 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_strmapi("Hello", &ft_toupper)
+function: apply ft_toupper to each character of "Hello"
+output: HELLO
+*/
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

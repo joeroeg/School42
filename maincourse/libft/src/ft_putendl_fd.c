@@ -6,11 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:05:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/26 16:21:22 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:16:57 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_putendl_fd("Hello", 1)
+function: write "Hello" to a file with fd = 1 (stdout) and add a newline
+output: Hello
+*/
 
 void	ft_putendl_fd(char *s, int fd)
 {

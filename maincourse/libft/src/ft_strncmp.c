@@ -6,11 +6,21 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:24:00 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/28 19:50:20 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 19:25:52 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_strncmp("abcdef", "abc", 6)
+function: compare "abcdef" and "abc" within 6 chars
+output: 0
+
+input: ft_strncmp("abcdef", "abcdeF", 6)
+function: compare "abcdef" and "abcdeF" within 6 chars
+output: 32
+*/
 
 int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {

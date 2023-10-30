@@ -6,11 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:58:45 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/28 16:49:30 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:26:38 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_lstlast(lst)
+function: return the last element of lst
+output: lst->last
+*/
 
 t_list	*ft_lstlast(t_list *lst)
 {

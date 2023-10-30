@@ -6,11 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:09:01 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/28 19:45:13 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:18:01 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_strchr("Hello", 'l')
+function: find the first occurrence of 'l' in "Hello"
+output: "llo"
+*/
 
 char	*ft_strchr(const char *s, int c)
 {

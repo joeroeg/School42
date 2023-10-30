@@ -6,11 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:18:43 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/28 19:51:54 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:30:10 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_strrchr("Hello", 'l')
+function: find the last occurrence of 'l' in "Hello"
+output: "lo"
+*/
 
 char	*ft_strrchr(const char *s, int c)
 {

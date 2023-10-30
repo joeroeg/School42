@@ -6,11 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:43:35 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/28 19:21:35 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 19:31:03 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_calloc(5, 2)
+function: allocate 5 * 2 = 10 bytes of memory and set them to 0
+output: 0x7f8c3a402b80 (address of the allocated memory)
+*/
 
 void	*ft_calloc(size_t count, size_t size)
 {

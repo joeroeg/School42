@@ -6,11 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:30:26 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/28 19:46:24 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:20:13 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_strjoin("Hello", "World")
+function: concatenate "Hello" and "World"
+output: "HelloWorld"
+*/
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

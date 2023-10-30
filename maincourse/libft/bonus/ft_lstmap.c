@@ -6,11 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:00:40 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/28 19:57:08 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:28:51 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+input: ft_lstmap(lst, f, del)
+function: iterate through lst and apply f to each element
+output: new list
+*/
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *))
 {
