@@ -6,16 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:30:26 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:20:13 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:22:43 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_strjoin("Hello", "World")
-function: concatenate "Hello" and "World"
-output: "HelloWorld"
+function: allocates (with malloc(3)) and returns a new string, which is the
+		  result of the concatenation of (s1) and (s2).s
+   input: ft_strjoin("Hello", "World")
+  output: "HelloWorld"
 */
 
 char	*ft_strjoin(char const *s1, char const *s2)

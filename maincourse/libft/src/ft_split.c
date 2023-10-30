@@ -6,16 +6,16 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:35:15 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:17:47 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:44:21 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_split("Hello World", ' ')
-function: split "Hello World" by ' ' and return an array of strings
-output: ["Hello", "World", NULL]
+function: splits a string into substrings separated by delimiter (c)
+   input: ft_split("Hello World", ' ')
+  output: {"Hello", "World", NULL}
 */
 
 static size_t	ft_countword(char const *s, char c)

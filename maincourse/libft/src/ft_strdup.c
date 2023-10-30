@@ -6,16 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:47:06 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:18:31 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:17:56 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_strdup("Hello")
-function: duplicate "Hello"
-output: "Hello"
+function: allocates sufficient memory for a copy of the string (str),
+		  does the copy, and returns a pointer to it.
+   input: ft_strdup("Hello")
+  output: "Hello"
 */
 
 char	*ft_strdup(const char *str)

@@ -6,16 +6,16 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:14:00 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 19:35:29 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:33:45 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_isalpha('a')
 function: check if 'a' is an alphabet
-output: 1
+   input: ft_isalpha('a')
+  output: 1
 */
 
 int	ft_isalpha(int c)

@@ -6,16 +6,19 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:09:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 19:31:55 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:33:09 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_atoi("-1234")
-function: convert "-1234" to int
-output: -1234
+function: atoi is used to convert a string to an integer.
+		  it skips all white-space characters at the beginning of the string,
+		  converts the subsequent characters as part of the number,
+		  and then stops when it encounters the first character that isn't a number.
+   input: ft_atoi("-1234")
+  output: -1234
 */
 
 static int	ft_isspace(char c)

@@ -55,8 +55,7 @@ void	ft_putnbr_fd(int n, int fd);
 // ft_isascii	int main(void)	{	for (int i = -256; i <= 256; i++) { printf("%d - %d\n", i, ft_isascii(i)); } return 0; }
 // ft_isprint	int main(void)	{	for (int i = 0; i < 128; i++) { printf("%d - %d\n", i, ft_isprint(i)); } return 0; }
 // ft_strlen	int	main(void)	{	char *str; int result; str = "Hello"; result = ft_strlen(str); printf ("%d", result); return (0); }
-// ft_memset
-int	main(void)	{	char str1[] = "abcde"; char str2[] = "abcde"; ft_memset (str1, '-', 3); puts (str1); memset (str2, '-', 3); puts (str2); return (0); }
+// ft_memset	int	main(void)	{	char str1[] = "abcde"; char str2[] = "abcde"; ft_memset (str1, '-', 3); puts (str1); memset (str2, '-', 3); puts (str2); return (0); }
 // ft_memcpy	int main(void)	{	char src[] = "memcpy"; char src2[] = "ft_memcpy"; char dst[7]; printf("Destination before    memcpy: %s\n", dst); memcpy(dst, src, sizeof(src)); printf("Destination after     memcpy: %s\n", dst); ft_bzero(dst, sizeof(dst)); printf("Destination before ft_memcpy: %s\n", dst); ft_memcpy(dst, src2, sizeof(src2)); printf("Destination after  ft_memcpy: %s\n", dst); return 0;}
 // ft_memmove	int main(void)	{	// ovelap test  char memmove_src[] = "abcdef";  char memcpy_src[] = "abcdef";  ft_memmove(&memmove_src[2], &memmove_src[0], 4);  printf("memmove Output: %s\n", memmove_src);  ft_memcpy(&memcpy_src[2], &memcpy_src[0], 4);  printf("memcpy Output: %s\n", memcpy_src);  return 0;}
 // ft_strclpy	int main(void)	{	char src[] = "-----";	char dst[] = "Hello";	printf("dst before: %s\n", dst);	ft_strlcpy(dst, src, 1);	printf("dst after : %s\n", dst);}
@@ -73,6 +72,16 @@ int	main(void)	{	char str1[] = "abcde"; char str2[] = "abcde"; ft_memset (str1, 
 // ft_split		int main(void)	{	char a[] = "abc def ghi";     int i;           char** result = ft_split(a, ' ');       for (i=0; result[i]; i++)         printf("%s\n", result[i]);       return 0; }
 // ft_putchar_fd int main(int argc, char **argv){	int fd = open("myfile", O_WRONLY | O_CREAT);	ft_putchar_fd('c', fd);	close(fd);	return 0;}
 
+int main()
+{
+	char str1[] = "abcde";
+	char str2[] = "abcde";
+	memmove(str1 + 2, str1, 3);  // Output: "ababc"
+	printf("memmove Output: %s\n", str1);
+	strcpy(str2, "abcde");
+	memcpy(str2 + 2, str2, 3);  // Output may be undefined or incorrect
+	printf("memcpy Output: %s\n", str2);
+}
 
 /*
 // ft_strrchr 		int main(void)	{	char string[] = "This is a string";    char ch = 's'; char *result;    result = ft_strrchr(string, ch);    printf("%s\n", result);    return 0;}

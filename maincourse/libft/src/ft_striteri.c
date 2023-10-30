@@ -6,16 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:55:47 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:19:56 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:45:23 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_striteri("Hello", &ft_putchar)
-function: apply ft_putchar to each character of "Hello"
-output: Hello
+function: applies the function (f) to each character of the string (s)
+		  passed as argument, and passing its index as first argument.
+   input: ft_striteri("Hello", &ft_putchar)
+  output: Hello
 */
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))

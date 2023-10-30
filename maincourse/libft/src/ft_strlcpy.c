@@ -6,16 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:37:19 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:29:57 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:50:52 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_strlcpy("Hello", "World", 3)
-function: copy 3 characters from "World" to "Hello"
-output: Hel
+function: copies up to (dstsize - 1) characters from the string (src) to (dst),
+		  NUL-terminating the result if (dstsize) is not 0.
+   input: ft_strlcpy("Hello", "World", 3)
+  output: Hel
 */
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)

@@ -6,20 +6,20 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 19:11:54 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 19:26:25 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:35:30 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_memchr("abcdef", 'c', 6)
-function: find 'c' in "abcdef" within 6 chars
-output: "cdef"
+function: memchr is a function that scans the first n bytes of the memory area
+		  pointed to by s for the character c and returns a pointer to it.
+   input: ft_memchr("abcdef", 'c', 6)
+  output: "cdef"
 
-input: ft_memchr("abcdef", 'c', 2)
-function: find 'c' in "abcdef" within 2 chars
-output: NULL
+   input: ft_memchr("abcdef", 'c', 2)
+  output: NULL
 */
 
 void	*ft_memchr(const void *s, int c, size_t n)

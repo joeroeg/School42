@@ -6,16 +6,17 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:52:13 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:24:37 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:58:34 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_substr("Hello", 2, 2)
-function: return a substring of "Hello" starting at index 2 with a length of 2
-output: "ll"
+function: allocates (with malloc) and returns a substring from the string
+		  (s). The substring begins at index (start) and is of maximum size (len).
+   input: ft_substr("Hello", 2, 2)
+  output: "ll"
 */
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

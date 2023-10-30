@@ -6,16 +6,16 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:05:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:16:57 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:41:26 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_putendl_fd("Hello", 1)
-function: write "Hello" to a file with fd = 1 (stdout) and add a newline
-output: Hello
+function: writes a string to a file descriptor (fd)
+   input: ft_putendl_fd("Hello", 1)
+  output: Hello
 */
 
 void	ft_putendl_fd(char *s, int fd)

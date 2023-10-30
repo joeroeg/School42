@@ -6,16 +6,16 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:39:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 19:33:14 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:34:08 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_itoa(-1234)
 function: convert integer to string
-output: "-1234"
+   input: ft_itoa(-1234)
+  output: "-1234"
 */
 
 static size_t	count_digits(int n)

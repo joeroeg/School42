@@ -6,16 +6,19 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:24:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 19:32:24 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:06:26 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_isdigit('1')
 function: check if '1' is a digit
-output: 1
+   input: ft_isdigit('1')
+  output: 1
+	note: subtracting '0' from any digit will give us the same digit
+		  in decimal system. So if we subtract '0' from any digit and
+		  the result is less than 10 then it is a digit.
 */
 
 int	ft_isdigit(int c)

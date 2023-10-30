@@ -6,16 +6,19 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 19:29:34 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:20:29 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:49:15 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_strlcat("Hello", " world", 11)
-function: concatenate "Hello" and " world" into "Hello world"
-output: 11
+function: appends the NUL-terminated string (src) to the end of (dest).
+		  append at most (size - strlen(dest) - 1) bytes, NUL-terminating the result.
+		  returns the total length of the string it tried to create.
+   input: ft_strlcat("Hello", " world", 11)
+  output: 11
+  printf: Hello world
 */
 
 size_t	find_dest_length(char *dest, size_t size)

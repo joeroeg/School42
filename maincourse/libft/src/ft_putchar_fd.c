@@ -6,16 +6,16 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:55:04 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:16:33 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:41:07 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-input: ft_putchar_fd('a', 1)
-function: write 'a' to a file with fd = 1 (stdout)
-output: a
+function: writes a character to a file descriptor (fd)
+   input: ft_putchar_fd('a', 1)
+  output: a
 */
 
 void	ft_putchar_fd(char c, int fd)
