@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:18:43 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 17:53:50 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 22:31:55 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ function: locates the last occurrence of (c) in the string (s) and returns
 
 char	*ft_strrchr(const char *s, int c)
 {
+	int			i;
 	const char	*last;
 
 	if (!s)
 		return (NULL);
+	i = ft_strlen(s);
+	if ((char) c == '\0')
+		return ((char *)&s[i]);
 	last = NULL;
 	while (*s)
 	{

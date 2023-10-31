@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:27:32 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 17:38:42 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 22:39:02 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,21 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	unsigned char		*destination;
 	const unsigned char	*source;
 
-	if (!dest || !src)
-		return (NULL);
-	destination = dest;
-	source = src;
-	if (destination == source)
-		return (destination);
-	if (destination < source)
+	destination = (unsigned char *)dest;
+	source = (unsigned char *)src;
+	if (destination == source || n == 0)
+		return (dest);
+	if (destination < source || destination >= (source + n))
+	{
 		while (n--)
 			*destination++ = *source++;
-	else if (destination > source)
+	}
+	else
 	{
 		destination += n;
 		source += n;
 		while (n--)
 			*(--destination) = *(--source);
 	}
-	return (destination);
+	return (dest);
 }

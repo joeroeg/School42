@@ -6,24 +6,23 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:35:15 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 17:44:21 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 23:15:04 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-function: splits a string into substrings separated by delimiter (c)
-   input: ft_split("Hello World", ' ')
-  output: {"Hello", "World", NULL}
-*/
-
-static size_t	ft_countword(char const *s, char c)
+static void	free_split(char **arr, int n)
 {
-	size_t	count;
+	while (n--)
+		free(arr[n]);
+	free(arr);
+}
 
-	if (!*s)
-		return (0);
+static int	count_words(char const *s, char c)
+{
+	int	count;
+
 	count = 0;
 	while (*s)
 	{
@@ -31,54 +30,68 @@ static size_t	ft_countword(char const *s, char c)
 			s++;
 		if (*s)
 			count++;
-		while (*s != c && *s)
+		while (*s && *s != c)
 			s++;
 	}
 	return (count);
 }
 
-char	**ft_allocate_lst(char const *s, char c)
+static char	*allocate_word(char *start, char *end)
 {
-	char	**lst;
+	int		i;
+	char	*word;
 
-	lst = (char **)malloc((ft_countword(s, c) + 1) * sizeof(char *));
-	if (!lst)
-		return (0);
-	return (lst);
+	i = 0;
+	word = malloc(end - start + 1);
+	if (!word)
+		return (NULL);
+	while (start + i < end)
+	{
+		word[i] = start[i];
+		i++;
+	}
+	word[end - start] = '\0';
+	return (word);
 }
 
-void	ft_fill_lst(char **lst, char const *s, char c)
+static void	fill_array(char **arr, char const *s, char c)
 {
-	size_t	word_len;
+	char	*start;
 	int		i;
 
 	i = 0;
 	while (*s)
 	{
-		while (*s == c && *s)
+		while (*s == c)
 			s++;
 		if (*s)
 		{
-			if (!ft_strchr(s, c))
-				word_len = ft_strlen(s);
-			else
-				word_len = ft_strchr(s, c) - s;
-			lst[i++] = ft_substr(s, 0, word_len);
-			s += word_len;
+			start = (char *)s;
+			while (*s && *s != c)
+				s++;
+			arr[i] = allocate_word(start, (char *)s);
+			if (!arr[i])
+			{
+				free_split(arr, i);
+				return ;
+			}
+			i++;
 		}
 	}
-	lst[i] = NULL;
+	arr[i] = NULL;
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**lst;
+	char	**arr;
+	int		word_count;
 
 	if (!s)
-		return (0);
-	lst = ft_allocate_lst(s, c);
-	if (!lst)
-		return (0);
-	ft_fill_lst(lst, s, c);
-	return (lst);
+		return (NULL);
+	word_count = count_words(s, c);
+	arr = malloc((word_count + 1) * sizeof(char *));
+	if (!arr)
+		return (NULL);
+	fill_array(arr, s, c);
+	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:09:01 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 17:44:49 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 22:15:49 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@ function: locates the first occurrence of (c) in the string (s) and returns
 
 char	*ft_strchr(const char *s, int c)
 {
+	int	i;
+
 	if (!s)
 		return (NULL);
+	i = 0;
 	while (*s)
 	{
 		if (*s == (char)c)
-			return ((char *)s);
+			return ((char *)&s[i]);
 		s++;
 	}
-	if (c == '\0')
-		return ((char *)s);
+	if ((char) c == '\0')
+		return ((char *)(s + i));
 	return (NULL);
 }
