@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
+
 
 typedef struct s_list
 {
@@ -9,16 +8,50 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
-t_list	*ft_lstnew(void *content)
+// is used to count the number of nodes in a list.
+int	ft_lstsize(t_list *lst)
+{
+	size_t	i;
+
+	i = 0;
+	while (lst) // is used to check if the address of the list is NULL or not.
+	{
+		lst = lst->next; // we assign the next of the list to the list (we move to the next node) until we reach the end of the list (NULL)
+		i++; // we increment the counter
+	}
+	return (i); // we return the counter
+}
+
+// is used to add a new node at the beginning of the list.
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	if (lst) // is used to check if the address of the list is NULL or not.
+	{
+		if (*lst) // is used to check if the content of the list is NULL or not.
+			new->next = *lst; // we assign the content of the list to the next of the new node
+			// `new`: Pointer to the new node structure.
+			// `->`: Dereference-and-access operator.
+			// `next`: Member variable of the struct `t_list` where we store the value.
+			// `*lst`: The value we want to store in the new node.
+		*lst = new; // we assign the new node to the list
+	}
+}
+
+// is used to create a new node and return it to the caller function.
+t_list	*ft_lstnew(void *data)
 {
 	t_list	*new_node;
 
 	new_node = (t_list *)malloc(sizeof(*new_node));
 	if (!new_node)
 		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+	new_node->content = data; // we assign the data to the content of the new node
+	// `new_node`: Pointer to the new node structure.
+	// `->`: Dereference-and-access operator.
+	// `content`: Member variable of the struct `t_list` where we store the value.
+    // `data`: The value we want to store in the new node.
+	new_node->next = NULL; // we assign NULL to the next of the new node
+	return (new_node); // we return the new node
 }
 
 int main()
@@ -86,7 +119,6 @@ int main()
 		free(tmp);
 		printf("Popped: %d\n", popped);
 	}
-
 
 	return (0);
 }

@@ -1,13 +1,17 @@
+/*
+input: ft_lstnew("Hello")
+function: create a new node with content "Hello"
+output: "Hello"
+*/
+
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
 
 typedef struct s_list
 {
-	void			*content;
-	struct s_list	*next;
-}				t_list;
+    void *content;
+    struct s_list *next;
+} t_list;
 
 t_list	*ft_lstnew(void *content)
 {
