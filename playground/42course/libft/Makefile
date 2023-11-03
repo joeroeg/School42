@@ -5,32 +5,35 @@
 #                                                     +:+ +:+         +:+      #
 #    By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/17 17:24:38 by hezhukov          #+#    #+#              #
-#    Updated: 2023/11/03 13:59:11 by hezhukov         ###   ########.fr        #
+#    Created: 2023/11/01 19:05:51 by hezhukov          #+#    #+#              #
+#    Updated: 2023/11/01 19:08:09 by hezhukov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+DIR_SRCS = src
+DIR_BONUS = bonus
+DIR_OBJS = obj
 
-SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
-ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c \
-ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c \
-ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c \
-ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
-ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+SRCS = $(wildcard $(DIR_SRCS)/*.c)
+OBJS = $(SRCS:$(DIR_SRCS)/%.c=$(DIR_OBJS)/%.o)
 
-BONUS_SRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+BONUS_SRCS = $(wildcard $(DIR_BONUS)/*.c)
+BONUS_OBJS = $(BONUS_SRCS:$(DIR_BONUS)/%.c=$(DIR_OBJS)/%.o)
 
-OBJS = $(SRCS:.c=.o)
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
+INCLUDES = -Iincludes
 
-INCLUDES = -I.
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
 RM = /bin/rm -f
 
-%.o: %.c
+$(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c
+	@mkdir -p $(@D)
+	@echo "compiling $<"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(DIR_OBJS)/%.o: $(DIR_BONUS)/%.c
+	@mkdir -p $(@D)
 	@echo "compiling $<"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
