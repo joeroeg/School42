@@ -1,92 +1,133 @@
 #include <stdio.h>
-#include <string.h>
+#include <unistd.h>
+#include <stdarg.h>
 #include <stdlib.h>
-#include <ctype.h>
 
-typedef struct s_list
+void ft_putchar(int c)
 {
-	void			*content;
-	struct s_list	*next;
-}				t_list;
+	write(1, &c, 1);
+}
 
-t_list	*ft_lstnew(void *content)
+// size_t ft_putnbr(int n) {
+//     unsigned int num;
+//     size_t length = 1;
+
+//     // Handle negative numbers
+//     if (n < 0) {
+//         ft_putchar('-');
+//         num = (unsigned int)(-n);
+//         length++; // Increase length for the '-' sign
+//     } else {
+//         num = (unsigned int)n;
+//     }
+
+//     // Print and count digits
+//     if (num >= 10) {
+//         length += ft_putnbr(num / 10); // Recursively print the rest of the number
+// 		printf(" (%zu)\n", length);
+//     }
+//     length++; // Count the digit printed
+//     ft_putchar((num % 10) + '0');
+//     return length; // Return the total length of the number printed
+// }
+
+long	abss(int n)
 {
-	t_list	*new_node;
+	if (n == -2147483648)
+		return (2147483648);
+	if (n < 0)
+		return (-n);
+	else
+		return (n);
+}
 
-	new_node = (t_list *)malloc(sizeof(*new_node));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+int	ft_count_digits(int n)
+{
+	int	count;
+
+	count = 0;
+	if (n <= 0)
+		count = 1;
+	while (n != 0)
+	{
+		n = n / 10;
+		count++;
+	}
+	return (count);
+}
+
+char	*ft_initialize(int n, int i)
+{
+	char	*tmp;
+
+	if (n < 0)
+	{
+		tmp = (char *)malloc(sizeof(char) * (i + 1));
+		if (!tmp)
+			return (0);
+		tmp[0] = '-';
+	}
+	else
+	{
+		tmp = (char *)malloc(sizeof(char) * (i + 1));
+		if (!tmp)
+			return (0);
+	}
+	return (tmp);
+}
+
+char	*ft_itoa(int n)
+{
+	int		i;
+	long	num;
+	char	*tmp;
+
+	i = ft_count_digits(n);
+	tmp = ft_initialize(n, i);
+	if (!tmp)
+		return (0);
+	tmp[i] = '\0';
+	num = abss(n);
+	while (num > 9)
+	{
+		tmp[--i] = (num % 10) + '0';
+		num /= 10;
+	}
+	tmp[--i] = (num % 10) + '0';
+	return (tmp);
+}
+
+int	ft_printstr(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str == NULL)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+	return (i);
+}
+
+int	ft_print_d_i(int num)
+{
+	int		len;
+	char	*str_num;
+
+	len = 0;
+	str_num = ft_itoa(num);
+	len = ft_printstr(str_num);
+	free(str_num);
+	return (len);
 }
 
 int main()
 {
-	// Single Data Node
-	int a = 42;
-	t_list *node1 = ft_lstnew(&a);
-	printf("Single Data Node content: %d\n", *((int *)node1->content));
-
-	// Multiple Data Nodes
-	int b = 43;
-	char c[] = "Hello ";
-	char d[] = "World!";
-	t_list *node2 = ft_lstnew(&b); // we set node2->content to &b (address of b) | node2->next = NULL
-	t_list *node3 = ft_lstnew(&c); // we set node3->content to &c (address of c) | node3->next = NULL
-	t_list *node4 = ft_lstnew(&d); // we set node4->content to &d (address of d) | node4->next = NULL
-	node2->next = node3; // we set node2->next to node3 because node2->next is NULL
-	node3->next = node4; // we set node3->next to node4 because node3->next is NULL
-	printf("Multiple Data Nodes content: %d\n", *((int *)node2->content)); // we print the content of node2 which is the address of b
-	printf("Multiple Data Nodes content: %s\n", ((char *)node2->next->content)); // or shorthand node3->content we print the content of node2->next which is the address of c
-	printf("Multiple Data Nodes content: %s\n", ((char *)node2->next->next->content)); // or shorthand node4-> content we print the content of node2->next->next which is the address of d
-
-	// Array of Data Nodes
-	int arr[] = {1, 2, 3};
-	t_list *node5 = ft_lstnew(arr);
-	for (int i = 0; i < 3; i++)
-		printf("Array elements: %d\n", ((int *)node5->content)[i]);
-
-	// Struct Node
-	typedef struct {
-		int id;
-		char name[10];
-	} Person;
-
-	Person p = {1, "Alice"};
-	t_list *node6= ft_lstnew(&p);
-	printf("Person id: %d \nPerson name: %s\n", ((Person *)node6->content)->id, ((Person *)node6->content)->name);
-
-	// Nested Lists
-	t_list *inner_node = ft_lstnew(&a);
-	t_list *outer_node = ft_lstnew(inner_node);
-	printf("Inner node content: %d\n", *((int *)((t_list *)outer_node->content)->content));
-
-
-	// Dynamic Data Node (malloc)
-	int *dynamic_data = malloc(sizeof(int));
-	*dynamic_data = 99;
-	t_list *node7 = ft_lstnew(dynamic_data);
-	printf("Dynamic data: %d\n", *((int *)node7->content));
-
-	/* Queue/Stack */
-
-	// Stack push operation (LIFO) is the same as adding a new node to the beginning of the list
-	t_list *top = NULL;
-	int item = 5;
-	t_list *new_node = ft_lstnew(&item);
-	new_node->next = top;
-	top = new_node;
-
-	// Stack pop operation (LIFO) is the same as removing the first node from the list
-	if (top) {
-		int popped = *((int *)top->content);
-		t_list *tmp = top;
-		top = top->next;
-		free(tmp);
-		printf("Popped: %d\n", popped);
-	}
-
-
-	return (0);
+	ft_print_d_i(-42);
 }

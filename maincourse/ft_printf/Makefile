@@ -6,36 +6,36 @@
 #    By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/04 13:03:49 by hezhukov          #+#    #+#              #
-#    Updated: 2023/11/04 15:45:54 by hezhukov         ###   ########.fr        #
+#    Updated: 2023/11/05 20:41:40 by hezhukov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
+EXE = a.out
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
-SRC = ft_printf.c
+SRC = $(wildcard *.c) capture.c
 OBJ = $(SRC:.c=.o)
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
 
-all: $(LIBFT) $(NAME)
-
-$(LIBFT):
-	make -C $(LIBFT_DIR)
+all: $(NAME) $(EXE)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L$(LIBFT_DIR) -lft
+	@ar rcs $(NAME) $(OBJ)
+
+$(EXE): $(NAME) main.o tests.o capture.o
+	@$(CC) $(CFLAGS) main.o tests.o capture.o -L. -lftprintf -o $(EXE)
+
+run: $(EXE)
+	@./$(EXE)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
-	make clean -C $(LIBFT_DIR)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
-	make fclean -C $(LIBFT_DIR)
+	@rm -f $(NAME) $(EXE)
 
 re: fclean all
 
