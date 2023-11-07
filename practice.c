@@ -1,70 +1,37 @@
 #include <stdio.h>
+#include <unistd.h>
 
-void	*ft_memcpy(void *s1, const void *s2, size_t n)
+int ft_count_digits(int n)
 {
-	unsigned char		*destination;
-	const unsigned char	*source;
-
-	if (!s1 || !s2)
-		return (NULL);
-	destination = s1;
-	source = s2;
-	while (n--)
+	int len = 0;
+	if (n <= 0)
+		len++;
+	while (n != 0)
 	{
-		*destination++ = *source++;
+		n /= 10;
+		len++;
 	}
-	return (s1);
+	return (len);
 }
 
-void	*ft_memmove(void *s1, const void *s2, size_t n)
+void ft_putchar(int c)
 {
-	unsigned char		*destination;
-	const unsigned char	*source;
-
-	if (!s1 || !s2)
-		return (NULL);
-	destination = s1;
-	source = s2;
-	if (destination == source)
-		return (destination);
-	if (destination < source)
-		while (n--)
-			*destination++ = *source++;
-	else if (destination > source)
-	{
-		destination += n;
-		source += n;
-		while (n--)
-			*(--destination) = *(--source);
-	}
-	return (destination);
+	write(1, &c, 1);
 }
 
 
-int main(void)
-{
-    char source[20] = "Hello World!"; // 12 characters + 1 null character
-    char destination[20] = "";
-	char src[20] = "Hello World!";
-	char dest[15] = "";
-	int offset = 50;
+unsigned int ft_putnbr_u(unsigned int n) {
+    unsigned int len = 0;
 
-	ft_memcpy(destination, source, 12);
-	ft_memmove(dest, src, 12);
-	printf(" memcpy: %s\n", destination);
-	printf("memmove: %s\n", dest);
-
-	printf("---------------------\n");
-	for (int i = 0; i <= offset; i++)
-	{
-		printf("offset = %d\n", i);
-	ft_memcpy(source + i, destination, 5);
-	ft_memmove(src + i, dest, 5);
-	printf(" memcpy: %s\n", source);
-	printf("memmove: %s\n", src);
-	}
-
-	return (0);
+	len = ft_count_digits(n);
+    if (n >= 10) {
+        ft_putnbr_u(n / 10);
+    }
+    ft_putchar((n % 10) + '0');
+    return len;
 }
 
-
+int main()
+{
+	printf("(%d)", ft_putnbr_u(1000));
+}
