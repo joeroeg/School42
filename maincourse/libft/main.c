@@ -45,17 +45,10 @@ void	ft_putnbr_fd(int n, int fd);
 // ft_strlen	int	main(void)	{	char *str; int result; str = "Hello"; result = ft_strlen(str); printf ("%d", result); return (0); }
 // ft_memset	int	main(void)	{	char str1[] = "Hello World ft_memset"; char str2[] = "Hello World memset"; ft_memset (str1, '-', 5); puts (str1); memset (str2, '-', 5); puts (str2); return (0); }
 // ft_memcpy	int main(void)	{	char src[] = "memcpy"; char src2[] = "ft_memcpy"; char dst[7]; printf("Destination before    memcpy: %s\n", dst); memcpy(dst, src, sizeof(src)); printf("Destination after     memcpy: %s\n", dst); ft_bzero(dst, sizeof(dst)); printf("Destination before ft_memcpy: %s\n", dst); ft_memcpy(dst, src2, sizeof(src2)); printf("Destination after  ft_memcpy: %s\n", dst); return 0;}
-// ft_memmove	int main(void)	{	char str1[11] = "123456789";	char str2[11] = "123456789";    printf("origin string: %s\n", str1);	printf("origin string: %s\n", str2); memcpy(str1 + 1, str1, sizeof(int)*3);    printf("mcpy overlap:  %s\n", str1); memmove(str2 + 1, str2, sizeof(int)*3);    printf("move overlap:  %s\n", str2);    return 0;}
+// ft_memmove
+int main(void){	char str1[11] = "123456789";	char str2[11] = "123456789";    printf("origin string: %s\n", str1);	printf("origin string: %s\n", str2); memcpy(str1 + 1, str1, sizeof(int)*3);    printf("mcpy overlap:  %s\n", str1); memmove(str2 + 1, str2, sizeof(int)*3);    printf("move overlap:  %s\n", str2);    return 0;}
 // ft_strclpy	int main(void)	{	char src[] = "-----";	char dst[] = "Hello";	printf("dst before: %s\n", dst);	ft_strlcpy(dst, src, 1);	printf("dst after : %s\n", dst);}
-// ft_memchr	
-int main() {
-    int arr[] = {1, 2, 3, 4, 5};
-    char str[] = "Hello World!";
-    printf("%s\n", ft_memchr(str, 'o', sizeof(str)));
-    printf("%d\n", *(int *)ft_memchr(arr, 4, sizeof(arr)));
-    return 0;
-}
-
+// ft_memchr	int main()      {    int arr[] = {1, 2, 3, 4, 5};    char str[] = "Hello World!";    printf("%s\n", ft_memchr(str, 'o', sizeof(str)));    printf("%d\n", *(int *)ft_memchr(arr, 4, sizeof(arr)));    return 0;}
 // ft_strlcat	int main(void)	{   char src[] = "";     char dest[] = "Hello";     size_t dstsize = 10;     printf("%lu\n", ft_strlcat(dest, src, dstsize));     return 0;}
 // ft_toupper	int main(void)	{	for (int i = 0; i < 128; i++) { printf("%d - %c\n", i, ft_toupper(i)); } return 0; }
 // ft_tolower 	int main(void)	{	for (int i = 0; i < 128; i++) { printf("%d - %c\n", i, ft_tolower(i)); } return 0; }
