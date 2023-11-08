@@ -1,8 +1,0 @@
-{
-    "terminal.integrated.shell.linux": "/bin/bash",
-    "cmake.configureOnOpen": false,
-    "files.associations": {
-        "stdbool.h": "c",
-        "unistd.h": "c"
-    }
-}
