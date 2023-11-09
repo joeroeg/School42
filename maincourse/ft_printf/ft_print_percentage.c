@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_c.c                                       :+:      :+:    :+:   */
+/*   ft_print_percentage.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 13:41:58 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/08 16:18:09 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/11/08 14:52:02 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/11/08 17:02:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_c(va_list *args)
+int	ft_print_percentage(va_list *args)
 {
 	char	c;
 
-	c = (char)va_arg(*args, int);
-	write (1, &c, 1);
+	(void)args;
+	c = '%';
+	write(1, &c, 1);
 	return (1);
 }

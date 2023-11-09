@@ -3,9 +3,9 @@
 #include <time.h>
 #include "ft_printf.h"
 
-int main()
+int	main()
 {
-	char input[] = "%p";
+	char input[] = "%X";
 	int digit = -42;
 	printf("(%d)", printf(input, digit));
 	printf("\n");

@@ -1,46 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_p.c                                       :+:      :+:    :+:   */
+/*   ft_print_lowercase_x.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 14:24:13 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/08 16:48:36 by hezhukov         ###   ########.fr       */
+/*   Created: 2023/11/08 13:53:21 by hezhukov          #+#    #+#             */
+/*   Updated: 2023/11/08 17:02:21 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ptr_to_hex(uintptr_t ptr_val, char *buffer)
+void	unsigned_to_hex_lower(unsigned int num, char *buffer)
 {
 	char	*hex_chars;
 	int		index;
 
 	hex_chars = "0123456789abcdef";
 	index = 0;
-	if (ptr_val == 0)
-	{
+	if (num == 0)
 		buffer[index++] = '0';
-	}
 	else
 	{
-		while (ptr_val != 0)
+		while (num != 0)
 		{
-			buffer[index++] = hex_chars[ptr_val % 16];
-			ptr_val /= 16;
+			buffer[index++] = hex_chars[num % 16];
+			num /= 16;
 		}
 	}
 	buffer[index] = '\0';
 }
 
-int	print_formatted_ptr(char *buffer)
+int	print_and_count_lower(char *buffer)
 {
 	int	len;
 	int	index;
 
-	len = 2;
-	write(1, "0x", 2);
+	len = 0;
 	index = ft_strlen(buffer);
 	while (index > 0)
 	{
@@ -50,13 +47,15 @@ int	print_formatted_ptr(char *buffer)
 	return (len);
 }
 
-int	ft_print_p(va_list *args)
+int	ft_print_lowercase_x(va_list *args)
 {
-	uintptr_t	ptr_val;
-	char		buffer[17];
+	unsigned int	num;
+	char			buffer[16];
+	int				len;
 
-	ptr_val = va_arg(*args, uintptr_t);
+	num = va_arg(*args, unsigned int);
 	ft_memset(buffer, 0, sizeof(buffer));
-	ptr_to_hex(ptr_val, buffer);
-	return (print_formatted_ptr(buffer));
+	unsigned_to_hex_lower(num, buffer);
+	len = print_and_count_lower(buffer);
+	return (len);
 }
