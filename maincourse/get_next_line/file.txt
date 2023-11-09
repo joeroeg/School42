@@ -1,1 +1,16 @@
-a
+next new line 1\n
+next new line 2\n
+next new line 3\n
+next new line 4\n
+next new line 5\n
+NULL
+
+buffersize=2
+next new line 1\n
+
+buffersize=20
+read() read() read()
+buffer[] = "line 3\nnext new li\nn"
+result = buffer from start to \n
+result = line 3\n
+return (result)
