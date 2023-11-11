@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:09:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 17:33:09 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:25:04 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ function: atoi is used to convert a string to an integer.
    input: ft_atoi("-1234")
   output: -1234
 */
-
+/*
 static int	ft_isspace(char c)
 {
 	return (c == '\f' || c == '\n' || c == '\r'
@@ -51,3 +51,4 @@ int	ft_atoi(const char *str)
 	}
 	return (number * sign);
 }
+*/

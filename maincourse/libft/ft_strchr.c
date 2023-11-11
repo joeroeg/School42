@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:09:01 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/01 17:35:58 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:29:17 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ function: locates the first occurrence of (c) in the string (s) and returns
   output: "o World"
 */
 
+/*
 char	*ft_strchr(const char *s, int c)
 {
 	int	i;
@@ -36,3 +37,4 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)(s + i));
 	return (NULL);
 }
+*/

@@ -6,30 +6,38 @@
 #    By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 12:13:40 by hezhukov          #+#    #+#              #
-#    Updated: 2023/11/09 14:25:32 by hezhukov         ###   ########.fr        #
+#    Updated: 2023/11/10 14:19:23 by hezhukov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = getnextline.a
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
-SRC = get_next_line.c
+CFLAGS = -Wall -Wextra -Werror -g
+SRC = get_next_line.c get_next_line_utils.c
 OBJ = $(SRC:.c=.o)
+EXEC = test_gnl
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@rm -f $(EXEC)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+run: re $(EXEC)
+
+$(EXEC): $(NAME)
+	@$(CC) $(CFLAGS) $(NAME) main.c -o $(EXEC)
+	@./$(EXEC)
+
+.PHONY: all clean fclean re run

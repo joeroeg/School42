@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 15:53:13 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 17:51:16 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 20:04:18 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ function: calculates the length of the string (s), excluding the terminating
   output: 5
 */
 
+/*
 size_t	ft_strlen(const char *s)
 {
 	const char	*a;
@@ -30,3 +31,5 @@ size_t	ft_strlen(const char *s)
 		s++;
 	return (s - a);
 }
+*/
+

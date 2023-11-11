@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:55:47 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 17:45:23 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:29:31 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ function: applies the function (f) to each character of the string (s)
   output: Hello
 */
 
+/*
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	unsigned int	i;
@@ -32,3 +33,4 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 		i++;
 	}
 }
+*/

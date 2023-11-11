@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:47:06 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 19:05:11 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:29:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ function: allocates sufficient memory for a copy of the string (str),
   output: "Hello"
 */
 
+/*
 char	*ft_strdup(const char *str)
 {
 	size_t	length;
@@ -31,3 +32,4 @@ char	*ft_strdup(const char *str)
 	ft_strlcpy(duplicate, str, length + 1);
 	return (duplicate);
 }
+*/

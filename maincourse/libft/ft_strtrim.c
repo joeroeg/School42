@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:33:53 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/03 13:59:49 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:30:40 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ function: allocates (with malloc) and returns a copy of (s1) with the characters
   output: "World"
 */
 
+/*
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	len1;
@@ -34,3 +35,4 @@ char	*ft_strtrim(char const *s1, char const *set)
 		len1--;
 	return (ft_substr(s1, 0, len1 + 1));
 }
+*/

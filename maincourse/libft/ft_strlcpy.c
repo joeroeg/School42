@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:37:19 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/01 17:28:57 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:29:54 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ function: copies up to (dstsize - 1) characters from the string (src) to (dst),
   output: He
 */
 
+/*
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	srclen;
@@ -37,3 +38,4 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	}
 	return (srclen);
 }
+*/

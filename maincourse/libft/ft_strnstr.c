@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:29:00 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/03 13:59:51 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:30:29 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ function: locates the first occurrence of the null-terminated string (needle)
     note: len >= needle_len check "room" left in the haystack to fit the needle.
 */
 
+/*
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	needle_len;
@@ -43,3 +44,4 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (NULL);
 }
+*/

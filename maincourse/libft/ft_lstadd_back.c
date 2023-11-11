@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:57:53 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:25:13 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:26:29 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ function: add new to the end of lst
 output: lst->new
 */
 
+/*
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
@@ -33,3 +34,4 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 			*lst = new;
 	}
 }
+*/

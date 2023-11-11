@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 19:11:54 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 23:20:27 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:27:55 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ function: memchr is a function that scans the first n bytes of the memory area
   output: NULL
 */
 
+/*
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const unsigned char	*string;
@@ -39,3 +40,4 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
+*/

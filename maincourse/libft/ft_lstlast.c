@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:58:45 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:26:38 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:27:08 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ function: return the last element of lst
 output: lst->last
 */
 
+/*
 t_list	*ft_lstlast(t_list *lst)
 {
 	while (lst)
@@ -28,3 +29,4 @@ t_list	*ft_lstlast(t_list *lst)
 	}
 	return (lst);
 }
+*/

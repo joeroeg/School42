@@ -2,13 +2,11 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "Build ft_printf",
-            "command": "/usr/bin/make",
+            "label": "Build",
+            "command": "/usr/bin/clang",
             "args": [
-				"-C",
-                "${workspaceFolder}/maincourse/ft_printf/", // Change to the directory of your Makefile
-                "all" // The target to build, default is 'all'
-
+				"-g",
+                "${workspaceFolder}/maincourse/get_next_line/a.out/", // Change to the directory of your Makefile
 			],
             "options": {
                 "cwd": "${workspaceFolder}"

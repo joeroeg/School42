@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:27:32 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 22:39:02 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:28:15 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ function: memcpy function copies characters from the source to the destination
   output: ababa
 */
 
+/*
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned char		*destination;
@@ -52,3 +53,4 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:58:54 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/29 20:28:50 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:27:48 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ function: return the size of lst
 output: size of lst
 */
 
+/*
 int	ft_lstsize(t_list *lst)
 {
 	size_t	i;
@@ -30,3 +31,4 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (i);
 }
+*/

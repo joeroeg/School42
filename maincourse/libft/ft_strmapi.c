@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:41:53 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/03 14:42:42 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:30:08 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ function: applies the function f to each character of the string passed
   output: HELLO
 */
 
+/*
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char			*str;
@@ -39,3 +40,4 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	}
 	return (str);
 }
+*/

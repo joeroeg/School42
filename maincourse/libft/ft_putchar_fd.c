@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:55:04 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/01 16:41:04 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:28:39 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ function: writes a character to a file descriptor (fd)
   output: a
 */
 
+/*
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
+*/

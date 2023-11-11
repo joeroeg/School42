@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 15:15:06 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/02 15:20:20 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 20:30:19 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@ function: check if 'a' is a printable character
   output: 1
 */
 
+/*
 int	ft_isprint(int c)
+{
+	return (c >= 32 && c <= 126);
+}
+*/
+
+int ft_isprint(int c)
 {
 	return (c >= 32 && c <= 126);
 }

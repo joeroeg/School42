@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:35:26 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 17:33:26 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:25:15 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ function: this function is similar to memset,
    input: ft_bzero("abcdef", 6)
   output: "000000"
 */
-
+/*
 void	ft_bzero(void *s, size_t n)
 {
 	ft_memset(s, 0, n);
 }
+*/

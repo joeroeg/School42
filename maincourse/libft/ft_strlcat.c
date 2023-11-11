@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 19:29:34 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/01 17:33:38 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:29:49 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ function: appends the NUL-terminated string (src) to the end of (dest).
   printf: Hello World
 */
 
+/*
 size_t	find_dest_length(char *dest, size_t size)
 {
 	char	*destination;
@@ -66,3 +67,4 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 		return (destlen + ft_strlen(src));
 	return (concatenate(dest, src, destlen, size));
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:18:43 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/01 17:36:17 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:30:34 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ function: locates the last occurrence of (c) in the string (s) and returns
   output: "orld"
 */
 
+/*
 char	*ft_strrchr(const char *s, int c)
 {
 	int			i;
@@ -40,3 +41,4 @@ char	*ft_strrchr(const char *s, int c)
 		return ((char *)s);
 	return ((char *)last);
 }
+*/
