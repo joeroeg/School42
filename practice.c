@@ -1,31 +1,53 @@
-#include <fcntl.h>   // for open flags
-#include <sys/stat.h> // for permission flags
-#include <unistd.h>  // for close
-#include <stdio.h>   // for perror
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define BUFFER_SIZE 1024
+
+char *get_next_line(int fd) {
+    static char buffer[BUFFER_SIZE + 1];
+    static int i = 0;
+    static int read_bytes = 0;
+    char *line = malloc(BUFFER_SIZE + 1);
+    if (!line) return NULL; // Check malloc failure
+
+    int j = 0;
+    while (1) {
+        if (i >= read_bytes) {
+            read_bytes = read(fd, buffer, BUFFER_SIZE);
+            if (read_bytes <= 0) { // EOF or error
+                free(line);
+                return NULL;
+            }
+            i = 0;
+        }
+
+        line[j++] = buffer[i++];
+        if (j >= BUFFER_SIZE || buffer[i - 1] == '\n') {
+            line[j] = '\0';
+            break;
+        }
+    }
+
+    return line;
+}
 
 int main() {
-    // File path and name
-    const char *filePath = "example.txt";
-
-    // Open the file with O_CREAT flag to create it if it doesn't exist
-    // O_WRONLY flag is used to open the file for write-only access
-    // 0644 sets the file permissions (owner can read/write, others can read)
-    int fileDescriptor = open(filePath, O_CREAT | O_WRONLY, 0644);
-
-    // Check if file creation was successful
-    if (fileDescriptor == -1) {
-        // If open() returns -1, an error occurred
+    const char *path = "test.txt";
+    char *line;
+    int fd = open(path, O_RDONLY);
+    if (fd == -1) {
         perror("Error opening file");
         return 1;
     }
 
-    // Close the file
-    if (close(fileDescriptor) == -1) {
-        // If close() returns -1, an error occurred while closing
-        perror("Error closing file");
-        return 1;
+    while ((line = get_next_line(fd)) != NULL) {
+        printf("%s", line);
+        free(line);
     }
 
-    printf("File '%s' created successfully\n", filePath);
+    close(fd);
     return 0;
 }
