@@ -6,7 +6,7 @@
 #    By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 12:13:40 by hezhukov          #+#    #+#              #
-#    Updated: 2023/11/10 14:19:23 by hezhukov         ###   ########.fr        #
+#    Updated: 2023/11/12 17:02:10 by hezhukov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = clang
 CFLAGS = -Wall -Wextra -Werror -g
 SRC = get_next_line.c get_next_line_utils.c
 OBJ = $(SRC:.c=.o)
-EXEC = test_gnl
+EXEC = a.out
 
 all: $(NAME)
 
