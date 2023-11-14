@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:09:21 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/14 15:42:01 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:52:07 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,36 @@ char	*ft_strchr(const char *s, int c)
 	if ((char)c == '\0')
 		return ((char *)s);
 	return (NULL);
+}
+
+char	*extract_line(char **static_buffer)
+{
+    char *line;
+    char *new_buffer;
+    size_t i;
+
+    if (!static_buffer || !*static_buffer) return NULL;
+
+    i = 0;
+    while ((*static_buffer)[i] != '\n' && (*static_buffer)[i] != '\0') i++;
+
+    line = malloc(sizeof(char) * (i + ((*static_buffer)[i] == '\n' ? 2 : 1)));
+    if (!line) return NULL;
+
+    for (size_t j = 0; j < i; j++) line[j] = (*static_buffer)[j];
+    line[i] = ((*static_buffer)[i] == '\n') ? '\n' : '\0';
+    line[i + ((*static_buffer)[i] == '\n' ? 1 : 0)] = '\0';
+
+    new_buffer = ((*static_buffer)[i] != '\0') ? ft_strdup(*static_buffer + i + 1) : strdup("");
+    if (!new_buffer) {
+        free(line);
+        return NULL;
+    }
+
+    free(*static_buffer);
+    *static_buffer = new_buffer;
+
+    return line;
 }
 
 char	*ft_strdup(const char *src)

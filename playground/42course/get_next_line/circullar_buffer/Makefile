@@ -6,14 +6,14 @@
 #    By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 12:13:40 by hezhukov          #+#    #+#              #
-#    Updated: 2023/11/14 12:32:04 by hezhukov         ###   ########.fr        #
+#    Updated: 2023/11/14 17:58:21 by hezhukov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = getnextline.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
-SRC = get_next_line.c get_next_line_utils.c
+SRC = get_next_line.c
 OBJ = $(SRC:.c=.o)
 EXEC = a.out
 

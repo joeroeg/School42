@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:00:04 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/14 14:58:28 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:52:51 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*get_next_line(int fd)
 	char		*line;
 	ssize_t		bytes_read;
 	char		*temp;
-
 	buffer = malloc(BUFFER_SIZE + 1);
 	line = NULL;
 	if (fd < 0 || !buffer)
