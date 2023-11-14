@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+         #
+#    By: device <device@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 12:13:40 by hezhukov          #+#    #+#              #
-#    Updated: 2023/11/13 15:23:55 by hezhukov         ###   ########.fr        #
+#    Updated: 2023/11/13 21:58:35 by device           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = getnextline.a
-CC = clang
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 SRC = get_next_line.c get_next_line_utils.c
 OBJ = $(SRC:.c=.o)
@@ -37,7 +37,6 @@ re: fclean all
 run: re $(EXEC)
 
 $(EXEC): $(NAME)
-	@$(CC) $(CFLAGS) $(NAME) main.c -o $(EXEC)
-	@./$(EXEC)
+	@$(CC) $(CFLAGS) main.c $(NAME) -o $(EXEC) && ./$(EXEC)
 
 .PHONY: all clean fclean re run
