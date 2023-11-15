@@ -6,7 +6,8 @@
 #include <string.h>  // For memcpy
 #include <stdbool.h> // For bool type
 
-typedef struct CircularBuffer {
+typedef struct CircularBuffer
+{
     char	*buffer;
     size_t	capacity;
     size_t	head;
@@ -26,6 +27,28 @@ void freeCircularBuffer(CircularBuffer *cb) {
     free(cb->buffer);
 }
 
+void expandBuffer(CircularBuffer *cb) {
+    int newCapacity = cb->capacity * 2;  // Double the capacity
+    char *newBuffer = realloc(cb->buffer, newCapacity * sizeof(char));
+    if (newBuffer == NULL) {
+        perror("Failed to expand buffer");
+        exit(EXIT_FAILURE);
+    }
+
+    // Adjust the buffer if the data was wrapped around
+    if (cb->tail < cb->head) {
+        memcpy(newBuffer + cb->capacity, newBuffer, cb->tail * sizeof(char));
+        cb->tail += cb->capacity;
+    }
+
+    cb->buffer = newBuffer;
+    cb->capacity = newCapacity;
+}
+
+int isBufferFull(CircularBuffer *cb) {
+    return cb->count == cb->capacity;
+}
+
 int readLine(int fd, CircularBuffer *cb, char *line, size_t lineCapacity) {
     char ch;
     ssize_t bytesRead;
@@ -33,18 +56,23 @@ int readLine(int fd, CircularBuffer *cb, char *line, size_t lineCapacity) {
 	int isNewLineRead = 0;
 
     while ((bytesRead = read(fd, &ch, 1)) > 0 && lineLength < lineCapacity - 1) {
+		if (isBufferFull(cb)) {
+        expandBuffer(cb);
+    }
         if (cb->count < cb->capacity) {
             cb->buffer[cb->tail] = ch;
             cb->tail = (cb->tail + 1) % cb->capacity;
             cb->count++;
-        } else {
-            // Process the character at the head if the buffer is full
-            if (lineLength < lineCapacity - 1) {
-                line[lineLength++] = cb->buffer[cb->head];
-            }
-            cb->buffer[cb->head] = ch;
-            cb->head = (cb->head + 1) % cb->capacity;
         }
+		// so as I understand we do not need to check if the buffer is full because we are expanding it.
+		// else {
+        //     // Process the character at the head if the buffer is full
+        //     if (lineLength < lineCapacity - 1) {
+        //         line[lineLength++] = cb->buffer[cb->head];
+        //     }
+        //     cb->buffer[cb->head] = ch;
+        //     cb->head = (cb->head + 1) % cb->capacity;
+        // }
 
         if (ch == '\n') {
             isNewLineRead = 1;
@@ -69,7 +97,7 @@ int readLine(int fd, CircularBuffer *cb, char *line, size_t lineCapacity) {
 
 int main() {
     CircularBuffer cb;
-    initCircularBuffer(&cb, 1); // 100 is the buffer capacity
+    initCircularBuffer(&cb, 100); // 100 is the buffer capacity
 
     int fileDescriptor = open("example.txt", O_RDONLY);
     if (fileDescriptor < 0) {
