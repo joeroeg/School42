@@ -6,13 +6,13 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:35:15 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:29:08 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/15 19:50:03 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
+
 static void	free_split(char **arr, int n)
 {
 	while (n--)
@@ -96,4 +96,4 @@ char	**ft_split(char const *s, char c)
 	fill_array(arr, s, c);
 	return (arr);
 }
-*/
+
