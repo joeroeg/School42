@@ -6,13 +6,13 @@
 #    By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 12:13:40 by hezhukov          #+#    #+#              #
-#    Updated: 2023/11/15 19:11:58 by hezhukov         ###   ########.fr        #
+#    Updated: 2023/11/16 13:26:32 by hezhukov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = getnextline.a
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 SRC = get_next_line.c get_next_line_utils.c
 OBJ = $(SRC:.c=.o)
 EXEC = a.out
@@ -37,6 +37,6 @@ re: fclean all
 run: re $(EXEC)
 
 $(EXEC): $(NAME)
-	@$(CC) $(CFLAGS) main.c $(NAME) -o $(EXEC) && ./$(EXEC)
+	@$(CC) $(CFLAGS) main.c $(NAME) -g -o $(EXEC) && ./$(EXEC)
 
 .PHONY: all clean fclean re run
