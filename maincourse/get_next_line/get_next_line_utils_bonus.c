@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:09:21 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/18 14:55:55 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/18 14:57:40 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -71,7 +71,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start + len > str_len)
 		len = str_len - start;
-	substr = malloc(len + 1);
+	substr = (char *)malloc(sizeof(char) * len + 1);
 	if (substr == NULL)
 		return (NULL);
 	i = 0;
