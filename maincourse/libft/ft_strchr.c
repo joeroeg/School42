@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:09:01 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/18 17:23:24 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:39:40 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,4 @@ char *ft_strchr(const char *s, int c)
 	return (0);
 }
 */
+
