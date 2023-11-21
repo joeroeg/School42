@@ -11,7 +11,12 @@ run_test() {
     # Run the C program and capture the actual output
     actual_output=$(./a.out "$input")
 
-    # Compare the actual output with the expected output using diff
+    # Check if there is a newline character at the end of the actual output
+    if [ "${actual_output: -1}" == $'\n' ]; then
+        actual_output="${actual_output::-1}" # Remove the trailing newline for comparison
+    fi
+
+    # Compare the actual output with the expected output
     if [ "$actual_output" == "$expected_output" ]; then
         echo "Test with input '$input': ✅ Passed"
     else
@@ -19,12 +24,13 @@ run_test() {
     fi
 }
 
-# Run test cases
-run_test "Hello, World!" "Hello,"
-run_test "12345" "12345"
-run_test "   Leading spaces" "Leading"
-run_test $'Tab\tSeparated' "Tab"
+# Test cases
+run_test "FOR PONY" "FOR"
+run_test "this        ...       is sparta, then again, maybe    not" "this"
 run_test "   " ""
+run_test "a b" "a"
+run_test "  lorem,ipsum  " "lorem,ipsum"
+run_test "" ""
 
 # Clean up (optional)
 rm -f a.out
