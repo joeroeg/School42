@@ -1,28 +1,25 @@
-#include <stdio.h>
 #include <unistd.h>
 
-int is_power_of_2(unsigned int n)
+int	main(int argc, char *argv[])
 {
-    if (n == 0)
-        return 0;
-    return (n & (n - 1)) == 0;
+	int	i;
+
+	i = 0;
+	if (argc == 4) {
+		if (!argv[2][1] && !argv[3][1]) {
+			while (argv[1][i]) {
+				if (argv[1][i] == argv[2][0])
+					write(1, &argv[3][0], 1);
+				else
+					write(1, &argv[1][i], 1);
+				i += 1;
+			}
+		}
+	}
+	write(1, "\n", 1);
+	return (0);
 }
 
-
-#include <stdio.h>
-
-int is_power_of_2(unsigned int n);
-
-int main() {
-    // Test with a range of values
-    unsigned int test_values[] = {0, 1, 2, 3, 4, 8, 16, 32, 63, 64, 128, 256, 1024, 2048, 5000};
-    int num_tests = sizeof(test_values) / sizeof(test_values[0]);
-
-    for (int i = 0; i < num_tests; i++) {
-        unsigned int value = test_values[i];
-        printf("is_power_of_2(%u) = %d\n", value, is_power_of_2(value));
-    }
-
-    return 0;
-}
-
+/*
+1. validate 3 arguments
+*/
