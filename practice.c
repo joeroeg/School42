@@ -1,25 +1,31 @@
 #include <unistd.h>
 
-int	main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	int	i;
+    int i = 0;
+	int j = 0;
+    int seen_before_av1[128] = {0};
+	int seen_before_av2[128] = {0};
 
-	i = 0;
-	if (argc == 4) {
-		if (!argv[2][1] && !argv[3][1]) {
-			while (argv[1][i]) {
-				if (argv[1][i] == argv[2][0])
-					write(1, &argv[3][0], 1);
-				else
-					write(1, &argv[1][i], 1);
-				i += 1;
+    if (argc == 3)
+    {
+        while ((argv[2][i]))
+        {
+            if (seen_before_av2[(int)argv[2][i]] == 0)
+			{
+				seen_before_av2[(int)argv[2][i]] = 1;
 			}
-		}
-	}
-	write(1, "\n", 1);
-	return (0);
+            i++;
+        }
+		while ((argv[1][j]))
+        {
+            if (seen_before_av1[(int)argv[1][j]] == 0 && seen_before_av2[(int)argv[1][j]] == 1)
+			{
+				seen_before_av1[(int)argv[1][j]] = 1;
+				write (1, &argv[1][j], 1);
+			}
+            j++;
+        }
+    }
+    write(1, "\n", 1);
 }
-
-/*
-1. validate 3 arguments
-*/
