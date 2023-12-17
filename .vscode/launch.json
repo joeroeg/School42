@@ -30,7 +30,7 @@
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/a.out",
-		"args": ["abc."],
+		"args": [],
 		"stopAtEntry": false,
 		"cwd": "${fileDirname}",
 		"environment": [],
