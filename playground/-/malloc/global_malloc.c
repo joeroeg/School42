@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX_ALLOCATIONS 1024
+
 typedef struct Allocation {
     void *pointer;
     size_t size;
@@ -9,9 +11,9 @@ typedef struct Allocation {
     int line;
 } Allocation;
 
-#define MAX_ALLOCATIONS 1024
 Allocation allocations[MAX_ALLOCATIONS];
 int allocation_count = 0;
+
 
 void* custom_malloc(size_t size, const char *file, int line) {
     void *ptr = malloc(size);
