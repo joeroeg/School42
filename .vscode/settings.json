@@ -53,10 +53,19 @@
 		"unistd.h": "c",
 		"stdarg.h": "c"
 	},
+	"[c]": {
 	"files.autoSave": "onFocusChange",
     "editor.detectIndentation": false,
 	"editor.insertSpaces": false,
 	"editor.renderWhitespace": "all",
 	"files.trimTrailingWhitespace": true,
 	"files.insertFinalNewline": true
+	},
+
+	"[python]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+		"editor.renderWhitespace": "all",
+        "editor.formatOnSave": true
+	}
 }

@@ -1,25 +1,25 @@
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-int	main(int argc, char *argv[])
+int gcd(int x, int y)
 {
-	int	i;
-
-	i = 0;
-	if (argc == 4) {
-		if (!argv[2][1] && !argv[3][1]) {
-			while (argv[1][i]) {
-				if (argv[1][i] == argv[2][0])
-					write(1, &argv[3][0], 1);
-				else
-					write(1, &argv[1][i], 1);
-				i += 1;
-			}
-		}
-	}
-	write(1, "\n", 1);
-	return (0);
+    while (y != 0)
+    {
+        int temp = x;
+        y = x % y;
+        x = temp;
+    }
+    return x;
 }
 
-/*
-1. validate 3 arguments
-*/
+int main(int argc, char **argv)
+{
+    if (argc == 3)
+    {
+        int x = atoi(argv[1]);
+        int y = atoi(argv[2]);
+        printf("%d", gcd(x, y));
+    }
+    printf("\n");
+}
