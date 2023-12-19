@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Compile the C program
-gcc -o print_bits_test print_bits.c
+gcc print_bits.c
 
 # ANSI color codes
 RED='\033[0;31m'
@@ -15,7 +15,7 @@ run_test() {
     expected=$(printf '%08d' $(bc <<< "ibase=10;obase=2;$input"))
     echo -e "Expected output: ${GREEN}$expected${NC}"
     echo -n "Actual output:   "
-    ./print_bits_test "$input"
+    ./a.out "$input"
     echo -e "\n"
 }
 

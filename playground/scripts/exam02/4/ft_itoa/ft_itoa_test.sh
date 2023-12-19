@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Compile the C program along with the test program
-gcc -o test_ft_itoa ft_itoa.c test_ft_itoa.c
+gcc ft_itoa.c ft_itoa_test.c
 
 # ANSI color codes
 RED='\033[0;31m'
@@ -14,7 +14,7 @@ run_test() {
     expected=$2
 
     # Run the program and capture the output
-    result=$(./test_ft_itoa "$input")
+    result=$(./a.out "$input")
 
     # Check if the result matches the expected output
     if [ "$result" == "$expected" ]; then

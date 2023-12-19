@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Compile the C program
-gcc -o is_power_of_2_test is_power_of_2.c
+gcc is_power_of_2.c
 
 # Function to run a test case
 run_test() {
@@ -9,7 +9,7 @@ run_test() {
     expected=$2
 
     # Run the program and capture the output
-    result=$(./is_power_of_2_test "$input")
+    result=$(./a.out "$input")
 
     # Check if the result matches the expected output
     if [ "$result" -eq "$expected" ]; then
