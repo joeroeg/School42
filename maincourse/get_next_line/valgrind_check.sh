@@ -18,9 +18,9 @@ LOG_DIR="$PROJECT_PATH/valgrind_logs"
 LEAK_CHECK=1  # check for memory leaks
 SHOW_LEAK_KINDS=1 # show the kinds of leaks
 TRACK_ORIGINS=1 # track origins of uninitialised values
-VERBOSE=1 # show extra information
-LOG_TO_FILE=1 # save Valgrind output to a log file
-USE_GREP=0  # to enable grep filtering
+VERBOSE=0 # show extra information
+LOG_TO_FILE=0 # save Valgrind output to a log file
+USE_GREP=1  # to enable grep filtering
 
 # Building the Valgrind command
 VALGRIND_CMD="valgrind"

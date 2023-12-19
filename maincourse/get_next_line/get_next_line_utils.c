@@ -51,7 +51,7 @@ char	*ft_strdup(const char *str)
 	len = ft_strlen(str) + 1;
 	s = (char *)malloc(sizeof(char) * len);
 	if (s == NULL)
-		return (NULL);
+		return (ft_strdup(""));
 	i = -1;
 	while (++i < len)
 		s[i] = str[i];
