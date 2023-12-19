@@ -1,32 +1,8 @@
-<<<<<<< HEAD
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-int gcd(int x, int y)
-{
-    while (y != 0)
-    {
-        int temp = x;
-        y = x % y;
-        x = temp;
-    }
-    return x;
-}
-
-int main(int argc, char **argv)
-{
-    if (argc == 3)
-    {
-        int x = atoi(argv[1]);
-        int y = atoi(argv[2]);
-        printf("%d", gcd(x, y));
-    }
-    printf("\n");
-=======
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#define MAX_ALLOCATIONS 1024
 
 typedef struct Allocation {
     void *pointer;
@@ -35,9 +11,9 @@ typedef struct Allocation {
     int line;
 } Allocation;
 
-#define MAX_ALLOCATIONS 1024
 Allocation allocations[MAX_ALLOCATIONS];
 int allocation_count = 0;
+
 
 void* custom_malloc(size_t size, const char *file, int line) {
     void *ptr = malloc(size);
@@ -79,5 +55,4 @@ int main() {
     // Intentionally not freeing 'array' to simulate memory leak
     check_for_memory_leaks();
     return 0;
->>>>>>> de4b1dd2a3531f451d8d27018ae4d304d2984c42
 }
