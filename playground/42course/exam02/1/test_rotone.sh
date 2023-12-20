@@ -25,6 +25,8 @@ run_test "Hello, World!" "Ifmmp, Xpsme!"
 run_test "123" "123"
 run_test "Test!" "Uftu!"
 run_test "aA" "bB"
+run_test "z" "a"
+run_test "Z" "A"
 
 # Clean up (optional)
 rm -f your_program
