@@ -1,45 +1,31 @@
-// Passed Moulinette 2019.09.01
-
 #include <unistd.h>
 
-void	str_capitalizer(char *str)
+int main(int argc, char **argv)
 {
-	while (*str != '\0')
-	{
-		while (*str != '\0' && (*str == ' ' || *str == '\t'))
-		{
-			write(1, str, 1);
-			++str;
-		}
-
-		while (*str != '\0' && *str != ' ' && *str != '\t')
-		{
-			if (*str >= 'a' && *str <= 'z'
-			&& (*(str + 1) == '\0' || *(str + 1) == ' ' || *(str + 1) == '\t'))
-				*str = *str - ('a' - 'A');
-			else if (*str >= 'A' && *str <= 'Z' && *(str + 1) != '\0'
-			&& *(str + 1) != ' ' && *(str + 1) != '\t')
-				*str = *str + ('a' - 'A');
-			write(1, str, 1);
-			++str;
-		}
-	}
-	write(1, "\n", 1);
-}
-
-int		main(int argc, char **argv)
-{
-	if (argc == 1)
-		write(1, "\n", 1);
-	else
-	{
-		int i = 1;
-		while (i < argc)
-		{
-			str_capitalizer(argv[i]);
-			++i;
-		}
-	}
-
-	return (0);
+    if (argc < 2)
+        write(1, "\n", 1);
+    int i = 1;
+    int j = 0;
+    while (argv[i])
+    {
+        j = 0;
+        while (argv[i][j])
+        {
+            if (argv[i][j] >= 'A' && argv[i][j] <= 'Z')
+            {
+                argv[i][j] = argv[i][j] + 32;
+            }
+            if (argv[i][j + 1] == '\0' || argv[i][j + 1] == ' ' || argv[i][j + 1] == '\t')
+            {
+                if (argv[i][j] >= 'a' && argv[i][j] <= 'z')
+                {
+                    argv[i][j] = argv[i][j] - 32;
+                }
+            }
+            write(1, &argv[i][j], 1);
+            j++;
+        }
+        write(1, "\n", 1);
+        i++;
+    }
 }

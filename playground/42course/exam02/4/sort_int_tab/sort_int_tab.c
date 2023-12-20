@@ -1,10 +1,11 @@
+#include <stdio.h>
 
 void	sort_int_tab(int *tab, unsigned int size)
 {
 	unsigned int	i = 0;
 	int	temp;
 
-	while (i < (size - 1))
+	while (i < size)
 	{
 		if (tab[i] > tab[i + 1])
 		{
@@ -16,5 +17,14 @@ void	sort_int_tab(int *tab, unsigned int size)
 		else
 			i++;
 	}
+}
 
+int main() {
+    int array[] = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3};
+    unsigned int size = sizeof(array) / sizeof(array[0]);
+    sort_int_tab(array, size);
+    for (unsigned int i = 0; i < size; i++) {
+    printf("[%d]", array[i]);
+    }
+    return 0;
 }

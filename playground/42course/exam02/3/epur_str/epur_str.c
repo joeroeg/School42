@@ -1,19 +1,19 @@
 #include <unistd.h>
 
+
 int main(int argc, char **argv)
 {
-    int i = 0;
-    int flag = 0;
-
     if (argc == 2)
     {
+        int i = 0;
+        int flag = 0;
         while (argv[1][i] == ' ' || argv[1][i] == '\t')
             i++;
         while (argv[1][i])
         {
             if (argv[1][i] == ' ' || argv[1][i] == '\t')
                 flag = 1;
-            else
+            if (argv[1][i] != ' ' && argv[1][i] != '\t')
             {
                 if (flag)
                 {
