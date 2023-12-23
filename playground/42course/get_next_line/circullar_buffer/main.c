@@ -7,7 +7,7 @@ int main(void) {
         return 1;
     }
 	char *line;
-    while ((line = get_next_line(fd)) != NULL &&) {
+    while ((line = get_next_line(fd)) != NULL) {
         printf("%s", line);
         free(line);
     }
