@@ -1,32 +1,30 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
-int ft_isspace(char c)
-{
-    return (c == ' ' || c == '\t' || c == '\n');
-}
+char *my_strrev(char *str) {
+    int i, j;
+    char temp;
 
+    // Length of the string
+    int n = strlen(str);
 
-int word_count(char *str)
-{
-    int inword = 0;
-    int words = 0;
-    for (int i = 0; str[i]; i++)
-    {
-        if (!ft_isspace(str[i]) && inword == 0)
-        {
-            words++;
-            inword = 1;
-        }
-        else if (ft_isspace(str[i]))
-            inword = 0;
+    // Loop from start to half of the string
+    for (i = 0, j = n - 1; i < j; i++, j--) {
+        // Swap characters at positions i and j
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
     }
-    return (words);
+
+    return str;
 }
 
-int main()
-{
-    char *str = "abc def ghi";
-    printf("%d", word_count(str));
+int main() {
+    char str[] = "Hello, World!";
+
+    printf("Original string: %s\n", str);
+    my_strrev(str);
+    printf("Reversed string: %s\n", str);
+
+    return 0;
 }

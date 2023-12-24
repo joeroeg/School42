@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Assignment name	: ft_strspn
+# Expected files	: ft_strspn.c
+# Allowed functions: None
+# ---------------------------------------------------------------
+# Reproduce exactly the behavior of the strspn function
+# (man strspn).
+# The function should be prototyped as follows:
+# size_t	ft_strspn(const char *s, const char *accept);
+
 # Compile the C program along with the test program
 gcc -o test_ft_strspn ft_strspn.c test_ft_strspn.c
 

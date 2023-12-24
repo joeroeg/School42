@@ -22,3 +22,12 @@ char *ft_strpbrk(const char *s1, const char *s2)
 	}
 	return (0);
 }
+
+int main() {
+    const char *str = "abcdef";
+    const char *chars = "fedcb";
+
+    char *result = ft_strpbrk(str, chars);
+	printf("%s\n", result);
+    return 0;
+}

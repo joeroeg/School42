@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 				write (1, &argv[1][start],1);
 				start++;
 			}
-			if (flag !=0)
+			if (flag != 0)
 			{
 				write(1, " ", 1);
 			}

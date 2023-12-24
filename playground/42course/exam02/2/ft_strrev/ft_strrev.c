@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 char *ft_strrev(char *str)
 {
 	int i = -1;
@@ -13,4 +15,11 @@ char *ft_strrev(char *str)
 		str[length - 1 - i] = temporary;
 	}
 	return (str);
+}
+
+
+int main()
+{
+	char str[] = ft_strrev("abc");
+	printf("%s", str);
 }

@@ -28,7 +28,7 @@
 # $
 
 # Compile the C program
-gcc -o wdmatch_test wdmatch.c
+gcc wdmatch.c
 
 # ANSI color codes
 RED='\033[0;31m'
@@ -43,7 +43,7 @@ run_test() {
     echo "Testing with inputs: '$str1', '$str2'"
 
     # Run the program and capture the output
-    result=$(./wdmatch_test "$str1" "$str2" | cat -e)
+    result=$(./a.out "$str1" "$str2" | cat -e)
 
     # Check if the result matches the expected output
     if [ "$result" == "${expected}$" ]; then
