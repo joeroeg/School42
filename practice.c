@@ -1,4 +1,5 @@
 #include <stdio.h>
+<<<<<<< HEAD
 #include <string.h>
 
 char *my_strrev(char *str) {
@@ -27,4 +28,12 @@ int main() {
     printf("Reversed string: %s\n", str);
 
     return 0;
+=======
+
+
+int main()
+{
+	printf("hello world");
+>>>>>>> 21b4a32e8566f6c2cae05e26ce546446c73b8a9f
 }
+
