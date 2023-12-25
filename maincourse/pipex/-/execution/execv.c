@@ -8,6 +8,7 @@
 
 // int main() {
 //     char *args[] = {"/bin/ls", NULL}; // Argument list must end with NULL
+// 	// char *args[] = {"/bin/ls", "-l", "/", NULL}; // Includes arguments for ls
 //     execv("/bin/ls", args); // Replaces the current process with /bin/ls
 // 	// we don't need to check for an error
 //     perror("execv"); // This will only execute if execv fails
@@ -18,32 +19,32 @@
 
 /* ARGC ARGV version */
 
-int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        fprintf(stderr, "Usage: %s <command> [arguments...]\n", argv[0]);
-        return EXIT_FAILURE;
-    }
+// int main(int argc, char *argv[]) {
+//     if (argc < 2) {
+//         fprintf(stderr, "Usage: %s <command> [arguments...]\n", argv[0]);
+//         return EXIT_FAILURE;
+//     }
 
-    // The command to run is the first argument. The rest are its arguments.
-    // execvp expects the first element of the argument array to be the command.
-    execvp(argv[1], &argv[1]);
+//     // The command to run is the first argument. The rest are its arguments.
+//     // execvp expects the first element of the argument array to be the command.
+//     execvp(argv[1], &argv[1]);
 
-    // If execvp returns, an error occurred
-    perror("execvp");
-    return EXIT_FAILURE;
-}
+//     // If execvp returns, an error occurred
+//     perror("execvp");
+//     return EXIT_FAILURE;
+// }
 
 
 /* ENVIRONMENT VARIABLES */
 
-// int main() {
-//     char *args[] = {"/usr/bin/env", NULL};
-//     char *envp[] = {"HOME=/myhome", "PATH=/bin:/usr/bin", NULL};
+int main() {
+    char *args[] = {"/usr/bin/env", NULL};
+    char *envp[] = {"HOME=/myhome", "PATH=/bin:/usr/bin", NULL};
 
-//     execve("/usr/bin/env", args, envp); // execve allows specifying env variables
-//     perror("execve");
-//     return EXIT_FAILURE;
-// }
+    execve("/usr/bin/env", args, envp); // execve allows specifying env variables
+    perror("execve");
+    return EXIT_FAILURE;
+}
 
 
 

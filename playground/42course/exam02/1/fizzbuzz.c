@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-/*
+
 void	ft_write_number(int number)
 {
 	char	str[10] = "0123456789";
@@ -30,9 +30,4 @@ int		main()
 		write (1, "\n", 1);
 	}
 }
-*/
 
-int main()
-{
-
-}

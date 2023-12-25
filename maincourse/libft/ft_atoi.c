@@ -20,7 +20,7 @@ function: atoi is used to convert a string to an integer.
    input: ft_atoi("-1234")
   output: -1234
 */
-/*
+
 static int	ft_isspace(char c)
 {
 	return (c == '\f' || c == '\n' || c == '\r'
@@ -51,4 +51,10 @@ int	ft_atoi(const char *str)
 	}
 	return (number * sign);
 }
-*/
+
+int main()
+{
+	char *str = "1234";
+	printf("%d\n", ft_atoi(str));
+	return 0;
+}

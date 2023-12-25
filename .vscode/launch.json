@@ -1,20 +1,18 @@
 {
-	"configurations": [
-
-//
-	// {
-	// 	"name": "(lldb) Launch",
-	// 	"type": "cppdbg",
-	// 	"request": "launch",
-	// 	"program": "${workspaceFolder}/a.out",
-	// 	"args": [],
-	// 	"stopAtEntry": false,
-	// 	"cwd": "${fileDirname}",
-	// 	"environment": [],
-	// 	"externalConsole": false,
-	// 	"MIMode": "lldb"
-	// },
-//
-	]
+    "configurations": [
+        {
+            "name": "(lldb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": ["ls", "-l"],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "Compile C File"
+        }
+    ],
+    "version": "0.2.0"
 }
-
