@@ -17,7 +17,7 @@
 
 
 
-/* ARGC ARGV version */
+/* CLA version */
 
 // int main(int argc, char *argv[]) {
 //     if (argc < 2) {
