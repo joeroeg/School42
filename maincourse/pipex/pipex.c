@@ -36,8 +36,7 @@ int redirect_stdin(const char *filename) {
 
 // Function to check if a file exists and is executable
 int is_executable(const char *path) {
-    struct stat st;
-    return stat(path, &st) == 0 && st.st_mode & S_IXUSR;
+    return access(path, X_OK) == 0;
 }
 
 // Function to find the full path of an executable
@@ -90,7 +89,6 @@ void execute_command(char *command, char *const argv[]) {
         free(executable);
     }
 }
-
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
