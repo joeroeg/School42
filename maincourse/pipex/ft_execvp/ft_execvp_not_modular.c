@@ -2,10 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <sys/wait.h>
 
 int ft_execvp(const char *file, char *const argv[], char *const envp[]) {
-    /* Step 1: Finding the PATH Environment Variable */
     const char *path_const = NULL;
     for (int i = 0; envp[i] != NULL; i++) {
         if (strncmp(envp[i], "PATH=", 5) == 0) {
@@ -19,20 +19,17 @@ int ft_execvp(const char *file, char *const argv[], char *const envp[]) {
         return -1;
     }
 
-    /* Step 2: Creating a Mutable Copy of the PATH String */
     char *path = strdup(path_const);
     if (path == NULL) {
         perror("strdup");
         return -1;
     }
 
-    /* Step 3: Tokenizing the PATH String and Searching for the Executable */
     char *p = strtok(path, ":");
     while (p != NULL) {
         char fullPath[1024];
         snprintf(fullPath, sizeof(fullPath), "%s/%s", p, file);
 
-    /* Step 4: Forking a New Process and Executing the Command */
         if (access(fullPath, X_OK) == 0) {
             pid_t pid = fork();
             if (pid == 0) {
@@ -58,18 +55,6 @@ int ft_execvp(const char *file, char *const argv[], char *const envp[]) {
 
     free(path);  // Free the duplicated string
 
-    /* Step 5: Handling Command Not Found */
     fprintf(stderr, "%s: command not found\n", file);
     return -1;
-}
-
-
-int main(int argc, char **argv, char **envp) {
-    if (argc < 2) {
-        fprintf(stderr, "Usage: %s command\n", argv[0]);
-        return 1;
-    }
-
-    ft_execvp(argv[1], &argv[1], envp);
-    return 0;
 }
