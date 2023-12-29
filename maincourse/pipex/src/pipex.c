@@ -28,31 +28,40 @@ main
 			command_not_found
 */
 
-char **parse_command(char *cmd) {
-    char **argv = malloc((MAX_ARGS + 1) * sizeof(char *));
-    if (argv == NULL) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
+char	**parse_command(char *cmd)
+{
+	char	**argv;
+	int		i;
+	char	*token;
 
-    int i = 0;
-    char *token = strtok(cmd, " ");
-    while (token != NULL && i < MAX_ARGS) {
-        argv[i++] = ft_strdup(token);
-        token = strtok(NULL, " ");
-    }
-    argv[i] = NULL; // NULL-terminate the array
-    return argv;
+	argv = malloc((MAX_ARGS + 1) * sizeof(char *));
+	if (argv == NULL)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+
+	i = 0;
+	token = strtok(cmd, " ");
+	while (token != NULL && i < MAX_ARGS)
+	{
+		argv[i++] = ft_strdup(token);
+		token = strtok(NULL, " ");
+	}
+	argv[i] = NULL;
+	return (argv);
 }
 
-int main(int argc, char **argv, char **envp) {
-    if (argc != 5) {
-        fprintf(stderr, "Usage: %s <input_file> \"<cmd1>\" \"<cmd2>\" <output_file>\n", argv[0]);
-        return 1;
-    }
+int	main(int argc, char **argv, char **envp)
+{
+	char	**cmd1_args;
+	char	**cmd2_args;
 
-    char **cmd1_args = parse_command(argv[2]);
-    char **cmd2_args = parse_command(argv[3]);
+	if (argc != 5)
+		return (0);
+
+	cmd1_args = parse_command(argv[2]);
+	cmd2_args = parse_command(argv[3]);
 
     int pipe_fds[2];
     if (pipe(pipe_fds) == -1) {

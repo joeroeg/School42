@@ -1,0 +1,441 @@
+============================================================================
+
+
+      BASIC TEST
+      NUMBER 1
+      < input grep Hello | wc -l > output
+
+
+ - Bash output file:
+1
+\EOF
+
+ - Pipex output file:
+1
+\EOF
+
+ - Bash standard stream: None
+
+ - Pipex standard stream: None
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      BASIC TEST
+      NUMBER 2
+      < input grep Hello | wc -l > output
+
+
+ - Bash output file:
+5
+\EOF
+
+ - Pipex output file:
+5
+\EOF
+
+ - Bash standard stream: None
+
+ - Pipex standard stream: None
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      BASIC TEST
+      NUMBER 3
+      < input grep Hello | ls -la src/ > output
+
+
+ - Bash output file:
+total 36
+drwxrwxr-x 2 device device 4096 Aug 29 14:01 .
+drwxrwxr-x 6 device device 4096 Dec 28 23:46 ..
+-rw-rw-r-- 1 device device 4657 Aug 29 14:01 main.c
+-rw-rw-r-- 1 device device  833 Aug 29 14:01 runTest.c
+-rw-rw-r-- 1 device device 8492 Aug 29 14:01 test.c
+-rw-rw-r-- 1 device device  427 Aug 29 14:01 utils.c
+\EOF
+
+ - Pipex output file:
+total 36
+drwxrwxr-x 2 device device 4096 Aug 29 14:01 .
+drwxrwxr-x 6 device device 4096 Dec 28 23:46 ..
+-rw-rw-r-- 1 device device 4657 Aug 29 14:01 main.c
+-rw-rw-r-- 1 device device  833 Aug 29 14:01 runTest.c
+-rw-rw-r-- 1 device device 8492 Aug 29 14:01 test.c
+-rw-rw-r-- 1 device device  427 Aug 29 14:01 utils.c
+\EOF
+
+ - Bash standard stream: None
+
+ - Pipex standard stream: None
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      BASIC TEST
+      NUMBER 4
+      < input ls -la src/ | wc -l > output
+
+
+ - Bash output file:
+7
+\EOF
+
+ - Pipex output file:
+7
+\EOF
+
+ - Bash standard stream: None
+
+ - Pipex standard stream: None
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      BASIC TEST
+      NUMBER 5
+      < input grep Hello | awk '{count++} END {print count}' > output
+
+
+ - Bash output file:
+2
+\EOF
+
+ - Pipex output file: Empty
+
+ - Bash standard stream: None
+
+ - Pipex standard stream:
+awk: 1: unexpected character '''
+\EOF
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      BASIC TEST
+      NUMBER 6
+      < input grep Hello | awk "{count++} END {print count}" > output
+
+
+ - Bash output file:
+2
+\EOF
+
+ - Pipex output file: Empty
+
+ - Bash standard stream: None
+
+ - Pipex standard stream:
+awk: line 1: runaway string constant "{count++} ...
+\EOF
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      BASIC TEST
+      NUMBER 7
+      < input grep Hello | awk '"{count++} END {print count}"' > output
+
+
+ - Bash output file:
+Hello World!
+Hello World!
+\EOF
+
+ - Pipex output file: Empty
+
+ - Bash standard stream: None
+
+ - Pipex standard stream:
+awk: 1: unexpected character '''
+awk: line 1: runaway string constant "{count++} ...
+\EOF
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      BASIC TEST
+      NUMBER 8
+      < input grep Hello | awk "'{count++} END {print count}'" > output
+
+
+ - Bash output file: Empty
+
+ - Pipex output file: Empty
+
+ - Bash standard stream:
+awk: 1: unexpected character '''
+awk: 1: unexpected character '''
+\EOF
+
+ - Pipex standard stream:
+awk: line 1: runaway string constant "'{count++} ...
+\EOF
+
+ - Bash exit code value: 2
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      ERROR TEST
+      NUMBER 1
+      < input grep Hello | wc -l > output
+
+
+ - Bash output file:
+0
+\EOF
+
+ - Pipex output file:
+0
+\EOF
+
+ - Bash standard stream:
+pipex: line 1: input: No such file or directory
+\EOF
+
+ - Pipex standard stream:
+open: No such file or directory
+\EOF
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      ERROR TEST
+      NUMBER 2
+      < input grep Hello | wc -l > output (No environment)
+
+
+ - Bash output file:
+1
+\EOF
+
+ - Pipex output file: Empty
+
+ - Bash standard stream: None
+
+ - Pipex standard stream:
+PATH not found
+PATH not found
+\EOF
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      ERROR TEST
+      NUMBER 3
+      < input fizzBuzz | ls -la src/ > output
+
+
+ - Bash output file:
+total 36
+drwxrwxr-x 2 device device 4096 Aug 29 14:01 .
+drwxrwxr-x 6 device device 4096 Dec 28 23:46 ..
+-rw-rw-r-- 1 device device 4657 Aug 29 14:01 main.c
+-rw-rw-r-- 1 device device  833 Aug 29 14:01 runTest.c
+-rw-rw-r-- 1 device device 8492 Aug 29 14:01 test.c
+-rw-rw-r-- 1 device device  427 Aug 29 14:01 utils.c
+\EOF
+
+ - Pipex output file:
+total 36
+drwxrwxr-x 2 device device 4096 Aug 29 14:01 .
+drwxrwxr-x 6 device device 4096 Dec 28 23:46 ..
+-rw-rw-r-- 1 device device 4657 Aug 29 14:01 main.c
+-rw-rw-r-- 1 device device  833 Aug 29 14:01 runTest.c
+-rw-rw-r-- 1 device device 8492 Aug 29 14:01 test.c
+-rw-rw-r-- 1 device device  427 Aug 29 14:01 utils.c
+\EOF
+
+ - Bash standard stream:
+pipex: line 1: fizzBuzz: command not found
+\EOF
+
+ - Pipex standard stream:
+fizzBuzz: command not found
+\EOF
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      ERROR TEST
+      NUMBER 4
+      < input ls -la src/ | buzzFizz > output
+
+
+ - Bash output file: Empty
+
+ - Pipex output file: Empty
+
+ - Bash standard stream:
+pipex: line 1: buzzFizz: command not found
+\EOF
+
+ - Pipex standard stream:
+buzzFizz: command not found
+\EOF
+
+ - Bash exit code value: 127
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      ERROR TEST
+      NUMBER 5
+      < input fizzBuzz | wc -l > output (No environment)
+
+
+ - Bash output file:
+0
+\EOF
+
+ - Pipex output file: Empty
+
+ - Bash standard stream:
+pipex: line 1: fizzBuzz: command not found
+\EOF
+
+ - Pipex standard stream:
+PATH not found
+PATH not found
+\EOF
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      ERROR TEST
+      NUMBER 6
+      < input grep Hello | buzzFizz > output (No environment)
+
+
+ - Bash output file: Empty
+
+ - Pipex output file: Empty
+
+ - Bash standard stream:
+pipex: line 1: buzzFizz: command not found
+\EOF
+
+ - Pipex standard stream:
+PATH not found
+PATH not found
+\EOF
+
+ - Bash exit code value: 127
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
+============================================================================
+
+
+      CONCURRENCY TEST
+      NUMBER 1
+      < input sleep 3 | sleep 3 > output
+
+
+ - Bash output file: Empty
+
+ - Pipex output file: Empty
+
+ - Bash standard stream: None
+
+ - Pipex standard stream: None
+
+ - Bash exit code value: 0
+
+ - Pipex exit code value: 0
+
+File permissions of output files mismatch
+
+
