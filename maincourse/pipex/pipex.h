@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:46:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/29 12:50:44 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:59:23 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,13 @@
 
 # define MAX_ARGS 10
 
-const	char	*find_path_env(char *const envp[]);
+int			count_tokens(const char *str, char delimiter);
+char		**allocate_token_array(int token_count);
+void		free_token_array(char **array, int size);
+char		**tokenize(const char *str, char delimiter, char **token_array);
 char		**tokenize_path(const char *path);
+
+const	char	*find_path_env(char *const envp[]);
 char		*build_full_path(const char *dir, const char *file);
 int			execute_command(const char *fullPath, char *const argv[]);
 void		command_not_found(const char *file);
