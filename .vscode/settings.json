@@ -57,7 +57,7 @@
 	"files.autoSave": "onFocusChange",
     "editor.detectIndentation": false,
 	"editor.insertSpaces": false,
-	"editor.renderWhitespace": "trailing",
+	"editor.renderWhitespace": "all",
 	"files.trimTrailingWhitespace": true,
 	"files.insertFinalNewline": true
 	},

@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/28 22:14:39 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:21:30 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,62 +23,42 @@ const	char	*find_path_env(char *const envp[])
     }
 	return (NULL);  // Return NULL if PATH is not found
 }
-
-char** tokenize_path(const char* path)
+char	**tokenize_path(const char *path)
 {
-    int count = 1; // Start with 1 for the first token
+	int count = 1; // Start with 1 for the first token
     for (int i = 0; path[i] != '\0'; i++)
 	{
         if (path[i] == ':')
-		{
             count++;
-        }
     }
-
-    // Allocate memory for array of strings
     char** dirs = malloc((count + 1) * sizeof(char*)); // +1 for NULL terminator
     if (dirs == NULL)
+		error_message("malloc", 1);
+	char* path_dup = ft_strdup(path);
+	if (path_dup == NULL)
 	{
-        perror("malloc");
-        return NULL;
-    }
-
-    // Duplicate the path to avoid modifying the original string
-    char* path_dup = strdup(path);
-    if (path_dup == NULL)
+		free(dirs);
+		error_message("strdup", 1);
+	}
+	char* token = strtok(path_dup, ":");
+	int index = 0;
+	while (token != NULL)
 	{
-        free(dirs);
-        perror("strdup");
-        return (NULL);
-    }
-
-    // Tokenize the path
-    char* token = strtok(path_dup, ":");
-    int index = 0;
-    while (token != NULL)
-	{
-        dirs[index] = strdup(token);
-        if (dirs[index] == NULL)
+		dirs[index] = ft_strdup(token);
+		if (dirs[index] == NULL)
 		{
-            // Clean up in case of allocation failure
-            for (int j = 0; j < index; j++)
-			{
-                free(dirs[j]);
-            }
-            free(dirs);
-            free(path_dup);
-            perror("strdup");
-            return (NULL);
-        }
-        index++;
-        token = strtok(NULL, ":");
-    }
-    dirs[index] = NULL; // NULL-terminate the array
-
-    // Clean up
-    free(path_dup);
-
-    return (dirs);
+			for (int j = 0; j < index; j++)
+				free(dirs[j]);
+			free(dirs);
+			free(path_dup);
+			error_message("strdup", 1);
+		}
+		index++;
+		token = strtok(NULL, ":");
+	}
+	dirs[index] = NULL;
+	free(path_dup);
+	return (dirs);
 }
 
 char* build_full_path(const char* dir, const char* file) {
@@ -102,8 +82,9 @@ char* build_full_path(const char* dir, const char* file) {
     return fullPath;
 }
 
-int	execute_command(const char* fullPath, char* const argv[]) {
-    pid_t pid = fork();  // Fork a new process
+int	execute_command(const char *fullPath, char *const argv[])
+{
+	pid_t pid = fork();
 
     if (pid == -1) {
         // Fork failed
@@ -156,4 +137,11 @@ int ft_execvp(const char *file, char *const argv[], char *const envp[]) {
 
     command_not_found(file);
     return -1;
+}
+
+void	error_message(const char *message, int should_exit)
+{
+	perror(message);
+	if (should_exit)
+		exit(EXIT_FAILURE);
 }

@@ -11,7 +11,7 @@ CLE     = \e[1;1H\e[2J
 
 # Names of the programs
 NAME    = pipex
-B_NAME  = pipex_bonus
+# B_NAME  = pipex_bonus
 LIBFT   = libft.a
 LDIR    = libft/
 SDIR    = src/
@@ -25,7 +25,7 @@ RM      = rm -f
 # Source and Object Files
 SRCS    = $(addprefix $(SDIR), pipex.c pipex_utilities.c)
 OBJS    = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS))
-BSRCS   = $(addprefix $(SDIR), bonus_pipex.c)
+# BSRCS   = $(addprefix $(SDIR), bonus_pipex.c)
 BOBJS   = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(BSRCS))
 
 USER = $(shell whoami)
