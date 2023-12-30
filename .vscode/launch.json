@@ -17,7 +17,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": ["infile", "cat", "sort", "outfile"],
+            "args": ["infile", "cat -e", "sort -r", "outfile"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

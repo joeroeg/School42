@@ -11,7 +11,7 @@ CFLAGS  = -Wall -Werror -Wextra -g
 RM      = rm -f
 
 # Source and Object Files
-SRCS    = $(addprefix $(SDIR), pipex.c pipex_utilities.c pipex_tokenization.c)
+SRCS    = $(addprefix $(SDIR), pipex.c pipex_utilities.c pipex_execution.c)
 OBJS    = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS))
 
 # Default rule
