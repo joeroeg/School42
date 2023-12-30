@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/29 19:41:39 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:03:21 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,32 +80,78 @@ void	command_not_found(const char *file)
 	fprintf(stderr, "%s: command not found\n", file);
 }
 
-int ft_execvp(const char *file, char *const argv[], char *const envp[]) {
-	const char *path_const = find_path_env(envp);
-    if (path_const == NULL) {
+char *get_validated_path(char *const envp[])
+{
+    const char *path_const;
+    char *path;
+
+    path_const = find_path_env(envp);
+    if (path_const == NULL)
+    {
         fprintf(stderr, "PATH not found\n");
-        return -1;
+        return NULL;
     }
-    char *path = ft_strdup(path_const);
-    if (path == NULL) {
+
+    path = ft_strdup(path_const);
+    if (path == NULL)
+    {
         perror("strdup");
+    }
+
+    return path;
+}
+
+int execute_command_with_path(char *path, const char *file, char *const argv[])
+{
+    char **directories;
+    char *fullpath;
+    int status;
+
+    if (path == NULL)
+    {
         return -1;
     }
-	char** directories = tokenize_path(path_const);
-	for (int i = 0; directories[i] != NULL; i++) {
-        char* fullPath = build_full_path(directories[i], file);
-        if (access(fullPath, X_OK) == 0) {
-            int status = execute_command(fullPath, argv);
-            free(fullPath);
-            free(directories);
+
+    directories = tokenize_path(path);
+    for (int i = 0; directories[i] != NULL; i++)
+    {
+        fullpath = build_full_path(directories[i], file);
+        if (access(fullpath, X_OK) == 0)
+        {
+            status = execute_command(fullpath, argv);
+            // free_string_array(directories); // gives error: pointer being freed was not allocated
+            free(fullpath);
             return status;
         }
-        free(fullPath);
+        free(fullpath);
     }
-    free(directories);
-
+    free_string_array(directories);
     command_not_found(file);
     return -1;
+}
+
+
+int ft_execvp(const char *file, char *const argv[], char *const envp[])
+{
+    char *path;
+    int status;
+
+    path = get_validated_path(envp);
+    status = execute_command_with_path(path, file, argv);
+    free(path);
+    return status;
+}
+
+void free_string_array(char **array)
+{
+    if (array != NULL)
+    {
+        for (int i = 0; array[i] != NULL; i++)
+        {
+            free(array[i]);
+        }
+        free(array);
+    }
 }
 
 void	error_message(const char *message, int should_exit)

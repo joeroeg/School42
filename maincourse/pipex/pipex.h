@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:46:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/29 14:59:23 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/12/29 19:53:43 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char		*build_full_path(const char *dir, const char *file);
 int			execute_command(const char *fullPath, char *const argv[]);
 void		command_not_found(const char *file);
 int			ft_execvp(const char *file, char *const argv[], char *const envp[]);
+void		free_string_array(char **array);
 void		error_message(const char *message, int should_exit);
 
 #endif

@@ -6,11 +6,15 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:57:55 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/29 14:34:19 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:04:34 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+/*
+valgrind --leak-check=full ./pipex infile "cat -e" "sort -r" outfile 2>&1 | grep "definitely lost:"
+*/
 
 int	validate_arguments(int argc)
 {
@@ -128,5 +132,7 @@ int	main(int argc, char **argv, char **envp)
 	close(pipe_fds[1]);
 	waitpid(cmd1, NULL, 0);
 	waitpid(cmd2, NULL, 0);
+	free_string_array(cmd1_args);
+	free_string_array(cmd2_args);
 	return (0);
 }
