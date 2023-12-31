@@ -1,0 +1,14 @@
+Date/Time | Changes | LogFile | Definitely Lost | Indirectly Lost | Still Reachable
+2023-12-31 14:54:11 |  | logs/__pipex_infile__NULL___NULL__outfile.log |  |  | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks
+2023-12-31 14:54:11 |  | logs/__pipex_infile__NULL_____outfile.log | No leaks | No leaks | No leaks
+2023-12-31 14:54:11 |  | logs/__pipex_infile__NULL___sort__outfile.log |  |  | 2,616 bytes in 14 blocks
+2023-12-31 14:54:11 |  | logs/__pipex_infile_______outfile.log | No leaks | No leaks | No leaks
+2023-12-31 14:54:11 |  | logs/__pipex_infile_____sort__outfile.log | No leaks | No leaks | No leaks
+2023-12-31 14:54:11 |  | logs/__pipex_infile__cat___NULL__outfile.log |  |  | 2,615 bytes in 14 blocks
+2023-12-31 14:54:11 |  | logs/__pipex_infile__cat_____outfile.log | No leaks | No leaks | No leaks
+2023-12-31 14:54:11 |  | logs/__pipex_infile__cat___sort__outfile.log | No leaks | No leaks | No leaks
+2023-12-31 14:54:11 |  | logs/__pipex_infile__cat__e___error__r__outfile.log |  |  | 2,622 bytes in 16 blocks
+2023-12-31 14:54:11 |  | logs/__pipex_infile__cat__e___sort__invalid__outfile.log | No leaks | No leaks | No leaks
+2023-12-31 14:54:11 |  | logs/__pipex_infile__cat__e___sort__r__outfile.log | No leaks | No leaks | No leaks
+2023-12-31 14:54:11 |  | logs/__pipex_infile__cat__invalid___sort__r__outfile.log | No leaks | No leaks | No leaks
+2023-12-31 14:54:11 |  | logs/__pipex_infile__error__e___sort__r__outfile.log |  |  | 2,623 bytes in 16 blocks

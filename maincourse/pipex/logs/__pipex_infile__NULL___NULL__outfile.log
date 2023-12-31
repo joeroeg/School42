@@ -1,0 +1,58 @@
+==36750== Memcheck, a memory error detector
+==36750== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==36750== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==36750== Command: ./pipex infile NULL NULL outfile
+==36750== 
+Command not found: NULL
+Command not found: NULL
+==36751== 
+==36751== HEAP SUMMARY:
+==36751==     in use at exit: 20,751 bytes in 175 blocks
+==36751==   total heap usage: 216 allocs, 41 frees, 26,710 bytes allocated
+==36751== 
+==36752== 
+==36752== HEAP SUMMARY:
+==36752==     in use at exit: 20,751 bytes in 175 blocks
+==36752==   total heap usage: 216 allocs, 41 frees, 26,710 bytes allocated
+==36752== 
+==36751== LEAK SUMMARY:
+==36751==    definitely lost: 0 bytes in 0 blocks
+==36751==    indirectly lost: 0 bytes in 0 blocks
+==36751==      possibly lost: 0 bytes in 0 blocks
+==36751==    still reachable: 2,616 bytes in 14 blocks
+==36751==         suppressed: 18,135 bytes in 161 blocks
+==36751== Reachable blocks (those to which a pointer was found) are not shown.
+==36751== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==36751== 
+==36751== For lists of detected and suppressed errors, rerun with: -s
+==36751== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
+==36752== LEAK SUMMARY:
+==36752==    definitely lost: 0 bytes in 0 blocks
+==36752==    indirectly lost: 0 bytes in 0 blocks
+==36752==      possibly lost: 0 bytes in 0 blocks
+==36752==    still reachable: 2,616 bytes in 14 blocks
+==36752==         suppressed: 18,135 bytes in 161 blocks
+==36752== Reachable blocks (those to which a pointer was found) are not shown.
+==36752== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==36752== 
+==36752== For lists of detected and suppressed errors, rerun with: -s
+==36752== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
+Argument 0: ./pipex
+Argument 1: infile
+Argument 2: NULL
+Argument 3: NULL
+Argument 4: outfile
+==36750== 
+==36750== HEAP SUMMARY:
+==36750==     in use at exit: 18,199 bytes in 162 blocks
+==36750==   total heap usage: 180 allocs, 18 frees, 23,129 bytes allocated
+==36750== 
+==36750== LEAK SUMMARY:
+==36750==    definitely lost: 0 bytes in 0 blocks
+==36750==    indirectly lost: 0 bytes in 0 blocks
+==36750==      possibly lost: 0 bytes in 0 blocks
+==36750==    still reachable: 0 bytes in 0 blocks
+==36750==         suppressed: 18,199 bytes in 162 blocks
+==36750== 
+==36750== For lists of detected and suppressed errors, rerun with: -s
+==36750== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)

@@ -1,0 +1,41 @@
+==36764== Memcheck, a memory error detector
+==36764== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==36764== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==36764== Command: ./pipex infile error\ -e sort\ -r outfile
+==36764== 
+Command not found: error
+==36766== 
+==36766== HEAP SUMMARY:
+==36766==     in use at exit: 20,758 bytes in 177 blocks
+==36766==   total heap usage: 218 allocs, 41 frees, 26,729 bytes allocated
+==36766== 
+==36766== LEAK SUMMARY:
+==36766==    definitely lost: 0 bytes in 0 blocks
+==36766==    indirectly lost: 0 bytes in 0 blocks
+==36766==      possibly lost: 0 bytes in 0 blocks
+==36766==    still reachable: 2,623 bytes in 16 blocks
+==36766==         suppressed: 18,135 bytes in 161 blocks
+==36766== Reachable blocks (those to which a pointer was found) are not shown.
+==36766== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==36766== 
+==36766== For lists of detected and suppressed errors, rerun with: -s
+==36766== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
+Argument 0: ./pipex
+Argument 1: infile
+Argument 2: error -e
+Argument 3: sort -r
+Argument 4: outfile
+==36764== 
+==36764== HEAP SUMMARY:
+==36764==     in use at exit: 18,199 bytes in 162 blocks
+==36764==   total heap usage: 182 allocs, 20 frees, 23,136 bytes allocated
+==36764== 
+==36764== LEAK SUMMARY:
+==36764==    definitely lost: 0 bytes in 0 blocks
+==36764==    indirectly lost: 0 bytes in 0 blocks
+==36764==      possibly lost: 0 bytes in 0 blocks
+==36764==    still reachable: 0 bytes in 0 blocks
+==36764==         suppressed: 18,199 bytes in 162 blocks
+==36764== 
+==36764== For lists of detected and suppressed errors, rerun with: -s
+==36764== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)

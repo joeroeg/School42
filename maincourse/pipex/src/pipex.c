@@ -6,32 +6,11 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:50:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/30 21:07:04 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/12/31 14:56:29 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
-
-/*
-./pipex infile "cat -e" "sort -r" outfile | cat outfile
-
-STILL REACHABLE
-valgrind --leak-check=full ./pipex infile "cat" "NULL" outfile
-valgrind --leak-check=full ./pipex infile "NULL" "sort" outfile
-valgrind --leak-check=full ./pipex infile "NULL" "NULL" outfile
-valgrind --leak-check=full ./pipex infile "cat -e" "error -r" outfile
-valgrind --leak-check=full ./pipex infile "error -e" "sort -r" outfile
-
-
-NO MEMORY LEAKS
-valgrind --leak-check=full ./pipex infile "cat" "sort" outfile
-valgrind --leak-check=full ./pipex infile "cat -e" "sort -r" outfile
-valgrind --leak-check=full ./pipex infile "cat" "" outfile
-valgrind --leak-check=full ./pipex infile "" "sort" outfile
-valgrind --leak-check=full ./pipex infile "cat -e" "sort -invalid" outfile
-valgrind --leak-check=full ./pipex infile "cat -invalid" "sort -r" outfile
-
-*/
 
 void	exec_cmd1(char **cmd1_args, int pipe_fds[], char **envp)
 {
@@ -136,4 +115,3 @@ int	main(int argc, char **argv, char **envp)
 	waitpid(-1, NULL, 0);
 	return (0);
 }
-

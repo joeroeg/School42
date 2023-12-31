@@ -1,5 +1,5 @@
-1   line$
-2   line$
-3   line$
-4   line$
-5   line$
+Argument 4: outfile
+Argument 3: sort -r
+Argument 2: error -e
+Argument 1: infile
+Argument 0: ./pipex
