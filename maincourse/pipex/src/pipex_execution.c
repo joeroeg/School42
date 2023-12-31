@@ -6,65 +6,104 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:56:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/30 21:26:39 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/12/31 18:14:06 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int ft_execvp(const char *file, char *const argv[], char *const envp[])
+char	*build_and_check_exec(const char *dir, const char *file, size_t length)
 {
-    int i;
-    char *path, *fullpath;
-    char **directories;
-    const char *path_const = NULL;
+	char	*fullpath;
 
-    // Find PATH in the environment variables
-    i = 0;
-    while (envp[i]) {
-        if (strncmp(envp[i], "PATH=", 5) == 0) {
-            path_const = envp[i] + 5;
-            break;
-        }
-        i++;
-    }
-    if (!path_const)
-        return -1;
+	fullpath = malloc(length);
+	if (!fullpath)
+	{
+		perror("malloc");
+		return (NULL);
+	}
+	ft_strlcpy(fullpath, dir, length);
+	ft_strlcat(fullpath, "/", length);
+	ft_strlcat(fullpath, file, length);
+	if (access(fullpath, X_OK) == 0)
+		return (fullpath);
+	free(fullpath);
+	return (NULL);
+}
 
-    path = strdup(path_const);
-    if (!path) {
-        perror("strdup");
-        return -1;
-    }
+char	*search_command_in_directories(const char *file, char *path)
+{
+	char	**directories;
+	char	*fullpath;
+	int		i;
+	size_t	length;
 
-    directories = tokenize_path(path);
-    if (!directories) {
-        free(path);
-        return -1;
-    }
+	directories = tokenize_path(path);
+	if (!directories)
+		return (NULL);
+	i = -1;
+	while (directories[++i])
+	{
+		length = ft_strlen(directories[i]) + 1 + ft_strlen(file) + 1;
+		fullpath = build_and_check_exec(directories[i], file, length);
+		if (fullpath)
+			break ;
+	}
+	free_string_array(directories);
+	return (fullpath);
+}
 
-    // Iterate over directories in PATH
-    for (i = 0; directories[i] != NULL; i++) {
-        // Build full path
-        size_t length = strlen(directories[i]) + 1 + strlen(file) + 1;
-        fullpath = malloc(length);
-        if (!fullpath) {
-            perror("malloc");
-            continue;
-        }
-        snprintf(fullpath, length, "%s/%s", directories[i], file);
+char	*find_command_path(const char *file, char *const envp[])
+{
+	char	*path;
+	char	*command_path;
+	int		i;
 
-        // Check if command is executable
-        if (access(fullpath, X_OK) == 0) {
-            execv(fullpath, argv);
-            // If execv returns, it means an error occurred
-            perror("execv");
-        }
-        free(fullpath);
-    }
+	i = 0;
+	path = NULL;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		{
+			path = ft_strdup(envp[i] + 5);
+			break ;
+		}
+		i++;
+	}
+	if (!path)
+	{
+		ft_putstr_fd("PATH variable not found\n", 2);
+		return (NULL);
+	}
+	command_path = search_command_in_directories(file, path);
+	free(path);
+	return (command_path);
+}
 
-    fprintf(stderr, "Command not found: %s\n", file);
-    free_string_array(directories); // Assuming this function frees the array of strings
-    free(path);
-    return -1; // Return -1 if the command is not found or execv fails
+int	execute_command(char *fullpath, char *const argv[])
+{
+	if (fullpath)
+	{
+		execv(fullpath, argv);
+		perror("execv");
+		free(fullpath);
+		return (-1);
+	}
+	else
+	{
+		ft_putstr_fd("Command not found\n", 2);
+		return (-1);
+	}
+}
+
+int	ft_execvp(const char *file, char *const argv[], char *const envp[])
+{
+	char	*command_path;
+	int		result;
+
+	command_path = find_command_path(file, envp);
+	result = execute_command(command_path, argv);
+	if (command_path)
+		free(command_path);
+	return (result);
 }

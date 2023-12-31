@@ -1,11 +1,23 @@
 {
     "configurations": [
+        // {
+        //     "name": "(lldb) Launch",
+        //     "type": "cppdbg",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/a.out",
+        //     "args": ["ls"],
+        //     "stopAtEntry": false,
+        //     "cwd": "${fileDirname}",
+        //     "environment": [],
+        //     "externalConsole": false,
+        //     "MIMode": "lldb",
+        // }
         {
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/maincourse/pipex/pipex",
-            "args": ["infile", "cat -e", "sor -r", "outfile"],
+            "args": ["infile", "NULL", "NULL", "outfile"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
@@ -17,7 +29,7 @@
         //     "type": "cppdbg",
         //     "request": "launch",
         //     "program": "${fileDirname}/${fileBasenameNoExtension}",
-        //     "args": ["infile", "cat -e", "sort -r", "outfile"],
+        //     "args": [],
         //     "stopAtEntry": false,
         //     "cwd": "${fileDirname}",
         //     "environment": [],
@@ -26,6 +38,5 @@
         //     "preLaunchTask": "Compile C File"
         // }
     ],
-    "version": "0.2.0"
 }
 

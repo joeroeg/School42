@@ -28,19 +28,19 @@ $(ODIR)%.o: $(SDIR)%.c
 
 # Compiling libft
 libft:
-	@echo "Compiling libft"
+	@echo "compiling libft"
 	@$(MAKE) -C $(LDIR)
 
 # Cleaning up
 clean:
 	@$(RM) $(OBJS)
 	@make -C $(LDIR) clean
-	@echo "Cleaned up object files"
+	@echo "cleaned up object files"
 
 fclean: clean
 	@$(RM) $(NAME)
 	@make -C $(LDIR) fclean
-	@echo "Cleaned up all files"
+	@echo "cleaned up all files"
 
 # Re-compiling
 re: fclean all

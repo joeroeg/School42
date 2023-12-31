@@ -1,14 +1,70 @@
-Date/Time | Changes | LogFile | Definitely Lost | Indirectly Lost | Still Reachable
-2023-12-31 14:54:11 |  | logs/__pipex_infile__NULL___NULL__outfile.log |  |  | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks
-2023-12-31 14:54:11 |  | logs/__pipex_infile__NULL_____outfile.log | No leaks | No leaks | No leaks
-2023-12-31 14:54:11 |  | logs/__pipex_infile__NULL___sort__outfile.log |  |  | 2,616 bytes in 14 blocks
-2023-12-31 14:54:11 |  | logs/__pipex_infile_______outfile.log | No leaks | No leaks | No leaks
-2023-12-31 14:54:11 |  | logs/__pipex_infile_____sort__outfile.log | No leaks | No leaks | No leaks
-2023-12-31 14:54:11 |  | logs/__pipex_infile__cat___NULL__outfile.log |  |  | 2,615 bytes in 14 blocks
-2023-12-31 14:54:11 |  | logs/__pipex_infile__cat_____outfile.log | No leaks | No leaks | No leaks
-2023-12-31 14:54:11 |  | logs/__pipex_infile__cat___sort__outfile.log | No leaks | No leaks | No leaks
-2023-12-31 14:54:11 |  | logs/__pipex_infile__cat__e___error__r__outfile.log |  |  | 2,622 bytes in 16 blocks
-2023-12-31 14:54:11 |  | logs/__pipex_infile__cat__e___sort__invalid__outfile.log | No leaks | No leaks | No leaks
-2023-12-31 14:54:11 |  | logs/__pipex_infile__cat__e___sort__r__outfile.log | No leaks | No leaks | No leaks
-2023-12-31 14:54:11 |  | logs/__pipex_infile__cat__invalid___sort__r__outfile.log | No leaks | No leaks | No leaks
-2023-12-31 14:54:11 |  | logs/__pipex_infile__error__e___sort__r__outfile.log |  |  | 2,623 bytes in 16 blocks
+Date/Time | Changes | Definitely Lost | Indirectly Lost | Still Reachable | LogFile
+2023-12-31 15:50:45 | | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 15:50:45 | | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 15:50:45 | | | | 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 15:50:45 | | | | 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 15:50:45 | | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 15:54:19 | add libft functions | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 15:54:19 | add libft functions | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 15:54:19 | add libft functions | | | 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 15:54:19 | add libft functions | | | 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 15:54:19 | add libft functions | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 15:57:04 | OQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQft_putstr_fd | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 15:57:04 | OQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQft_putstr_fd | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 15:57:04 | OQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQft_putstr_fd | | | 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 15:57:04 | OQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQft_putstr_fd | | | 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 15:57:04 | OQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQOQft_putstr_fd | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 17:08:20 | ft_snprintf | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 17:08:20 | ft_snprintf | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 17:08:20 | ft_snprintf | | | 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 17:08:20 | ft_snprintf | | | 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 17:08:20 | ft_snprintf | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 17:27:07 | return snprintf | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 17:27:07 | return snprintf | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 17:27:07 | return snprintf | | | 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 17:27:07 | return snprintf | | | 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 17:27:07 | return snprintf | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 17:32:48 | strlcat | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 17:32:48 | strlcat | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 17:32:48 | strlcat | | | 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 17:32:48 | strlcat | | | 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 17:32:48 | strlcat | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 17:33:33 | intentionally deleted / | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 17:33:33 | intentionally deleted / | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 17:33:33 | intentionally deleted / | | | 2,615 bytes in 14 blocks 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 17:33:33 | intentionally deleted / | | | 2,615 bytes in 14 blocks 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___sort__outfile.log
+2023-12-31 17:33:33 | intentionally deleted / | | | 2,622 bytes in 16 blocks 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 17:33:33 | intentionally deleted / | | | 2,627 bytes in 16 blocks 2,627 bytes in 16 blocks | logs/__pipex_infile__cat__e___sort__invalid__outfile.log
+2023-12-31 17:33:33 | intentionally deleted / | | | 2,621 bytes in 16 blocks 2,621 bytes in 16 blocks | logs/__pipex_infile__cat__e___sort__r__outfile.log
+2023-12-31 17:33:33 | intentionally deleted / | | | 2,627 bytes in 16 blocks 2,627 bytes in 16 blocks | logs/__pipex_infile__cat__invalid___sort__r__outfile.log
+2023-12-31 17:33:33 | intentionally deleted / | | | 2,623 bytes in 16 blocks 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 17:47:33 | refactored pipex ececution | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 17:47:33 | refactored pipex ececution | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 17:47:33 | refactored pipex ececution | | | 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 17:47:33 | refactored pipex ececution | | | 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 17:47:33 | refactored pipex ececution | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 18:05:16 | returned get_path_env | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 18:05:16 | returned get_path_env | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 18:05:16 | returned get_path_env | | | 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 18:05:16 | returned get_path_env | | | 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 18:05:16 | returned get_path_env | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 18:11:07 | all is good | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 18:11:07 | all is good | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 18:11:07 | all is good | | | 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 18:11:07 | all is good | | | 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 18:11:07 | all is good | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 18:21:52 | test before try to find reachable bytes | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 18:21:52 | test before try to find reachable bytes | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 18:21:52 | test before try to find reachable bytes | | | 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 18:21:52 | test before try to find reachable bytes | | | 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 18:21:52 | test before try to find reachable bytes | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 18:22:50 | add free(cmd1_args); in cleanup | | | 2,616 bytes in 14 blocks 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 18:22:50 | add free(cmd1_args); in cleanup | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 18:22:50 | add free(cmd1_args); in cleanup | | | 2,615 bytes in 14 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 18:22:50 | add free(cmd1_args); in cleanup | | | 2,622 bytes in 16 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 18:22:50 | add free(cmd1_args); in cleanup | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 18:24:08 | cleanup in fork_and_exec | | | 2,616 bytes in 14 blocks 2,523 bytes in 12 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 18:24:08 | cleanup in fork_and_exec | | | 2,616 bytes in 14 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2023-12-31 18:24:08 | cleanup in fork_and_exec | | | 2,523 bytes in 12 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 18:24:08 | cleanup in fork_and_exec | | | 2,527 bytes in 13 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 18:24:08 | cleanup in fork_and_exec | | | 2,623 bytes in 16 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log

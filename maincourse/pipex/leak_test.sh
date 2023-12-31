@@ -67,6 +67,64 @@ for cmd in "${commands[@]}"; do
     run_valgrind "$logfilename" "$cmd"
 done
 
-echo "Tests completed."
+echo "Testing complete. Starting log analysis."
 
+# Valgrind log analysis script
+
+LOG_DIR="logs"
+OUTPUT_FILE="memory_leak_summary.txt"
+verbose=0
+
+# Process command-line arguments
+while getopts "v" opt; do
+  case $opt in
+    v) verbose=1 ;;
+    *) echo "Usage: $0 [-v]" >&2
+       exit 1 ;;
+  esac
+done
+
+# Get current date/time
+current_date=$(date "+%Y-%m-%d %H:%M:%S")
+
+# Prompt for user input regarding changes
+read -p "Enter description of changes made: " changes
+
+# Initialize output file with table headers if file doesn't exist
+if [ ! -f $OUTPUT_FILE ]; then
+    echo "Date/Time | Changes | Definitely Lost | Indirectly Lost | Still Reachable | LogFile" > $OUTPUT_FILE
+    # Echo the headers to terminal as well
+    echo "Date/Time | Changes | Definitely Lost | Indirectly Lost | Still Reachable | LogFile"
+fi
+
+# Function to analyze a single log file
+analyze_log_file() {
+    local file=$1
+
+    # Extract information about memory leaks
+    local leaks=$(grep -E 'definitely lost|indirectly lost' $file | grep -v '0 bytes in 0 blocks')
+    local still_reachable=$(grep 'still reachable' $file | grep -v '0 bytes in 0 blocks')
+
+    # Check if verbose is off and there are no leaks
+    if [ $verbose -eq 0 ] && [ -z "$leaks" ] && [ -z "$still_reachable" ]; then
+        return
+    fi
+
+    # Prepare table row
+    local dl=$(echo "$leaks" | grep 'definitely lost' | cut -d: -f2 | xargs || echo "No leaks")
+    local il=$(echo "$leaks" | grep 'indirectly lost' | cut -d: -f2 | xargs || echo "No leaks")
+    local sr=$(echo "$still_reachable" | cut -d: -f2 | xargs || echo "No leaks")
+    local row="$current_date | $changes | $dl | $il | $sr | $file"
+
+    # Echo to terminal and append to file
+    echo $row
+    echo $row >> $OUTPUT_FILE
+}
+
+# Process each log file
+for file in $LOG_DIR/*.log; do
+    analyze_log_file $file
+done
+
+echo "Log analysis completed. Summary saved in $OUTPUT_FILE."
 
