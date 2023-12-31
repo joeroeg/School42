@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/30 16:58:22 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/12/30 20:41:51 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,9 @@ int	validate_arguments(int argc)
 	return (0);
 }
 
-char	**parse_command(char *cmd)
+void	free_string_array(char **array)
 {
-	char	**argv;
-	int		i;
-	char	*token;
-
-	argv = malloc((MAX_ARGS + 1) * sizeof(char *));
-	i = 0;
-	token = strtok(cmd, " ");
-	while (token != NULL && i < MAX_ARGS)
-	{
-		argv[i++] = strdup(token);
-		token = strtok(NULL, " ");
-	}
-	argv[i] = NULL;
-	return (argv);
-}
-
-void free_string_array(char **array)
-{
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i] != NULL)
@@ -60,13 +42,27 @@ void	error_message(const char *message, int should_exit)
 		exit(EXIT_FAILURE);
 }
 
-char **tokenize_path(const char *path)
+char	**tokenize_path(const char *path)
 {
-    char **token_array;
-    token_array = ft_split(path, ':');
-    if (token_array == NULL) {
-        error_message("ft_split", 1);
-        return NULL;
-    }
-    return token_array;
+	char	**token_array;
+
+	token_array = ft_split(path, ':');
+	if (token_array == NULL)
+	{
+		error_message("ft_split", 0);
+		return (NULL);
+	}
+	return (token_array);
+}
+
+void	cleanup(int pipe_fds[2], char **cmd1_args, char **cmd2_args)
+{
+	if (pipe_fds[0] != -1)
+		close(pipe_fds[0]);
+	if (pipe_fds[1] != -1)
+		close(pipe_fds[1]);
+	if (cmd1_args != NULL)
+		free_string_array(cmd1_args);
+	if (cmd2_args != NULL)
+		free_string_array(cmd2_args);
 }

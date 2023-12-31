@@ -153,13 +153,13 @@ int	main(int argc, char **argv, char **envp)
 	cmd1 = fork(); // create child process
 	if (cmd1 == 0)
 	{
-		close(pipe_fds[0]); // close read end of pipe
-		infile_fd = open("infile", O_RDONLY); // open infile
-		dup2(infile_fd, STDIN_FILENO); // redirect stdin to infile
-		close(infile_fd); // close infile
-		dup2(pipe_fds[1], STDOUT_FILENO); // redirect stdout to write end of pipe
-		close(pipe_fds[1]); // close write end of pipe
-		ft_execvp(cmd1_args[0], cmd1_args, envp);
+	close(pipe_fds[0]); // close read end of pipe
+	infile_fd = open("infile", O_RDONLY); // open infile
+	dup2(infile_fd, STDIN_FILENO); // redirect stdin to infile
+	close(infile_fd); // close infile
+	dup2(pipe_fds[1], STDOUT_FILENO); // redirect stdout to write end of pipe
+	close(pipe_fds[1]); // close write end of pipe
+	ft_execvp(cmd1_args[0], cmd1_args, envp);
 	}
 
 	cmd2 = fork(); // create child process

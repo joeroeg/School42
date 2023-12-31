@@ -76,5 +76,9 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+char	*ft_strtok(char *str, const char *delim);
+size_t	ft_strspn(const char *str1, const char *str2);
+size_t	ft_strcspn(const char *str1, const char *str2);
+char	*ft_strpbrk(const char *str, const char *accept);
 
 #endif
