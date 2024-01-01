@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:50:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/31 18:24:22 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/12/31 20:26:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	exec_cmd1(char **cmd1_args, int pipe_fds[], char **envp)
 	dup2(pipe_fds[1], STDOUT_FILENO);
 	close(pipe_fds[1]);
 	ft_execvp(cmd1_args[0], cmd1_args, envp);
+	cleanup(pipe_fds, cmd1_args, NULL);
 	exit(1);
 }
 
@@ -41,6 +42,7 @@ void	exec_cmd2(char **cmd2_args, int pipe_fds[], char **envp)
 	dup2(outfile_fd, STDOUT_FILENO);
 	close(outfile_fd);
 	ft_execvp(cmd2_args[0], cmd2_args, envp);
+	cleanup(pipe_fds, NULL, cmd2_args);
 	exit(1);
 }
 
@@ -54,15 +56,15 @@ int	fork_and_exec_cmd(char **cmd_args, int pipe_fds[], \
 	{
 		error_message("fork", 0);
 		cleanup(pipe_fds, cmd_args, NULL);
-		return (1);
+		return (1); // checked
 	}
 	if (pid == 0)
 	{
 		exec_cmd(cmd_args, pipe_fds, envp);
 		cleanup(pipe_fds, cmd_args, NULL);
-		exit(0);
+		exit(0); // checked
 	}
-	return (0);
+	return (0); // checked
 }
 
 char	**parse_command(char *cmd)
@@ -74,7 +76,7 @@ char	**parse_command(char *cmd)
 	if (cmd == NULL || *cmd == '\0')
 	{
 		error_message("empty command", 0);
-		return (NULL);
+		return (NULL); // checked
 	}
 	argv = malloc((MAX_ARGS + 1) * sizeof(char *));
 	i = 0;
@@ -85,7 +87,7 @@ char	**parse_command(char *cmd)
 		token = ft_strtok(NULL, " ");
 	}
 	argv[i] = NULL;
-	return (argv);
+	return (argv); // checked
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -95,23 +97,23 @@ int	main(int argc, char **argv, char **envp)
 	int		pipe_fds[2];
 
 	if (validate_arguments(argc) != 0)
-		return (1);
+		return (1);  // checked
 	cmd1_args = parse_command(argv[2]);
 	if (cmd1_args == NULL)
-		return (1);
+		return (1); // checked
 	cmd2_args = parse_command(argv[3]);
 	if (cmd2_args == NULL)
 	{
-		free_string_array(cmd1_args);
-		return (1);
+		free_string_array(&cmd1_args);
+		return (1);  // checked
 	}
 	if (pipe(pipe_fds) == -1)
 		error_message("pipe", 1);
 	if (fork_and_exec_cmd(cmd1_args, pipe_fds, envp, exec_cmd1) != 0)
-		return (1);
+		return (1); // checked
 	if (fork_and_exec_cmd(cmd2_args, pipe_fds, envp, exec_cmd2) != 0)
 		return (1);
 	cleanup(pipe_fds, cmd1_args, cmd2_args);
 	waitpid(-1, NULL, 0);
-	return (0);
+	return (0); // checked
 }

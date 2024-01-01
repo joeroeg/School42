@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:46:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/30 19:17:58 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/12/31 18:42:50 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 int		validate_arguments(int argc);
 char	**parse_command(char *cmd);
-void	free_string_array(char **array);
+void	free_string_array(char ***array);
 void	error_message(const char *message, int should_exit);
 void	cleanup(int pipe_fds[2], char **cmd1_args, char **cmd2_args);
 char	**tokenize_path(const char *path);

@@ -1,148 +1,21 @@
-==92952== Memcheck, a memory error detector
-==92952== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==92952== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
-==92952== Command: ./pipex infile cat\ -invalid sort\ -r outfile
-==92952== 
-==92952== Invalid read of size 8
-==92952==    at 0x100002E7B: free_string_array (pipex_utilities.c:30)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002DCB: main (pipex.c:115)
-==92952==  Address 0x10082d620 is 0 bytes inside a block of size 88 free'd
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002EB0: free_string_array (pipex_utilities.c:35)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002B9D: fork_and_exec_cmd (pipex.c:65)
-==92952==    by 0x100002D78: main (pipex.c:111)
-==92952==  Block was alloc'd at
-==92952==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002BFB: parse_command (pipex.c:80)
-==92952==    by 0x100002CF1: main (pipex.c:100)
-==92952== 
-==92952== Invalid read of size 8
-==92952==    at 0x100002E8E: free_string_array (pipex_utilities.c:32)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002DCB: main (pipex.c:115)
-==92952==  Address 0x10082d620 is 0 bytes inside a block of size 88 free'd
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002EB0: free_string_array (pipex_utilities.c:35)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002B9D: fork_and_exec_cmd (pipex.c:65)
-==92952==    by 0x100002D78: main (pipex.c:111)
-==92952==  Block was alloc'd at
-==92952==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002BFB: parse_command (pipex.c:80)
-==92952==    by 0x100002CF1: main (pipex.c:100)
-==92952== 
-==92952== Invalid free() / delete / delete[] / realloc()
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002E96: free_string_array (pipex_utilities.c:32)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002DCB: main (pipex.c:115)
-==92952==  Address 0x10082d6c0 is 0 bytes inside a block of size 4 free'd
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002E96: free_string_array (pipex_utilities.c:32)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002B9D: fork_and_exec_cmd (pipex.c:65)
-==92952==    by 0x100002D78: main (pipex.c:111)
-==92952==  Block was alloc'd at
-==92952==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x10000389A: ft_strdup (in ./pipex)
-==92952==    by 0x100002C4D: parse_command (pipex.c:85)
-==92952==    by 0x100002CF1: main (pipex.c:100)
-==92952== 
-==92952== Invalid free() / delete / delete[] / realloc()
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002EB0: free_string_array (pipex_utilities.c:35)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002DCB: main (pipex.c:115)
-==92952==  Address 0x10082d620 is 0 bytes inside a block of size 88 free'd
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002EB0: free_string_array (pipex_utilities.c:35)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002B9D: fork_and_exec_cmd (pipex.c:65)
-==92952==    by 0x100002D78: main (pipex.c:111)
-==92952==  Block was alloc'd at
-==92952==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002BFB: parse_command (pipex.c:80)
-==92952==    by 0x100002CF1: main (pipex.c:100)
-==92952== 
-==92952== Invalid read of size 8
-==92952==    at 0x100002E7B: free_string_array (pipex_utilities.c:30)
-==92952==    by 0x100002FCD: cleanup (pipex_utilities.c:67)
-==92952==    by 0x100002DCB: main (pipex.c:115)
-==92952==  Address 0x10082d760 is 0 bytes inside a block of size 88 free'd
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002EB0: free_string_array (pipex_utilities.c:35)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002B9D: fork_and_exec_cmd (pipex.c:65)
-==92952==    by 0x100002DA5: main (pipex.c:113)
-==92952==  Block was alloc'd at
-==92952==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002BFB: parse_command (pipex.c:80)
-==92952==    by 0x100002D19: main (pipex.c:103)
-==92952== 
-==92952== Invalid read of size 8
-==92952==    at 0x100002E8E: free_string_array (pipex_utilities.c:32)
-==92952==    by 0x100002FCD: cleanup (pipex_utilities.c:67)
-==92952==    by 0x100002DCB: main (pipex.c:115)
-==92952==  Address 0x10082d760 is 0 bytes inside a block of size 88 free'd
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002EB0: free_string_array (pipex_utilities.c:35)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002B9D: fork_and_exec_cmd (pipex.c:65)
-==92952==    by 0x100002DA5: main (pipex.c:113)
-==92952==  Block was alloc'd at
-==92952==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002BFB: parse_command (pipex.c:80)
-==92952==    by 0x100002D19: main (pipex.c:103)
-==92952== 
-==92952== Invalid free() / delete / delete[] / realloc()
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002E96: free_string_array (pipex_utilities.c:32)
-==92952==    by 0x100002FCD: cleanup (pipex_utilities.c:67)
-==92952==    by 0x100002DCB: main (pipex.c:115)
-==92952==  Address 0x10082d800 is 0 bytes inside a block of size 5 free'd
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002E96: free_string_array (pipex_utilities.c:32)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002B9D: fork_and_exec_cmd (pipex.c:65)
-==92952==    by 0x100002DA5: main (pipex.c:113)
-==92952==  Block was alloc'd at
-==92952==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x10000389A: ft_strdup (in ./pipex)
-==92952==    by 0x100002C4D: parse_command (pipex.c:85)
-==92952==    by 0x100002D19: main (pipex.c:103)
-==92952== 
-==92952== Invalid free() / delete / delete[] / realloc()
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002EB0: free_string_array (pipex_utilities.c:35)
-==92952==    by 0x100002FCD: cleanup (pipex_utilities.c:67)
-==92952==    by 0x100002DCB: main (pipex.c:115)
-==92952==  Address 0x10082d760 is 0 bytes inside a block of size 88 free'd
-==92952==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002EB0: free_string_array (pipex_utilities.c:35)
-==92952==    by 0x100002FB9: cleanup (pipex_utilities.c:65)
-==92952==    by 0x100002B9D: fork_and_exec_cmd (pipex.c:65)
-==92952==    by 0x100002DA5: main (pipex.c:113)
-==92952==  Block was alloc'd at
-==92952==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==92952==    by 0x100002BFB: parse_command (pipex.c:80)
-==92952==    by 0x100002D19: main (pipex.c:103)
-==92952== 
+==25017== Memcheck, a memory error detector
+==25017== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==25017== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==25017== Command: ./pipex infile cat\ -invalid sort\ -r outfile
+==25017== 
 cat: illegal option -- i
 usage: cat [-benstuv] [file ...]
-sort: Bad file descriptor
-==92952== 
-==92952== HEAP SUMMARY:
-==92952==     in use at exit: 14,103 bytes in 161 blocks
-==92952==   total heap usage: 181 allocs, 26 frees, 19,044 bytes allocated
-==92952== 
-==92952== LEAK SUMMARY:
-==92952==    definitely lost: 0 bytes in 0 blocks
-==92952==    indirectly lost: 0 bytes in 0 blocks
-==92952==      possibly lost: 0 bytes in 0 blocks
-==92952==    still reachable: 0 bytes in 0 blocks
-==92952==         suppressed: 14,103 bytes in 161 blocks
-==92952== 
-==92952== For lists of detected and suppressed errors, rerun with: -s
-==92952== ERROR SUMMARY: 16 errors from 8 contexts (suppressed: 7 from 7)
+==25017== 
+==25017== HEAP SUMMARY:
+==25017==     in use at exit: 14,103 bytes in 161 blocks
+==25017==   total heap usage: 181 allocs, 20 frees, 19,044 bytes allocated
+==25017== 
+==25017== LEAK SUMMARY:
+==25017==    definitely lost: 0 bytes in 0 blocks
+==25017==    indirectly lost: 0 bytes in 0 blocks
+==25017==      possibly lost: 0 bytes in 0 blocks
+==25017==    still reachable: 0 bytes in 0 blocks
+==25017==         suppressed: 14,103 bytes in 161 blocks
+==25017== 
+==25017== For lists of detected and suppressed errors, rerun with: -s
+==25017== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
