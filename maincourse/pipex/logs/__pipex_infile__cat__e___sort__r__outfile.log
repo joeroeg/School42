@@ -1,14 +1,72 @@
-==173867== Memcheck, a memory error detector
-==173867== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==173867== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==173867== Command: ./pipex infile cat\ -e sort\ -r outfile
-==173867== 
-==173867== 
-==173867== HEAP SUMMARY:
-==173867==     in use at exit: 0 bytes in 0 blocks
-==173867==   total heap usage: 6 allocs, 6 frees, 191 bytes allocated
-==173867== 
-==173867== All heap blocks were freed -- no leaks are possible
-==173867== 
-==173867== For lists of detected and suppressed errors, rerun with: -s
-==173867== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==48637== Memcheck, a memory error detector
+==48637== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==48637== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==48637== Command: ./pipex infile cat\ -e sort\ -r outfile
+==48637== 
+==48637== Invalid read of size 8
+==48637==    at 0x109799: free_string_array (pipex_utilities.c:32)
+==48637==    by 0x1098A3: cleanup (pipex_utilities.c:71)
+==48637==    by 0x1096AF: main (pipex.c:121)
+==48637==  Address 0x4aa8040 is 0 bytes inside a block of size 88 free'd
+==48637==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==48637==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
+==48637==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
+==48637==    by 0x109667: main (pipex.c:117)
+==48637==  Block was alloc'd at
+==48637==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==48637==    by 0x1094F0: parse_command (pipex.c:86)
+==48637==    by 0x1095DC: main (pipex.c:106)
+==48637== 
+==48637== Invalid free() / delete / delete[] / realloc()
+==48637==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==48637==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
+==48637==    by 0x1098A3: cleanup (pipex_utilities.c:71)
+==48637==    by 0x1096AF: main (pipex.c:121)
+==48637==  Address 0x4aa8040 is 0 bytes inside a block of size 88 free'd
+==48637==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==48637==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
+==48637==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
+==48637==    by 0x109667: main (pipex.c:117)
+==48637==  Block was alloc'd at
+==48637==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==48637==    by 0x1094F0: parse_command (pipex.c:86)
+==48637==    by 0x1095DC: main (pipex.c:106)
+==48637== 
+==48637== Invalid read of size 8
+==48637==    at 0x109799: free_string_array (pipex_utilities.c:32)
+==48637==    by 0x1098B8: cleanup (pipex_utilities.c:73)
+==48637==    by 0x1096AF: main (pipex.c:121)
+==48637==  Address 0x4aa8180 is 0 bytes inside a block of size 88 free'd
+==48637==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==48637==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
+==48637==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
+==48637==    by 0x10968D: main (pipex.c:119)
+==48637==  Block was alloc'd at
+==48637==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==48637==    by 0x1094F0: parse_command (pipex.c:86)
+==48637==    by 0x109606: main (pipex.c:109)
+==48637== 
+==48637== Invalid free() / delete / delete[] / realloc()
+==48637==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==48637==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
+==48637==    by 0x1098B8: cleanup (pipex_utilities.c:73)
+==48637==    by 0x1096AF: main (pipex.c:121)
+==48637==  Address 0x4aa8180 is 0 bytes inside a block of size 88 free'd
+==48637==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==48637==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
+==48637==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
+==48637==    by 0x10968D: main (pipex.c:119)
+==48637==  Block was alloc'd at
+==48637==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==48637==    by 0x1094F0: parse_command (pipex.c:86)
+==48637==    by 0x109606: main (pipex.c:109)
+==48637== 
+==48637== 
+==48637== HEAP SUMMARY:
+==48637==     in use at exit: 0 bytes in 0 blocks
+==48637==   total heap usage: 6 allocs, 8 frees, 191 bytes allocated
+==48637== 
+==48637== All heap blocks were freed -- no leaks are possible
+==48637== 
+==48637== For lists of detected and suppressed errors, rerun with: -s
+==48637== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)

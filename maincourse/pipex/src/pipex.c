@@ -6,7 +6,7 @@
 /*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:50:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/01 12:55:01 by device           ###   ########.fr       */
+/*   Updated: 2024/01/10 10:27:48 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,20 @@ int	fork_and_exec_cmd(char **cmd_args, int pipe_fds[], \
 	{
 		error_message("fork", 0);
 		cleanup(pipe_fds, cmd_args, NULL);
-		return (1); // checked
+		return (1);
 	}
 	if (pid == 0)
 	{
 		exec_cmd(cmd_args, pipe_fds, envp);
 		cleanup(pipe_fds, cmd_args, NULL);
-		exit(0); // checked
+		exit(0);
 	}
-	return (0); // checked
+	else
+	{
+		free_string_array(&cmd_args);
+		return (0);
+	}
+	return (0);
 }
 
 char	**parse_command(char *cmd)
@@ -76,7 +81,7 @@ char	**parse_command(char *cmd)
 	if (cmd == NULL || *cmd == '\0')
 	{
 		error_message("empty command", 0);
-		return (NULL); // checked
+		return (NULL);
 	}
 	argv = malloc((MAX_ARGS + 1) * sizeof(char *));
 	i = 0;
@@ -87,7 +92,7 @@ char	**parse_command(char *cmd)
 		token = ft_strtok(NULL, " ");
 	}
 	argv[i] = NULL;
-	return (argv); // checked
+	return (argv);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -97,23 +102,23 @@ int	main(int argc, char **argv, char **envp)
 	int		pipe_fds[2];
 
 	if (validate_arguments(argc) != 0)
-		return (1);  // checked
+		return (1);
 	cmd1_args = parse_command(argv[2]);
 	if (cmd1_args == NULL)
-		return (1); // checked
+		return (1);
 	cmd2_args = parse_command(argv[3]);
 	if (cmd2_args == NULL)
 	{
 		free_string_array(&cmd1_args);
-		return (1);  // checked
+		return (1);
 	}
 	if (pipe(pipe_fds) == -1)
 		error_message("pipe", 1);
 	if (fork_and_exec_cmd(cmd1_args, pipe_fds, envp, exec_cmd1) != 0)
-		return (1); // checked
+		return (1);
 	if (fork_and_exec_cmd(cmd2_args, pipe_fds, envp, exec_cmd2) != 0)
 		return (1);
 	cleanup(pipe_fds, cmd1_args, cmd2_args);
 	waitpid(-1, NULL, 0);
-	return (0); // checked
+	return (0);
 }

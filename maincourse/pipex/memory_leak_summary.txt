@@ -168,3 +168,11 @@ Date/Time | Changes | Definitely Lost | Indirectly Lost | Still Reachable | LogF
 2023-12-31 21:13:08 | test at home | | | 96 bytes in 3 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
 2023-12-31 21:13:08 | test at home | | | 93 bytes in 2 blocks 93 bytes in 2 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
 2023-12-31 21:13:08 | test at home | | | 93 bytes in 2 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-10 10:24:32 | discarded all changes | | | 95 bytes in 3 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-10 10:24:32 | discarded all changes | | | 92 bytes in 2 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-10 10:24:32 | discarded all changes | | | 96 bytes in 3 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-10 10:24:32 | discarded all changes | | | 93 bytes in 2 blocks 93 bytes in 2 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-10 10:24:32 | discarded all changes | | | 93 bytes in 2 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-10 10:25:36 | added else to fork_and_exec_cmd | | | 96 bytes in 3 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-10 10:25:36 | added else to fork_and_exec_cmd | | | 93 bytes in 2 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-10 10:25:36 | added else to fork_and_exec_cmd | | | 93 bytes in 2 blocks | logs/__pipex_infile__NULL___sort__outfile.log
