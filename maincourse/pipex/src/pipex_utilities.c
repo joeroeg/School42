@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/10 11:58:09 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:18:38 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	validate_arguments(int argc)
 	if (argc != 5)
 	{
 		fprintf(stderr, "Error: wrong number of arguments\n");
-		return (1); // checked
+		return (1);
 	}
-	return (0); // checked
+	return (0);
 }
 
 void	free_string_array(char ***array)
@@ -38,8 +38,6 @@ void	free_string_array(char ***array)
 	free(*array);
 	*array = NULL;
 }
-
-
 
 void	error_message(const char *message, int should_exit)
 {
