@@ -1,82 +1,36 @@
-==87801== Memcheck, a memory error detector
-==87801== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==87801== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==87801== Command: ./pipex infile error\ -e sort\ -r outfile
-==87801== 
-==87801== Invalid read of size 8
-==87801==    at 0x109799: free_string_array (pipex_utilities.c:32)
-==87801==    by 0x1098A3: cleanup (pipex_utilities.c:69)
-==87801==    by 0x1096AF: main (pipex.c:159)
-==87801==  Address 0x4aa8040 is 0 bytes inside a block of size 88 free'd
-==87801==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==87801==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==87801==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==87801==    by 0x109633: main (pipex.c:149)
-==87801==  Block was alloc'd at
-==87801==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==87801==    by 0x1094F0: parse_command (pipex.c:86)
-==87801==    by 0x1095DC: main (pipex.c:144)
-==87801== 
-==87801== Invalid free() / delete / delete[] / realloc()
-==87801==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==87801==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==87801==    by 0x1098A3: cleanup (pipex_utilities.c:69)
-==87801==    by 0x1096AF: main (pipex.c:159)
-==87801==  Address 0x4aa8040 is 0 bytes inside a block of size 88 free'd
-==87801==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==87801==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==87801==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==87801==    by 0x109633: main (pipex.c:149)
-==87801==  Block was alloc'd at
-==87801==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==87801==    by 0x1094F0: parse_command (pipex.c:86)
-==87801==    by 0x1095DC: main (pipex.c:144)
-==87801== 
-==87801== Invalid read of size 8
-==87801==    at 0x109799: free_string_array (pipex_utilities.c:32)
-==87801==    by 0x1098B8: cleanup (pipex_utilities.c:71)
-==87801==    by 0x1096AF: main (pipex.c:159)
-==87801==  Address 0x4aa8180 is 0 bytes inside a block of size 88 free'd
-==87801==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==87801==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==87801==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==87801==    by 0x10968D: main (pipex.c:157)
-==87801==  Block was alloc'd at
-==87801==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==87801==    by 0x1094F0: parse_command (pipex.c:86)
-==87801==    by 0x109654: main (pipex.c:151)
-==87801== 
-==87801== Invalid free() / delete / delete[] / realloc()
-==87801==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==87801==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==87801==    by 0x1098B8: cleanup (pipex_utilities.c:71)
-==87801==    by 0x1096AF: main (pipex.c:159)
-==87801==  Address 0x4aa8180 is 0 bytes inside a block of size 88 free'd
-==87801==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==87801==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==87801==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==87801==    by 0x10968D: main (pipex.c:157)
-==87801==  Block was alloc'd at
-==87801==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==87801==    by 0x1094F0: parse_command (pipex.c:86)
-==87801==    by 0x109654: main (pipex.c:151)
-==87801== 
-Command not found
-==87802== 
-==87802== HEAP SUMMARY:
-==87802==     in use at exit: 0 bytes in 0 blocks
-==87802==   total heap usage: 49 allocs, 49 frees, 2,048 bytes allocated
-==87802== 
-==87802== All heap blocks were freed -- no leaks are possible
-==87802== 
-==87802== For lists of detected and suppressed errors, rerun with: -s
-==87802== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==87801== 
-==87801== HEAP SUMMARY:
-==87801==     in use at exit: 0 bytes in 0 blocks
-==87801==   total heap usage: 6 allocs, 8 frees, 193 bytes allocated
-==87801== 
-==87801== All heap blocks were freed -- no leaks are possible
-==87801== 
-==87801== For lists of detected and suppressed errors, rerun with: -s
-==87801== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+==34593== Memcheck, a memory error detector
+==34593== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==34593== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==34593== Command: ./pipex infile error\ -e sort\ -r outfile
+==34593== 
+open infile: No such file or directory
+==34595== 
+==34595== HEAP SUMMARY:
+==34595==     in use at exit: 16,566 bytes in 173 blocks
+==34595==   total heap usage: 188 allocs, 15 frees, 21,374 bytes allocated
+==34595== 
+==34595== LEAK SUMMARY:
+==34595==    definitely lost: 0 bytes in 0 blocks
+==34595==    indirectly lost: 0 bytes in 0 blocks
+==34595==      possibly lost: 0 bytes in 0 blocks
+==34595==    still reachable: 2,527 bytes in 13 blocks
+==34595==         suppressed: 14,039 bytes in 160 blocks
+==34595== Reachable blocks (those to which a pointer was found) are not shown.
+==34595== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==34595== 
+==34595== For lists of detected and suppressed errors, rerun with: -s
+==34595== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
+==34593== 
+==34593== HEAP SUMMARY:
+==34593==     in use at exit: 14,103 bytes in 161 blocks
+==34593==   total heap usage: 181 allocs, 20 frees, 19,040 bytes allocated
+==34593== 
+==34593== LEAK SUMMARY:
+==34593==    definitely lost: 0 bytes in 0 blocks
+==34593==    indirectly lost: 0 bytes in 0 blocks
+==34593==      possibly lost: 0 bytes in 0 blocks
+==34593==    still reachable: 0 bytes in 0 blocks
+==34593==         suppressed: 14,103 bytes in 161 blocks
+==34593== 
+==34593== For lists of detected and suppressed errors, rerun with: -s
+==34593== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
