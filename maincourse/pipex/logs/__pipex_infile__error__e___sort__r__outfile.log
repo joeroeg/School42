@@ -1,36 +1,18 @@
-==34593== Memcheck, a memory error detector
-==34593== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==34593== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
-==34593== Command: ./pipex infile error\ -e sort\ -r outfile
-==34593== 
-open infile: No such file or directory
-==34595== 
-==34595== HEAP SUMMARY:
-==34595==     in use at exit: 16,566 bytes in 173 blocks
-==34595==   total heap usage: 188 allocs, 15 frees, 21,374 bytes allocated
-==34595== 
-==34595== LEAK SUMMARY:
-==34595==    definitely lost: 0 bytes in 0 blocks
-==34595==    indirectly lost: 0 bytes in 0 blocks
-==34595==      possibly lost: 0 bytes in 0 blocks
-==34595==    still reachable: 2,527 bytes in 13 blocks
-==34595==         suppressed: 14,039 bytes in 160 blocks
-==34595== Reachable blocks (those to which a pointer was found) are not shown.
-==34595== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==34595== 
-==34595== For lists of detected and suppressed errors, rerun with: -s
-==34595== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
-==34593== 
-==34593== HEAP SUMMARY:
-==34593==     in use at exit: 14,103 bytes in 161 blocks
-==34593==   total heap usage: 181 allocs, 20 frees, 19,040 bytes allocated
-==34593== 
-==34593== LEAK SUMMARY:
-==34593==    definitely lost: 0 bytes in 0 blocks
-==34593==    indirectly lost: 0 bytes in 0 blocks
-==34593==      possibly lost: 0 bytes in 0 blocks
-==34593==    still reachable: 0 bytes in 0 blocks
-==34593==         suppressed: 14,103 bytes in 161 blocks
-==34593== 
-==34593== For lists of detected and suppressed errors, rerun with: -s
-==34593== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
+==9712== Memcheck, a memory error detector
+==9712== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==9712== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==9712== Command: ./pipex infile error\ -e sort\ -r outfile
+==9712== 
+==9712== Conditional jump or move depends on uninitialised value(s)
+==9712==    at 0x1095C1: main (pipex.c:106)
+==9712== 
+==9712== 
+==9712== HEAP SUMMARY:
+==9712==     in use at exit: 0 bytes in 0 blocks
+==9712==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==9712== 
+==9712== All heap blocks were freed -- no leaks are possible
+==9712== 
+==9712== Use --track-origins=yes to see where uninitialised values come from
+==9712== For lists of detected and suppressed errors, rerun with: -s
+==9712== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

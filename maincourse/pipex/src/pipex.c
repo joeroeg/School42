@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:50:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/10 18:16:45 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:53:09 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,11 @@ int	main(int argc, char **argv, char **envp)
 
 	if (validate_arguments(argc) != 0)
 		return (1);
+	if (cmd1_args == NULL)
+		return (1);
 	if (pipe(pipe_fds) == -1)
 		error_message("pipe", 1);
 	cmd1_args = parse_command(argv[2]);
-	if (cmd1_args == NULL)
-		return (1);
 	if (fork_and_exec_cmd(cmd1_args, pipe_fds, envp, exec_cmd1) != 0)
 		return (1);
 	cmd2_args = parse_command(argv[3]);
