@@ -18,6 +18,8 @@ declare -a commands=(
     "./pipex infile \"cat -e\" \"error -r\" outfile"
     "./pipex infile \"error -e\" \"sort -r\" outfile"
 
+    # valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./pipex infile NULL NULL outfile
+
     # Basic tests
     # "./pipex infile \"cat -e\" \"sort -r\" outfile  # Basic test with 'cat -e' and 'sort -r'"
     # "./pipex infile \"cat\" \"sort\" outfile       # Basic test with 'cat' and 'sort'"
