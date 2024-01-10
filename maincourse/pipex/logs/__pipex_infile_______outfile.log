@@ -1,15 +1,20 @@
-==48687== Memcheck, a memory error detector
-==48687== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==48687== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==48687== Command: ./pipex infile   outfile
-==48687== 
-empty command: Success
-==48687== 
-==48687== HEAP SUMMARY:
-==48687==     in use at exit: 0 bytes in 0 blocks
-==48687==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
-==48687== 
-==48687== All heap blocks were freed -- no leaks are possible
-==48687== 
-==48687== For lists of detected and suppressed errors, rerun with: -s
-==48687== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==75360== Memcheck, a memory error detector
+==75360== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==75360== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==75360== Command: ./pipex infile   outfile
+==75360== 
+empty command: Undefined error: 0
+==75360== 
+==75360== HEAP SUMMARY:
+==75360==     in use at exit: 14,103 bytes in 161 blocks
+==75360==   total heap usage: 175 allocs, 14 frees, 18,847 bytes allocated
+==75360== 
+==75360== LEAK SUMMARY:
+==75360==    definitely lost: 0 bytes in 0 blocks
+==75360==    indirectly lost: 0 bytes in 0 blocks
+==75360==      possibly lost: 0 bytes in 0 blocks
+==75360==    still reachable: 0 bytes in 0 blocks
+==75360==         suppressed: 14,103 bytes in 161 blocks
+==75360== 
+==75360== For lists of detected and suppressed errors, rerun with: -s
+==75360== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)

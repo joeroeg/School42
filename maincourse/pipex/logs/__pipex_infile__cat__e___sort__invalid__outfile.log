@@ -1,74 +1,21 @@
-==48667== Memcheck, a memory error detector
-==48667== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==48667== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==48667== Command: ./pipex infile cat\ -e sort\ -invalid outfile
-==48667== 
-==48667== Invalid read of size 8
-==48667==    at 0x109799: free_string_array (pipex_utilities.c:32)
-==48667==    by 0x1098A3: cleanup (pipex_utilities.c:71)
-==48667==    by 0x1096AF: main (pipex.c:121)
-==48667==  Address 0x4aa8040 is 0 bytes inside a block of size 88 free'd
-==48667==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48667==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48667==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==48667==    by 0x109667: main (pipex.c:117)
-==48667==  Block was alloc'd at
-==48667==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48667==    by 0x1094F0: parse_command (pipex.c:86)
-==48667==    by 0x1095DC: main (pipex.c:106)
-==48667== 
-==48667== Invalid free() / delete / delete[] / realloc()
-==48667==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48667==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48667==    by 0x1098A3: cleanup (pipex_utilities.c:71)
-==48667==    by 0x1096AF: main (pipex.c:121)
-==48667==  Address 0x4aa8040 is 0 bytes inside a block of size 88 free'd
-==48667==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48667==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48667==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==48667==    by 0x109667: main (pipex.c:117)
-==48667==  Block was alloc'd at
-==48667==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48667==    by 0x1094F0: parse_command (pipex.c:86)
-==48667==    by 0x1095DC: main (pipex.c:106)
-==48667== 
-==48667== Invalid read of size 8
-==48667==    at 0x109799: free_string_array (pipex_utilities.c:32)
-==48667==    by 0x1098B8: cleanup (pipex_utilities.c:73)
-==48667==    by 0x1096AF: main (pipex.c:121)
-==48667==  Address 0x4aa8180 is 0 bytes inside a block of size 88 free'd
-==48667==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48667==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48667==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==48667==    by 0x10968D: main (pipex.c:119)
-==48667==  Block was alloc'd at
-==48667==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48667==    by 0x1094F0: parse_command (pipex.c:86)
-==48667==    by 0x109606: main (pipex.c:109)
-==48667== 
-==48667== Invalid free() / delete / delete[] / realloc()
-==48667==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48667==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48667==    by 0x1098B8: cleanup (pipex_utilities.c:73)
-==48667==    by 0x1096AF: main (pipex.c:121)
-==48667==  Address 0x4aa8180 is 0 bytes inside a block of size 88 free'd
-==48667==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48667==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48667==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==48667==    by 0x10968D: main (pipex.c:119)
-==48667==  Block was alloc'd at
-==48667==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48667==    by 0x1094F0: parse_command (pipex.c:86)
-==48667==    by 0x109606: main (pipex.c:109)
-==48667== 
-sort: invalid option -- 'v'
-Try 'sort --help' for more information.
-==48667== 
-==48667== HEAP SUMMARY:
-==48667==     in use at exit: 0 bytes in 0 blocks
-==48667==   total heap usage: 6 allocs, 8 frees, 197 bytes allocated
-==48667== 
-==48667== All heap blocks were freed -- no leaks are possible
-==48667== 
-==48667== For lists of detected and suppressed errors, rerun with: -s
-==48667== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+==75345== Memcheck, a memory error detector
+==75345== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==75345== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==75345== Command: ./pipex infile cat\ -e sort\ -invalid outfile
+==75345== 
+sort: invalid option -- v
+Usage: sort [-bcCdfigMmnrsuz] [-kPOS1[,POS2] ... ] [+POS1 [-POS2]] [-S memsize] [-T tmpdir] [-t separator] [-o outfile] [--batch-size size] [--files0-from file] [--heapsort] [--mergesort] [--radixsort] [--qsort] [--mmap] [--parallel thread_no] [--human-numeric-sort] [--version-sort] [--random-sort [--random-source file]] [--compress-program program] [file ...]
+==75345== 
+==75345== HEAP SUMMARY:
+==75345==     in use at exit: 14,103 bytes in 161 blocks
+==75345==   total heap usage: 181 allocs, 20 frees, 19,044 bytes allocated
+==75345== 
+==75345== LEAK SUMMARY:
+==75345==    definitely lost: 0 bytes in 0 blocks
+==75345==    indirectly lost: 0 bytes in 0 blocks
+==75345==      possibly lost: 0 bytes in 0 blocks
+==75345==    still reachable: 0 bytes in 0 blocks
+==75345==         suppressed: 14,103 bytes in 161 blocks
+==75345== 
+==75345== For lists of detected and suppressed errors, rerun with: -s
+==75345== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)

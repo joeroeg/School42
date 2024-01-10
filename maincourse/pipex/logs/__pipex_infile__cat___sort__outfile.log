@@ -1,72 +1,19 @@
-==48630== Memcheck, a memory error detector
-==48630== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==48630== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==48630== Command: ./pipex infile cat sort outfile
-==48630== 
-==48630== Invalid read of size 8
-==48630==    at 0x109799: free_string_array (pipex_utilities.c:32)
-==48630==    by 0x1098A3: cleanup (pipex_utilities.c:71)
-==48630==    by 0x1096AF: main (pipex.c:121)
-==48630==  Address 0x4aa8040 is 0 bytes inside a block of size 88 free'd
-==48630==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48630==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48630==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==48630==    by 0x109667: main (pipex.c:117)
-==48630==  Block was alloc'd at
-==48630==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48630==    by 0x1094F0: parse_command (pipex.c:86)
-==48630==    by 0x1095DC: main (pipex.c:106)
-==48630== 
-==48630== Invalid free() / delete / delete[] / realloc()
-==48630==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48630==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48630==    by 0x1098A3: cleanup (pipex_utilities.c:71)
-==48630==    by 0x1096AF: main (pipex.c:121)
-==48630==  Address 0x4aa8040 is 0 bytes inside a block of size 88 free'd
-==48630==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48630==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48630==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==48630==    by 0x109667: main (pipex.c:117)
-==48630==  Block was alloc'd at
-==48630==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48630==    by 0x1094F0: parse_command (pipex.c:86)
-==48630==    by 0x1095DC: main (pipex.c:106)
-==48630== 
-==48630== Invalid read of size 8
-==48630==    at 0x109799: free_string_array (pipex_utilities.c:32)
-==48630==    by 0x1098B8: cleanup (pipex_utilities.c:73)
-==48630==    by 0x1096AF: main (pipex.c:121)
-==48630==  Address 0x4aa8130 is 0 bytes inside a block of size 88 free'd
-==48630==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48630==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48630==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==48630==    by 0x10968D: main (pipex.c:119)
-==48630==  Block was alloc'd at
-==48630==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48630==    by 0x1094F0: parse_command (pipex.c:86)
-==48630==    by 0x109606: main (pipex.c:109)
-==48630== 
-==48630== Invalid free() / delete / delete[] / realloc()
-==48630==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48630==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48630==    by 0x1098B8: cleanup (pipex_utilities.c:73)
-==48630==    by 0x1096AF: main (pipex.c:121)
-==48630==  Address 0x4aa8130 is 0 bytes inside a block of size 88 free'd
-==48630==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48630==    by 0x1097AF: free_string_array (pipex_utilities.c:38)
-==48630==    by 0x10949E: fork_and_exec_cmd (pipex.c:69)
-==48630==    by 0x10968D: main (pipex.c:119)
-==48630==  Block was alloc'd at
-==48630==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==48630==    by 0x1094F0: parse_command (pipex.c:86)
-==48630==    by 0x109606: main (pipex.c:109)
-==48630== 
-==48630== 
-==48630== HEAP SUMMARY:
-==48630==     in use at exit: 0 bytes in 0 blocks
-==48630==   total heap usage: 4 allocs, 6 frees, 185 bytes allocated
-==48630== 
-==48630== All heap blocks were freed -- no leaks are possible
-==48630== 
-==48630== For lists of detected and suppressed errors, rerun with: -s
-==48630== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+==75318== Memcheck, a memory error detector
+==75318== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==75318== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==75318== Command: ./pipex infile cat sort outfile
+==75318== 
+==75318== 
+==75318== HEAP SUMMARY:
+==75318==     in use at exit: 14,103 bytes in 161 blocks
+==75318==   total heap usage: 179 allocs, 18 frees, 19,032 bytes allocated
+==75318== 
+==75318== LEAK SUMMARY:
+==75318==    definitely lost: 0 bytes in 0 blocks
+==75318==    indirectly lost: 0 bytes in 0 blocks
+==75318==      possibly lost: 0 bytes in 0 blocks
+==75318==    still reachable: 0 bytes in 0 blocks
+==75318==         suppressed: 14,103 bytes in 161 blocks
+==75318== 
+==75318== For lists of detected and suppressed errors, rerun with: -s
+==75318== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
