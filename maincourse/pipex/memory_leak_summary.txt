@@ -163,3 +163,8 @@ Date/Time | Changes | Definitely Lost | Indirectly Lost | Still Reachable | LogF
 2023-12-31 20:25:41 | execute_command (else) | | | 2,522 bytes in 12 blocks | logs/__pipex_infile__cat___NULL__outfile.log
 2023-12-31 20:25:41 | execute_command (else) | | | 2,525 bytes in 13 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
 2023-12-31 20:25:41 | execute_command (else) | | | 2,526 bytes in 13 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 21:13:08 | test at home | | | 95 bytes in 3 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2023-12-31 21:13:08 | test at home | | | 92 bytes in 2 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2023-12-31 21:13:08 | test at home | | | 96 bytes in 3 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2023-12-31 21:13:08 | test at home | | | 93 bytes in 2 blocks 93 bytes in 2 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2023-12-31 21:13:08 | test at home | | | 93 bytes in 2 blocks | logs/__pipex_infile__NULL___sort__outfile.log
