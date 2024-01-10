@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:50:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/10 16:53:36 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:27:51 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,44 @@ char	**parse_command(char *cmd)
 	return (argv);
 }
 
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	char	**cmd1_args;
+// 	char	**cmd2_args;
+// 	int		pipe_fds[2];
+
+// 	if (validate_arguments(argc) != 0)
+// 		return (1);
+// 	cmd1_args = parse_command(argv[2]);
+// 	if (cmd1_args == NULL)
+// 	{
+// 		free_string_array(&cmd1_args);
+// 		return (1);
+// 	}
+// 	if (pipe(pipe_fds) == -1)
+// 		error_message("pipe", 1);
+// 	if (fork_and_exec_cmd(cmd1_args, pipe_fds, envp, exec_cmd1) != 0)
+// 	{
+// 		free_string_array(&cmd1_args);
+// 		return (1);
+// 	}
+// 	cmd2_args = parse_command(argv[3]);
+// 	if (cmd2_args == NULL)
+// 	{
+// 		free_string_array(&cmd1_args);
+// 		free_string_array(&cmd2_args);
+// 		return (1);
+// 	}
+// 	if (fork_and_exec_cmd(cmd2_args, pipe_fds, envp, exec_cmd2) != 0)
+// 	{
+// 		free_string_array(&cmd2_args);
+// 		return (1);
+// 	}
+// 	waitpid(-1, NULL, 0);
+// 	cleanup(pipe_fds, cmd1_args, cmd2_args);
+// 	return (0);
+// }
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	**cmd1_args;
@@ -118,6 +156,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	if (fork_and_exec_cmd(cmd2_args, pipe_fds, envp, exec_cmd2) != 0)
 		return (1);
+	cleanup(pipe_fds, cmd1_args, cmd2_args);
 	waitpid(-1, NULL, 0);
 	return (0);
 }

@@ -45,5 +45,9 @@ fclean: clean
 # Re-compiling
 re: fclean all
 
+# Run script
+run:
+	@./run.sh
+
 # Phony rules to avoid conflicts
 .PHONY: all libft clean fclean re run

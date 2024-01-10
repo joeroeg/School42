@@ -1,0 +1,41 @@
+==86796== Memcheck, a memory error detector
+==86796== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==86796== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==86796== Command: ./pipex infile cat NULL outfile
+==86796== 
+Command not found
+open infile: No such file or directory
+==86798== 
+==86798== HEAP SUMMARY:
+==86798==     in use at exit: 0 bytes in 0 blocks
+==86798==   total heap usage: 50 allocs, 50 frees, 2,114 bytes allocated
+==86798== 
+==86798== All heap blocks were freed -- no leaks are possible
+==86798== 
+==86798== For lists of detected and suppressed errors, rerun with: -s
+==86798== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==86797== 
+==86797== HEAP SUMMARY:
+==86797==     in use at exit: 92 bytes in 2 blocks
+==86797==   total heap usage: 2 allocs, 0 frees, 92 bytes allocated
+==86797== 
+==86797== LEAK SUMMARY:
+==86797==    definitely lost: 0 bytes in 0 blocks
+==86797==    indirectly lost: 0 bytes in 0 blocks
+==86797==      possibly lost: 0 bytes in 0 blocks
+==86797==    still reachable: 92 bytes in 2 blocks
+==86797==         suppressed: 0 bytes in 0 blocks
+==86797== Reachable blocks (those to which a pointer was found) are not shown.
+==86797== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==86797== 
+==86797== For lists of detected and suppressed errors, rerun with: -s
+==86797== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==86796== 
+==86796== HEAP SUMMARY:
+==86796==     in use at exit: 0 bytes in 0 blocks
+==86796==   total heap usage: 4 allocs, 4 frees, 185 bytes allocated
+==86796== 
+==86796== All heap blocks were freed -- no leaks are possible
+==86796== 
+==86796== For lists of detected and suppressed errors, rerun with: -s
+==86796== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
