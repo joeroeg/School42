@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:56:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/10 11:58:58 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:07:27 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ char	*find_command_path(const char *file, char *const envp[])
 	return (command_path);
 }
 
-int	execute_command(char *fullpath, char *const argv[])
+int	execute_command(char *fullpath, char *const argv[], char *const envp[])
 {
 	if (fullpath)
 	{
-		execv(fullpath, argv);
-		perror("execv");
+		execve(fullpath, argv, envp);
+		perror("execve");
 		free(fullpath);
 		return (-1);
 	}
@@ -104,7 +104,7 @@ int	ft_execvp(const char *file, char *const argv[], char *const envp[])
 	int		result;
 
 	command_path = find_command_path(file, envp);
-	result = execute_command(command_path, argv);
+	result = execute_command(command_path, argv, envp);
 	if (command_path)
 		free(command_path);
 	return (result);
