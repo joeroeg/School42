@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:56:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/31 20:26:24 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:58:58 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ char	*build_and_check_exec(const char *dir, const char *file, size_t length)
 	if (!fullpath)
 	{
 		perror("malloc");
-		return (NULL); // checked
+		return (NULL);
 	}
 	ft_strlcpy(fullpath, dir, length);
 	ft_strlcat(fullpath, "/", length);
 	ft_strlcat(fullpath, file, length);
 	if (access(fullpath, X_OK) == 0)
-		return (fullpath); // checked
+		return (fullpath);
 	free(fullpath);
-	return (NULL); // checked
+	return (NULL);
 }
 
 char	*search_command_in_directories(const char *file, char *path)
@@ -42,17 +42,17 @@ char	*search_command_in_directories(const char *file, char *path)
 
 	directories = tokenize_path(path);
 	if (!directories)
-		return (NULL); // checked
+		return (NULL);
 	i = -1;
 	while (directories[++i])
 	{
 		length = ft_strlen(directories[i]) + 1 + ft_strlen(file) + 1;
 		fullpath = build_and_check_exec(directories[i], file, length);
 		if (fullpath)
-			break ; // checked
+			break ;
 	}
 	free_string_array(&directories);
-	return (fullpath); // checked
+	return (fullpath);
 }
 
 char	*find_command_path(const char *file, char *const envp[])
@@ -68,18 +68,18 @@ char	*find_command_path(const char *file, char *const envp[])
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 		{
 			path = ft_strdup(envp[i] + 5);
-			break ; // checked
+			break ;
 		}
 		i++;
 	}
 	if (!path)
 	{
 		ft_putstr_fd("PATH variable not found\n", 2);
-		return (NULL); // checked
+		return (NULL);
 	}
 	command_path = search_command_in_directories(file, path);
 	free(path);
-	return (command_path); // checked
+	return (command_path);
 }
 
 int	execute_command(char *fullpath, char *const argv[])
@@ -89,12 +89,12 @@ int	execute_command(char *fullpath, char *const argv[])
 		execv(fullpath, argv);
 		perror("execv");
 		free(fullpath);
-		return (-1); // checked
+		return (-1);
 	}
 	else
 	{
 		ft_putstr_fd("Command not found\n", 2);
-		return (-1); // checked
+		return (-1);
 	}
 }
 
@@ -107,5 +107,5 @@ int	ft_execvp(const char *file, char *const argv[], char *const envp[])
 	result = execute_command(command_path, argv);
 	if (command_path)
 		free(command_path);
-	return (result); // checked
+	return (result);
 }

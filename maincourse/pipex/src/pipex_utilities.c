@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/31 20:26:24 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:58:09 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_string_array(char ***array)
 
 	i = 0;
 	if (*array == NULL)
-		return ; // checked
+		return ;
 	while ((*array)[i] != NULL)
 	{
 		free((*array)[i]);
@@ -45,7 +45,7 @@ void	error_message(const char *message, int should_exit)
 {
 	perror(message);
 	if (should_exit)
-		exit(1); // checked
+		exit(1);
 }
 
 char	**tokenize_path(const char *path)
@@ -56,9 +56,9 @@ char	**tokenize_path(const char *path)
 	if (token_array == NULL)
 	{
 		error_message("ft_split", 0);
-		return (NULL); // checked
+		return (NULL);
 	}
-	return (token_array); // checked
+	return (token_array);
 }
 
 void	cleanup(int pipe_fds[2], char **cmd1_args, char **cmd2_args)
