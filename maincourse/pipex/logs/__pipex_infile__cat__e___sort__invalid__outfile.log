@@ -1,79 +1,16 @@
-==9381== Memcheck, a memory error detector
-==9381== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==9381== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
-==9381== Command: ./pipex infile cat\ -e sort\ -invalid outfile
-==9381== 
-==9381== Invalid read of size 8
-==9381==    at 0x100002E46: free_string_array (pipex_utilities.c:32)
-==9381==    by 0x100002FA9: cleanup (pipex_utilities.c:69)
-==9381==    by 0x100002D7B: main (pipex.c:159)
-==9381==  Address 0x10082d620 is 0 bytes inside a block of size 88 free'd
-==9381==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==9381==    by 0x100002E94: free_string_array (pipex_utilities.c:38)
-==9381==    by 0x100002B45: fork_and_exec_cmd (pipex.c:69)
-==9381==    by 0x100002CF7: main (pipex.c:149)
-==9381==  Block was alloc'd at
-==9381==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==9381==    by 0x100002BAB: parse_command (pipex.c:86)
-==9381==    by 0x100002CA1: main (pipex.c:144)
-==9381== 
-==9381== Invalid free() / delete / delete[] / realloc()
-==9381==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==9381==    by 0x100002E94: free_string_array (pipex_utilities.c:38)
-==9381==    by 0x100002FA9: cleanup (pipex_utilities.c:69)
-==9381==    by 0x100002D7B: main (pipex.c:159)
-==9381==  Address 0x10082d620 is 0 bytes inside a block of size 88 free'd
-==9381==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==9381==    by 0x100002E94: free_string_array (pipex_utilities.c:38)
-==9381==    by 0x100002B45: fork_and_exec_cmd (pipex.c:69)
-==9381==    by 0x100002CF7: main (pipex.c:149)
-==9381==  Block was alloc'd at
-==9381==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==9381==    by 0x100002BAB: parse_command (pipex.c:86)
-==9381==    by 0x100002CA1: main (pipex.c:144)
-==9381== 
-==9381== Invalid read of size 8
-==9381==    at 0x100002E46: free_string_array (pipex_utilities.c:32)
-==9381==    by 0x100002FBD: cleanup (pipex_utilities.c:71)
-==9381==    by 0x100002D7B: main (pipex.c:159)
-==9381==  Address 0x10082d760 is 0 bytes inside a block of size 88 free'd
-==9381==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==9381==    by 0x100002E94: free_string_array (pipex_utilities.c:38)
-==9381==    by 0x100002B45: fork_and_exec_cmd (pipex.c:69)
-==9381==    by 0x100002D55: main (pipex.c:157)
-==9381==  Block was alloc'd at
-==9381==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==9381==    by 0x100002BAB: parse_command (pipex.c:86)
-==9381==    by 0x100002D19: main (pipex.c:151)
-==9381== 
-==9381== Invalid free() / delete / delete[] / realloc()
-==9381==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==9381==    by 0x100002E94: free_string_array (pipex_utilities.c:38)
-==9381==    by 0x100002FBD: cleanup (pipex_utilities.c:71)
-==9381==    by 0x100002D7B: main (pipex.c:159)
-==9381==  Address 0x10082d760 is 0 bytes inside a block of size 88 free'd
-==9381==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==9381==    by 0x100002E94: free_string_array (pipex_utilities.c:38)
-==9381==    by 0x100002B45: fork_and_exec_cmd (pipex.c:69)
-==9381==    by 0x100002D55: main (pipex.c:157)
-==9381==  Block was alloc'd at
-==9381==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==9381==    by 0x100002BAB: parse_command (pipex.c:86)
-==9381==    by 0x100002D19: main (pipex.c:151)
-==9381== 
-sort: invalid option -- v
-Usage: sort [-bcCdfigMmnrsuz] [-kPOS1[,POS2] ... ] [+POS1 [-POS2]] [-S memsize] [-T tmpdir] [-t separator] [-o outfile] [--batch-size size] [--files0-from file] [--heapsort] [--mergesort] [--radixsort] [--qsort] [--mmap] [--parallel thread_no] [--human-numeric-sort] [--version-sort] [--random-sort [--random-source file]] [--compress-program program] [file ...]
-==9381== 
-==9381== HEAP SUMMARY:
-==9381==     in use at exit: 14,103 bytes in 161 blocks
-==9381==   total heap usage: 181 allocs, 22 frees, 19,044 bytes allocated
-==9381== 
-==9381== LEAK SUMMARY:
-==9381==    definitely lost: 0 bytes in 0 blocks
-==9381==    indirectly lost: 0 bytes in 0 blocks
-==9381==      possibly lost: 0 bytes in 0 blocks
-==9381==    still reachable: 0 bytes in 0 blocks
-==9381==         suppressed: 14,103 bytes in 161 blocks
-==9381== 
-==9381== For lists of detected and suppressed errors, rerun with: -s
-==9381== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 7 from 7)
+==81992== Memcheck, a memory error detector
+==81992== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==81992== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==81992== Command: ./pipex infile cat\ -e sort\ -invalid outfile
+==81992== 
+sort: invalid option -- 'v'
+Try 'sort --help' for more information.
+==81992== 
+==81992== HEAP SUMMARY:
+==81992==     in use at exit: 0 bytes in 0 blocks
+==81992==   total heap usage: 6 allocs, 6 frees, 197 bytes allocated
+==81992== 
+==81992== All heap blocks were freed -- no leaks are possible
+==81992== 
+==81992== For lists of detected and suppressed errors, rerun with: -s
+==81992== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
