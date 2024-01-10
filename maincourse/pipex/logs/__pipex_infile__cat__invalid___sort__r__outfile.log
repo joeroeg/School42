@@ -1,21 +1,16 @@
-==84775== Memcheck, a memory error detector
-==84775== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==84775== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
-==84775== Command: ./pipex infile cat\ -invalid sort\ -r outfile
-==84775== 
-cat: illegal option -- i
-usage: cat [-benstuv] [file ...]
-==84775== 
-==84775== HEAP SUMMARY:
-==84775==     in use at exit: 14,103 bytes in 161 blocks
-==84775==   total heap usage: 181 allocs, 20 frees, 19,044 bytes allocated
-==84775== 
-==84775== LEAK SUMMARY:
-==84775==    definitely lost: 0 bytes in 0 blocks
-==84775==    indirectly lost: 0 bytes in 0 blocks
-==84775==      possibly lost: 0 bytes in 0 blocks
-==84775==    still reachable: 0 bytes in 0 blocks
-==84775==         suppressed: 14,103 bytes in 161 blocks
-==84775== 
-==84775== For lists of detected and suppressed errors, rerun with: -s
-==84775== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
+==75187== Memcheck, a memory error detector
+==75187== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==75187== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==75187== Command: ./pipex infile cat\ -invalid sort\ -r outfile
+==75187== 
+cat: invalid option -- 'i'
+Try 'cat --help' for more information.
+==75187== 
+==75187== HEAP SUMMARY:
+==75187==     in use at exit: 0 bytes in 0 blocks
+==75187==   total heap usage: 6 allocs, 6 frees, 197 bytes allocated
+==75187== 
+==75187== All heap blocks were freed -- no leaks are possible
+==75187== 
+==75187== For lists of detected and suppressed errors, rerun with: -s
+==75187== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

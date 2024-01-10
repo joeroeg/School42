@@ -196,3 +196,6 @@ Date/Time | Changes | Definitely Lost | Indirectly Lost | Still Reachable | LogF
 2024-01-10 13:07:00 | execve | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
 2024-01-10 13:07:00 | execve | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
 2024-01-10 13:07:00 | execve | | | 2,526 bytes in 13 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-10 14:29:44 | linux | | | 96 bytes in 3 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-10 14:29:44 | linux | | | 93 bytes in 2 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-10 14:29:44 | linux | | | 93 bytes in 2 blocks | logs/__pipex_infile__NULL___sort__outfile.log
