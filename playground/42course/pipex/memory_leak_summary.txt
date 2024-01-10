@@ -211,3 +211,43 @@ Date/Time | Changes | Definitely Lost | Indirectly Lost | Still Reachable | LogF
 2024-01-10 16:28:36 | must work test | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
 2024-01-10 16:28:36 | must work test | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
 2024-01-10 16:28:36 | must work test | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-10 16:38:36 | | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-10 16:38:36 | | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL_____outfile.log
+2024-01-10 16:38:36 | | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-10 16:38:36 | | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-10 16:38:36 | | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-10 16:38:36 | | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-10 16:39:36 | deleted parent cleanup | ==11976== 93 (88 direct, 5 indirect) bytes in 1 blocks are definitely lost in loss record 21 of 40 ==11976== 93 (88 direct, 5 indirect) bytes in 1 blocks are definitely lost in loss record 22 of 40 176 bytes in 2 blocks | 10 bytes in 2 blocks | 2,430 bytes in 10 blocks 2,523 bytes in 12 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-10 16:39:36 | deleted parent cleanup | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL_____outfile.log
+2024-01-10 16:39:36 | deleted parent cleanup | ==11969== 93 (88 direct, 5 indirect) bytes in 1 blocks are definitely lost in loss record 21 of 40 ==11969== 93 (88 direct, 5 indirect) bytes in 1 blocks are definitely lost in loss record 22 of 40 176 bytes in 2 blocks | 10 bytes in 2 blocks | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-10 16:39:36 | deleted parent cleanup | ==11961== 92 (88 direct, 4 indirect) bytes in 1 blocks are definitely lost in loss record 21 of 40 ==11961== 93 (88 direct, 5 indirect) bytes in 1 blocks are definitely lost in loss record 22 of 40 176 bytes in 2 blocks | 9 bytes in 2 blocks | 2,522 bytes in 12 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-10 16:39:36 | deleted parent cleanup | ==11903== 92 (88 direct, 4 indirect) bytes in 1 blocks are definitely lost in loss record 21 of 40 ==11903== 93 (88 direct, 5 indirect) bytes in 1 blocks are definitely lost in loss record 22 of 40 176 bytes in 2 blocks | 9 bytes in 2 blocks | | logs/__pipex_infile__cat___sort__outfile.log
+2024-01-10 16:39:36 | deleted parent cleanup | ==11984== 95 (88 direct, 7 indirect) bytes in 1 blocks are definitely lost in loss record 21 of 40 ==11984== 97 (88 direct, 9 indirect) bytes in 1 blocks are definitely lost in loss record 24 of 40 176 bytes in 2 blocks | 16 bytes in 4 blocks | 2,525 bytes in 13 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-10 16:39:36 | deleted parent cleanup | ==11933== 95 (88 direct, 7 indirect) bytes in 1 blocks are definitely lost in loss record 21 of 40 ==11933== 102 (88 direct, 14 indirect) bytes in 1 blocks are definitely lost in loss record 24 of 40 176 bytes in 2 blocks | 21 bytes in 4 blocks | | logs/__pipex_infile__cat__e___sort__invalid__outfile.log
+2024-01-10 16:39:36 | deleted parent cleanup | ==11913== 95 (88 direct, 7 indirect) bytes in 1 blocks are definitely lost in loss record 21 of 40 ==11913== 96 (88 direct, 8 indirect) bytes in 1 blocks are definitely lost in loss record 24 of 40 176 bytes in 2 blocks | 15 bytes in 4 blocks | | logs/__pipex_infile__cat__e___sort__r__outfile.log
+2024-01-10 16:39:36 | deleted parent cleanup | ==11940== 96 (88 direct, 8 indirect) bytes in 1 blocks are definitely lost in loss record 23 of 40 ==11940== 101 (88 direct, 13 indirect) bytes in 1 blocks are definitely lost in loss record 24 of 40 176 bytes in 2 blocks | 21 bytes in 4 blocks | | logs/__pipex_infile__cat__invalid___sort__r__outfile.log
+2024-01-10 16:39:36 | deleted parent cleanup | ==11991== 96 (88 direct, 8 indirect) bytes in 1 blocks are definitely lost in loss record 23 of 40 ==11991== 97 (88 direct, 9 indirect) bytes in 1 blocks are definitely lost in loss record 24 of 40 176 bytes in 2 blocks | 17 bytes in 4 blocks | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-10 16:40:43 | cleanup in fork&exec | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-10 16:40:43 | cleanup in fork&exec | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL_____outfile.log
+2024-01-10 16:40:43 | cleanup in fork&exec | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-10 16:40:43 | cleanup in fork&exec | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-10 16:40:43 | cleanup in fork&exec | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-10 16:40:43 | cleanup in fork&exec | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-10 16:41:34 | free_string_array in fork&exec | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-10 16:41:34 | free_string_array in fork&exec | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL_____outfile.log
+2024-01-10 16:41:34 | free_string_array in fork&exec | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-10 16:41:34 | free_string_array in fork&exec | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-10 16:41:34 | free_string_array in fork&exec | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-10 16:41:34 | free_string_array in fork&exec | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-10 16:44:38 | add cleanup | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-10 16:44:38 | add cleanup | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL_____outfile.log
+2024-01-10 16:44:38 | add cleanup | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-10 16:44:38 | add cleanup | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-10 16:44:38 | add cleanup | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-10 16:44:38 | add cleanup | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-10 16:46:22 | deleted cleanup | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-10 16:46:22 | deleted cleanup | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL_____outfile.log
+2024-01-10 16:46:22 | deleted cleanup | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-10 16:46:22 | deleted cleanup | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-10 16:46:22 | deleted cleanup | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-10 16:46:22 | deleted cleanup | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log

@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/10 16:18:38 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:00:28 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	validate_arguments(int argc)
 {
 	if (argc != 5)
 	{
-		fprintf(stderr, "Error: wrong number of arguments\n");
+		ft_putstr_fd("Error: wrong number of arguments\n", 2);
 		return (1);
 	}
 	return (0);
