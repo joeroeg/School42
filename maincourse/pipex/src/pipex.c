@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:50:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/11 15:20:48 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:45:39 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ char	**parse_command(char *cmd)
 	char	*token;
 
 	if (cmd == NULL || *cmd == '\0' || *cmd == ' ')
-	{
-		error_message("empty command", 0);
 		return (NULL);
-	}
 	argv = malloc((MAX_ARGS + 1) * sizeof(char *));
 	i = 0;
 	token = ft_strtok(cmd, " ");
@@ -82,7 +79,7 @@ t_pipex_data	init_pipex_data(int argc, char **argv, char **envp)
 	if (argc != 5)
 	{
 		ft_putstr_fd("Usage: ./pipex infile cmd1 cmd2 outfile\n", 2);
-		error_message("Error: wrong number of arguments", 1);
+		exit(1);
 	}
 	data.cmd1_args = parse_command(argv[2]);
 	data.cmd2_args = parse_command(argv[3]);
@@ -90,7 +87,7 @@ t_pipex_data	init_pipex_data(int argc, char **argv, char **envp)
 	{
 		free_string_array(&data.cmd1_args);
 		free_string_array(&data.cmd2_args);
-		error_message("parse_command", 1);
+		exit(1);
 	}
 	if (pipe(data.pipe_fds) == -1)
 		error_message("pipe", 1);
