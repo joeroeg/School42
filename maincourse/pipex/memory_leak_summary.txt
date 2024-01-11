@@ -1,6 +1,24 @@
 Date/Time | Changes | Definitely Lost | Indirectly Lost | Still Reachable | LogFile
-2024-01-11 11:37:21 | pipex struct mac | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
-2024-01-11 11:37:21 | pipex struct mac | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
-2024-01-11 11:37:21 | pipex struct mac | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
-2024-01-11 11:37:21 | pipex struct mac | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
-2024-01-11 11:37:21 | pipex struct mac | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-11 12:31:04 | parse command | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-11 12:31:04 | parse command | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-11 12:31:04 | parse command | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-11 12:31:04 | parse command | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___sort__outfile.log
+2024-01-11 12:31:04 | parse command | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-11 12:31:04 | parse command | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___sort__invalid__outfile.log
+2024-01-11 12:31:04 | parse command | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___sort__r__outfile.log
+2024-01-11 12:31:04 | parse command | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__invalid___sort__r__outfile.log
+2024-01-11 12:31:04 | parse command | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-11 12:56:15 | no infile | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-11 12:56:15 | no infile | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-11 12:56:15 | no infile | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-11 12:56:15 | no infile | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___sort__outfile.log
+2024-01-11 12:56:15 | no infile | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-11 12:56:15 | no infile | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___sort__invalid__outfile.log
+2024-01-11 12:56:15 | no infile | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___sort__r__outfile.log
+2024-01-11 12:56:15 | no infile | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__invalid___sort__r__outfile.log
+2024-01-11 12:56:15 | no infile | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-11 13:04:34 | add infile | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-11 13:04:34 | add infile | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-11 13:04:34 | add infile | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-11 13:04:34 | add infile | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-11 13:04:34 | add infile | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
