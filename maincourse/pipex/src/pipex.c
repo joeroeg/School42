@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:50:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/10 19:01:32 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:31:31 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	exec_cmd1(char **cmd1_args, int pipe_fds[], char **envp)
+void	exec_cmd1(char **argv, char **cmd1_args, int pipe_fds[], char **envp)
 {
 	int	infile_fd;
 
 	close(pipe_fds[0]);
-	infile_fd = open("infile", O_RDONLY);
+	infile_fd = open(argv[1], O_RDONLY);
 	if (infile_fd == -1)
+	{
+		cleanup(pipe_fds, cmd1_args, NULL);
 		error_message("open infile", 1);
+	}
 	dup2(infile_fd, STDIN_FILENO);
 	close(infile_fd);
 	dup2(pipe_fds[1], STDOUT_FILENO);
@@ -29,14 +32,17 @@ void	exec_cmd1(char **cmd1_args, int pipe_fds[], char **envp)
 	exit(1);
 }
 
-void	exec_cmd2(char **cmd2_args, int pipe_fds[], char **envp)
+void	exec_cmd2(char **argv, char **cmd2_args, int pipe_fds[], char **envp)
 {
 	int	outfile_fd;
 
 	close(pipe_fds[1]);
-	outfile_fd = open("outfile", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	outfile_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (outfile_fd == -1)
+	{
+		cleanup(pipe_fds, NULL, cmd2_args);
 		error_message("open outfile", 1);
+	}
 	dup2(pipe_fds[0], STDIN_FILENO);
 	close(pipe_fds[0]);
 	dup2(outfile_fd, STDOUT_FILENO);
@@ -46,8 +52,8 @@ void	exec_cmd2(char **cmd2_args, int pipe_fds[], char **envp)
 	exit(1);
 }
 
-int	fork_and_exec_cmd(char **cmd_args, int pipe_fds[], \
-	char **envp, void (*exec_cmd)(char **, int [], char **))
+int	fork_and_exec_cmd(char **argv, char **cmd_args, int pipe_fds[], \
+	char **envp, void (*exec_cmd)(char **, char **, int [], char **))
 {
 	pid_t	pid;
 
@@ -60,7 +66,7 @@ int	fork_and_exec_cmd(char **cmd_args, int pipe_fds[], \
 	}
 	if (pid == 0)
 	{
-		exec_cmd(cmd_args, pipe_fds, envp);
+		exec_cmd(argv, cmd_args, pipe_fds, envp);
 		cleanup(pipe_fds, cmd_args, NULL);
 		exit(1);
 	}
@@ -108,7 +114,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	if (pipe(pipe_fds) == -1)
 		error_message("pipe", 1);
-	if (fork_and_exec_cmd(cmd1_args, pipe_fds, envp, exec_cmd1) != 0)
+	if (fork_and_exec_cmd(argv, cmd1_args, pipe_fds, envp, exec_cmd1) != 0)
 		return (1);
 	cmd2_args = parse_command(argv[3]);
 	if (cmd2_args == NULL)
@@ -116,7 +122,7 @@ int	main(int argc, char **argv, char **envp)
 		free_string_array(&cmd1_args);
 		return (1);
 	}
-	if (fork_and_exec_cmd(cmd2_args, pipe_fds, envp, exec_cmd2) != 0)
+	if (fork_and_exec_cmd(argv, cmd2_args, pipe_fds, envp, exec_cmd2) != 0)
 		return (1);
 	waitpid(-1, NULL, 0);
 	return (0);
