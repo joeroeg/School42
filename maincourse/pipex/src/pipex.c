@@ -6,7 +6,7 @@
 /*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:50:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/11 10:13:26 by device           ###   ########.fr       */
+/*   Updated: 2024/01/11 10:30:58 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,9 @@ int main(int argc, char **argv, char **envp) {
     waitpid(pid2, NULL, 0);
 
     // Clean up, free memory, etc.
+	// cleanup(NULL, data.cmd1_args, data.cmd2_args);
+	free_string_array(&data.cmd1_args);
+	free_string_array(&data.cmd2_args);
 
     return (0);
 }

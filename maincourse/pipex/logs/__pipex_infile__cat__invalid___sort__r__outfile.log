@@ -1,73 +1,16 @@
-==60858== Memcheck, a memory error detector
-==60858== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==60858== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
-==60858== Command: ./pipex infile cat\ -invalid sort\ -r outfile
-==60858== 
-==60858== Conditional jump or move depends on uninitialised value(s)
-==60858==    at 0x100002E5B: free_string_array (pipex_utilities.c:54)
-==60858==    by 0x100002AA2: fork_and_exec_cmd (pipex.c:83)
-==60858==    by 0x100002C1B: main (pipex.c:117)
-==60858== 
-==60858== Use of uninitialised value of size 8
-==60858==    at 0x100002E76: free_string_array (pipex_utilities.c:56)
-==60858==    by 0x100002AA2: fork_and_exec_cmd (pipex.c:83)
-==60858==    by 0x100002C1B: main (pipex.c:117)
-==60858== 
-==60858== Use of uninitialised value of size 8
-==60858==    at 0x100002E8C: free_string_array (pipex_utilities.c:58)
-==60858==    by 0x100002AA2: fork_and_exec_cmd (pipex.c:83)
-==60858==    by 0x100002C1B: main (pipex.c:117)
-==60858== 
-==60858== Invalid free() / delete / delete[] / realloc()
-==60858==    at 0x100126365: free (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==60858==    by 0x100002E94: free_string_array (pipex_utilities.c:58)
-==60858==    by 0x100002AA2: fork_and_exec_cmd (pipex.c:83)
-==60858==    by 0x100002C1B: main (pipex.c:117)
-==60858==  Address 0x1000007feedfacf is not stack'd, malloc'd or (recently) free'd
-==60858== 
-==60858== Use of uninitialised value of size 8
-==60858==    at 0x100002EA0: free_string_array (pipex_utilities.c:59)
-==60858==    by 0x100002AA2: fork_and_exec_cmd (pipex.c:83)
-==60858==    by 0x100002C1B: main (pipex.c:117)
-==60858== 
-==60858== 
-==60858== Process terminating with default action of signal 10 (SIGBUS)
-==60858==  Non-existent physical address at address 0x100010000
-==60858==    at 0x100002EA0: free_string_array (pipex_utilities.c:59)
-==60858==    by 0x100002AA2: fork_and_exec_cmd (pipex.c:83)
-==60858==    by 0x100002C1B: main (pipex.c:117)
-==60858== 
-==60858== HEAP SUMMARY:
-==60858==     in use at exit: 14,300 bytes in 167 blocks
-==60858==   total heap usage: 181 allocs, 15 frees, 19,044 bytes allocated
-==60858== 
-==60858== LEAK SUMMARY:
-==60858==    definitely lost: 0 bytes in 0 blocks
-==60858==    indirectly lost: 0 bytes in 0 blocks
-==60858==      possibly lost: 0 bytes in 0 blocks
-==60858==    still reachable: 197 bytes in 6 blocks
-==60858==         suppressed: 14,103 bytes in 161 blocks
-==60858== Reachable blocks (those to which a pointer was found) are not shown.
-==60858== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==60858== 
-==60858== Use --track-origins=yes to see where uninitialised values come from
-==60858== For lists of detected and suppressed errors, rerun with: -s
-==60858== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 7 from 7)
-./leak_test.sh: line 58: 60858 Bus error: 10           valgrind --leak-check=full ./pipex infile "cat -invalid" "sort -r" outfile
-open infile: Bad file descriptor
-==60860== 
-==60860== HEAP SUMMARY:
-==60860==     in use at exit: 16,469 bytes in 170 blocks
-==60860==   total heap usage: 191 allocs, 21 frees, 21,474 bytes allocated
-==60860== 
-==60860== LEAK SUMMARY:
-==60860==    definitely lost: 0 bytes in 0 blocks
-==60860==    indirectly lost: 0 bytes in 0 blocks
-==60860==      possibly lost: 0 bytes in 0 blocks
-==60860==    still reachable: 2,430 bytes in 10 blocks
-==60860==         suppressed: 14,039 bytes in 160 blocks
-==60860== Reachable blocks (those to which a pointer was found) are not shown.
-==60860== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==60860== 
-==60860== For lists of detected and suppressed errors, rerun with: -s
-==60860== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
+==18123== Memcheck, a memory error detector
+==18123== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==18123== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==18123== Command: ./pipex infile cat\ -invalid sort\ -r outfile
+==18123== 
+cat: invalid option -- 'i'
+Try 'cat --help' for more information.
+==18123== 
+==18123== HEAP SUMMARY:
+==18123==     in use at exit: 0 bytes in 0 blocks
+==18123==   total heap usage: 6 allocs, 6 frees, 197 bytes allocated
+==18123== 
+==18123== All heap blocks were freed -- no leaks are possible
+==18123== 
+==18123== For lists of detected and suppressed errors, rerun with: -s
+==18123== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
