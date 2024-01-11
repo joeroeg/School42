@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:50:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/11 10:30:58 by device           ###   ########.fr       */
+/*   Updated: 2024/01/11 11:38:37 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,33 +58,6 @@ void	exec_cmd2(t_pipex_data *main_data)
 		main_data->cmd1_args, main_data->cmd2_args);
 	exit(1);
 }
-
-/*
-int	fork_and_exec_cmd(t_pipex_data *main_data)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == -1)
-	{
-		error_message("fork", 0);
-		cleanup(main_data->pipe_fds, main_data->cmd1_args, main_data->cmd2_args);
-		return (1);
-	}
-	if (pid == 0)
-	{
-		exec_cmd(main_data->cmd1_args, main_data->envp);
-		cleanup(main_data->pipe_fds, main_data->cmd1_args, main_data->cmd2_args);
-		exit(1);
-	}
-	else
-	{
-		free_string_array(&main_data->cmd1_args);
-		return (0);
-	}
-	return (0);
-}
-*/
 
 char	**parse_command(char *cmd)
 {
@@ -194,14 +167,3 @@ int main(int argc, char **argv, char **envp) {
     return (0);
 }
 
-/*
-[X] initialize the structure (pipe_fds, cmd1_args, cmd2_args, etc.)
-[ ] validate the arguments (argc, argv, etc.)
-[ ] parse the command (parse_command)
-[ ] fork and execute the first command (fork_and_exec_cmd)
-[ ] fork and execute the second command (fork_and_exec_cmd)
-[ ] execute the first command
-[ ] execute the second command
-[ ] clean up
-
-*/
