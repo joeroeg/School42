@@ -6,20 +6,44 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/10 18:13:07 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:49:39 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	validate_arguments(int argc)
+t_cmd_data	init_cmd_data(char **argv, int pipe_fds[], char **envp)
 {
+	t_cmd_data	cmd_data;
+
+	cmd_data.argv = argv;
+	cmd_data.pipe_fds[0] = pipe_fds[0];
+	cmd_data.pipe_fds[1] = pipe_fds[1];
+	cmd_data.envp = envp;
+	return (cmd_data);
+}
+
+t_main_data	init_main_data(int argc, char **argv, char **envp)
+{
+	t_main_data	main_data;
+
 	if (argc != 5)
 	{
 		ft_putstr_fd("Error: wrong number of arguments\n", 2);
-		return (1);
+		error_message("usage: ./pipex infile cmd1 cmd2 outfile", 1);
 	}
-	return (0);
+	main_data.cmd1_args = parse_command(argv[2]);
+	main_data.cmd2_args = parse_command(argv[3]);
+	if (main_data.cmd1_args == NULL || main_data.cmd2_args == NULL)
+	{
+		free_string_array(&main_data.cmd1_args);
+		free_string_array(&main_data.cmd2_args);
+		exit(1);
+	}
+	if (pipe(main_data.pipe_fds) == -1)
+		error_message("pipe", 1);
+	main_data.cmd_data = init_cmd_data(argv, main_data.pipe_fds, envp);
+	return (main_data);
 }
 
 void	free_string_array(char ***array)

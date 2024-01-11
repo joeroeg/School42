@@ -65,3 +65,18 @@ Date/Time | Changes | Definitely Lost | Indirectly Lost | Still Reachable | LogF
 2024-01-10 19:18:22 | only cmd1 | | | 93 bytes in 2 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
 2024-01-10 19:18:22 | only cmd1 | | | 93 bytes in 2 blocks | logs/__pipex_infile__NULL_____outfile.log
 2024-01-10 19:18:22 | only cmd1 | | | 93 bytes in 2 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-10 19:33:04 | mac custom filename | | | 2,430 bytes in 10 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-10 19:33:04 | mac custom filename | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL_____outfile.log
+2024-01-10 19:33:04 | mac custom filename | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-10 19:33:04 | mac custom filename | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-10 19:33:04 | mac custom filename | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-10 19:33:04 | mac custom filename | | | 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
+2024-01-10 20:47:27 | struct | | | 186 bytes in 4 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___NULL__outfile.log
+2024-01-10 20:47:27 | struct | | | 186 bytes in 4 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__NULL___sort__outfile.log
+2024-01-10 20:47:27 | struct | | | 185 bytes in 4 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___NULL__outfile.log
+2024-01-10 20:47:27 | struct | | | 185 bytes in 4 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__cat___sort__outfile.log
+2024-01-10 20:47:27 | struct | | | 192 bytes in 6 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___error__r__outfile.log
+2024-01-10 20:47:27 | struct | | | 197 bytes in 6 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___sort__invalid__outfile.log
+2024-01-10 20:47:27 | struct | | | 191 bytes in 6 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__e___sort__r__outfile.log
+2024-01-10 20:47:27 | struct | | | 197 bytes in 6 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__cat__invalid___sort__r__outfile.log
+2024-01-10 20:47:27 | struct | | | 193 bytes in 6 blocks 2,430 bytes in 10 blocks | logs/__pipex_infile__error__e___sort__r__outfile.log
