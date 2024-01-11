@@ -1,36 +1,53 @@
-==41663== Memcheck, a memory error detector
-==41663== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==41663== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
-==41663== Command: ./pipex infile cat\ -e error\ -r outfile
-==41663== 
+==44478== Memcheck, a memory error detector
+==44478== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==44478== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==44478== Command: ./pipex infile cat\ -e error\ -r outfile
+==44478== 
+open infile: Bad file descriptor
+==44481== 
+==44481== HEAP SUMMARY:
+==44481==     in use at exit: 16,469 bytes in 170 blocks
+==44481==   total heap usage: 191 allocs, 21 frees, 21,469 bytes allocated
+==44481== 
 Command not found
-==41665== 
-==41665== HEAP SUMMARY:
-==41665==     in use at exit: 16,469 bytes in 170 blocks
-==41665==   total heap usage: 217 allocs, 47 frees, 22,632 bytes allocated
-==41665== 
-==41665== LEAK SUMMARY:
-==41665==    definitely lost: 0 bytes in 0 blocks
-==41665==    indirectly lost: 0 bytes in 0 blocks
-==41665==      possibly lost: 0 bytes in 0 blocks
-==41665==    still reachable: 2,430 bytes in 10 blocks
-==41665==         suppressed: 14,039 bytes in 160 blocks
-==41665== Reachable blocks (those to which a pointer was found) are not shown.
-==41665== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==41665== 
-==41665== For lists of detected and suppressed errors, rerun with: -s
-==41665== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
-==41663== 
-==41663== HEAP SUMMARY:
-==41663==     in use at exit: 14,103 bytes in 161 blocks
-==41663==   total heap usage: 181 allocs, 20 frees, 19,039 bytes allocated
-==41663== 
-==41663== LEAK SUMMARY:
-==41663==    definitely lost: 0 bytes in 0 blocks
-==41663==    indirectly lost: 0 bytes in 0 blocks
-==41663==      possibly lost: 0 bytes in 0 blocks
-==41663==    still reachable: 0 bytes in 0 blocks
-==41663==         suppressed: 14,103 bytes in 161 blocks
-==41663== 
-==41663== For lists of detected and suppressed errors, rerun with: -s
-==41663== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
+==44482== 
+==44482== HEAP SUMMARY:
+==44482==     in use at exit: 16,469 bytes in 170 blocks
+==44482==   total heap usage: 217 allocs, 47 frees, 22,632 bytes allocated
+==44482== 
+==44481== LEAK SUMMARY:
+==44481==    definitely lost: 0 bytes in 0 blocks
+==44481==    indirectly lost: 0 bytes in 0 blocks
+==44481==      possibly lost: 0 bytes in 0 blocks
+==44481==    still reachable: 2,430 bytes in 10 blocks
+==44481==         suppressed: 14,039 bytes in 160 blocks
+==44481== Reachable blocks (those to which a pointer was found) are not shown.
+==44481== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==44481== 
+==44481== For lists of detected and suppressed errors, rerun with: -s
+==44481== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
+==44482== LEAK SUMMARY:
+==44482==    definitely lost: 0 bytes in 0 blocks
+==44482==    indirectly lost: 0 bytes in 0 blocks
+==44482==      possibly lost: 0 bytes in 0 blocks
+==44482==    still reachable: 2,430 bytes in 10 blocks
+==44482==         suppressed: 14,039 bytes in 160 blocks
+==44482== Reachable blocks (those to which a pointer was found) are not shown.
+==44482== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==44482== 
+==44482== For lists of detected and suppressed errors, rerun with: -s
+==44482== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
+==44478== 
+==44478== HEAP SUMMARY:
+==44478==     in use at exit: 14,103 bytes in 161 blocks
+==44478==   total heap usage: 181 allocs, 20 frees, 19,039 bytes allocated
+==44478== 
+==44478== LEAK SUMMARY:
+==44478==    definitely lost: 0 bytes in 0 blocks
+==44478==    indirectly lost: 0 bytes in 0 blocks
+==44478==      possibly lost: 0 bytes in 0 blocks
+==44478==    still reachable: 0 bytes in 0 blocks
+==44478==         suppressed: 14,103 bytes in 161 blocks
+==44478== 
+==44478== For lists of detected and suppressed errors, rerun with: -s
+==44478== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)

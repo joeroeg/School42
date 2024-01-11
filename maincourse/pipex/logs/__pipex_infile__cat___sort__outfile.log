@@ -1,19 +1,36 @@
-==41585== Memcheck, a memory error detector
-==41585== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==41585== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
-==41585== Command: ./pipex infile cat sort outfile
-==41585== 
-==41585== 
-==41585== HEAP SUMMARY:
-==41585==     in use at exit: 14,103 bytes in 161 blocks
-==41585==   total heap usage: 179 allocs, 18 frees, 19,032 bytes allocated
-==41585== 
-==41585== LEAK SUMMARY:
-==41585==    definitely lost: 0 bytes in 0 blocks
-==41585==    indirectly lost: 0 bytes in 0 blocks
-==41585==      possibly lost: 0 bytes in 0 blocks
-==41585==    still reachable: 0 bytes in 0 blocks
-==41585==         suppressed: 14,103 bytes in 161 blocks
-==41585== 
-==41585== For lists of detected and suppressed errors, rerun with: -s
-==41585== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
+==44363== Memcheck, a memory error detector
+==44363== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==44363== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==44363== Command: ./pipex infile cat sort outfile
+==44363== 
+open infile: Bad file descriptor
+==44365== 
+==44365== HEAP SUMMARY:
+==44365==     in use at exit: 16,469 bytes in 170 blocks
+==44365==   total heap usage: 189 allocs, 19 frees, 21,462 bytes allocated
+==44365== 
+==44365== LEAK SUMMARY:
+==44365==    definitely lost: 0 bytes in 0 blocks
+==44365==    indirectly lost: 0 bytes in 0 blocks
+==44365==      possibly lost: 0 bytes in 0 blocks
+==44365==    still reachable: 2,430 bytes in 10 blocks
+==44365==         suppressed: 14,039 bytes in 160 blocks
+==44365== Reachable blocks (those to which a pointer was found) are not shown.
+==44365== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==44365== 
+==44365== For lists of detected and suppressed errors, rerun with: -s
+==44365== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
+==44363== 
+==44363== HEAP SUMMARY:
+==44363==     in use at exit: 14,103 bytes in 161 blocks
+==44363==   total heap usage: 179 allocs, 18 frees, 19,032 bytes allocated
+==44363== 
+==44363== LEAK SUMMARY:
+==44363==    definitely lost: 0 bytes in 0 blocks
+==44363==    indirectly lost: 0 bytes in 0 blocks
+==44363==      possibly lost: 0 bytes in 0 blocks
+==44363==    still reachable: 0 bytes in 0 blocks
+==44363==         suppressed: 14,103 bytes in 161 blocks
+==44363== 
+==44363== For lists of detected and suppressed errors, rerun with: -s
+==44363== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
