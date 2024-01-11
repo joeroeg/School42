@@ -1,36 +1,21 @@
-==44435== Memcheck, a memory error detector
-==44435== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==44435== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
-==44435== Command: ./pipex infile cat\ -invalid sort\ -r outfile
-==44435== 
-open infile: Bad file descriptor
-==44439== 
-==44439== HEAP SUMMARY:
-==44439==     in use at exit: 16,469 bytes in 170 blocks
-==44439==   total heap usage: 191 allocs, 21 frees, 21,474 bytes allocated
-==44439== 
-==44439== LEAK SUMMARY:
-==44439==    definitely lost: 0 bytes in 0 blocks
-==44439==    indirectly lost: 0 bytes in 0 blocks
-==44439==      possibly lost: 0 bytes in 0 blocks
-==44439==    still reachable: 2,430 bytes in 10 blocks
-==44439==         suppressed: 14,039 bytes in 160 blocks
-==44439== Reachable blocks (those to which a pointer was found) are not shown.
-==44439== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==44439== 
-==44439== For lists of detected and suppressed errors, rerun with: -s
-==44439== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
-==44435== 
-==44435== HEAP SUMMARY:
-==44435==     in use at exit: 14,103 bytes in 161 blocks
-==44435==   total heap usage: 181 allocs, 20 frees, 19,044 bytes allocated
-==44435== 
-==44435== LEAK SUMMARY:
-==44435==    definitely lost: 0 bytes in 0 blocks
-==44435==    indirectly lost: 0 bytes in 0 blocks
-==44435==      possibly lost: 0 bytes in 0 blocks
-==44435==    still reachable: 0 bytes in 0 blocks
-==44435==         suppressed: 14,103 bytes in 161 blocks
-==44435== 
-==44435== For lists of detected and suppressed errors, rerun with: -s
-==44435== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
+==70277== Memcheck, a memory error detector
+==70277== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==70277== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==70277== Command: ./pipex infile cat\ -invalid sort\ -r outfile
+==70277== 
+cat: illegal option -- i
+usage: cat [-benstuv] [file ...]
+==70277== 
+==70277== HEAP SUMMARY:
+==70277==     in use at exit: 14,103 bytes in 161 blocks
+==70277==   total heap usage: 181 allocs, 20 frees, 19,044 bytes allocated
+==70277== 
+==70277== LEAK SUMMARY:
+==70277==    definitely lost: 0 bytes in 0 blocks
+==70277==    indirectly lost: 0 bytes in 0 blocks
+==70277==      possibly lost: 0 bytes in 0 blocks
+==70277==    still reachable: 0 bytes in 0 blocks
+==70277==         suppressed: 14,103 bytes in 161 blocks
+==70277== 
+==70277== For lists of detected and suppressed errors, rerun with: -s
+==70277== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)

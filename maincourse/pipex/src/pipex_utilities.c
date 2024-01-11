@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/11 12:53:19 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:16:02 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,3 @@ void	cleanup(t_pipex_data *data)
 	if (data->cmd2_args != NULL)
 		free_string_array(&(data->cmd2_args));
 }
-

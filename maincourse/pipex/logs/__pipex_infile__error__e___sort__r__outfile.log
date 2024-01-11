@@ -1,36 +1,36 @@
-==44487== Memcheck, a memory error detector
-==44487== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==44487== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
-==44487== Command: ./pipex infile error\ -e sort\ -r outfile
-==44487== 
-open infile: Bad file descriptor
-==44488== 
-==44488== HEAP SUMMARY:
-==44488==     in use at exit: 16,469 bytes in 170 blocks
-==44488==   total heap usage: 191 allocs, 21 frees, 21,470 bytes allocated
-==44488== 
-==44488== LEAK SUMMARY:
-==44488==    definitely lost: 0 bytes in 0 blocks
-==44488==    indirectly lost: 0 bytes in 0 blocks
-==44488==      possibly lost: 0 bytes in 0 blocks
-==44488==    still reachable: 2,430 bytes in 10 blocks
-==44488==         suppressed: 14,039 bytes in 160 blocks
-==44488== Reachable blocks (those to which a pointer was found) are not shown.
-==44488== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==44488== 
-==44488== For lists of detected and suppressed errors, rerun with: -s
-==44488== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
-==44487== 
-==44487== HEAP SUMMARY:
-==44487==     in use at exit: 14,103 bytes in 161 blocks
-==44487==   total heap usage: 181 allocs, 20 frees, 19,040 bytes allocated
-==44487== 
-==44487== LEAK SUMMARY:
-==44487==    definitely lost: 0 bytes in 0 blocks
-==44487==    indirectly lost: 0 bytes in 0 blocks
-==44487==      possibly lost: 0 bytes in 0 blocks
-==44487==    still reachable: 0 bytes in 0 blocks
-==44487==         suppressed: 14,103 bytes in 161 blocks
-==44487== 
-==44487== For lists of detected and suppressed errors, rerun with: -s
-==44487== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
+==70327== Memcheck, a memory error detector
+==70327== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==70327== Using Valgrind-3.22.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==70327== Command: ./pipex infile error\ -e sort\ -r outfile
+==70327== 
+Command not found
+==70329== 
+==70329== HEAP SUMMARY:
+==70329==     in use at exit: 16,469 bytes in 170 blocks
+==70329==   total heap usage: 217 allocs, 47 frees, 22,633 bytes allocated
+==70329== 
+==70329== LEAK SUMMARY:
+==70329==    definitely lost: 0 bytes in 0 blocks
+==70329==    indirectly lost: 0 bytes in 0 blocks
+==70329==      possibly lost: 0 bytes in 0 blocks
+==70329==    still reachable: 2,430 bytes in 10 blocks
+==70329==         suppressed: 14,039 bytes in 160 blocks
+==70329== Reachable blocks (those to which a pointer was found) are not shown.
+==70329== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==70329== 
+==70329== For lists of detected and suppressed errors, rerun with: -s
+==70329== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
+==70327== 
+==70327== HEAP SUMMARY:
+==70327==     in use at exit: 14,103 bytes in 161 blocks
+==70327==   total heap usage: 181 allocs, 20 frees, 19,040 bytes allocated
+==70327== 
+==70327== LEAK SUMMARY:
+==70327==    definitely lost: 0 bytes in 0 blocks
+==70327==    indirectly lost: 0 bytes in 0 blocks
+==70327==      possibly lost: 0 bytes in 0 blocks
+==70327==    still reachable: 0 bytes in 0 blocks
+==70327==         suppressed: 14,103 bytes in 161 blocks
+==70327== 
+==70327== For lists of detected and suppressed errors, rerun with: -s
+==70327== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 7 from 7)
