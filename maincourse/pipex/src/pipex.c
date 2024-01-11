@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:50:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/11 15:45:39 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:14:27 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ char	**parse_command(char *cmd)
 	if (cmd == NULL || *cmd == '\0' || *cmd == ' ')
 		return (NULL);
 	argv = malloc((MAX_ARGS + 1) * sizeof(char *));
+	if (argv == NULL)
+		return (NULL);
 	i = 0;
 	token = ft_strtok(cmd, " ");
 	while (token != NULL && i < MAX_ARGS)
@@ -87,6 +89,7 @@ t_pipex_data	init_pipex_data(int argc, char **argv, char **envp)
 	{
 		free_string_array(&data.cmd1_args);
 		free_string_array(&data.cmd2_args);
+		ft_putstr_fd("Error: failed to parse command\n", 2);
 		exit(1);
 	}
 	if (pipe(data.pipe_fds) == -1)
