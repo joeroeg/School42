@@ -1,5 +1,6 @@
 # Names of the programs
 NAME    = pipex
+NAME_B  = pipex_bonus
 LIBFT   = libft.a
 LDIR    = libft/
 SDIR    = src/
@@ -14,13 +15,25 @@ RM      = rm -f
 SRCS    = $(addprefix $(SDIR), pipex.c pipex_utilities.c pipex_execution.c)
 OBJS    = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS))
 
+# Adding bonus source and object files
+SRCS_B  = $(addprefix $(SDIR), pipex_bonus.c pipex_utilities_bonus.c pipex_execution_bonus.c)
+OBJS_B  = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS_B))
+
 # Default rule
 all: libft $(NAME)
 	@echo "pipex compiled"
 
-# Compilation rules
+# Rule for bonus program
+bonus: libft $(NAME_B)
+	@echo "pipex_bonus compiled"
+
+# Compilation rules for the main program
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDIR)$(LIBFT)
+
+# Compilation rules for the bonus program
+$(NAME_B): $(OBJS_B)
+	@$(CC) $(CFLAGS) $(OBJS_B) -o $(NAME_B) $(LDIR)$(LIBFT)
 
 $(ODIR)%.o: $(SDIR)%.c
 	@mkdir -p $(ODIR)
@@ -33,21 +46,20 @@ libft:
 
 # Cleaning up
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJS) $(OBJS_B)
 	@make -C $(LDIR) clean
 	@echo "cleaned up object files"
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(NAME_B)
 	@make -C $(LDIR) fclean
 	@echo "cleaned up all files"
 
 # Re-compiling
 re: fclean all
 
-# Run script
 run:
 	@./run.sh
 
 # Phony rules to avoid conflicts
-.PHONY: all libft clean fclean re run
+.PHONY: all libft clean fclean re run bonus

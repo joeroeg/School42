@@ -4,13 +4,13 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/maincourse/pipex/pipex",
-            "args": ["infile", "NULL", "NULL", "outfile"],
+            "program": "${workspaceFolder}/maincourse/pipex/pipex_bonus",
+            "args": ["here_doc", "5", "cat", "sort", "outfile"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "gdb",
+            "MIMode": "lldb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

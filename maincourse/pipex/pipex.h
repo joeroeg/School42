@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:46:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/11 12:53:43 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/12 12:56:31 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,25 @@
 # include <errno.h>
 
 # define MAX_ARGS 10
+# define BUFFER_SIZE 1024
+
+// typedef struct s_pipex_data
+// {
+// 	char	**cmd1_args;
+// 	char	**cmd2_args;
+// 	int		pipe_fds[2];
+// 	char	**argv;
+// 	char	**envp;
+// }	t_pipex_data;
 
 typedef struct s_pipex_data
 {
 	char	**cmd1_args;
 	char	**cmd2_args;
 	int		pipe_fds[2];
+	char	*limiter;
+	char	*infile;
+	char	*outfile;
 	char	**argv;
 	char	**envp;
 }	t_pipex_data;
