@@ -83,31 +83,117 @@
 //     return 0;
 // }
 
-void execute_command(char *cmd) {
-    pid_t pid = fork();
-    if (pid == 0) { // Child process
-        execlp(cmd, cmd, (char *) NULL);
-        fprintf(stderr, "Failed to execute '%s'\n", cmd);
-        exit(EXIT_FAILURE);
-    } else if (pid < 0) {
-        perror("fork");
-        exit(EXIT_FAILURE);
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+
+typedef struct {
+    int *pipefds;   // Array of file descriptors
+    int n_pipes;    // Number of pipes
+    int n_cmds;     // Number of commands
+} Pipeline;
+
+
+void create_pipes(int pipefds[], int n_pipes) {
+    for (int i = 0; i < n_pipes; i++) {
+        if (pipe(pipefds + i*2) < 0) {
+            perror("pipe");
+            exit(EXIT_FAILURE);
+        }
     }
 }
+
+void execute_command(const char *cmd, Pipeline *pipeline, int index) {
+    // Split the command into arguments
+    char *args[10]; // assuming a max of 10 arguments for simplicity
+    int argc = 0;
+    char *token;
+    char *tempCmd = strdup(cmd); // create a modifiable copy of cmd
+
+    token = strtok(tempCmd, " ");
+    while (token != NULL && argc < 10) {
+        args[argc++] = token;
+        token = strtok(NULL, " ");
+    }
+    args[argc] = NULL; // null-terminate the arguments list
+
+    // Execute the command
+    if (execvp(args[0], args) < 0) {
+        perror("execvp");  // Handle errors in execvp
+        free(tempCmd);
+        exit(EXIT_FAILURE);
+    }
+
+    free(tempCmd); // free the duplicated command string
+}
+
+void redirect_io(Pipeline *pipeline, int index) {
+    if (index > 0) {
+        // If this is not the first command, redirect stdin from the previous pipe
+        if (dup2(pipeline->pipefds[(index - 1) * 2], STDIN_FILENO) < 0) {
+            perror("dup2");  // Handle errors in dup2
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    if (index < pipeline->n_pipes) {
+        // If this is not the last command, redirect stdout to the next pipe
+        if (dup2(pipeline->pipefds[index * 2 + 1], STDOUT_FILENO) < 0) {
+            perror("dup2");  // Handle errors in dup2
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    // Close all pipe file descriptors in the child process
+    for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
+        close(pipeline->pipefds[i]);
+    }
+}
+
+void cleanup_pipes_and_wait(Pipeline *pipeline) {
+    // Close all pipe file descriptors
+    for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
+        close(pipeline->pipefds[i]);
+    }
+
+    // Wait for all child processes
+    for (int i = 0; i < pipeline->n_cmds; i++) {
+        wait(NULL); // You can modify this to handle return status if necessary
+    }
+}
+
+void execute_pipeline(char *cmds[], int n) {
+    int pipefds[2 * (n - 1)];
+    Pipeline pipeline = {pipefds, n - 1, n};
+
+    create_pipes(pipeline.pipefds, pipeline.n_pipes);
+
+    for (int i = 0; i < n; i++) {
+        pid_t pid = fork();
+        if (pid == 0) {
+            redirect_io(&pipeline, i);
+            execute_command(cmds[i], &pipeline, i);
+            exit(EXIT_FAILURE);
+        } else if (pid < 0) {
+            perror("fork");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    cleanup_pipes_and_wait(&pipeline);
+}
+
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
         fprintf(stderr, "Usage: %s <command1> <command2> ... <commandN>\n", argv[0]);
-        return 1;
+        return EXIT_FAILURE;
     }
 
-    for (int i = 1; i < argc; i++) {
-        execute_command(argv[i]);
-    }
+    execute_pipeline(argv + 1, argc - 1);
+    return EXIT_SUCCESS;
 
-    while (wait(NULL) > 0); // Wait for all child processes to complete
-
-    return 0;
 }
-
 

@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/12 12:56:38 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/13 13:45:11 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,10 @@ char	**tokenize_path(const char *path)
 
 void	cleanup(t_pipex_data *data)
 {
-	if (data->pipe_fds[0] != -1)
-		close(data->pipe_fds[0]);
-	if (data->pipe_fds[1] != -1)
-		close(data->pipe_fds[1]);
-	if (data->cmd1_args != NULL)
-		free_string_array(&(data->cmd1_args));
-	if (data->cmd2_args != NULL)
-		free_string_array(&(data->cmd2_args));
+	if (data->pipefds[0] != -1)
+		close(data->pipefds[0]);
+	if (data->pipefds[1] != -1)
+		close(data->pipefds[1]);
 	if (data->argv != NULL)
 		free_string_array(&(data->argv));
 	if (data->envp != NULL)

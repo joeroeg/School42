@@ -6,11 +6,33 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/12 20:20:02 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/13 16:43:29 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+/*
+currently i'm working on
+[ ] - add infile and outfile redirection
+	[ ] - 2nd command is not executed
+
+
+current problems
+[X] - when i build with pipex_utilities_bonus.c pipex_execution_bonus.c -> solution was to rename similar functions.
+[ ] - add infile and outfile redirection
+[ ] - incorporate here_doc in a curent logic.
+
+execute_command
+[ ] - think of the purpose of t_pipex_data *pipeline, int index
+[ ] - replace the hardcoded 10 with a macro
+[ ] - what is the purpose of strdup? why not just use cmd?
+[ ] - replace ececvp with ft_execvp
+
+init_pipex_data
+[ ] - add a condition to initialize limiter and outfile if they are not NULL
+[ ] - add a condition to initialize infile if it is not NULL
+*/
 
 int get_next_line(char **line)
 {
@@ -68,90 +90,138 @@ void here_doc(char *limiter, char *infile, char **envp)
 	}
 }
 
-void pipex(t_pipex_data *data, char **envp)
-{
-    pid_t   pid;
-    int     fd[2];
-    int     infile_fd, outfile_fd;
-
-    if (data->limiter == NULL)
-    {
-        // Open the input file
-        infile_fd = open(data->infile, O_RDONLY);
-        if (infile_fd < 0)
-            error_message("Error: Unable to open input file", 1);
-    }
-
-    if (data->outfile != NULL)
-    {
-        // Open the output file
-        outfile_fd = open(data->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-        if (outfile_fd < 0)
-            error_message("Error: Unable to open output file", 1);
-    }
-
-    if (pipe(fd) == -1)
-        error_message("Error: Pipe failed", 1);
-
-    pid = fork();
-    if (pid == -1)
-        error_message("Error: Fork failed", 1);
-
-    if (pid == 0)
-    {
-        // Child process
-        if (data->limiter == NULL)
-        {
-            dup2(infile_fd, STDIN_FILENO);
-            close(infile_fd);
+void create_pipes(int pipefds[], int n_pipes) {
+    for (int i = 0; i < n_pipes; i++) {
+        if (pipe(pipefds + i*2) < 0) {
+            perror("pipe");
+            exit(EXIT_FAILURE);
         }
-        close(fd[0]);
-        dup2(fd[1], STDOUT_FILENO);
-		ft_execvp(data->cmd1_args[0], data->cmd1_args, envp);
-        perror("execvp");
-        exit(EXIT_FAILURE);
-    }
-    else
-    {
-        // Parent process
-        close(fd[1]);
-        if (data->outfile != NULL)
-        {
-            dup2(outfile_fd, STDOUT_FILENO);
-            close(outfile_fd);
-        }
-        dup2(fd[0], STDIN_FILENO);
-        waitpid(pid, NULL, 0);
-		ft_execvp(data->cmd2_args[0], data->cmd2_args, envp);
-        perror("execvp");
-        exit(EXIT_FAILURE);
     }
 }
 
-int	main(int argc, char **argv, char **envp)
-{
-	t_pipex_data	data;
+void execute_command(const char *cmd, t_pipex_data *pipeline, int index) {
+	(void)pipeline;
+	(void)index;
+    // Split the command into arguments
+    char *args[10]; // assuming a max of 10 arguments for simplicity
+    int argc = 0;
+    char *token;
+    char *tempCmd = strdup(cmd); // create a modifiable copy of cmd
 
-	if (argc < 5)
-		error_message("Error: Bad argument", 1);
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
-	{
-		if (argc < 6)
-			error_message("Error: Bad argument", 1);
-		data.limiter = argv[2];
-		data.cmd1_args = ft_split(argv[3], ' ');
-		data.cmd2_args = ft_split(argv[4], ' ');
-		data.infile = argv[5];
-		data.outfile = NULL;
-	}
-	else
-	{
-		data.limiter = NULL;
-		data.cmd1_args = ft_split(argv[2], ' ');
-		data.cmd2_args = ft_split(argv[3], ' ');
-		data.infile = argv[1];
-		data.outfile = argv[4];
-	}
-	pipex(&data, envp);
-	return (0);
+    token = strtok(tempCmd, " ");
+    while (token != NULL && argc < 10) {
+        args[argc++] = token;
+        token = strtok(NULL, " ");
+    }
+    args[argc] = NULL; // null-terminate the arguments list
+
+    // Execute the command
+    if (execvp(args[0], args) < 0) {
+        perror("execvp");  // Handle errors in execvp
+        free(tempCmd);
+        exit(EXIT_FAILURE);
+    }
+
+    free(tempCmd); // free the duplicated command string
+}
+
+void redirect_io(t_pipex_data *pipeline, int index) {
+    if (index > 0) {
+        // If this is not the first command, redirect stdin from the previous pipe
+        if (dup2(pipeline->pipefds[(index - 1) * 2], STDIN_FILENO) < 0) {
+            perror("dup2");  // Handle errors in dup2
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    if (index < pipeline->n_pipes) {
+        // If this is not the last command, redirect stdout to the next pipe
+        if (dup2(pipeline->pipefds[index * 2 + 1], STDOUT_FILENO) < 0) {
+            perror("dup2");  // Handle errors in dup2
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    // Close all pipe file descriptors in the child process
+    for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
+        close(pipeline->pipefds[i]);
+    }
+}
+
+void cleanup_pipes_and_wait(t_pipex_data *pipeline) {
+    // Close all pipe file descriptors
+    for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
+        close(pipeline->pipefds[i]);
+    }
+
+    // Wait for all child processes
+    for (int i = 0; i < pipeline->n_cmds; i++) {
+        wait(NULL); // You can modify this to handle return status if necessary
+    }
+}
+
+void execute_pipeline(t_pipex_data *pipeline) {
+    for (int i = 0; i < pipeline->n_cmds; i++) {
+        pid_t pid = fork();
+        if (pid == 0) {
+            if (i == 0) {
+                // First command: redirect input from infile
+                int fd_in = open(pipeline->infile, O_RDONLY);
+                if (fd_in < 0) {
+                    perror("open");
+                    exit(EXIT_FAILURE);
+                }
+                dup2(fd_in, STDIN_FILENO);
+                close(fd_in);
+            }
+
+            if (i == pipeline->n_cmds - 1) {
+                // Last command: redirect output to outfile
+                int fd_out = open(pipeline->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+                if (fd_out < 0) {
+                    perror("open");
+                    exit(EXIT_FAILURE);
+                }
+                dup2(fd_out, STDOUT_FILENO);
+                close(fd_out);
+            }
+            redirect_io(pipeline, i);
+            execute_command(pipeline->argv[i], pipeline, i);
+            exit(EXIT_FAILURE); // execvp failed
+        } else if (pid < 0) {
+            perror("fork");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    cleanup_pipes_and_wait(pipeline);
+}
+
+
+void init_pipex_data(t_pipex_data *pipeline, int argc, char **argv, char **envp) {
+    pipeline->n_cmds = argc - 3; // Excluding infile, outfile, and program name
+    pipeline->n_pipes = pipeline->n_cmds - 1;
+    pipeline->pipefds = malloc(2 * pipeline->n_pipes * sizeof(int));
+    if (!pipeline->pipefds) {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+    pipeline->limiter = NULL;
+    pipeline->infile = argv[0]; // First command argument is infile
+    pipeline->outfile = argv[argc - 1]; // Last command argument is outfile
+    pipeline->argv = argv + 1; // Skip infile to point to the first command
+    pipeline->envp = envp;
+}
+
+int main(int argc, char *argv[], char *envp[]) {
+    if (argc < 4) {
+        fprintf(stderr, "Usage: %s file1 cmd1 ... cmdn file2\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+	t_pipex_data pipeline;
+	init_pipex_data(&pipeline, argc - 1, argv + 1, envp);
+	execute_pipeline(&pipeline);
+	free(pipeline.pipefds);
+    return EXIT_SUCCESS;
+
 }
