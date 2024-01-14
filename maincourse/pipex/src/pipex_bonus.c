@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/14 15:23:19 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:27:34 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ currently i'm working on
 	[X] - parse here_doc in command line
 	[X] - initialize limiter with here_doc
 	[X] - redirect input to a here_doc
-	[X] - here_doc testing
+	[ ] - here_doc testing
 
 current problems
 [ ] - norminette
