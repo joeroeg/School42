@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/14 11:57:44 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:58:39 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,37 @@ char	**tokenize_path(const char *path)
 	return (token_array);
 }
 
-void	cleanup(t_pipex_data *data)
+void cleanup_pipes_and_wait(t_pipex_data *pipeline) {
+    // Close all remaining pipes in the parent
+    for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
+        close(pipeline->pipefds[i]);
+    }
+
+    // Wait for all child processes to finish
+    int status;
+    while (wait(&status) > 0); // Wait for any child process to finish
+}
+
+void init_pipex_data(t_pipex_data *pipeline, int argc, char **argv, char **envp)
 {
-	if (data->pipefds[0] != -1)
-		close(data->pipefds[0]);
-	if (data->pipefds[1] != -1)
-		close(data->pipefds[1]);
-	if (data->argv != NULL)
-		free_string_array(&(data->argv));
-	if (data->envp != NULL)
-		free_string_array(&(data->envp));
-	if (data->infile != NULL)
-		free(data->infile);
-	if (data->outfile != NULL)
-		free(data->outfile);
-	if (data->limiter != NULL)
-		free(data->limiter);
-	free(data);
+	if (pipeline->here_doc == true)
+	{
+		pipeline->n_cmds = argc - 4; // Excluding infile, outfile, limiter, and program name
+		pipeline->infile = NULL; // No infile for here_doc
+		pipeline->argv = argv + 3; // Skip program name, here_doc and limiter to point to the first command
+	}
+	else
+	{
+		pipeline->n_cmds = argc - 3; // Excluding infile, outfile, and program name
+    	pipeline->infile = argv[1]; // First command argument is infile
+    	pipeline->argv = argv + 2; // Skip program name and infile to point to the first command
+	}
+    pipeline->n_pipes = pipeline->n_cmds - 1;
+    pipeline->pipefds = malloc(2 * pipeline->n_pipes * sizeof(int));
+    if (!pipeline->pipefds) {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+    pipeline->outfile = argv[argc - 1]; // Last command argument is outfile
+    pipeline->envp = envp;
 }

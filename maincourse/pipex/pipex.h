@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:46:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/14 15:17:00 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:08:45 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,13 @@ void		error_message(const char *message, int should_exit);
 void		cleanup(t_pipex_data *data);
 char		**tokenize_path(const char *path);
 int			ft_execvp(const char *file, char *const argv[], char *const envp[]);
+
+void		redirect_first_command(t_pipex_data *pipeline);
+void		redirect_last_command(t_pipex_data *pipeline);
+void		redirect_intermediate_command(t_pipex_data *pipeline, int index);
+void		redirect_here_doc(t_pipex_data *pipeline);
+void		here_doc(char *limiter, int fd_out);
+void		init_pipex_data(t_pipex_data *pipeline, int argc, char **argv, char **envp);
+void		cleanup_pipes_and_wait(t_pipex_data *pipeline);
 
 #endif

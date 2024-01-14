@@ -16,7 +16,7 @@ SRCS    = $(addprefix $(SDIR), pipex.c pipex_utilities.c pipex_execution.c)
 OBJS    = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS))
 
 # Adding bonus source and object files
-SRCS_B  = $(addprefix $(SDIR), pipex_bonus.c pipex_utilities_bonus.c pipex_execution_bonus.c)
+SRCS_B  = $(addprefix $(SDIR), pipex_bonus.c pipex_utilities_bonus.c pipex_execution_bonus.c pipex_redirection_bonus.c pipex_heredoc_bonus.c)
 OBJS_B  = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS_B))
 
 # Default rule
