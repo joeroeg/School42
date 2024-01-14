@@ -8,7 +8,7 @@ ODIR    = obj/
 
 # Compiler and flags
 CC      = gcc
-CFLAGS  = -Wall -Werror -Wextra -g
+# CFLAGS  = -Wall -Werror -Wextra -g
 RM      = rm -f
 
 # Source and Object Files

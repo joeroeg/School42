@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/13 16:43:29 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/13 20:47:19 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void create_pipes(int pipefds[], int n_pipes) {
 }
 
 void execute_command(const char *cmd, t_pipex_data *pipeline, int index) {
+	dprintf(2, "Executing command: %s\n", cmd);
 	(void)pipeline;
 	(void)index;
     // Split the command into arguments
@@ -116,6 +117,8 @@ void execute_command(const char *cmd, t_pipex_data *pipeline, int index) {
     args[argc] = NULL; // null-terminate the arguments list
 
     // Execute the command
+	for (int i = 0; i < argc; i++)
+		dprintf(2, "args[%d] = %s\n", i, args[i]);
     if (execvp(args[0], args) < 0) {
         perror("execvp");  // Handle errors in execvp
         free(tempCmd);
@@ -126,76 +129,177 @@ void execute_command(const char *cmd, t_pipex_data *pipeline, int index) {
 }
 
 void redirect_io(t_pipex_data *pipeline, int index) {
+    dprintf(2, "Redirecting IO for command index: %d\n", index);
+
+    // Redirect stdin for all but the first command
     if (index > 0) {
-        // If this is not the first command, redirect stdin from the previous pipe
         if (dup2(pipeline->pipefds[(index - 1) * 2], STDIN_FILENO) < 0) {
-            perror("dup2");  // Handle errors in dup2
+			dprintf(pipeline->pipefds[(index - 1) * 2], STDIN_FILENO);
+            perror("dup2 (stdin)");
             exit(EXIT_FAILURE);
         }
+        close(pipeline->pipefds[(index - 1) * 2]); // Close the read end of the previous pipe
     }
 
+    // Redirect stdout for all but the last command
     if (index < pipeline->n_pipes) {
-        // If this is not the last command, redirect stdout to the next pipe
         if (dup2(pipeline->pipefds[index * 2 + 1], STDOUT_FILENO) < 0) {
-            perror("dup2");  // Handle errors in dup2
+            perror("dup2 (stdout)");
             exit(EXIT_FAILURE);
         }
-    }
-
-    // Close all pipe file descriptors in the child process
-    for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
-        close(pipeline->pipefds[i]);
+        close(pipeline->pipefds[index * 2 + 1]); // Close the write end of the current pipe
     }
 }
 
+/*
+	I'm not sure about clean up expression in this function
+*/
 void cleanup_pipes_and_wait(t_pipex_data *pipeline) {
-    // Close all pipe file descriptors
+    // Close all remaining pipes in the parent
     for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
         close(pipeline->pipefds[i]);
     }
 
-    // Wait for all child processes
-    for (int i = 0; i < pipeline->n_cmds; i++) {
-        wait(NULL); // You can modify this to handle return status if necessary
-    }
+    // Wait for all child processes to finish
+    int status;
+    while (wait(&status) > 0); // Wait for any child process to finish
 }
 
+
+
+void redirect_first_command(t_pipex_data *pipeline) {
+    int fd_in = open(pipeline->infile, O_RDONLY);
+    if (fd_in < 0) {
+        perror("open (infile)");
+        exit(EXIT_FAILURE);
+    }
+    dup2(fd_in, STDIN_FILENO);
+    close(fd_in);
+}
+
+void redirect_last_command(t_pipex_data *pipeline) {
+    int fd_out = open(pipeline->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd_out < 0) {
+        perror("open (outfile)");
+        exit(EXIT_FAILURE);
+    }
+    dup2(fd_out, STDOUT_FILENO);
+    close(fd_out);
+}
+
+void redirect_intermediate_command(t_pipex_data *pipeline, int index) {
+    // Redirect stdin from the read end of the previous pipe
+    int fd_stdin = pipeline->pipefds[(index - 1) * 2];
+    dup2(fd_stdin, STDIN_FILENO);
+    close(fd_stdin);
+
+    // Redirect stdout to the write end of the next pipe
+    int fd_stdout = pipeline->pipefds[index * 2 + 1];
+    dup2(fd_stdout, STDOUT_FILENO);
+    close(fd_stdout);
+}
+
+/*
+	this function only executes the first command but not the second but it does redirect the output to the outfile
+*/
+// void execute_pipeline(t_pipex_data *pipeline)
+// {
+// 	dprintf(2, "Starting execute_pipeline\n");
+//     for (int i = 0; i < pipeline->n_cmds; i++) {
+// 		dprintf(2, "Creating process for command %d: %s\n", i, pipeline->argv[i]);
+//         pid_t pid = fork();
+//         if (pid == 0)
+// 		{
+//             if (i == 0)
+// 				redirect_first_command(pipeline);
+//             if (i == pipeline->n_cmds - 1)
+// 				redirect_last_command(pipeline);
+//             redirect_io(pipeline, i);
+//             execute_command(pipeline->argv[i], pipeline, i);
+//             exit(EXIT_FAILURE); // execvp failed
+//         }
+// 		else if (pid < 0) {
+//             perror("fork");
+//             exit(EXIT_FAILURE);
+//         }
+//     }
+
+//     cleanup_pipes_and_wait(pipeline);
+// 	dprintf(2, "Finished execute_pipeline\n");
+// }
+
+// this is now functional and executes multiples commands with redirection.
 void execute_pipeline(t_pipex_data *pipeline) {
+    dprintf(2, "Starting execute_pipeline\n");
+
+    // Create pipes
+    create_pipes(pipeline->pipefds, pipeline->n_pipes);
+
     for (int i = 0; i < pipeline->n_cmds; i++) {
+        dprintf(2, "Creating process for command %d: %s\n", i, pipeline->argv[i]);
         pid_t pid = fork();
-        if (pid == 0) {
+
+        if (pid == 0) { // Child process
+            // Redirect only for the first command
             if (i == 0) {
-                // First command: redirect input from infile
-                int fd_in = open(pipeline->infile, O_RDONLY);
-                if (fd_in < 0) {
-                    perror("open");
-                    exit(EXIT_FAILURE);
-                }
-                dup2(fd_in, STDIN_FILENO);
-                close(fd_in);
+                redirect_first_command(pipeline);
             }
 
+            // Redirect only for the last command
             if (i == pipeline->n_cmds - 1) {
-                // Last command: redirect output to outfile
-                int fd_out = open(pipeline->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-                if (fd_out < 0) {
-                    perror("open");
+                redirect_last_command(pipeline);
+            }
+
+            // Redirect for intermediate commands
+            if (i > 0) {
+                // Close write-end of the previous pipe
+                close(pipeline->pipefds[(i - 1) * 2 + 1]);
+                if (dup2(pipeline->pipefds[(i - 1) * 2], STDIN_FILENO) < 0) {
+                    perror("dup2 (stdin)");
                     exit(EXIT_FAILURE);
                 }
-                dup2(fd_out, STDOUT_FILENO);
-                close(fd_out);
             }
-            redirect_io(pipeline, i);
+            if (i < pipeline->n_cmds - 1) {
+                // Close read-end of the next pipe
+                close(pipeline->pipefds[i * 2]);
+                if (dup2(pipeline->pipefds[i * 2 + 1], STDOUT_FILENO) < 0) {
+                    perror("dup2 (stdout)");
+                    exit(EXIT_FAILURE);
+                }
+            }
+
+            // Close all other pipe fds in child
+            for (int j = 0; j < 2 * pipeline->n_pipes; j++) {
+                close(pipeline->pipefds[j]);
+            }
+
             execute_command(pipeline->argv[i], pipeline, i);
-            exit(EXIT_FAILURE); // execvp failed
+            exit(EXIT_FAILURE); // If execvp fails
         } else if (pid < 0) {
             perror("fork");
             exit(EXIT_FAILURE);
+        } else { // Parent process
+            // Close the used ends of the pipe
+            if (i > 0) {
+                close(pipeline->pipefds[(i - 1) * 2]);
+            }
+            if (i < pipeline->n_cmds - 1) {
+                close(pipeline->pipefds[i * 2 + 1]);
+            }
         }
     }
 
+    // Close any remaining open pipes in the parent
+    for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
+        close(pipeline->pipefds[i]);
+    }
+
+    // Wait for all child processes to finish
     cleanup_pipes_and_wait(pipeline);
+    dprintf(2, "Finished execute_pipeline\n");
 }
+
+
 
 
 void init_pipex_data(t_pipex_data *pipeline, int argc, char **argv, char **envp) {
@@ -207,9 +311,9 @@ void init_pipex_data(t_pipex_data *pipeline, int argc, char **argv, char **envp)
         exit(EXIT_FAILURE);
     }
     pipeline->limiter = NULL;
-    pipeline->infile = argv[0]; // First command argument is infile
+    pipeline->infile = argv[1]; // First command argument is infile
     pipeline->outfile = argv[argc - 1]; // Last command argument is outfile
-    pipeline->argv = argv + 1; // Skip infile to point to the first command
+    pipeline->argv = argv + 2; // Skip program name and infile to point to the first command
     pipeline->envp = envp;
 }
 
@@ -219,7 +323,7 @@ int main(int argc, char *argv[], char *envp[]) {
         return EXIT_FAILURE;
     }
 	t_pipex_data pipeline;
-	init_pipex_data(&pipeline, argc - 1, argv + 1, envp);
+	init_pipex_data(&pipeline, argc, argv, envp);
 	execute_pipeline(&pipeline);
 	free(pipeline.pipefds);
     return EXIT_SUCCESS;
