@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/13 20:47:19 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/14 11:46:43 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,27 @@
 
 /*
 currently i'm working on
-[ ] - add infile and outfile redirection
-	[ ] - 2nd command is not executed
-
+[ ] - replace ececvp with ft_execvp
 
 current problems
-[X] - when i build with pipex_utilities_bonus.c pipex_execution_bonus.c -> solution was to rename similar functions.
-[ ] - add infile and outfile redirection
 [ ] - incorporate here_doc in a curent logic.
 
 execute_command
 [ ] - think of the purpose of t_pipex_data *pipeline, int index
 [ ] - replace the hardcoded 10 with a macro
 [ ] - what is the purpose of strdup? why not just use cmd?
-[ ] - replace ececvp with ft_execvp
 
 init_pipex_data
+[X] - add infile and outfile redirection
 [ ] - add a condition to initialize limiter and outfile if they are not NULL
 [ ] - add a condition to initialize infile if it is not NULL
+
+
+solved
+[X] - when i build with pipex_utilities_bonus.c pipex_execution_bonus.c -> solution was to rename similar functions.
+[X] - add infile and outfile redirection
+	[X] - 2nd command is not executed
+
 */
 
 int get_next_line(char **line)
@@ -298,9 +301,6 @@ void execute_pipeline(t_pipex_data *pipeline) {
     cleanup_pipes_and_wait(pipeline);
     dprintf(2, "Finished execute_pipeline\n");
 }
-
-
-
 
 void init_pipex_data(t_pipex_data *pipeline, int argc, char **argv, char **envp) {
     pipeline->n_cmds = argc - 3; // Excluding infile, outfile, and program name
