@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/14 11:46:43 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/14 12:04:33 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 /*
 currently i'm working on
-[ ] - replace ececvp with ft_execvp
 
 current problems
 [ ] - incorporate here_doc in a curent logic.
+[ ] - norminette
+[ ] - replace standatd functions with custom one
 
 execute_command
 [ ] - think of the purpose of t_pipex_data *pipeline, int index
@@ -34,6 +35,7 @@ solved
 [X] - when i build with pipex_utilities_bonus.c pipex_execution_bonus.c -> solution was to rename similar functions.
 [X] - add infile and outfile redirection
 	[X] - 2nd command is not executed
+[X] - replace ececvp with ft_execvp
 
 */
 
@@ -122,7 +124,7 @@ void execute_command(const char *cmd, t_pipex_data *pipeline, int index) {
     // Execute the command
 	for (int i = 0; i < argc; i++)
 		dprintf(2, "args[%d] = %s\n", i, args[i]);
-    if (execvp(args[0], args) < 0) {
+    if (ft_execvp(args[0], args, pipeline->envp) < 0) {
         perror("execvp");  // Handle errors in execvp
         free(tempCmd);
         exit(EXIT_FAILURE);
@@ -154,9 +156,6 @@ void redirect_io(t_pipex_data *pipeline, int index) {
     }
 }
 
-/*
-	I'm not sure about clean up expression in this function
-*/
 void cleanup_pipes_and_wait(t_pipex_data *pipeline) {
     // Close all remaining pipes in the parent
     for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
@@ -167,8 +166,6 @@ void cleanup_pipes_and_wait(t_pipex_data *pipeline) {
     int status;
     while (wait(&status) > 0); // Wait for any child process to finish
 }
-
-
 
 void redirect_first_command(t_pipex_data *pipeline) {
     int fd_in = open(pipeline->infile, O_RDONLY);
@@ -202,36 +199,6 @@ void redirect_intermediate_command(t_pipex_data *pipeline, int index) {
     close(fd_stdout);
 }
 
-/*
-	this function only executes the first command but not the second but it does redirect the output to the outfile
-*/
-// void execute_pipeline(t_pipex_data *pipeline)
-// {
-// 	dprintf(2, "Starting execute_pipeline\n");
-//     for (int i = 0; i < pipeline->n_cmds; i++) {
-// 		dprintf(2, "Creating process for command %d: %s\n", i, pipeline->argv[i]);
-//         pid_t pid = fork();
-//         if (pid == 0)
-// 		{
-//             if (i == 0)
-// 				redirect_first_command(pipeline);
-//             if (i == pipeline->n_cmds - 1)
-// 				redirect_last_command(pipeline);
-//             redirect_io(pipeline, i);
-//             execute_command(pipeline->argv[i], pipeline, i);
-//             exit(EXIT_FAILURE); // execvp failed
-//         }
-// 		else if (pid < 0) {
-//             perror("fork");
-//             exit(EXIT_FAILURE);
-//         }
-//     }
-
-//     cleanup_pipes_and_wait(pipeline);
-// 	dprintf(2, "Finished execute_pipeline\n");
-// }
-
-// this is now functional and executes multiples commands with redirection.
 void execute_pipeline(t_pipex_data *pipeline) {
     dprintf(2, "Starting execute_pipeline\n");
 

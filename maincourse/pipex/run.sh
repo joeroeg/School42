@@ -3,7 +3,7 @@
 # Executing the command
 # ./pipex_bonus infile "cat -e" "echo cmd2 test" outfile
 # ./pipex_bonus infile "cat -e" "sort -r" outfile
-./pipex_bonus infile "cat -e" "sort -r" "grep "1" " outfile
+./pipex_bonus infile "cat -e" "grep "row"" "sort -r" outfile
 # ./pipex_bonus infile "ls" "ls" outfile
 # ./pipex_bonus infile "cat -e" "sort -r" outfile
 # ./pipex_bonus infile "sort" "cat -e" outfile
