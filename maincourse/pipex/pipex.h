@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:46:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/14 12:01:30 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:17:00 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <errno.h>
+# include <stdbool.h>
 
 # define MAX_ARGS 10
 # define BUFFER_SIZE 1024
@@ -39,6 +40,7 @@ typedef struct s_pipex_data
 	int		n_cmds;		// Number of commands
 	int		*pipefds;	// Array of file descriptors
 	int		n_pipes;	// Number of pipes
+	bool	here_doc;	// Here document flag
 	char	*limiter; 	// Here document limiter
 	char	*infile;	// Input file
 	char	*outfile;	// Output file
