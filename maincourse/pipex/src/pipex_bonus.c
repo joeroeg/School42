@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/14 17:01:53 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:22:30 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void execute_command(const char *cmd, t_pipex_data *pipeline, int index) {
 
     free(tempCmd); // free the duplicated command string
 }
-/*
+
 void execute_pipeline(t_pipex_data *pipeline)
 {
     create_pipes(pipeline->pipefds, pipeline->n_pipes);
@@ -135,8 +135,9 @@ void execute_pipeline(t_pipex_data *pipeline)
     }
     cleanup_pipes_and_wait(pipeline);
 }
-*/
 
+
+/*
 void close_pipes(t_pipex_data *pipeline, int current_cmd) {
     for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
         if (i != (current_cmd - 1) * 2 && i != current_cmd * 2 + 1) {
@@ -190,7 +191,7 @@ void execute_pipeline(t_pipex_data *pipeline) {
     }
     cleanup_pipes_and_wait(pipeline);
 }
-
+*/
 
 int main(int argc, char *argv[], char *envp[])
 {
