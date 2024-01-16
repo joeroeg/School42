@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 14:55:14 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:13:06 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ void	error_message(const char *message, int should_exit)
 		exit(1);
 }
 
+void	error_message_print(char *message, int should_exit)
+{
+	ft_putstr_fd(message, 2);
+	if (should_exit)
+		exit(1);
+}
+
 char	**tokenize_path(const char *path)
 {
 	char	**token_array;
@@ -49,23 +56,25 @@ char	**tokenize_path(const char *path)
 	return (token_array);
 }
 
-void cleanup_pipes_and_wait(t_pipex_data *pipeline) {
-    // Close all remaining pipes in the parent
-    dprintf(2, "Parent process closing all remaining pipe fds\n");
-    for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
-        dprintf(2, "Parent process closing pipe fd %d\n", i);
-        close(pipeline->pipefds[i]);
-    }
+void	cleanup_pipes_and_wait(t_pipex_data *pipeline)
+{
+	int	i;
 
-    int status;
-    for (int i = 0; i < pipeline->n_cmds; i++) {
-        pid_t wpid = wait(&status);
-        dprintf(2, "Parent process waited for child process %d to finish with status %d\n", wpid, status);
-    }
+	i = 0;
+	while (i < 2 * pipeline->n_pipes)
+	{
+		close(pipeline->pipefds[i]);
+		i++;
+	}
+	i = 0;
+	while (i < pipeline->n_cmds)
+	{
+		wait(NULL);
+		i++;
+	}
 }
 
-
-void init_pipex_data(t_pipex_data *pipeline, int argc, char **argv, char **envp)
+void	init_pipex_data(t_pipex_data *pipeline, int argc, char **argv, char **envp)
 {
 	if (pipeline->here_doc == true)
 	{

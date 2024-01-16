@@ -6,16 +6,45 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:52:51 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 16:14:40 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:28:12 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int get_next_line(char **line)
+// int	get_next_line(char **line)
+// {
+// 	char	*buf;
+// 	int		ret;
+// 	char	*temp;
+
+// 	buf = malloc(sizeof(char) * 2);
+// 	if (!buf)
+// 		error_message("Error: Malloc failed", 1);
+// 	*line = malloc(sizeof(char) * 1);
+// 	if (!*line)
+// 		error_message("Error: Malloc failed", 1);
+// 	**line = '\0';
+// 	while ((ret = read(STDIN_FILENO, buf, 1)) > 0)
+// 	{
+// 		buf[ret] = '\0';
+// 		if (buf[0] == '\n')
+// 			break ;
+// 		temp = ft_strjoin(*line, buf);
+// 		free(*line);
+// 		*line = temp;
+// 	}
+// 	free(buf);
+// 	if (ret == -1)
+// 		error_message("Error: Read failed", 1);
+// 	return (ret);
+// }
+
+int	get_next_line(char **line)
 {
 	char	*buf;
 	int		ret;
+	char	*temp;
 
 	buf = malloc(sizeof(char) * 2);
 	if (!buf)
@@ -24,12 +53,13 @@ int get_next_line(char **line)
 	if (!*line)
 		error_message("Error: Malloc failed", 1);
 	**line = '\0';
-	while ((ret = read(STDIN_FILENO, buf, 1)) > 0)
+	while (1)
 	{
-		buf[ret] = '\0';
-		if (buf[0] == '\n')
+		ret = read(STDIN_FILENO, buf, 1);
+		if (ret <= 0 || buf[0] == '\n')
 			break ;
-		char *temp = ft_strjoin(*line, buf);
+		buf[ret] = '\0';
+		temp = ft_strjoin(*line, buf);
 		free(*line);
 		*line = temp;
 	}
@@ -39,9 +69,10 @@ int get_next_line(char **line)
 	return (ret);
 }
 
-void here_doc(char *limiter, int write_end)
+
+void	here_doc(char *limiter, int write_end)
 {
-	char *line;
+	char	*line;
 
 	while (get_next_line(&line))
 	{

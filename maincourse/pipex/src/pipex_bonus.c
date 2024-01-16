@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 16:32:12 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:21:41 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ SOLVED TASKS
 	[X] - what is the purpose of strdup? why not just use cmd? maybe because strtok modify original array
 
 */
+
 
 void	create_pipes(int pipefds[], int n_pipes)
 {
@@ -76,92 +77,89 @@ void	execute_command(const char *cmd, t_pipex_data *pipeline)
 	free(args);
 }
 
-
-void create_child_process(t_pipex_data *pipeline, int cmd_index) {
-    if (cmd_index == 0 && pipeline->here_doc == true) {
-        redirect_here_doc(pipeline);
-    } else if (cmd_index == 0) {
-        redirect_first_command(pipeline);
-    }
-    if (cmd_index == pipeline->n_cmds - 1) {
-        redirect_last_command(pipeline);
-    }
-    if (cmd_index > 0) {
-        close(pipeline->pipefds[(cmd_index - 1) * 2 + 1]);
-        if (dup2(pipeline->pipefds[(cmd_index - 1) * 2], STDIN_FILENO) < 0) {
-            perror("dup2 (stdin)");
-            exit(EXIT_FAILURE);
-        }
-    }
-    if (cmd_index < pipeline->n_cmds - 1) {
-        close(pipeline->pipefds[cmd_index * 2]);
-        if (dup2(pipeline->pipefds[cmd_index * 2 + 1], STDOUT_FILENO) < 0) {
-            perror("dup2 (stdout)");
-            exit(EXIT_FAILURE);
-        }
-    }
-
-    for (int j = 0; j < 2 * pipeline->n_pipes; j++) {
-        close(pipeline->pipefds[j]);
-    }
-
-    execute_command(pipeline->argv[cmd_index], pipeline);
-    exit(EXIT_FAILURE); // If execvp fails
-}
-
-void close_unused_pipe_ends(t_pipex_data *pipeline, int cmd_index) {
-    if (cmd_index > 0) {
-        close(pipeline->pipefds[(cmd_index - 1) * 2]);
-    }
-    if (cmd_index < pipeline->n_cmds - 1) {
-        close(pipeline->pipefds[cmd_index * 2 + 1]);
-    }
-}
-
-void close_all_pipe_fds(t_pipex_data *pipeline) {
-    for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
-        close(pipeline->pipefds[i]);
-    }
-}
-
-void execute_pipeline(t_pipex_data *pipeline)
+void	create_child_process(t_pipex_data *pipeline, int cmd_index)
 {
-	create_pipes(pipeline->pipefds, pipeline->n_pipes);
-	for (int i = 0; i < pipeline->n_cmds; i++) {
-        dprintf(2, "Creating process for command %d: %s\n", i, pipeline->argv[i]);
-        pid_t pid = fork();
+	int	j;
 
-        if (pid == 0) {
-            create_child_process(pipeline, i);
-        } else if (pid < 0) {
-            perror("fork");
-            exit(EXIT_FAILURE);
-        } else { // Parent process
-            close_unused_pipe_ends(pipeline, i);
-        }
-    }
-
-    close_all_pipe_fds(pipeline);
-    cleanup_pipes_and_wait(pipeline);
+	if (cmd_index == 0 && pipeline->here_doc == true)
+		redirect_here_doc(pipeline);
+	else if (cmd_index == 0)
+		redirect_first_command(pipeline);
+	if (cmd_index == pipeline->n_cmds - 1)
+		redirect_last_command(pipeline);
+	if (cmd_index > 0)
+	{
+		close(pipeline->pipefds[(cmd_index - 1) * 2 + 1]);
+		if (dup2(pipeline->pipefds[(cmd_index - 1) * 2], STDIN_FILENO) < 0)
+			error_message("dup2 (stdin)", 1);
+	}
+	if (cmd_index < pipeline->n_cmds - 1)
+	{
+		close(pipeline->pipefds[cmd_index * 2]);
+		if (dup2(pipeline->pipefds[cmd_index * 2 + 1], STDOUT_FILENO) < 0)
+			error_message("dup2 (stdout)", 1);
+	}
+	j = 0;
+	while (j < 2 * pipeline->n_pipes)
+		close(pipeline->pipefds[j++]);
+	execute_command(pipeline->argv[cmd_index], pipeline);
+	error_message("execute_command", 1);
 }
 
-int main(int argc, char *argv[], char *envp[])
+void	close_unused_pipe_ends(t_pipex_data *pipeline, int cmd_index)
+{
+	if (cmd_index > 0)
+		close(pipeline->pipefds[(cmd_index - 1) * 2]);
+	if (cmd_index < pipeline->n_cmds - 1)
+		close(pipeline->pipefds[cmd_index * 2 + 1]);
+}
+
+void	close_all_pipe_fds(t_pipex_data *pipeline)
+{
+	int	i;
+
+	i = 0;
+	while (i < 2 * pipeline->n_pipes)
+		close(pipeline->pipefds[i++]);
+}
+
+void	execute_pipeline(t_pipex_data *pipeline)
+{
+	int		i;
+	pid_t	pid;
+
+	create_pipes(pipeline->pipefds, pipeline->n_pipes);
+	i = 0;
+	while (i < pipeline->n_cmds)
+	{
+		pid = fork();
+		if (pid == 0)
+			create_child_process(pipeline, i);
+		else if (pid < 0)
+		{
+			perror("fork");
+			exit(EXIT_FAILURE);
+		}
+		else
+			close_unused_pipe_ends(pipeline, i);
+		i++;
+	}
+	close_all_pipe_fds(pipeline);
+	cleanup_pipes_and_wait(pipeline);
+}
+
+int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipex_data	pipeline;
 
 	if (argc < 5)
-	{
-		ft_putstr_fd("Usage: ./pipex infile cmd1 cmd2 ... cmdn outfile\n", 2);
-		return (EXIT_FAILURE);
-	}
+		error_message_print("./pipex infile cmd1 cmd2 ... cmdn outfile\n", 1);
 	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
 	{
-		if (argc != 6) {
-		ft_putstr_fd("Usage: ./pipex here_doc LIMITER cmd1 cmd2 outfile\n", 2);
-		return (EXIT_FAILURE);
-	}
-	pipeline.limiter = argv[2];
-	pipeline.here_doc = true;
+		if (argc != 6)
+			error_message_print("./pipex here_doc LIMITER cmd1 cmd2 file\n", 1);
+		pipeline.limiter = argv[2];
+		pipeline.here_doc = true;
 	}
 	else
 	{
@@ -171,5 +169,5 @@ int main(int argc, char *argv[], char *envp[])
 	init_pipex_data(&pipeline, argc, argv, envp);
 	execute_pipeline(&pipeline);
 	free(pipeline.pipefds);
-	return EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }
