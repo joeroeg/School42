@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_redirection_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:43:58 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/15 13:21:32 by device           ###   ########.fr       */
+/*   Updated: 2024/01/15 13:36:44 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-
 void redirect_first_command(t_pipex_data *pipeline) {
 	if (pipeline->limiter)
 		return ;
-    int fd_in = open(pipeline->infile, O_RDONLY, 0644);
+    int fd_in = open(pipeline->infile, O_RDONLY);
     if (fd_in < 0) {
         perror("open (infile)");
         exit(EXIT_FAILURE);

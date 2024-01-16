@@ -9,7 +9,7 @@
 
 
     # test with 3 cmd
-./pipex_bonus infile "cat -e" "grep "line"" "sort -r" outfile# ./pipex_bonus infile "cat -e" "sort -r" outfile
+./pipex_bonus infile "cat -e" "grep --line-buffered "line"" "sort -r" outfile
 
 
 # here_doc test case

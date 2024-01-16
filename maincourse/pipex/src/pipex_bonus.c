@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/15 13:22:30 by device           ###   ########.fr       */
+/*   Updated: 2024/01/15 19:59:10 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void create_pipes(int pipefds[], int n_pipes) {
             perror("pipe");
             exit(EXIT_FAILURE);
         }
+        dprintf(2, "Created pipe %d: read fd %d, write fd %d\n", i, pipefds[i * 2], pipefds[i * 2 + 1]);
     }
 }
+
 
 void execute_command(const char *cmd, t_pipex_data *pipeline, int index) {
 	dprintf(2, "Executing command: %s\n", cmd);
@@ -75,6 +77,7 @@ void execute_command(const char *cmd, t_pipex_data *pipeline, int index) {
     free(tempCmd); // free the duplicated command string
 }
 
+/*
 void execute_pipeline(t_pipex_data *pipeline)
 {
     create_pipes(pipeline->pipefds, pipeline->n_pipes);
@@ -135,40 +138,58 @@ void execute_pipeline(t_pipex_data *pipeline)
     }
     cleanup_pipes_and_wait(pipeline);
 }
+*/
 
-
-/*
 void close_pipes(t_pipex_data *pipeline, int current_cmd) {
     for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
         if (i != (current_cmd - 1) * 2 && i != current_cmd * 2 + 1) {
+            dprintf(2, "Closing pipe fd %d in child process for command %d\n", i, current_cmd);
             close(pipeline->pipefds[i]);
         }
     }
 }
 
+
 void setup_child_process(t_pipex_data *pipeline, int i) {
     if (i == 0 && pipeline->here_doc) {
         redirect_here_doc(pipeline);
     } else if (i == 0) {
+		dprintf(2, "Redirected stdin for first command from fd %d\n", /* appropriate fd */);
         redirect_first_command(pipeline);
     } else if (i == pipeline->n_cmds - 1) {
+		dprintf(2, "Redirected stdout for last command to fd %d\n", /* appropriate fd */);
         redirect_last_command(pipeline);
     } else {
+		dprintf(2, "Redirected stdin and stdout for intermediate command %d\n", index);
         redirect_intermediate_command(pipeline, i);
     }
+
+    dprintf(2, "Closing unnecessary pipes for command %d\n", i);
     close_pipes(pipeline, i);
+
+    dprintf(2, "Closing all pipes in child process for command %d\n", i);
+    for (int j = 0; j < 2 * pipeline->n_pipes; j++) {
+        dprintf(2, "Child process (cmd %d) closing pipe fd %d\n", i, j);
+        close(pipeline->pipefds[j]);
+    }
+
+    dprintf(2, "Executing command %d: %s\n", i, pipeline->argv[i]);
     execute_command(pipeline->argv[i], pipeline, i);
-    exit(EXIT_FAILURE);  // If execvp fails
+    exit(EXIT_FAILURE);
 }
+
 
 void handle_parent_process(t_pipex_data *pipeline, int i) {
     if (i > 0) {
+        dprintf(2, "Parent process (cmd %d) closing read end of pipe (fd %d)\n", i, (i - 1) * 2);
         close(pipeline->pipefds[(i - 1) * 2]);
     }
     if (i < pipeline->n_cmds - 1) {
+        dprintf(2, "Parent process (cmd %d) closing write end of pipe (fd %d)\n", i, i * 2 + 1);
         close(pipeline->pipefds[i * 2 + 1]);
     }
 }
+
 
 void execute_pipeline(t_pipex_data *pipeline) {
     create_pipes(pipeline->pipefds, pipeline->n_pipes);
@@ -186,12 +207,15 @@ void execute_pipeline(t_pipex_data *pipeline) {
         }
     }
 
+    dprintf(2, "Parent process closing all remaining pipe fds\n");
     for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
+        dprintf(2, "Parent process closing pipe fd %d\n", i);
         close(pipeline->pipefds[i]);
     }
+
     cleanup_pipes_and_wait(pipeline);
 }
-*/
+
 
 int main(int argc, char *argv[], char *envp[])
 {

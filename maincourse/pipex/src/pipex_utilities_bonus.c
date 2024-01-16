@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/14 15:58:39 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:59:43 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,21 @@ char	**tokenize_path(const char *path)
 
 void cleanup_pipes_and_wait(t_pipex_data *pipeline) {
     // Close all remaining pipes in the parent
+    dprintf(2, "Parent process closing all remaining pipe fds\n");
     for (int i = 0; i < 2 * pipeline->n_pipes; i++) {
+        dprintf(2, "Parent process closing pipe fd %d\n", i);
         close(pipeline->pipefds[i]);
     }
 
-    // Wait for all child processes to finish
     int status;
-    while (wait(&status) > 0); // Wait for any child process to finish
+    pid_t pid;
+    while ((pid = wait(&status)) > 0) {
+        dprintf(2, "Parent process waited for child process %d to finish\n", pid);
+    }
 }
+
+
+
 
 void init_pipex_data(t_pipex_data *pipeline, int argc, char **argv, char **envp)
 {

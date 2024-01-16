@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:56:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/13 14:00:45 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/15 19:04:35 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	execute(char *fullpath, char *const argv[], char *const envp[])
 {
 	if (fullpath)
 	{
+		dprintf(2, "Executing command: %s\n", argv[0]);
 		execve(fullpath, argv, envp);
 		perror("execve");
 		free(fullpath);
