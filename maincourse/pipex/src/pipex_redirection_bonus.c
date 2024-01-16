@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:43:58 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 17:31:44 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:34:07 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,26 @@ void	redirect_first_command(t_pipex_data *pipeline)
 	close(fd_in);
 }
 
-void redirect_last_command(t_pipex_data *pipeline)
+void	redirect_last_command(t_pipex_data *pipeline)
 {
-    if (pipeline->here_doc) {
-        // Append mode when here_doc is used
-        int fd_out = open(pipeline->outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
-        dprintf(2, "Redirecting IO for last command with append\n");
-        if (fd_out < 0) {
-            perror("open (outfile)");
-            exit(EXIT_FAILURE);
-        }
-        dup2(fd_out, STDOUT_FILENO);
-        dprintf(2, "Redirected stdout to fd %d\n", fd_out);
-        close(fd_out);
-    } else {
-        // Overwrite mode when here_doc is not used
-        int fd_out = open(pipeline->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-        dprintf(2, "Redirecting IO for last command with overwrite\n");
-        if (fd_out < 0) {
-            perror("open (outfile)");
-            exit(EXIT_FAILURE);
-        }
-        dup2(fd_out, STDOUT_FILENO);
-        dprintf(2, "Redirected stdout to fd %d\n", fd_out);
-        close(fd_out);
-    }
+	int	fd_out;
+
+	if (pipeline->here_doc)
+	{
+		fd_out = open(pipeline->outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (fd_out < 0)
+			error_message("open (outfile)", 1);
+		dup2(fd_out, STDOUT_FILENO);
+		close(fd_out);
+	}
+	else
+	{
+		fd_out = open(pipeline->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd_out < 0)
+			error_message("open (outfile)", 1);
+		dup2(fd_out, STDOUT_FILENO);
+		close(fd_out);
+	}
 }
 
 
