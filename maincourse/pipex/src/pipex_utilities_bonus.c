@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/15 18:59:43 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:31:04 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,12 @@ void cleanup_pipes_and_wait(t_pipex_data *pipeline) {
         close(pipeline->pipefds[i]);
     }
 
-    int status;
-    pid_t pid;
-    while ((pid = wait(&status)) > 0) {
-        dprintf(2, "Parent process waited for child process %d to finish\n", pid);
-    }
+    // int status;
+    // for (int i = 0; i < pipeline->n_cmds; i++) {
+    //     pid_t wpid = wait(&status);
+    //     dprintf(2, "Parent process waited for child process %d to finish with status %d\n", wpid, status);
+    // }
 }
-
-
 
 
 void init_pipex_data(t_pipex_data *pipeline, int argc, char **argv, char **envp)

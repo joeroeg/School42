@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:43:58 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/15 13:36:44 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:26:34 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,25 @@ void redirect_first_command(t_pipex_data *pipeline) {
 	if (pipeline->limiter)
 		return ;
     int fd_in = open(pipeline->infile, O_RDONLY);
+	dprintf(2, "Redirecting IO for first command\n");
     if (fd_in < 0) {
         perror("open (infile)");
         exit(EXIT_FAILURE);
     }
     dup2(fd_in, STDIN_FILENO);
+	dprintf(2, "Redirected stdin to fd %d\n", fd_in);
     close(fd_in);
 }
 
 void redirect_last_command(t_pipex_data *pipeline) {
     int fd_out = open(pipeline->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	dprintf(2, "Redirecting IO for last command\n");
     if (fd_out < 0) {
         perror("open (outfile)");
         exit(EXIT_FAILURE);
     }
     dup2(fd_out, STDOUT_FILENO);
+	dprintf(2, "Redirected stdout to fd %d\n", fd_out);
     close(fd_out);
 }
 
@@ -44,6 +48,7 @@ void redirect_intermediate_command(t_pipex_data *pipeline, int index) {
     }
 
     // Redirect stdout to the write end of the next pipe
+	dprintf(2, "Redirecting stdout to fd %d\n", pipeline->pipefds[index * 2 + 1]);
     if (dup2(pipeline->pipefds[index * 2 + 1], STDOUT_FILENO) < 0) {
         perror("dup2 (stdout)");
         exit(EXIT_FAILURE);
