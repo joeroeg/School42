@@ -9,9 +9,9 @@
 
 
     # test with 3 cmd
-./pipex_bonus infile "cat -e" "grep "line"" "sort -r" outfile
+# ./pipex_bonus infile "cat -e" "grep "r"" "sort -r" outfile
 
 
 # here_doc test case
-# ./pipex_bonus here_doc EOF "cat -e" "grep "line"" "sort -r" outfile
+./pipex_bonus here_doc EOF "cat -e" "sort -r" outfile
 

@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 16:23:16 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:26:10 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 /*
 CURRENT TASKS
+[ ] - replace standard functions with custom one
+[ ] - norminette
 
 UNSOVLED TASKS
-[ ] - replace standard functions with custom one
-	execute_command
-	[X] - think of the purpose of t_pipex_data *pipeline, int index
-	[ ] - replace the hardcoded magic numbers 10 with a macro
-	[ ] - what is the purpose of strdup? why not just use cmd? maybe because strtok modify original array
-[ ] - norminette
 
 SOLVED TASKS
 [X] - when i build with pipex_utilities_bonus.c pipex_execution_bonus.c -> solution was to rename similar functions.
@@ -38,6 +34,10 @@ SOLVED TASKS
 	[X] - fix here_doc
 [X] - here_doc must append to the file, not overwrite
 [X] - limit here_doc for 2 command
+	execute_command
+	[X] - think of the purpose of t_pipex_data *pipeline, int index
+	[X] - replace the hardcoded magic numbers 10 with a macro
+	[X] - what is the purpose of strdup? why not just use cmd? maybe because strtok modify original array
 
 */
 
@@ -56,31 +56,6 @@ void	create_pipes(int pipefds[], int n_pipes)
 		i++;
 	}
 }
-
-// void	execute_command(const char *cmd, t_pipex_data *pipeline)
-// {
-// 	char	*args[MAX_ARGS];
-// 	int argc = 0;
-// 	char *token;
-// 	char *tempCmd = strdup(cmd); // create a modifiable copy of cmd
-
-//     token = strtok(tempCmd, " ");
-//     while (token != NULL && argc < 10) {
-//         args[argc++] = token;
-//         token = strtok(NULL, " ");
-//     }
-//     args[argc] = NULL; // null-terminate the arguments list
-
-//     // Execute the command
-// 	for (int i = 0; i < argc; i++)
-// 		dprintf(2, "args[%d] = %s\n", i, args[i]);
-//     if (ft_execvp(args[0], args, pipeline->envp) < 0) {
-//         perror("execvp");  // Handle errors in execvp
-//         free(tempCmd);
-//         exit(EXIT_FAILURE);
-//     }
-//     free(tempCmd);
-// }
 
 void	execute_command(const char *cmd, t_pipex_data *pipeline)
 {
