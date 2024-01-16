@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:46:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/14 17:08:45 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:09:23 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 
 # define MAX_ARGS 10
 # define BUFFER_SIZE 1024
+# define READ_END(pipe_index) (pipe_index * 2)    // Index for reading from the pipe
+# define WRITE_END(pipe_index) (pipe_index * 2 + 1) // Index for writing to the pipe
+
 
 // typedef struct s_pipex_data
 // {
