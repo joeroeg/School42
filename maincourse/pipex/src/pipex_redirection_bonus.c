@@ -6,24 +6,25 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:43:58 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 14:20:40 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:31:44 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void redirect_first_command(t_pipex_data *pipeline) {
+void	redirect_first_command(t_pipex_data *pipeline)
+{
+	int	fd_in;
+
 	if (pipeline->limiter)
 		return ;
-    int fd_in = open(pipeline->infile, O_RDONLY, 777);
+	fd_in = open(pipeline->infile, O_RDONLY, 777);
 	dprintf(2, "Redirecting IO for first command\n");
-    if (fd_in < 0) {
-        perror("open (infile)");
-        exit(EXIT_FAILURE);
-    }
-    dup2(fd_in, STDIN_FILENO);
+	if (fd_in < 0)
+		error_message("open (infile)", 1);
+	dup2(fd_in, STDIN_FILENO);
 	dprintf(2, "Redirected stdin to fd %d\n", fd_in);
-    close(fd_in);
+	close(fd_in);
 }
 
 void redirect_last_command(t_pipex_data *pipeline)
