@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_heredoc_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:52:51 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 22:22:47 by device           ###   ########.fr       */
+/*   Updated: 2024/01/17 15:04:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,26 @@
 
 int	get_next_line(char **line)
 {
-	char	*buf;
+	char	buf[2];
 	int		ret;
 	char	*temp;
 
-	buf = malloc(sizeof(char) * 2);
-	if (!buf)
-		error_message("Error: Malloc failed", 1);
-	*line = malloc(sizeof(char) * 1);
+	*line = malloc(1);
 	if (!*line)
 		error_message("Error: Malloc failed", 1);
 	**line = '\0';
 	while (1)
 	{
 		ret = read(STDIN_FILENO, buf, 1);
-		if (ret == -1)
-			break ;
-		if (ret <= 0 || buf[0] == '\n')
+		if (ret <= 0)
 			break ;
 		buf[ret] = '\0';
+		if (buf[0] == '\n')
+			break ;
 		temp = ft_strjoin(*line, buf);
 		free(*line);
 		*line = temp;
 	}
-	free(buf);
 	if (ret == -1)
 		error_message("Error: Read failed", 1);
 	return (ret);

@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:09:49 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/12/30 19:07:06 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:56:07 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ char	*ft_strtok(char *str, const char *delim)
 
 	if (str == NULL)
 		str = lasts;
-	str += strspn(str, delim);
+	str += ft_strspn(str, delim);
 	if (*str == '\0')
 	{
 		lasts = str;
 		return (NULL);
 	}
 	token = str;
-	str = strpbrk(token, delim);
+	str = ft_strpbrk(token, delim);
 	if (str == NULL)
 	{
-		lasts = token + strlen(token);
+		lasts = token + ft_strlen(token);
 	}
 	else
 	{

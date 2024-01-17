@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:56:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/17 00:15:25 by device           ###   ########.fr       */
+/*   Updated: 2024/01/17 15:15:05 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	execute(char *fullpath, char *const argv[], char *const envp[])
 	}
 }
 
-int	ft_execvp(const char *command , char *const argv[], char *const envp[])
+int	ft_execvp(const char *command, char *const argv[], char *const envp[])
 {
 	char	*command_path;
 	int		result;

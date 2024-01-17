@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_redirection_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:43:58 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 23:39:22 by device           ###   ########.fr       */
+/*   Updated: 2024/01/17 15:13:18 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	redirect_last_command(t_pipex_data *pipeline)
 	{
 		fd_out = open(pipeline->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd_out < 0)
-			error_message("open (outfile)", 1);
+			error_message("open (outfile)", EXIT_FAILURE);
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
 	}
