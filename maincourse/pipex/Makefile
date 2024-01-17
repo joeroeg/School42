@@ -4,6 +4,7 @@ NAME_B  = pipex_bonus
 LIBFT   = libft.a
 LDIR    = libft/
 SDIR    = src/
+BONUS_DIR = src/bonus/
 ODIR    = obj/
 
 # Compiler and flags
@@ -16,8 +17,8 @@ SRCS    = $(addprefix $(SDIR), pipex.c pipex_utilities.c pipex_execution.c)
 OBJS    = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS))
 
 # Adding bonus source and object files
-SRCS_B  = $(addprefix $(SDIR), pipex_bonus.c pipex_utilities_bonus.c pipex_execution_bonus.c pipex_redirection_bonus.c pipex_heredoc_bonus.c)
-OBJS_B  = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS_B))
+SRCS_B  = $(addprefix $(BONUS_DIR), pipex_bonus.c pipex_utilities_bonus.c pipex_execution_bonus.c pipex_redirection_bonus.c pipex_heredoc_bonus.c pipex_pipeline_bonus.c)
+OBJS_B  = $(patsubst $(BONUS_DIR)%.c,$(ODIR)%.o,$(SRCS_B))
 
 # Default rule
 all: libft $(NAME)
@@ -36,6 +37,10 @@ $(NAME_B): $(OBJS_B)
 	@$(CC) $(CFLAGS) $(OBJS_B) -o $(NAME_B) $(LDIR)$(LIBFT)
 
 $(ODIR)%.o: $(SDIR)%.c
+	@mkdir -p $(ODIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(ODIR)%.o: $(BONUS_DIR)%.c
 	@mkdir -p $(ODIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 

@@ -6,20 +6,11 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 19:29:34 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/01 17:33:38 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:47:44 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-function: appends the NUL-terminated string (src) to the end of (dest).
-		  append at most (size - strlen(dest) - 1) bytes, NUL-terminating the result.
-		  returns the total length of the string it tried to create.
-   input: ft_strlcat("Hello ", "World!", 12)
-  output: 11
-  printf: Hello World
-*/
 
 size_t	find_dest_length(char *dest, size_t size)
 {

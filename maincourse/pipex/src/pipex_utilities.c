@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 17:05:35 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:12:19 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**tokenize_path(const char *path)
 	return (token_array);
 }
 
-void	cleanup(t_pipex_data *data)
+void	cleanup(t_pipex_data_m *data)
 {
 	if (data->pipe_fds[0] != -1)
 		close(data->pipe_fds[0]);

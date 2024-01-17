@@ -6,11 +6,11 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:13:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 17:37:59 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:21:13 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../../pipex.h"
 
 void	free_string_array(char ***array)
 {
@@ -72,28 +72,4 @@ void	cleanup_pipes_and_wait(t_pipex_data *pipeline)
 		wait(NULL);
 		i++;
 	}
-}
-
-void	init_pipex_data(t_pipex_data *pipeline, int argc, char **argv, char **envp)
-{
-	if (pipeline->here_doc == true)
-	{
-		pipeline->n_cmds = argc - 4; // Excluding infile, outfile, limiter, and program name
-		pipeline->infile = NULL; // No infile for here_doc
-		pipeline->argv = argv + 3; // Skip program name, here_doc and limiter to point to the first command
-	}
-	else
-	{
-		pipeline->n_cmds = argc - 3; // Excluding infile, outfile, and program name
-    	pipeline->infile = argv[1]; // First command argument is infile
-    	pipeline->argv = argv + 2; // Skip program name and infile to point to the first command
-	}
-    pipeline->n_pipes = pipeline->n_cmds - 1;
-    pipeline->pipefds = malloc(2 * pipeline->n_pipes * sizeof(int));
-    if (!pipeline->pipefds) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-    pipeline->outfile = argv[argc - 1]; // Last command argument is outfile
-    pipeline->envp = envp;
 }

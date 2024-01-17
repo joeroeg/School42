@@ -6,18 +6,18 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 18:50:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/14 17:06:50 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:15:55 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	exec_cmd1(t_pipex_data *data)
+void	exec_cmd1(t_pipex_data_m *data)
 {
 	int	infile_fd;
 
 	close(data->pipe_fds[0]);
-	infile_fd = open(data->argv[1], O_RDONLY);
+	infile_fd = open(data->argv[1], O_RDONLY, 0644);
 	if (infile_fd == -1)
 	{
 		cleanup(data);
@@ -32,7 +32,7 @@ void	exec_cmd1(t_pipex_data *data)
 	exit(1);
 }
 
-void	exec_cmd2(t_pipex_data *data)
+void	exec_cmd2(t_pipex_data_m *data)
 {
 	int	outfile_fd;
 
@@ -74,9 +74,9 @@ char	**parse_command(char *cmd)
 	return (argv);
 }
 
-t_pipex_data	init_pipex_data(int argc, char **argv, char **envp)
+t_pipex_data_m	initialize_pipex_data(int argc, char **argv, char **envp)
 {
-	t_pipex_data	data;
+	t_pipex_data_m	data;
 
 	if (argc != 5)
 	{
@@ -101,11 +101,11 @@ t_pipex_data	init_pipex_data(int argc, char **argv, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_pipex_data	data;
+	t_pipex_data_m	data;
 	pid_t			pid1;
 	pid_t			pid2;
 
-	data = init_pipex_data(argc, argv, envp);
+	data = initialize_pipex_data(argc, argv, envp);
 	if (pipe(data.pipe_fds) == -1)
 		error_message("pipe", 1);
 	pid1 = fork();

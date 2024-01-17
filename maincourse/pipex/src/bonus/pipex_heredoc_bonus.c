@@ -6,11 +6,11 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:52:51 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 17:30:30 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:21:33 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../../pipex.h"
 
 int	get_next_line(char **line)
 {
@@ -40,7 +40,6 @@ int	get_next_line(char **line)
 		error_message("Error: Read failed", 1);
 	return (ret);
 }
-
 
 void	here_doc(char *limiter, int write_end)
 {

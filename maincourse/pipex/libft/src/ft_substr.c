@@ -6,18 +6,11 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:52:13 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/18 11:26:26 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:47:55 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-function: allocates (with malloc) and returns a substring from the string
-		  (s). The substring begins at index (start) and is of maximum size (len).
-   input: ft_substr("Hello World!", 0, 4)
-  output: "Hell"
-*/
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

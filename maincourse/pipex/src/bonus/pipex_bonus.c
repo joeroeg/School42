@@ -6,21 +6,26 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 17:21:41 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:43:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../../pipex.h"
 
 /*
 CURRENT TASKS
-[ ] - replace standard functions with custom one
-[ ] - norminette
 
 UNSOVLED TASKS
+./pipex_bonus here_doc EOF cat\ -e sort\ -r outfile
+	==35147== 8 bytes in 1 blocks are still reachable in loss record 1 of 48
+	==35147==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+	==35147==    by 0x1000022D7: init_pipex_data (pipex_bonus.c:60)
+	==35147==    by 0x1000026FC: main (pipex_bonus.c:158)
+
 
 SOLVED TASKS
-[X] - when i build with pipex_utilities_bonus.c pipex_execution_bonus.c -> solution was to rename similar functions.
+[X] - when i build with pipex_utilities_bonus.c
+	pipex_execution_bonus.c -> solution was to rename similar functions.
 [X] - add infile and outfile redirection
 	[X] - 2nd command is not executed
 [X] - replace ececvp with ft_execvp
@@ -37,25 +42,32 @@ SOLVED TASKS
 	execute_command
 	[X] - think of the purpose of t_pipex_data *pipeline, int index
 	[X] - replace the hardcoded magic numbers 10 with a macro
-	[X] - what is the purpose of strdup? why not just use cmd? maybe because strtok modify original array
-
+	[X] - what is the purpose of strdup?
+[X] - replace standard functions with custom one
+[X] - norminette
 */
 
-
-void	create_pipes(int pipefds[], int n_pipes)
+void	init_pipex_data(t_pipex_data *pipeline, \
+	int argc, char **argv, char **envp)
 {
-	int	i;
-
-	i = 0;
-	while (i < n_pipes)
+	if (pipeline->here_doc == true)
 	{
-		if (pipe(pipefds + i * 2) < 0)
-		{
-			perror("pipe");
-			exit(EXIT_FAILURE);
-		}
-		i++;
+		pipeline->n_cmds = argc - 4;
+		pipeline->infile = NULL;
+		pipeline->argv = argv + 3;
 	}
+	else
+	{
+		pipeline->n_cmds = argc - 3;
+		pipeline->infile = argv[1];
+		pipeline->argv = argv + 2;
+	}
+	pipeline->n_pipes = pipeline->n_cmds - 1;
+	pipeline->pipefds = malloc(2 * pipeline->n_pipes * sizeof(int));
+	if (!pipeline->pipefds)
+		error_message("malloc", 1);
+	pipeline->outfile = argv[argc - 1];
+	pipeline->envp = envp;
 }
 
 void	execute_command(const char *cmd, t_pipex_data *pipeline)
@@ -106,22 +118,17 @@ void	create_child_process(t_pipex_data *pipeline, int cmd_index)
 	error_message("execute_command", 1);
 }
 
-void	close_unused_pipe_ends(t_pipex_data *pipeline, int cmd_index)
+void cleanup_pipex_data(t_pipex_data *pipeline)
 {
-	if (cmd_index > 0)
-		close(pipeline->pipefds[(cmd_index - 1) * 2]);
-	if (cmd_index < pipeline->n_cmds - 1)
-		close(pipeline->pipefds[cmd_index * 2 + 1]);
+    if (pipeline != NULL) {
+        // Free the dynamically allocated pipefds array
+        if (pipeline->pipefds != NULL) {
+            free(pipeline->pipefds);
+            pipeline->pipefds = NULL; // Good practice to set the pointer to NULL after freeing
+        }
+    }
 }
 
-void	close_all_pipe_fds(t_pipex_data *pipeline)
-{
-	int	i;
-
-	i = 0;
-	while (i < 2 * pipeline->n_pipes)
-		close(pipeline->pipefds[i++]);
-}
 
 void	execute_pipeline(t_pipex_data *pipeline)
 {
@@ -147,6 +154,8 @@ void	execute_pipeline(t_pipex_data *pipeline)
 	close_all_pipe_fds(pipeline);
 	cleanup_pipes_and_wait(pipeline);
 }
+
+
 
 int	main(int argc, char *argv[], char *envp[])
 {

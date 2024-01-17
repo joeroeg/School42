@@ -6,21 +6,11 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 19:23:02 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/10/30 17:38:18 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:47:37 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-function: memcmp compares the first n bytes of memory area str1 and str2.
-		  if str1 is found returns an int less than, equal to, or greater than zero.
-   input: ft_memcmp("abcdef", "abc", 6)
-  output: 0
-
-   input: ft_memcmp("abcdef", "abcdeF", 6)
-  output: 32
-*/
 
 int	ft_memcmp(const void *str1, const void *str2, size_t n)
 {

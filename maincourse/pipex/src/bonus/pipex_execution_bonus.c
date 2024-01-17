@@ -6,11 +6,11 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:56:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 17:22:03 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:21:21 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../../pipex.h"
 
 char	*build_and_check_exec(const char *dir, const char *file, size_t length)
 {

@@ -6,20 +6,11 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:33:53 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/03 13:59:49 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:47:50 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-function: allocates (with malloc) and returns a copy of (s1) with the characters
-		  specified in (set) removed from the beginning and the end of the string.
-		  s1: The string to be trimmed.
-		  set: The reference set of characters to trim.
-   input: ft_strtrim(" Hello World Hello ", " Hello ")
-  output: "World"
-*/
 
 char	*ft_strtrim(char const *s1, char const *set)
 {

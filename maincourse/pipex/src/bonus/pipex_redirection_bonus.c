@@ -6,11 +6,11 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:43:58 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 17:37:51 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:21:29 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../../pipex.h"
 
 void	redirect_first_command(t_pipex_data *pipeline)
 {
