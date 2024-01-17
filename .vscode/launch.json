@@ -6,7 +6,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/maincourse/pipex/pipex_bonus",
             // "args": ["infile", "cat", "sort", "outfile"],
-            "args": ["here_doc", "5", "cat -e", "sort -r", "outfile"],
+            "args": ["infile", "ca", "sor", "outfile"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

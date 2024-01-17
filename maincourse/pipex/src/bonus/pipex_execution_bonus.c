@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_execution_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:56:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 18:21:21 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/17 00:33:30 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,19 @@ int	execute(char *fullpath, char *const argv[], char *const envp[])
 	}
 }
 
-int	ft_execvp(const char *file, char *const argv[], char *const envp[])
+/*
+// if (command_path)
+	// free(command_path);
+src/bonus/pipex_execution_bonus.c:107:3: warning: Attempt to free released memory [unix.Malloc]
+                free(command_path);
+*/
+
+int	ft_execvp(const char *command, char *const argv[], char *const envp[])
 {
 	char	*command_path;
 	int		result;
 
-	command_path = find_command_path(file, envp);
+	command_path = find_command_path(command, envp);
 	result = execute(command_path, argv, envp);
 	if (command_path)
 		free(command_path);

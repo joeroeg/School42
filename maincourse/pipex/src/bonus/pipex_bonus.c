@@ -6,7 +6,7 @@
 /*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 22:32:45 by device           ###   ########.fr       */
+/*   Updated: 2024/01/17 14:46:07 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 CURRENT TASKS
-./pipex_bonus here_doc EOF cat\ -e sort\ -r outfile
+[X]./pipex_bonus here_doc EOF cat\ -e sort\ -r outfile
 	==35147== 8 bytes in 1 blocks are still reachable in loss record 1 of 48
 	==35147==    at 0x100124505: malloc
 	==35147==    by 0x1000022D7: init_pipex_data (pipex_bonus.c:60)
@@ -83,7 +83,8 @@ void	execute_command(const char *cmd, t_pipex_data *pipeline)
 	if (ft_execvp(args[0], args, pipeline->envp) < 0)
 	{
 		perror("execvp");
-		free(args);
+		free_string_array(&args);
+		free(pipeline->pipefds);
 		exit(EXIT_FAILURE);
 	}
 	free(args);

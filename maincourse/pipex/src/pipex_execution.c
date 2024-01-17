@@ -6,7 +6,7 @@
 /*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:56:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 23:18:31 by device           ###   ########.fr       */
+/*   Updated: 2024/01/17 00:15:25 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*build_and_check_exec(const char *dir, const char *file, size_t length)
 	return (NULL);
 }
 
-char	*search_command_in_directories(const char *file, char *path)
+char	*search_command_in_directories(const char *command, char *path)
 {
 	char	**directories;
 	char	*fullpath;
@@ -44,9 +44,9 @@ char	*search_command_in_directories(const char *file, char *path)
 	i = -1;
 	while (directories[++i])
 	{
-		length = ft_strlen(directories[i]) + 1 + ft_strlen(file) + 1;
+		length = ft_strlen(directories[i]) + 1 + ft_strlen(command) + 1;
 		fullpath = NULL;
-		fullpath = build_and_check_exec(directories[i], file, length);
+		fullpath = build_and_check_exec(directories[i], command, length);
 		if (fullpath)
 			break ;
 	}
@@ -54,7 +54,7 @@ char	*search_command_in_directories(const char *file, char *path)
 	return (fullpath);
 }
 
-char	*find_command_path(const char *file, char *const envp[])
+char	*find_command_path(const char *command, char *const envp[])
 {
 	char	*path;
 	char	*command_path;
@@ -76,7 +76,7 @@ char	*find_command_path(const char *file, char *const envp[])
 		ft_putstr_fd("PATH variable not found\n", 2);
 		return (NULL);
 	}
-	command_path = search_command_in_directories(file, path);
+	command_path = search_command_in_directories(command, path);
 	free(path);
 	return (command_path);
 }
@@ -96,12 +96,12 @@ int	execute(char *fullpath, char *const argv[], char *const envp[])
 	}
 }
 
-int	ft_execvp(const char *file, char *const argv[], char *const envp[])
+int	ft_execvp(const char *command , char *const argv[], char *const envp[])
 {
 	char	*command_path;
 	int		result;
 
-	command_path = find_command_path(file, envp);
+	command_path = find_command_path(command, envp);
 	result = execute(command_path, argv, envp);
 	if (command_path)
 		free(command_path);

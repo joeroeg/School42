@@ -6,7 +6,7 @@
 /*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:40:30 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 21:18:59 by device           ###   ########.fr       */
+/*   Updated: 2024/01/16 23:26:19 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	create_pipes(int pipefds[], int n_pipes)
 	while (i < n_pipes)
 	{
 		if (pipe(pipefds + i * 2) < 0)
-		{
-			perror("pipe");
-			exit(EXIT_FAILURE);
-		}
+			error_message("pipe", 1);
 		i++;
 	}
 }
