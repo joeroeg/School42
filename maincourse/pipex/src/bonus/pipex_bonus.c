@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 18:43:25 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:30:36 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 /*
 CURRENT TASKS
-
-UNSOVLED TASKS
 ./pipex_bonus here_doc EOF cat\ -e sort\ -r outfile
 	==35147== 8 bytes in 1 blocks are still reachable in loss record 1 of 48
-	==35147==    at 0x100124505: malloc (in /Users/hezhukov/.brew/Cellar/valgrind/HEAD-d14be1d/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+	==35147==    at 0x100124505: malloc
 	==35147==    by 0x1000022D7: init_pipex_data (pipex_bonus.c:60)
 	==35147==    by 0x1000026FC: main (pipex_bonus.c:158)
+
+UNSOVLED TASKS
 
 
 SOLVED TASKS
@@ -118,18 +118,6 @@ void	create_child_process(t_pipex_data *pipeline, int cmd_index)
 	error_message("execute_command", 1);
 }
 
-void cleanup_pipex_data(t_pipex_data *pipeline)
-{
-    if (pipeline != NULL) {
-        // Free the dynamically allocated pipefds array
-        if (pipeline->pipefds != NULL) {
-            free(pipeline->pipefds);
-            pipeline->pipefds = NULL; // Good practice to set the pointer to NULL after freeing
-        }
-    }
-}
-
-
 void	execute_pipeline(t_pipex_data *pipeline)
 {
 	int		i;
@@ -155,8 +143,6 @@ void	execute_pipeline(t_pipex_data *pipeline)
 	cleanup_pipes_and_wait(pipeline);
 }
 
-
-
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipex_data	pipeline;
@@ -177,6 +163,7 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	init_pipex_data(&pipeline, argc, argv, envp);
 	execute_pipeline(&pipeline);
+	wait(NULL);
 	free(pipeline.pipefds);
 	return (EXIT_SUCCESS);
 }
