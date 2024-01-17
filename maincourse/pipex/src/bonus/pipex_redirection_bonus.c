@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_redirection_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:43:58 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 18:21:29 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:28:33 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ void	redirect_first_command(t_pipex_data *pipeline)
 
 	if (pipeline->limiter)
 		return ;
-	fd_in = open(pipeline->infile, O_RDONLY, 777);
-	dprintf(2, "Redirecting IO for first command\n");
+	fd_in = open(pipeline->infile, O_RDONLY, 0644);
 	if (fd_in < 0)
 		error_message("open (infile)", 1);
 	dup2(fd_in, STDIN_FILENO);
-	dprintf(2, "Redirected stdin to fd %d\n", fd_in);
 	close(fd_in);
 }
 
@@ -70,6 +68,7 @@ void	redirect_here_doc(t_pipex_data *pipeline)
 		close(fd[0]);
 		here_doc(pipeline->limiter, fd[1]);
 		close(fd[1]);
+		free(pipeline->pipefds);
 		exit(EXIT_SUCCESS);
 	}
 	else if (pid < 0)

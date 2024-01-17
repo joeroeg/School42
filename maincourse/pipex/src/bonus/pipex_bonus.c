@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 19:30:36 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:32:45 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,6 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	init_pipex_data(&pipeline, argc, argv, envp);
 	execute_pipeline(&pipeline);
-	wait(NULL);
 	free(pipeline.pipefds);
 	return (EXIT_SUCCESS);
 }

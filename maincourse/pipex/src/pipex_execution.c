@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:56:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 18:12:26 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 23:18:31 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*search_command_in_directories(const char *file, char *path)
 	while (directories[++i])
 	{
 		length = ft_strlen(directories[i]) + 1 + ft_strlen(file) + 1;
+		fullpath = NULL;
 		fullpath = build_and_check_exec(directories[i], file, length);
 		if (fullpath)
 			break ;
@@ -84,10 +85,8 @@ int	execute(char *fullpath, char *const argv[], char *const envp[])
 {
 	if (fullpath)
 	{
-		dprintf(2, "Executing command: %s\n", argv[0]);
 		execve(fullpath, argv, envp);
 		perror("execve");
-		free(fullpath);
 		return (-1);
 	}
 	else

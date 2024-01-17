@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_heredoc_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:52:51 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 18:21:33 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:22:47 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	get_next_line(char **line)
 	while (1)
 	{
 		ret = read(STDIN_FILENO, buf, 1);
+		if (ret == -1)
+			break ;
 		if (ret <= 0 || buf[0] == '\n')
 			break ;
 		buf[ret] = '\0';
