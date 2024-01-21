@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:28:10 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 14:49:36 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/21 15:50:35 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 /**
  * @brief Checks if the given number is contained in the given array.
- * @param num The number to check.
- * @param argv The array of strings to check.
- * @param i The index of the current argument.
- * @return 1 if the number has a duplicate, 0 otherwise.
 */
 
 static int	check_duplicates(int num, char **argv, int i)
@@ -34,8 +30,6 @@ static int	check_duplicates(int num, char **argv, int i)
 
 /**
  * @brief Checks if the given string is a valid integer.
- * @param num The string to check.
- * @return 1 if the string is a valid integer, 0 otherwise.
 */
 
 static int	is_integer(char *num)
@@ -56,8 +50,6 @@ static int	is_integer(char *num)
 
 /**
  * @brief Validates the arguments passed to the program.
- * @param argc The number of arguments passed to the program.
- * @param argv The arguments passed to the program.
 */
 
 void	validate_arguments(int argc, char **argv)
@@ -83,7 +75,7 @@ void	validate_arguments(int argc, char **argv)
 			error_message_free(&args, "some arguments are duplicated", EXIT_FAILURE);
 		if (tmp < INT_MIN || tmp > INT_MAX)
 			error_message_free(&args, "some arguments are out of range", EXIT_FAILURE);
- 		i++;
+		i++;
 	}
 	if (argc == 2)
 		free_string_array(&args);
