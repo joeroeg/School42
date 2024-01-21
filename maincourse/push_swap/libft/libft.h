@@ -66,5 +66,6 @@ size_t	ft_strspn(const char *str1, const char *str2);
 size_t	ft_strcspn(const char *str1, const char *str2);
 char	*ft_strpbrk(const char *str, const char *accept);
 int		ft_strcmp(const char *s1, const char *s2);
+long	ft_atol(const char *nptr);
 
 #endif

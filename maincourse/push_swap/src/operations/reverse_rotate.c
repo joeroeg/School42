@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 11:08:42 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 11:58:03 by hezhukov         ###   ########.fr       */
+/*   Created: 2024/01/19 11:08:42 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/01/21 17:45:50 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
-
-// Shifts down all elements of a stack by 1. The last element becomes the first one | rra and rrb
 
 int	reverse_rotate(t_node **stack)
 {
@@ -27,8 +25,8 @@ int	reverse_rotate(t_node **stack)
 	{
 		if (head->next->next == NULL)
 		{
-			 head->next = NULL;
-			 break ;
+			head->next = NULL;
+			break ;
 		}
 		head = head->next;
 	}

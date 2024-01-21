@@ -6,31 +6,23 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:28:10 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 15:50:35 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:50:16 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-/**
- * @brief Checks if the given number is contained in the given array.
-*/
-
-static int	check_duplicates(int num, char **argv, int i)
+static int	check_duplicates(long num, char **argv, int i)
 {
 	i++;
 	while (argv[i])
 	{
-		if (ft_atoi(argv[i]) == num)
+		if (ft_atol(argv[i]) == num)
 			return (1);
 		i++;
 	}
 	return (0);
 }
-
-/**
- * @brief Checks if the given string is a valid integer.
-*/
 
 static int	is_integer(char *num)
 {
@@ -39,6 +31,8 @@ static int	is_integer(char *num)
 	i = 0;
 	if (num[0] == '-' || num[0] == '+')
 		i++;
+	if (!num[i] || !ft_isdigit(num[i]))
+		return (0);
 	while (num[i])
 	{
 		if (!ft_isdigit(num[i]))
@@ -48,35 +42,31 @@ static int	is_integer(char *num)
 	return (1);
 }
 
-/**
- * @brief Validates the arguments passed to the program.
-*/
-
 void	validate_arguments(int argc, char **argv)
 {
 	int		i;
-	long	tmp;
-	char	**args;
+	long	number;
+	char	**arguments;
 
 	i = 0;
 	if (argc == 2)
-		args = ft_split(argv[1], ' ');
+		arguments = ft_split(argv[1], ' ');
 	else
 	{
 		i = 1;
-		args = argv;
+		arguments = argv;
 	}
-	while (args[i])
+	while (arguments[i])
 	{
-		tmp = ft_atol(args[i]);
-		if (!is_integer(args[i]))
-			error_message_free(&args, "some arguments are not integers", EXIT_FAILURE);
-		if (check_duplicates(tmp, args, i))
-			error_message_free(&args, "some arguments are duplicated", EXIT_FAILURE);
-		if (tmp < INT_MIN || tmp > INT_MAX)
-			error_message_free(&args, "some arguments are out of range", EXIT_FAILURE);
+		number = ft_atol(arguments[i]);
+		if (!is_integer(arguments[i]))
+			error_message_free(&arguments, "non-integers found", EXIT_FAILURE);
+		if (check_duplicates(number, arguments, i))
+			error_message_free(&arguments, "duplicates found", EXIT_FAILURE);
+		if (number < INT_MIN || number > INT_MAX)
+			error_message_free(&arguments, "out of range found", EXIT_FAILURE);
 		i++;
 	}
 	if (argc == 2)
-		free_string_array(&args);
+		free_string_array(&arguments);
 }

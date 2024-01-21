@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:06:47 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 14:36:27 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:44:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ void	free_string_array(char ***array);
 void	error_message_free(char ***args, char *message, int exit_code);
 long	ft_atol(const char *nptr);
 int		is_sorted(t_node **stack);
-int		get_distance(t_node **stack, int index);
-void	make_top(t_node **stack, int distance);
+int		find_distance(t_node **stack, int index);
 void	free_stack(t_node **stack);
 
 // Algorithm utils

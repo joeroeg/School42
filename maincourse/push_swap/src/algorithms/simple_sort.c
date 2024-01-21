@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simple.c                                           :+:      :+:    :+:   */
+/*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 11:23:46 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 13:07:58 by hezhukov         ###   ########.fr       */
+/*   Created: 2024/01/19 11:23:46 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/01/21 17:45:06 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-static int	get_min(t_node **stack, int val)
+static int	find_minimum(t_node **stack, int val)
 {
 	t_node	*head;
 	int		min;
@@ -35,8 +35,8 @@ static void	sort_3(t_node **stack_a)
 	int		next_min;
 
 	head = *stack_a;
-	min = get_min(stack_a, -1);
-	next_min = get_min(stack_a, min);
+	min = find_minimum(stack_a, -1);
+	next_min = find_minimum(stack_a, min);
 	if (is_sorted(stack_a))
 		return ;
 	if (head->index == min && head->next->index != next_min)
@@ -70,7 +70,7 @@ static void	sort_4(t_node **stack_a, t_node **stack_b)
 
 	if (is_sorted(stack_a))
 		return ;
-	distance = get_distance(stack_a, get_min(stack_a, -1));
+	distance = find_distance(stack_a, find_minimum(stack_a, -1));
 	if (distance == 1)
 		ra(stack_a);
 	else if (distance == 2)
@@ -91,7 +91,7 @@ void	sort_5(t_node **stack_a, t_node **stack_b)
 {
 	int	distance;
 
-	distance = get_distance(stack_a, get_min(stack_a, -1));
+	distance = find_distance(stack_a, find_minimum(stack_a, -1));
 	if (distance == 1)
 		ra(stack_a);
 	else if (distance == 2)

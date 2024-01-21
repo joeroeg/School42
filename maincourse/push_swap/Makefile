@@ -16,7 +16,7 @@ RM      = rm -f
 SRCS    = $(addprefix $(SDIR), push_swap.c) \
           $(addprefix $(SDIR)operations/, push.c reverse_rotate.c rotate.c swap.c) \
 		  $(addprefix $(SDIR)utilities/, utilities.c list_functions.c index.c validate_arguments.c) \
-		  $(addprefix $(SDIR)algorithms/, radix.c simple.c)
+		  $(addprefix $(SDIR)algorithms/, radix_sort.c simple_sort.c)
 OBJS    = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS))
 
 

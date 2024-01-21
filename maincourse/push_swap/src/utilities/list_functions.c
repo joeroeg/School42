@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 15:51:26 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 15:51:30 by hezhukov         ###   ########.fr       */
+/*   Created: 2024/01/19 15:51:26 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/01/21 17:46:12 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,3 @@ int	ft_lstsize(t_node *head)
 	}
 	return (i);
 }
-
-// void	ft_print_list(t_node *head)
-// {
-// 	t_node	*tmp;
-
-// 	tmp = head;
-// 	while (tmp != NULL)
-// 	{
-// 		ft_putnbr_fd(tmp->value, 1);
-// 		ft_putendl_fd("", 1);
-// 		tmp = tmp->next;
-// 	}
-// }
-

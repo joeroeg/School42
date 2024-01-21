@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 11:07:43 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 11:42:39 by hezhukov         ###   ########.fr       */
+/*   Created: 2024/01/19 11:07:43 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/01/21 17:45:16 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
-
-// Takes the first element of one stack and puts it at the top of another | pa and pb
 
 int	push(t_node **stack_to, t_node **stack_from)
 {

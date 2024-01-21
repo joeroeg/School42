@@ -6,13 +6,13 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:23:28 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 13:48:40 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/21 18:00:36 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static void	initStack(t_node **stack, int argc, char **argv)
+static void	initialize_stack(t_node **stack, int argc, char **argv)
 {
 	t_node	*new;
 	char	**args;
@@ -57,7 +57,7 @@ int	main(int argc, char **argv)
 	stack_b = (t_node **)malloc(sizeof(t_node));
 	*stack_a = NULL;
 	*stack_b = NULL;
-	initStack(stack_a, argc, argv);
+	initialize_stack(stack_a, argc, argv);
 	if (is_sorted(stack_a))
 	{
 		free_stack(stack_a);
