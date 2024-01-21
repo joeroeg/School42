@@ -19,4 +19,3 @@
 # valgrind --leak-check=full ./pipex_bonus here_doc EOF "cat -e" "gre "l"" outfile
 # valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes ./pipex_bonus here_doc EOF "cat -e" "gre "l"" outfile
 valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes ./pipex_bonus here_doc EOF "" "" outfile
-

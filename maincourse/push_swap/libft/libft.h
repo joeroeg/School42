@@ -26,12 +26,6 @@
 # include <math.h>
 # include <ctype.h>
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
-
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -67,9 +61,10 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 int		ft_islower(int c);
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
-void	ft_lstclear(t_list **lst, void (*del)(void *));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+char	*ft_strtok(char *str, const char *delim);
+size_t	ft_strspn(const char *str1, const char *str2);
+size_t	ft_strcspn(const char *str1, const char *str2);
+char	*ft_strpbrk(const char *str, const char *accept);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

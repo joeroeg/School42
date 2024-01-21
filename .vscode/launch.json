@@ -4,14 +4,14 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/maincourse/pipex/pipex_bonus",
-            // "args": ["infile", "cat", "sort", "outfile"],
-            "args": ["infile", "ca", "sor", "outfile"],
+            "program": "${workspaceFolder}/maincourse/push_swap/push_swap",
+            // "args": ["4", "67", "3", "87", "23"],
+            "args": ["5 4 3 2 -2147483648"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "gdb",
+            "MIMode": "lldb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
