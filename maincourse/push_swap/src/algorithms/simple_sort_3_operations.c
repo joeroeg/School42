@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   simple_sort_3_operations.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 19:58:06 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:27:40 by hezhukov         ###   ########.fr       */
+/*   Created: 2024/01/21 18:52:14 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/01/21 20:06:20 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../push_swap.h"
 
-/*
-input: ft_lstnew("Hello")
-function: create a new node with content "Hello"
-output: "Hello"
-*/
-
-/*
-t_list	*ft_lstnew(void *content)
+void	sort_132(t_node **stack_a)
 {
-	t_list	*new_node;
-
-	new_node = (t_list *)malloc(sizeof(*new_node));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+	ra(stack_a);
+	sa(stack_a);
+	rra(stack_a);
 }
-*/
+
+void	sort_213(t_node **stack_a)
+{
+	sa(stack_a);
+}
+
+void	sort_231(t_node **stack_a)
+{
+	rra(stack_a);
+}
+
+void	sort_312(t_node **stack_a)
+{
+	ra(stack_a);
+}
+
+void	sort_321(t_node **stack_a)
+{
+	sa(stack_a);
+	rra(stack_a);
+}

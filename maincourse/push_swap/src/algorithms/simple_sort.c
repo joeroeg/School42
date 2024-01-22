@@ -6,13 +6,18 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:23:46 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 17:45:06 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:18:30 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-static int	find_minimum(t_node **stack, int val)
+/**
+ * @brief find a minimum value in a stack
+ * @param stack stack to search in
+ * @param val value to exclude from search
+*/
+static int	find_minimum(t_node **stack, int exclude_value)
 {
 	t_node	*head;
 	int		min;
@@ -22,11 +27,22 @@ static int	find_minimum(t_node **stack, int val)
 	while (head->next)
 	{
 		head = head->next;
-		if ((head->index < min) && head->index != val)
+		if ((head->index < min) && head->index != exclude_value)
 			min = head->index;
 	}
 	return (min);
 }
+
+// void	sort_3(t_node **stack_a)
+// {
+// 	t_sort_function	*jump_table;
+// 	int				index;
+
+// 	jump_table = create_jump_table();
+// 	index = get_sort_index(stack_a);
+// 	if (index != -1)
+// 		jump_table[index](stack_a);
+// }
 
 static void	sort_3(t_node **stack_a)
 {
