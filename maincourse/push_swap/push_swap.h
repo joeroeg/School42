@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:06:47 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 19:55:13 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:23:07 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ typedef struct s_node
 	int				index;
 	struct s_node	*next;
 }				t_node;
-
-typedef void (*t_sort_function)(t_node **);
 
 void			validate_arguments(int argc, char **argv);
 void			index_stack(t_node **stack);
@@ -62,14 +60,5 @@ int				rr(t_node **stack_a, t_node **stack_b);
 int				rra(t_node **stack_a);
 int				rrb(t_node **stack_b);
 int				rrr(t_node **stack_a, t_node **stack_b);
-
-t_sort_function	*create_jump_table();
-int 			get_sort_index(t_node **stack_a);
-void			sort_132(t_node **stack_a);
-void			sort_213(t_node **stack_a);
-void			sort_231(t_node **stack_a);
-void			sort_312(t_node **stack_a);
-void			sort_321(t_node **stack_a);
-void			rotate_swap_reverse(t_node **stack_a);
 
 #endif
