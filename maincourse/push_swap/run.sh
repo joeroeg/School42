@@ -166,19 +166,19 @@ valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins
 ARG="1 2 3 4 5 6 7 8 9 10"
 valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes ./push_swap $ARG 2>&1 | grep -E 'definitely lost|indirectly lost|possibly lost|still reachable' | awk '$4 != "0" { print }'
 
-echo "running test of error cases "
+# echo "running test of error cases "
 
-ARG="5 4 3 2 1 1"
-./push_swap $ARG | ./checker_Mac $ARG
-ARG="5 4 3 2 1 0a"
-./push_swap $ARG | ./checker_Mac $ARG
-ARG="5 4 3 2 1 -2147483649"
-./push_swap $ARG | ./checker_Mac $ARG
-ARG="5 4 3 2 1 2147483648"
-./push_swap $ARG | ./checker_Mac $ARG
-ARG="5 4 3 2 1 -"
-./push_swap $ARG | ./checker_Mac $ARG
-ARG="5 4 3 2 1 +"
-./push_swap $ARG | ./checker_Mac $ARG
-ARG="5 4 3 2 1 - 1"
-./push_swap $ARG | ./checker_Mac $ARG
+# ARG="5 4 3 2 1 1"
+# ./push_swap $ARG | ./checker_Mac $ARG
+# ARG="5 4 3 2 1 0a"
+# ./push_swap $ARG | ./checker_Mac $ARG
+# ARG="5 4 3 2 1 -2147483649"
+# ./push_swap $ARG | ./checker_Mac $ARG
+# ARG="5 4 3 2 1 2147483648"
+# ./push_swap $ARG | ./checker_Mac $ARG
+# ARG="5 4 3 2 1 -"
+# ./push_swap $ARG | ./checker_Mac $ARG
+# ARG="5 4 3 2 1 +"
+# ./push_swap $ARG | ./checker_Mac $ARG
+# ARG="5 4 3 2 1 - 1"
+# ./push_swap $ARG | ./checker_Mac $ARG

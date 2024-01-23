@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:28:10 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/23 11:28:21 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:28:20 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void	validate_arguments(int argc, char **argv)
 	{
 		number = ft_atol(arguments[i]);
 		if (!is_integer(arguments[i]))
-			error_message_free(&arguments, "non-integers found", argc, EXIT_FAILURE);
+			error_message_free(&arguments, "non-integers found", argc, 1);
 		if (check_duplicates(number, arguments, i))
-			error_message_free(&arguments, "duplicates found", argc, EXIT_FAILURE);
+			error_message_free(&arguments, "duplicates found", argc, 1);
 		if (number < INT_MIN || number > INT_MAX)
-			error_message_free(&arguments, "out of range found", argc, EXIT_FAILURE);
+			error_message_free(&arguments, "out of range found", argc, 1);
 		i++;
 	}
 	if (argc == 2)

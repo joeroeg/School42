@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:41:30 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/23 11:28:34 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:28:18 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,6 @@ int	is_sorted(t_node **stack)
 		head = head->next;
 	}
 	return (1);
-}
-
-int	find_distance(t_node **stack, int index)
-{
-	t_node	*head;
-	int		distance;
-
-	distance = 0;
-	head = *stack;
-	while (head)
-	{
-		if (head->index == index)
-			break ;
-		distance++;
-		head = head->next;
-	}
-	return (distance);
 }
 
 void	free_stack(t_node **stack)
