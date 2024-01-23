@@ -6,13 +6,13 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:37:54 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 16:33:34 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:51:48 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-static t_node	*get_next_min(t_node **stack)
+t_node	*get_next_min(t_node **stack)
 {
 	t_node	*head;
 	t_node	*min;

@@ -6,15 +6,16 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:41:30 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/21 18:04:07 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:28:34 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-void	error_message_free(char ***args, char *message, int exit_code)
+void	error_message_free(char ***args, char *message, int argc, int exit_code)
 {
-	free_string_array(args);
+	if (argc == 2)
+		free_string_array(args);
 	if (exit_code == EXIT_FAILURE)
 		error_message(message, EXIT_FAILURE);
 	else if (exit_code == EXIT_SUCCESS)

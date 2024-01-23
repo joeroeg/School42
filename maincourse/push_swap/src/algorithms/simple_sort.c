@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:23:46 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/22 20:06:14 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:37:53 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,17 @@ static int	find_minimum(t_node **stack, int exclude_value)
 			min = head->index;
 	}
 	return (min);
+}
+
+void	sort_3(t_node **stack_a)
+{
+	t_sort_function	*jump_table;
+	int				index;
+
+	jump_table = create_jump_table();
+	index = get_sort_index(stack_a);
+	if (index != -1)
+		jump_table[index](stack_a);
 }
 
 // static void	sort_3(t_node **stack_a)
@@ -136,17 +147,6 @@ static int	find_minimum(t_node **stack, int exclude_value)
 // 		sort_5(stack_a, stack_b);
 // }
 
-void	sort_3(t_node **stack_a)
-{
-	t_sort_function	*jump_table;
-	int				index;
-
-	jump_table = create_jump_table();
-	index = get_sort_index(stack_a);
-	if (index != -1)
-		jump_table[index](stack_a);
-}
-
 bool is_empty(t_node **stack) {
     return (*stack == NULL);
 }
@@ -181,19 +181,43 @@ void move_minimum_to_top(t_node **stack_a, int min_position, int stack_size) {
 void push_minimum_to_b(t_node **stack_a, t_node **stack_b) {
     int min = find_minimum(stack_a, -1);
     int min_position = find_position(stack_a, min);
-    int stack_size = ft_lstsize(*stack_a); // Assuming you have a function to get the size of the stack
-
+    int stack_size = ft_lstsize(*stack_a);
     move_minimum_to_top(stack_a, min_position, stack_size);
     pb(stack_a, stack_b);
 }
 
+int find_next_minimum(t_node **stack, int first_min) {
+    return find_minimum(stack, first_min);
+}
 
+void push_n_minimum_to_b(t_node **stack_a, t_node **stack_b, int n) {
+    int min = find_minimum(stack_a, -1);
+    for (int i = 0; i < n; ++i) {
+        int min_position = find_position(stack_a, min);
+        int stack_size = ft_lstsize(*stack_a);
+        move_minimum_to_top(stack_a, min_position, stack_size);
+        pb(stack_a, stack_b);
 
-void simple_sort(t_node **stack_a, t_node **stack_b) {
-    while (!is_empty(stack_a)) {
-        push_minimum_to_b(stack_a, stack_b);
+        if (i < n - 1) {
+            min = find_next_minimum(stack_a, min);
+        }
     }
-    while (!is_empty(stack_b)) {
-        pa(stack_a, stack_b); // Move all elements back to stack_a
+}
+
+void reset_indices(t_node **stack) {
+    t_node *head = *stack;
+    while (head) {
+        head->index = -1;
+        head = head->next;
     }
+}
+
+void simple_sort(t_node **stack_a, t_node **stack_b, int limit)
+{
+	push_n_minimum_to_b(stack_a, stack_b, limit);
+	reset_indices(stack_a);
+	index_stack(stack_a);
+	sort_3(stack_a);
+	while (!is_empty(stack_b))
+		pa(stack_a, stack_b);
 }

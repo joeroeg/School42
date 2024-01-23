@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:23:28 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/22 12:23:41 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:04:51 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,12 @@ static void	initialize_stack(t_node **stack, int argc, char **argv)
 
 static void	sort_stack(t_node **stack_a, t_node **stack_b)
 {
-	if (ft_lstsize(*stack_a) <= 5)
-		simple_sort(stack_a, stack_b);
+	if (ft_lstsize(*stack_a) == 5)
+		simple_sort(stack_a, stack_b, 2);
+	else if (ft_lstsize(*stack_a) == 4)
+		simple_sort(stack_a, stack_b, 1);
+	else if (ft_lstsize(*stack_a) == 3)
+		sort_3(stack_a);
 	else
 		radix_sort(stack_a, stack_b);
 }

@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:06:47 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/22 19:53:17 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:38:24 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_node
 
 typedef void (*t_sort_function)(t_node **);
 
+t_node			*get_next_min(t_node **stack);
+
 void			validate_arguments(int argc, char **argv);
 void			index_stack(t_node **stack);
 t_node			*ft_lstnew(int value);
@@ -37,13 +39,13 @@ int				ft_lstsize(t_node *head);
 void			error_message(char *msg, int exit_code);
 void			ft_free(char **str);
 void			free_string_array(char ***array);
-void			error_message_free(char ***args, char *message, int exit_code);
+void			error_message_free(char ***args, char *message, int argc, int exit_code);
 int				is_sorted(t_node **stack);
 int				find_distance(t_node **stack, int index);
 void			free_stack(t_node **stack);
 
 void			radix_sort(t_node **stack_a, t_node **stack_b);
-void			simple_sort(t_node **stack_a, t_node **stack_b);
+void 			simple_sort(t_node **stack_a, t_node **stack_b, int limit);
 void			index_stack(t_node **stack);
 void			sort_5(t_node **stack_a, t_node **stack_b);
 
@@ -65,6 +67,7 @@ int				rrb(t_node **stack_b);
 int				rrr(t_node **stack_a, t_node **stack_b);
 
 t_sort_function	*create_jump_table();
+void			sort_3(t_node **stack_a);
 int 			get_sort_index(t_node **stack_a);
 void			sort_132(t_node **stack_a);
 void			sort_213(t_node **stack_a);
