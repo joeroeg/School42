@@ -6,7 +6,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/maincourse/push_swap/push_swap",
             // "args": ["4", "67", "3", "87", "23"],
-            "args": ["5 4 3 2 1a"],
+            "args": ["6 5 4 3 2 1"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
