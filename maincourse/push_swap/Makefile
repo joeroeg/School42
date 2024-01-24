@@ -11,7 +11,7 @@ CFLAGS  = -Wall -Werror -Wextra -g
 RM      = rm -f
 
 # Source and Object Files
-SRCS    = $(addprefix $(SDIR), push_swap.c) \
+SRCS    = $(addprefix $(SDIR), main.c) \
           $(addprefix $(SDIR)operations/, push.c reverse_rotate.c rotate.c swap.c) \
 		  $(addprefix $(SDIR)utilities/, utilities.c list_functions.c index.c validate_arguments.c) \
 		  $(addprefix $(SDIR)algorithms/, radix_sort.c simple_sort.c simple_sort_3_operations.c simple_sort_3_helpers.c simple_sort_helpers.c)
