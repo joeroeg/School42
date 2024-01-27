@@ -1,9 +1,15 @@
-#include <stdio.h>
+#include <unistd.h>
 
-int main(int argc, char **argv)
-{
-	for (int i = 0; i < argc; i++)
-	{
-		printf("argc[%d] argv[%s]\n", i, *argv++);
-	}
+int main() {
+    int x = 1;
+    // switch(x) {
+    //     case 1:
+	// 		write(1, "X=1\n", 4);
+    //         break;
+    // }
+
+    if(x == 1)
+		write(1, "X=1\n", 4);
+
+    return 0;
 }
