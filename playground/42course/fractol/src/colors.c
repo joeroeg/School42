@@ -1,4 +1,4 @@
-#include "../fractol.h"
+#include "fractol.h"
 
 int	get_rgba(int r, int g, int b, int a)
 {
@@ -7,10 +7,10 @@ int	get_rgba(int r, int g, int b, int a)
 
 uint32_t	set_color(int iter, t_fractol	*frctl)
 {
-	int			r;
-	int			g;
-	int			b;
-	double		t;
+	int			r = 0;
+	int			g = 0;
+	int			b = 0;
+	double		t = 0;-
 
 	t = (double)iter / (double)frctl->iter_max;
 	if (frctl->frctl_color == 1)

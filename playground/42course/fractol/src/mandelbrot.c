@@ -1,4 +1,4 @@
-#include "../fractol.h"
+#include "fractol.h"
 
 static void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
