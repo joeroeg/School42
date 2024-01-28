@@ -4,9 +4,8 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/maincourse/push_swap/push_swap",
-            // "args": ["4", "67", "3", "87", "23"],
-            "args": ["6 5 4 3 2 1"],
+            "program": "${workspaceFolder}/maincourse/fractol/fractol",
+            "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
@@ -30,44 +29,6 @@
                 }
             ]
         },
-
-        // {
-        //     "name": "(lldb) Launch",
-        //     "type": "cppdbg",
-        //     "request": "launch",
-        //     "program": "${workspaceFolder}/a.out",
-        //     "args": ["ls"],
-        //     "stopAtEntry": false,
-        //     "cwd": "${fileDirname}",
-        //     "environment": [],
-        //     "externalConsole": false,
-        //     "MIMode": "lldb",
-        // }
-        // {
-        //     "name": "(lldb) Launch",
-        //     "type": "cppdbg",
-        //     "request": "launch",
-        //     "program": "${workspaceFolder}/maincourse/pipex/pipex",
-        //     "args": ["infile", "NULL", "NULL", "outfile"],
-        //     "stopAtEntry": false,
-        //     "cwd": "${fileDirname}",
-        //     "environment": [],
-        //     "externalConsole": false,
-        //     "MIMode": "lldb"
-        // },
-        // {
-        //     "name": "(lldb) Launch",
-        //     "type": "cppdbg",
-        //     "request": "launch",
-        //     "program": "${fileDirname}/${fileBasenameNoExtension}",
-        //     "args": [],
-        //     "stopAtEntry": false,
-        //     "cwd": "${fileDirname}",
-        //     "environment": [],
-        //     "externalConsole": false,
-        //     "MIMode": "lldb",
-        //     "preLaunchTask": "Compile C File"
-        // }
     ],
 }
 
