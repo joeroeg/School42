@@ -9,8 +9,6 @@
 # include <stdio.h>
 # define WIDTH 800
 # define HEIGHT 600
-# define THREAD_WIDTH 5
-# define THREAD_NUMBER 120
 
 typedef struct s_fractol
 {
