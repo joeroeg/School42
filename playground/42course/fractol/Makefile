@@ -1,35 +1,118 @@
-NAME    := fractol
-CFLAGS  := -Wextra -Wall -Werror -Wunreachable-code -Ofast
-LIBMLX  := ./MLX42
+# Configuration
+NAME	= fractol
+LIBFT	= libft.a
+LDIR	= libft/
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
+LIBS	= -ldl -pthread -lm
+RM		= rm -rf
+MK		= mkdir -p
+SDIR	= src
+ODIR	= obj
 
-HEADERS := -I ./src -I $(LIBMLX)/include
-LIBS    := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS    := $(shell find ./src -iname "*.c")
-OBJS    := ${SRCS:.c=.o}
+# Include directories
+INCDIR = include
+HEADERS = -I $(INCDIR) -I $(MLXDIR)/include
 
-all: libmlx $(NAME)
+# Dependencies
+# DEPS = $(wildcard $(INCDIR)/*.h)
 
-libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+# # Source and Object Files
+# SRCS = $(wildcard $(SDIR)/*.c) $(wildcard $(SDIR)/*/*.c)
+SRCS := $(shell find ./src -iname "*.c")
+OBJS = $(SRCS:$(SDIR)/%.c=$(ODIR)/%.o)
 
-$(OBJS): src/fractol.h
+# # Source and Object Files
+# SRCS    = $(addprefix $(SDIR), main.c, mandelbrot.c, colors.c) \
+# OBJS    = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS))
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
+# MLX42
+MLXDIR = MLX42
+LIBMLX = $(MLXDIR)/build/libmlx42.a
+MLX_REPO = https://github.com/codam-coding-college/MLX42.git
+LIBS += -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" $(LIBMLX)
+HEADERS = -I $(INCDIR) -I $(MLXDIR)/include
+
+all: dependencies libft $(LIBMLX) $(NAME)
+
+# Dependency installation (brew, cmake, glfw)
+# dependencies:
+# 	@if [ -x "$$HOME/homebrew/bin/brew" ] || [ -x "$$HOME/.brew/bin/brew" ]; then \
+# 		echo "brew is already installed"; \
+# 	else \
+# 		echo "Brew not found"; \
+# 		read -p "Do you want to install brew? y/n: "  brewchoice; \
+# 		if [ "$$brewchoice" = "y" ]; then \
+# 			rm -rf $$HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $$HOME/.brew && \
+# 			echo 'export PATH=$$HOME/.brew/bin:$$PATH' >> $$HOME/.zshrc && source $$HOME/.zshrc && brew update; \
+# 			echo "Brew successfully installed"; \
+# 		else \
+# 			echo "Exit"; \
+# 			exit 2; \
+# 		fi \
+# 	fi
+# 	@if [ -d "$$HOME/homebrew/opt/cmake/bin" ] || [ -d "$$HOME/.brew/opt/cmake/bin" ]; then \
+# 		echo "cmake is already installed"; \
+# 	else \
+# 		echo "cmake not found"; \
+# 		read -p "Do you want to install cmake? y/n: " cmakechoice; \
+# 		if [ "$$cmakechoice" = "y" ]; then \
+# 			brew install cmake; \
+# 			echo "cmake successfully installed"; \
+# 		else \
+# 			echo "Exit"; \
+# 			exit 2; \
+# 		fi \
+# 	fi
+# 	@if [ -d "$$HOME/homebrew/opt/glfw/lib" ] || [ -d "$$HOME/.brew/opt/glfw/lib" ]; then \
+# 		echo "glfw is already installed"; \
+# 	else \
+# 		echo "glfw not found"; \
+# 		read -p "Do you want to install glfw? y/n: " glfwchoice; \
+# 		if [ "$$glfwchoice" = "y" ]; then \
+# 			brew install glfw; \
+# 			echo "glfw successfully installed"; \
+# 		else \
+# 			echo "Exit"; \
+# 			exit 2; \
+# 		fi \
+# 	fi
+
+$(LIBMLX): $(MLXDIR)
+	@cmake $(MLXDIR) -B $(MLXDIR)/build && make -C $(MLXDIR)/build -j4
+
+$(MLXDIR):
+	@if [ ! -d "$(MLXDIR)" ]; then \
+		echo "MLX42 directory not found. Cloning from $(MLX_REPO)..."; \
+		git clone $(MLX_REPO) $(MLXDIR); \
+	fi
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) $(LDIR)$(LIBFT)
+	@echo "Compilation complete: $(NAME)"
+
+$(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
+	@$(MK) $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
+
+# Compiling libft
+libft:
+	@echo "compiling libft"
+	@$(MAKE) -C $(LDIR)
 
 clean:
-	@rm -rf $(OBJS)
-	@rm -rf $(LIBMLX)/build
+	@$(RM) $(ODIR)
+	@$(RM) $(MLXDIR)/build
+	@echo "Object files and MLX42 build directory cleaned"
 
 fclean: clean
-	@rm -rf $(NAME)
+	@$(RM) $(NAME)
+	@echo "Executable file cleaned"
 
 re: fclean all
 
-run: all
+run:
+	@$(MAKE) all
 	@./$(NAME)
 
-.PHONY: all clean fclean re libmlx run
+.PHONY: all libft clean fclean re run dependencies

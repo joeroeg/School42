@@ -1,24 +1,5 @@
 #include "fractol.h"
 
-static void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	char	*c_dst;
-	char	*c_src;
-	size_t	i;
-
-	if (!src || !dst)
-		return (dst);
-	c_dst = (char *) dst;
-	c_src = (char *) src;
-	i = 0;
-	while (i < n)
-	{
-		c_dst[i] = c_src[i];
-		i++;
-	}
-	return (c_dst);
-}
-
 void	mandelbrot_init(t_fractol *frctl)
 {
 	frctl->iter_max = 25;
@@ -87,7 +68,6 @@ void	mandelbrot_pthread(t_fractol *frctl)
 	i = 0;
 	while (i < THREAD_NUMBER)
 	{
-		printf("i: %d\n", i);
 		ft_memcpy((void *)&t_param[i], (void *)frctl, sizeof(t_fractol));
 		t_param[i].y = THREAD_WIDTH * i;
 		t_param[i].y_max = THREAD_WIDTH * (i + 1);

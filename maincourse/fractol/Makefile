@@ -1,39 +1,39 @@
 # Configuration
-NAME = fractol
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
-# LIBS = -ldl -pthread -lm
-LIBF = -ldl -lglfw -pthread -lm
-RM = rm -rf
-MK = mkdir -p
-BIN = bin
-SDIR = src
-ODIR = obj
+NAME	= fractol
+LIBFT	= libft.a
+LDIR	= libft/
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address -Ofast
+LIBS	= -ldl -pthread -lm
+RM		= rm -rf
+MK		= mkdir -p
+SDIR	= src
+ODIR	= obj
 
 # Include directories
 INCDIR = include
 HEADERS = -I $(INCDIR) -I $(MLXDIR)/include
 
 # Dependencies
-DEPS = $(wildcard $(INCDIR)/*.h)
+# DEPS = $(wildcard $(INCDIR)/*.h)
 
 # # Source and Object Files
 # SRCS = $(wildcard $(SDIR)/*.c) $(wildcard $(SDIR)/*/*.c)
-# OBJS = $(SRCS:$(SDIR)/%.c=$(ODIR)/%.o)
+SRCS := $(shell find ./src -iname "*.c")
+OBJS = $(SRCS:$(SDIR)/%.c=$(ODIR)/%.o)
 
-# Source and Object Files
-SRCS    = $(addprefix $(SDIR), main.c, mandelbrot.c, colors.c) \
+# # Source and Object Files
+# SRCS    = $(addprefix $(SDIR), main.c, mandelbrot.c, colors.c) \
 OBJS    = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS))
 
 # MLX42
 MLXDIR = MLX42
 LIBMLX = $(MLXDIR)/build/libmlx42.a
 MLX_REPO = https://github.com/codam-coding-college/MLX42.git
-# LIBS += -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" $(LIBMLX)
-LIBS = $(LIBF) $(LIBMLX)
+LIBS += -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" $(LIBMLX)
 HEADERS = -I $(INCDIR) -I $(MLXDIR)/include
 
-all: dependencies $(LIBMLX) $(NAME)
+all: dependencies libft $(LIBMLX) $(NAME)
 
 # Dependency installation (brew, cmake, glfw)
 # dependencies:
@@ -88,12 +88,17 @@ $(MLXDIR):
 	fi
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) $(LDIR)$(LIBFT)
 	@echo "Compilation complete: $(NAME)"
 
 $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
 	@$(MK) $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
+
+# Compiling libft
+libft:
+	@echo "compiling libft"
+	@$(MAKE) -C $(LDIR)
 
 clean:
 	@$(RM) $(ODIR)
@@ -110,4 +115,4 @@ run:
 	@$(MAKE) all
 	@./$(NAME)
 
-.PHONY: all clean fclean re run dependencies
+.PHONY: all libft clean fclean re run dependencies

@@ -102,5 +102,5 @@ fclean: clean
 
 re: fclean all
 
-run:
+run: all
 	@./$(NAME)
