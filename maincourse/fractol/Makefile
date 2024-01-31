@@ -23,8 +23,8 @@ SRCS := $(shell find ./src -iname "*.c")
 OBJS = $(SRCS:$(SDIR)/%.c=$(ODIR)/%.o)
 
 # # Source and Object Files
-# SRCS    = $(addprefix $(SDIR), main.c, mandelbrot.c, colors.c) \
-OBJS    = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS))
+# SRCS    = $(addprefix $(SDIR), main.c, mandelbrot.c, colors.c)
+# OBJS    = $(patsubst $(SDIR)%.c,$(ODIR)%.o,$(SRCS))
 
 # MLX42
 MLXDIR = MLX42
