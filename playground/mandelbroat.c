@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <complex.h>
 
-#define ITERATIONS 100
+#define ITERATIONS 10
 
 // Function to determine if a point belongs to the Mandelbrot Set
 int mandelbrot(double complex c) {
@@ -18,7 +18,7 @@ int mandelbrot(double complex c) {
 int main() {
     // Set the size of the image and the scale for the complex plane
     int width = 100, height = 100;
-    double minReal = -2.0, maxReal = 1.0, minImaginary = -1.5, maxImaginary = 1.5;
+    double minReal = -2.0, maxReal = 1.0, minImaginary = -2, maxImaginary = 2;
 
     // Iterate over each pixel
     for (int y = 0; y < height; y++) {
@@ -30,7 +30,7 @@ int main() {
             int m = mandelbrot(c);
 
             // Print a character based on the return value
-            printf("%s", (m ==  ITERATIONS) ? "." : " "); // Simple text-based output
+            printf("%s", (m ==  ITERATIONS) ? " " : "."); // Simple text-based output
         }
         printf("\n");
     }

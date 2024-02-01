@@ -4,7 +4,7 @@
 #include <time.h> // For time() function
 #include <unistd.h> // For sleep()
 
-#define ITERATIONS 20
+#define ITERATIONS 15
 
 int mandelbrot(double complex c) {
     double complex z = 0;
@@ -35,7 +35,7 @@ int main() {
                 double imaginary = minImaginary + (y / (height - 1.0)) * (maxImaginary - minImaginary);
                 double complex c = real + imaginary * I;
                 int m = mandelbrot(c);
-                printf("%c", (m == ITERATIONS) ? getRandomChar() : ' ');
+                printf("%c", (m == ITERATIONS) ? ' ' : getRandomChar() );
             }
             printf("\n");
         }

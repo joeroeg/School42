@@ -8,7 +8,7 @@ void	mandelbrot_init(t_fractol *frctl)
 	frctl->xmax = 1.2;
 	frctl->ymin = -1.2;
 	frctl->ymax = 1.2;
-	frctl->frctl_color = 2;
+	frctl->frctl_color = 1;
 }
 
 void	mandelbrot_calc(t_fractol *frctl)
