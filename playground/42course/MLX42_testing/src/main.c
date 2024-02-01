@@ -10,7 +10,7 @@ static mlx_image_t* image;
 
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
-    return (r << 24 | g << 16 | b << 8 | a);
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
 void ft_randomize(void* param)
@@ -36,9 +36,9 @@ void my_scrollhook(double xdelta, double ydelta, void* param)
 	(void)param;
 	// Simple up or down detection.
 	if (ydelta > 0)
-		puts("Up!");
+		mlx_mouse_hook
 	else if (ydelta < 0)
-		puts("Down!");
+		image->instances[0].z += 10;
 
 	// Can also detect a mousewheel that go along the X (e.g: MX Master 3)
 	if (xdelta < 0)
@@ -70,24 +70,9 @@ int32_t main(void)
 {
 	mlx_t* mlx;
 
-	// Gotta error check this stuff
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-	{
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (!(image = mlx_new_image(mlx, 128, 128)))
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
+	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	image = mlx_new_image(mlx, 128, 128);
+	mlx_image_to_window(mlx, image, 0, 0);
 
 	mlx_loop_hook(mlx, ft_randomize, mlx);
 	mlx_loop_hook(mlx, ft_hook, mlx);

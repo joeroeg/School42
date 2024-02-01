@@ -2,7 +2,7 @@
 
 void	mandelbrot_init(t_fractol *frctl)
 {
-	frctl->iter_max = 100;
+	frctl->iter_max = 200;
 	frctl->zoom = 300;
 	frctl->xmin = -2;
 	frctl->xmax = 1.2;
