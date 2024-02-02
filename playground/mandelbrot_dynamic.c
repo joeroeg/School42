@@ -10,7 +10,7 @@ int mandelbrot(double complex c) {
     double complex z = 0;
     int n;
     for (n = 0; n < ITERATIONS; n++) {
-        if (cabs(z) > 2.0) break;
+        if (abs(z) > 2.0) break;
         z = z * z + c;
     }
     return n;
@@ -22,7 +22,7 @@ char getRandomChar() {
 
 int main() {
     int width = 100, height = 100;
-    double minReal = -2.0, maxReal = 1.0, minImaginary = -1.5, maxImaginary = 1.5;
+    double minReal = -1.5, maxReal = 1.5, minImaginary = -1.5, maxImaginary = 1.5;
 
     srand(time(NULL));
 
@@ -35,7 +35,7 @@ int main() {
                 double imaginary = minImaginary + (y / (height - 1.0)) * (maxImaginary - minImaginary);
                 double complex c = real + imaginary * I;
                 int m = mandelbrot(c);
-                printf("%c", (m == ITERATIONS) ? ' ' : getRandomChar() );
+                printf("%c", (m == ITERATIONS) ? getRandomChar() : ' ');
             }
             printf("\n");
         }
