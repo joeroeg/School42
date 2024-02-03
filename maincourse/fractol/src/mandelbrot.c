@@ -27,9 +27,10 @@ void	mandelbrot_calc(t_fractol *frctl)
 	}
 	if (frctl->iter == frctl->iter_max)
 		mlx_put_pixel(frctl->img, frctl->x, frctl->y, 0xFF);
+	else if (frctl->iter < frctl->iter_max)
+		mlx_put_pixel(frctl->img, frctl->x, frctl->y, set_color2(frctl->iter, frctl));
 	else
-		mlx_put_pixel(frctl->img, frctl->x, frctl->y,
-			set_color(frctl->iter, frctl));
+		mlx_put_pixel(frctl->img, frctl->x, frctl->y, set_color(frctl->iter, frctl));
 }
 
 void mandelbrot(t_fractol *frctl)

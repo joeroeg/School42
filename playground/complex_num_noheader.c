@@ -1,4 +1,10 @@
+/*
+	This is an example of a simple Mandelbrot set generator using complex numbers without the complex.h header file.
+	The program generates a text-based representation of the Mandelbrot set by iterating over each pixel in the image and determining if the corresponding point in the complex plane belongs to the Mandelbrot set.
+*/
+
 #include <stdio.h>
+#include <math.h>
 
 #define ITERATIONS 10
 
@@ -35,20 +41,41 @@ complex divide(complex n1, complex n2) {
 	return (temp);
 }
 
+float complex_abs(complex z) {
+    return sqrt(z.real * z.real + z.imag * z.imag);
+}
+
+
+int mandelbrot(complex c) {
+    complex z = {0, 0};
+    int n;
+    for (n = 0; n < ITERATIONS; n++) {
+        if (complex_abs(z) > 2.0) break; // Point escapes to infinity
+	z = add(multiply(z, z), c);
+    }
+    return n; // Number of iterations before escape
+}
+
 int main()
 {
-	int width = 100, height = 100;
-	complex min = {-2.0, -2.0};
-	complex max = {1.0, 2.0};
-	complex c;
+    // Set the size of the image and the scale for the complex plane
+    int width = 50, height = 50;
+    double minReal = -2.0, maxReal = 1.0, minImaginary = -1.0, maxImaginary = 1.0;
 
+    // Iterate over each pixel
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            double real = minReal + (x / (width - 1.0)) * (maxReal - minReal);
+            double imaginary = minImaginary + (y / (height - 1.0)) * (maxImaginary - minImaginary);
+            complex c = add((complex){real, 0}, (complex){0, imaginary});
+            int m = mandelbrot(c);
 
-
-
-	// complex z1 = {1.0, 3.0}, z2 = {1.0, -4.0};
-	// complex sum = add(z1, z2);
-	// printf("The sum: Z1 + Z2 = %.2f %+.2fi\n", sum.real, sum.imag);
-	return 0;
+            // Print a character based on the return value
+            printf("%s", (m ==  ITERATIONS) ? "." : " "); // Simple text-based output
+        }
+        printf("\n");
+    }
+    return 0;
 }
 
 

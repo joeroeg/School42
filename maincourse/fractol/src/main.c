@@ -48,3 +48,4 @@ int32_t	main(int32_t argc, const char *argv[])
 	mlx_terminate(frctl->mlx);
 	return (EXIT_SUCCESS);
 }
+

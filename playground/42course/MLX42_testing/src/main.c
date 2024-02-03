@@ -1,86 +1,75 @@
 #include "config.h"
 
+/**
+ * @brief Calculates whether a point belongs to the Mandelbrot set.
+ *
+ * This function iterates on the complex number z, starting from 0, using the formula z = z^2 + c,
+ * where c is a point in the complex plane. The iteration continues until the absolute value of z exceeds
+ * 2.0, indicating the point does not belong to the Mandelbrot set, or until the maximum number of iterations
+ * is reached. Points that remain within the escape radius of 2.0 after the maximum number of iterations are
+ * considered to be part of the Mandelbrot set. The pixel at coordinates (x, y) is then colored accordingly.
+ *
+ * @param c The complex number representing the point in the complex plane being tested for membership in the Mandelbrot set.
+ * @param frctl A pointer to the t_fractol structure, which contains the image where the result will be drawn.
+ * @param x The x-coordinate of the pixel in the image corresponding to the complex number c.
+ * @param y The y-coordinate of the pixel in the image corresponding to the complex number c.
+ *
+ * @details
+ * The escape radius of 2.0 is used to determine if a point escapes to infinity. If the absolute value of z exceeds this radius,
+ * it indicates that the point does not belong to the Mandelbrot set. This method colors the pixel at (x, y) based on the number
+ * of iterations required to determine if the point escapes. A special color is used for points that are determined to be within
+ * the Mandelbrot set (i.e., those that do not escape within the maximum number of iterations).
+ */
 
-#define WIDTH 512
-#define HEIGHT 512
 
-static mlx_image_t* image;
-
-// -----------------------------------------------------------------------------
-
-int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
-void ft_randomize(void* param)
-{
-	(void)param;
-	for (uint32_t i = 0; i < image->width; ++i)
-	{
-		for (uint32_t y = 0; y < image->height; ++y)
-		{
-			uint32_t color = ft_pixel(
-				rand() % 0xFF, // R
-				rand() % 0xFF, // G
-				rand() % 0xFF, // B
-				rand() % 0xFF  // A
-			);
-			mlx_put_pixel(image, i, y, color);
-		}
+/**
+ * @todo add julia set
+ *
+*/
+void mandelbrot(complex c, t_fractol *frctl, int x, int y) {
+    complex z = {0, 0};
+    int n;
+    for (n = 0; n < MAX_ITERATIONS; n++) {
+        if (complex_abs(z) > 2.0)
+			break; // Point escapes to infinity
+		z = add(multiply(z, z), c);
 	}
+	if (n == MAX_ITERATIONS)
+		mlx_put_pixel(frctl->image, x, y, 0xFF);
+	else
+		mlx_put_pixel(frctl->image, x, y, set_color(n, frctl));
+		// mlx_put_pixel(frctl->image, x, y, set_color(n));
 }
 
-void my_scrollhook(double xdelta, double ydelta, void* param)
+int32_t main()
 {
-	(void)param;
-	// Simple up or down detection.
-	if (ydelta > 0)
-		mlx_mouse_hook
-	else if (ydelta < 0)
-		image->instances[0].z += 10;
+	t_fractol	*frctl = (t_fractol *)malloc(sizeof(t_fractol));
+	frctl->mlx = mlx_init(WIDTH, HEIGHT, "fractol", false);
+	frctl->image = mlx_new_image(frctl->mlx, WIDTH, HEIGHT);
 
-	// Can also detect a mousewheel that go along the X (e.g: MX Master 3)
-	if (xdelta < 0)
-		puts("Sliiiide to the left!");
-	else if (xdelta > 0)
-		puts("Sliiiide to the right!");
-}
+    // Set the size of the image and the scale for the complex plane
+    double minReal = -2.0, maxReal = 1.0, minImaginary = -1.5, maxImaginary = 1.5;
 
-
-void ft_hook(void* param)
-{
-	mlx_t* mlx = param;
-
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		image->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		image->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		image->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		image->instances[0].x += 5;
-}
-
-// -----------------------------------------------------------------------------
-
-int32_t main(void)
-{
-	mlx_t* mlx;
-
-	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	image = mlx_new_image(mlx, 128, 128);
-	mlx_image_to_window(mlx, image, 0, 0);
-
-	mlx_loop_hook(mlx, ft_randomize, mlx);
-	mlx_loop_hook(mlx, ft_hook, mlx);
-	mlx_scroll_hook(mlx, &my_scrollhook, NULL);
-
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+    // Iterate over each pixel
+    for (int y = 0; y < HEIGHT; y++) {
+        for (int x = 0; x < WIDTH; x++) {
+            double real = minReal + (x / (WIDTH - 1.0)) * (maxReal - minReal);
+            double imaginary = minImaginary + (y / (HEIGHT - 1.0)) * (maxImaginary - minImaginary);
+            complex c = add((complex){real, 0}, (complex){0, imaginary});
+            mandelbrot(c, frctl, x, y);
+        }
+    }
+	mlx_image_to_window(frctl->mlx, frctl->image, 0, 0);
+	mlx_loop(frctl->mlx);
+	mlx_terminate(frctl->mlx);
 	return (EXIT_SUCCESS);
 }
-
-
+/*
+1. mlx_init
+2. mlx_new_image
+3. mlx_image_to_window
+4. mlx_put_pixel
+5. mlx_scroll_hook
+6. mlx_loop
+7. mlx_terminate
+*/

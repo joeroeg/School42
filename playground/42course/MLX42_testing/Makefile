@@ -1,5 +1,5 @@
 # Configuration
-NAME = program
+NAME = fractol
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 LIBS = -ldl -pthread -lm
@@ -19,15 +19,19 @@ DEPS = $(wildcard $(INCDIR)/*.h)
 # Source and Object Files
 SRCS = $(wildcard $(SDIR)/*.c) $(wildcard $(SDIR)/*/*.c)
 OBJS = $(SRCS:$(SDIR)/%.c=$(ODIR)/%.o)
+DEPFILES = $(OBJS:.o=.d) # Add this line to create dependency file paths
 
 # MLX42
 MLXDIR = MLX42
 LIBMLX = $(MLXDIR)/build/libmlx42.a
 MLX_REPO = https://github.com/codam-coding-college/MLX42.git
 LIBS += -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" $(LIBMLX)
-HEADERS = -I $(INCDIR) -I $(MLXDIR)/include
+HEADERS += -I $(INCDIR) -I $(MLXDIR)/include
 
 all: dependdown $(LIBMLX) $(NAME)
+
+# Dependency handling rules
+-include $(DEPFILES) # Include the dependency files in the Makefile
 
 # Dependency installation (brew, cmake, glfw)
 dependdown:
@@ -87,7 +91,7 @@ $(NAME): $(OBJS)
 
 $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
 	@$(MK) $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
+	@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ $(HEADERS) # Add -MMD and -MP flags here
 
 .PHONY: all clean fclean re
 
