@@ -1,17 +1,6 @@
 #include "config.h"
 
-/**
- * @brief Renders the Julia set
- * @var z The complex number to test
- * @var c The constant c for the Julia set
- * @var x The x coordinate of the pixel
- * @var y The y coordinate of the pixel
- * @return void
-*/
 void julia_render(complex z, t_fractol *frctl, int x, int y, complex c) {
-    // Define the constant c for the Julia set
-    // complex c = {-0.4, 0.6}; // Example value, change as needed
-
     int n;
     for (n = 0; n < MAX_ITERATIONS; n++) {
         if (complex_abs(z) > 2.0)
@@ -25,18 +14,10 @@ void julia_render(complex z, t_fractol *frctl, int x, int y, complex c) {
         mlx_put_pixel(frctl->image, x, y, set_color(n));
 }
 
-/**
- * @brief Renders the Julia set
- * @var z The complex number to test
- * @var c The constant c for the Julia set
- * @var x The x coordinate of the pixel
- * @var y The y coordinate of the pixel
- * @return void
-*/
 void julia(t_fractol *frctl, int width, int height, char *real, char *imaginary) {
     double minReal = -2.0, maxReal = 2.0, minImaginary = -1.5, maxImaginary = 1.5;
-	double realPart = atof(real);
-    double imagPart = atof(imaginary);
+	double realPart = ft_atof(real);
+    double imagPart = ft_atof(imaginary);
     complex c = {realPart, imagPart};
 
     for (int y = 0; y < height; y++) {

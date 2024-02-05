@@ -35,13 +35,13 @@ void mandelbrot_render(complex c, t_fractol *frctl, int x, int y) {
 		mlx_put_pixel(frctl->image, x, y, set_color(n));
 }
 
-void mandelbrot(t_fractol *frctl, int width, int height) {
+void mandelbrot(t_fractol *frctl, int width, int height, double zoom) {
     double minReal = -2.0, maxReal = 1.0, minImaginary = -1.5, maxImaginary = 1.5;
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            double real = minReal + (x / (width - 1.0)) * (maxReal - minReal);
-            double imaginary = minImaginary + (y / (height - 1.0)) * (maxImaginary - minImaginary);
+            double real = minReal + (x / (width - 1.0)) * (maxReal - minReal) / zoom;
+            double imaginary = minImaginary + (y / (height - 1.0)) * (maxImaginary - minImaginary) / zoom;
             complex c = add((complex){real, 0}, (complex){0, imaginary});
             mandelbrot_render(c, frctl, x, y);
         }

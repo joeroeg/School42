@@ -6,9 +6,10 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
 
-#define MAX_ITERATIONS 18
+#define MAX_ITERATIONS 32
 #define WIDTH 800
 #define HEIGHT 800
 
@@ -17,6 +18,11 @@ typedef struct complex {
     double imag;
 } complex;
 
+/* this was used for sierpinski triangle */
+// typedef struct {
+//     double x;
+//     double y;
+// } Point;
 
 typedef struct s_fractol
 {
@@ -28,11 +34,11 @@ typedef struct s_fractol
 	// int			frctl_fct;
 	// int			iter;
 	// int			iter_max;
-	// double		zoom;
-	// double		xmin;
-	// double		xmax;
-	// double		ymin;
-	// double		ymax;
+	double		zoom;
+	double		xmin;
+	double		xmax;
+	double		ymin;
+	double		ymax;
 	// double		c_r;
 	// double		c_i;
 	// double		z_r;
@@ -45,9 +51,14 @@ typedef struct s_fractol
 // fractal functions
 void mandelbrot(t_fractol *frctl, int width, int height);
 void mandelbrot_render(complex c, t_fractol *frctl, int x, int y);
+// void julia(t_fractol *frctl, int width, int height);
 void julia(t_fractol *frctl, int width, int height, char *real, char *imaginary);
+// void julia_render(complex z, t_fractol *frctl, int x, int y);
 void julia_render(complex z, t_fractol *frctl, int x, int y, complex c);
-
+void burning_ship(t_fractol *frctl, int width, int height);
+void burning_ship_render(complex c, t_fractol *frctl, int x, int y);
+void newton_fractal(t_fractol *frctl, int width, int height);
+void newton_render(complex z, t_fractol *frctl, int x, int y);
 
 // complex numbers operations
 complex add(complex n1, complex n2);
@@ -61,5 +72,6 @@ uint32_t	set_color(int iter);
 
 // utility functions
 void	print_help(void);
+double	ft_atof(const char *str);
 
-#endif
+# endif

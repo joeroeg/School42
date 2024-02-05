@@ -1,18 +1,30 @@
-#include "fractol.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/04 20:17:45 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/02/04 20:18:35 by hezhukov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "config.h"
 
 int	get_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-uint32_t	set_color(int iter, t_fractol	*frctl)
+uint32_t	set_color(int iter, t_fractol *frctl)
 {
-	int			r = 0;
-	int			g = 0;
-	int			b = 0;
-	double		t = 0;
+	int			r;
+	int			g;
+	int			b;
+	double		t;
 
-	t = (double)iter / (double)frctl->iter_max;
+	t = (double)iter / MAX_ITERATIONS;
 	if (frctl->frctl_color == 1)
 	{
 		r = (int)(9 * (1 - t) * pow(t, 3) * 255);
