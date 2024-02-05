@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:22:47 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/02/04 20:57:57 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/02/05 16:15:54 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,51 +34,52 @@ void	parse_arguments(int argc, char *argv[])
 		print_help(EXIT_FAILURE);
 }
 
-t_fractol	*initialize_frctl(void)
+t_fractol	*initialize_data(void)
 {
-	t_fractol	*frctl;
+	t_fractol	*data;
 
-	frctl = (t_fractol *)malloc(sizeof(t_fractol));
-	if (!frctl)
+	data = (t_fractol *)malloc(sizeof(t_fractol));
+	if (!data)
 	{
 		perror("malloc\n");
 		exit(EXIT_FAILURE);
 	}
-	frctl->mlx = mlx_init(WIDTH, HEIGHT, "fractol", false);
-	frctl->image = mlx_new_image(frctl->mlx, WIDTH, HEIGHT);
-	frctl->min_real = -2.0;
-	frctl->max_real = 2.0;
-	frctl->min_imaginary = -2;
-	frctl->max_imaginary = 2;
-	frctl->zoom = 1.0;
-	frctl->frctl_color = 1;
-	return (frctl);
+	data->width = WIDTH;
+	data->height = HEIGHT;
+	data->mlx = mlx_init(WIDTH, HEIGHT, "fractol", false);
+	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->min_real = -2.0;
+	data->max_real = 2.0;
+	data->min_imaginary = -2;
+	data->max_imaginary = 2;
+	data->zoom = 1.0;
+	data->data_color = 1;
+	return (data);
 }
 
-void	draw_fractal(t_fractol *frctl, int argc, char *argv[])
+void	draw_fractal(t_fractol *data, int argc, char *argv[])
 {
-	frctl->width = WIDTH;
-	frctl->height = HEIGHT;
 	if (argv[1][0] == '1')
 	{
-		frctl->fractal_type = 1;
-		mandelbrot(frctl);
+		data->fractal_type = 1;
+		mandelbrot(data);
 	}
 	else if (argv[1][0] == '2' && argc == 4)
 	{
-		frctl->fractal_type = 2;
-		julia(frctl, frctl->real = argv[2], \
-			frctl->imaginary = argv[3]);
+		data->fractal_type = 2;
+		data->c.real = ft_atof(argv[2]);
+		data->c.imag = ft_atof(argv[3]);
+		julia(data);
 	}
 	else if (argv[1][0] == '3')
 	{
-		frctl->fractal_type = 3;
-		burning_ship(frctl);
+		data->fractal_type = 3;
+		burning_ship(data);
 	}
 	else if (argv[1][0] == '4')
 	{
-		frctl->fractal_type = 4;
-		newton_fractal(frctl);
+		data->fractal_type = 4;
+		newton_fractal(data);
 	}
 	else
 		print_help(EXIT_FAILURE);
@@ -86,15 +87,15 @@ void	draw_fractal(t_fractol *frctl, int argc, char *argv[])
 
 int32_t	main(int argc, char *argv[])
 {
-	t_fractol	*frctl;
+	t_fractol	*data;
 
 	parse_arguments(argc, argv);
-	frctl = initialize_frctl();
-	draw_fractal(frctl, argc, argv);
-	mlx_image_to_window(frctl->mlx, frctl->image, 0, 0);
-	mlx_key_hook(frctl->mlx, &keyhook, frctl);
-	mlx_scroll_hook(frctl->mlx, &mouse_scroll_wheel, frctl);
-	mlx_loop(frctl->mlx);
-	cleanup(frctl);
+	data = initialize_data();
+	draw_fractal(data, argc, argv);
+	mlx_image_to_window(data->mlx, data->image, 0, 0);
+	mlx_key_hook(data->mlx, &keyhook, data);
+	mlx_scroll_hook(data->mlx, &mouse_scroll_wheel, data);
+	mlx_loop(data->mlx);
+	cleanup(data);
 	return (EXIT_SUCCESS);
 }

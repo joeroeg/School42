@@ -17,7 +17,7 @@ HEADERS = -I $(INCDIR) -I $(MLXDIR)/include
 DEPS = $(wildcard $(INCDIR)/*.h)
 
 # Source and Object Files
-SRCS = $(wildcard $(SDIR)/*.c) $(wildcard $(SDIR)/*/*.c)
+SRCS = $(shell find $(SDIR) -name '*.c')
 OBJS = $(SRCS:$(SDIR)/%.c=$(ODIR)/%.o)
 DEPFILES = $(OBJS:.o=.d) # Add this line to create dependency file paths
 
@@ -106,5 +106,3 @@ fclean: clean
 
 re: fclean all
 
-run: all
-	@./$(NAME)

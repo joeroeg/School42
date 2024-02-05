@@ -6,74 +6,62 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:22:56 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/02/04 20:56:08 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/02/05 16:15:56 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "config.h"
 
 /**
- * @brief Calculates whether a point belongs to the Mandelbrot set.
+ * Renders a pixel based on its membership in the Mandelbrot set.
  *
- * This function iterates on the t_complex number z, starting from 0, using the formula z = z^2 + c,
- * where c is a point in the t_complex plane. The iteration continues until the absolute value of z exceeds
- * 2.0, indicating the point does not belong to the Mandelbrot set, or until the maximum number of iterations
- * is reached. Points that remain within the escape radius of 2.0 after the maximum number of iterations are
- * considered to be part of the Mandelbrot set. The pixel at coordinates (x, y) is then colored accordingly.
+ * Iterates the formula z = z^2 + c for a complex point c
+ * This happens until |z| exceeds 2 or the max iterations are reached.
+ * Points within the radius of 2 after max iterations are colored.
  *
- * @param c The t_complex number representing the point in the t_complex plane being tested for membership in the Mandelbrot set.
- * @param frctl A pointer to the t_fractol structure, which contains the image where the result will be drawn.
- * @param x The x-coordinate of the pixel in the image corresponding to the t_complex number c.
- * @param y The y-coordinate of the pixel in the image corresponding to the t_complex number c.
- *
- * @details
- * The escape radius of 2.0 is used to determine if a point escapes to infinity. If the absolute value of z exceeds this radius,
- * it indicates that the point does not belong to the Mandelbrot set. This method colors the pixel at (x, y) based on the number
- * of iterations required to determine if the point escapes. A special color is used for points that are determined to be within
- * the Mandelbrot set (i.e., those that do not escape within the maximum number of iterations).
+ * @param c Complex point being tested.
+ * @param z The current value of z in the formula z = z^2 + c.
+ * @param max_iterations The maximum number of iterations to perform.
+ * @param data Structure containing the image to draw on.
+ * @param x X-coordinate of the pixel.
+ * @param y Y-coordinate of the pixel.
  */
-
-void	mandelbrot_render(t_complex c, t_fractol *frctl, int x, int y)
+void	mandelbrot_render(t_fractol *data)
 {
-	t_complex	z;
 	int			n;
 
-	z.real = 0;
-	z.imag = 0;
+	data->z = (t_complex){0, 0};
 	n = 0;
 	while (n < MAX_ITERATIONS)
 	{
-		if (t_complex_abs(z) > 2.0)
+		if (t_complex_abs(data->z) > 2.0)
 			break ;
-		z = add(multiply(z, z), c);
+		data->z = add(multiply(data->z, data->z), data->c);
 		n++;
 	}
-	if (n == MAX_ITERATIONS)
-		mlx_put_pixel(frctl->image, x, y, 0xFF);
-	else
-		mlx_put_pixel(frctl->image, x, y, set_color(n, frctl));
+	mlx_put_pixel(data->image, data->x, data->y, set_color(n, data));
 }
 
-void	mandelbrot(t_fractol *frctl)
+void	mandelbrot(t_fractol *data)
 {
 	double		real;
 	double		imaginary;
-	t_complex	c;
 
-	frctl->y = 0;
-	while (frctl->y < frctl->height)
+	data->y = 0;
+	while (data->y < data->height)
 	{
-		frctl->x = 0;
-		while (frctl->x < frctl->width)
+		data->x = 0;
+		while (data->x < data->width)
 		{
-			real = frctl->min_real + (frctl->x / (frctl->width - 1.0)) * \
-				(frctl->max_real - frctl->min_real) / frctl->zoom;
-			imaginary = frctl->min_imaginary + (frctl->y / (frctl->height - 1.0)) * \
-				(frctl->max_imaginary - frctl->min_imaginary) / frctl->zoom;
-			c = add((t_complex){real, 0}, (t_complex){0, imaginary});
-			mandelbrot_render(c, frctl, frctl->x, frctl->y);
-			frctl->x++;
+			real = data->min_real + (data->x / (data->width - 1.0)) * \
+			(data->max_real - data->min_real) / data->zoom;
+			imaginary = data->min_imaginary + \
+			(data->y / (data->height - 1.0)) * \
+			(data->max_imaginary - data->min_imaginary) / data->zoom;
+			data->c = add((t_complex){real, 0}, (t_complex){0, imaginary});
+			mandelbrot_render(data);
+			data->x++;
 		}
-		frctl->y++;
+		data->y++;
 	}
 }
