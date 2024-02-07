@@ -1,0 +1,4 @@
+- search and lists the largest files in your home directory: `find ~ -type f -exec du -h {} + | sort -rh | head -n 10`
+- search and lists the largest files in entire file system: `sudo find / -type f -exec du -h {} + 2>/dev/null | sort -rh | head -n 10`
+- search for .git and delete: `find /path/to/search -name .git -type d -exec echo {} \; -exec rm -ri {} \;`
+- gcc -fsanitize=address
