@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:46:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/16 18:41:22 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/02/07 10:41:52 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ typedef struct s_pipex_data_m
 
 typedef struct s_pipex_data
 {
-	int		n_cmds;
-	int		*pipefds;
-	int		n_pipes;
-	bool	here_doc;
-	char	*limiter;
-	char	*infile;
-	char	*outfile;
-	char	**argv;
-	char	**envp;
+	int		n_cmds; // number of commands
+	int		*pipefds; // array of pipe file descriptors
+	int		n_pipes; // number of pipes
+	bool	here_doc; // true if here_doc is used
+	char	*limiter; // here_doc limiter
+	char	*infile; // input file
+	char	*outfile; // output file
+	char	**argv; // array of command line arguments
+	char	**envp; // array of environment variables
 }	t_pipex_data;
 
 int			validate_arguments(int argc);

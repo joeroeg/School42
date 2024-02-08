@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:12:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/17 16:13:28 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:31:20 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,64 +55,34 @@ void	execute_command(const char *cmd, t_pipex_data *pipeline)
 	free(args);
 }
 
-// void	create_child_process(t_pipex_data *pipeline, int cmd_index)
-// {
-// 	int	j;
-
-// 	if (cmd_index == 0 && pipeline->here_doc == true)
-// 		redirect_here_doc(pipeline);
-// 	else if (cmd_index == 0)
-// 		redirect_first_command(pipeline);
-// 	if (cmd_index == pipeline->n_cmds - 1)
-// 		redirect_last_command(pipeline);
-// 	if (cmd_index > 0)
-// 	{
-// 		close(pipeline->pipefds[(cmd_index - 1) * 2 + 1]);
-// 		if (dup2(pipeline->pipefds[(cmd_index - 1) * 2], STDIN_FILENO) < 0)
-// 			error_message("dup2 (stdin)", 1);
-// 	}
-// 	if (cmd_index < pipeline->n_cmds - 1)
-// 	{
-// 		close(pipeline->pipefds[cmd_index * 2]);
-// 		if (dup2(pipeline->pipefds[cmd_index * 2 + 1], STDOUT_FILENO) < 0)
-// 			error_message("dup2 (stdout)", 1);
-// 	}
-// 	j = 0;
-// 	while (j < 2 * pipeline->n_pipes)
-// 		close(pipeline->pipefds[j++]);
-// 	execute_command(pipeline->argv[cmd_index], pipeline);
-// 	error_message("execute_command", 1);
-// }
-
-void create_child_process(t_pipex_data *pipeline, int cmd_index)
+void	create_child_process(t_pipex_data *pipeline, int cmd_index)
 {
-    int j;
+	int	j;
 
-    if (cmd_index == 0 && pipeline->here_doc == true)
-        redirect_here_doc(pipeline);
-    else if (cmd_index == 0)
-        redirect_first_command(pipeline);
-    else if (cmd_index == pipeline->n_cmds - 1)
-        redirect_last_command(pipeline);
-    else if (cmd_index > 0 && cmd_index < pipeline->n_cmds - 1)
-    {
+	if (cmd_index == 0 && pipeline->here_doc == true)
+		redirect_here_doc(pipeline);
+	else if (cmd_index == 0)
+		redirect_first_command(pipeline);
+	if (cmd_index == pipeline->n_cmds - 1)
+		redirect_last_command(pipeline);
+	if (cmd_index > 0)
+	{
 		close(pipeline->pipefds[(cmd_index - 1) * 2 + 1]);
-        if (dup2(pipeline->pipefds[(cmd_index - 1) * 2], STDIN_FILENO) < 0)
-            error_message("dup2 (stdin)", 1);
+		if (dup2(pipeline->pipefds[(cmd_index - 1) * 2], STDIN_FILENO) < 0)
+			error_message("dup2 (stdin)", 1);
+	}
+	if (cmd_index < pipeline->n_cmds - 1)
+	{
 		close(pipeline->pipefds[cmd_index * 2]);
-        if (dup2(pipeline->pipefds[cmd_index * 2 + 1], STDOUT_FILENO) < 0)
-            error_message("dup2 (stdout)", 1);
-    }
-
-    // Close all pipes in the child process
-    j = 0;
-    while (j < 2 * pipeline->n_pipes)
-        close(pipeline->pipefds[j++]);
-
-    execute_command(pipeline->argv[cmd_index], pipeline);
-    error_message("execute_command", 1);
+		if (dup2(pipeline->pipefds[cmd_index * 2 + 1], STDOUT_FILENO) < 0)
+			error_message("dup2 (stdout)", 1);
+	}
+	j = 0;
+	while (j < 2 * pipeline->n_pipes)
+		close(pipeline->pipefds[j++]);
+	execute_command(pipeline->argv[cmd_index], pipeline);
+	error_message("execute_command", 1);
 }
-
 
 void	execute_pipeline(t_pipex_data *pipeline)
 {
