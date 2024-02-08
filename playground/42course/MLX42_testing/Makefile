@@ -28,53 +28,53 @@ MLX_REPO = https://github.com/codam-coding-college/MLX42.git
 LIBS += -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" $(LIBMLX)
 HEADERS += -I $(INCDIR) -I $(MLXDIR)/include
 
-all: dependdown $(LIBMLX) $(NAME)
+all: $(LIBMLX) $(NAME)
 
 # Dependency handling rules
 -include $(DEPFILES) # Include the dependency files in the Makefile
 
 # Dependency installation (brew, cmake, glfw)
-dependdown:
-	@if [ -x "$$HOME/homebrew/bin/brew" ] || [ -x "$$HOME/.brew/bin/brew" ]; then \
-		echo "brew is already installed"; \
-	else \
-		echo "Brew not found"; \
-		read -p "Do you want to install brew? y/n: "  brewchoice; \
-		if [ "$$brewchoice" = "y" ]; then \
-			rm -rf $$HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $$HOME/.brew && \
-			echo 'export PATH=$$HOME/.brew/bin:$$PATH' >> $$HOME/.zshrc && source $$HOME/.zshrc && brew update; \
-			echo "Brew successfully installed"; \
-		else \
-			echo "Exit"; \
-			exit 2; \
-		fi \
-	fi
-	@if [ -d "$$HOME/homebrew/opt/cmake/bin" ] || [ -d "$$HOME/.brew/opt/cmake/bin" ]; then \
-		echo "cmake is already installed"; \
-	else \
-		echo "cmake not found"; \
-		read -p "Do you want to install cmake? y/n: " cmakechoice; \
-		if [ "$$cmakechoice" = "y" ]; then \
-			brew install cmake; \
-			echo "cmake successfully installed"; \
-		else \
-			echo "Exit"; \
-			exit 2; \
-		fi \
-	fi
-	@if [ -d "$$HOME/homebrew/opt/glfw/lib" ] || [ -d "$$HOME/.brew/opt/glfw/lib" ]; then \
-		echo "glfw is already installed"; \
-	else \
-		echo "glfw not found"; \
-		read -p "Do you want to install glfw? y/n: " glfwchoice; \
-		if [ "$$glfwchoice" = "y" ]; then \
-			brew install glfw; \
-			echo "glfw successfully installed"; \
-		else \
-			echo "Exit"; \
-			exit 2; \
-		fi \
-	fi
+# dependdown:
+# 	@if [ -x "$$HOME/homebrew/bin/brew" ] || [ -x "$$HOME/.brew/bin/brew" ]; then \
+# 		echo "brew is already installed"; \
+# 	else \
+# 		echo "Brew not found"; \
+# 		read -p "Do you want to install brew? y/n: "  brewchoice; \
+# 		if [ "$$brewchoice" = "y" ]; then \
+# 			rm -rf $$HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $$HOME/.brew && \
+# 			echo 'export PATH=$$HOME/.brew/bin:$$PATH' >> $$HOME/.zshrc && source $$HOME/.zshrc && brew update; \
+# 			echo "Brew successfully installed"; \
+# 		else \
+# 			echo "Exit"; \
+# 			exit 2; \
+# 		fi \
+# 	fi
+# 	@if [ -d "$$HOME/homebrew/opt/cmake/bin" ] || [ -d "$$HOME/.brew/opt/cmake/bin" ]; then \
+# 		echo "cmake is already installed"; \
+# 	else \
+# 		echo "cmake not found"; \
+# 		read -p "Do you want to install cmake? y/n: " cmakechoice; \
+# 		if [ "$$cmakechoice" = "y" ]; then \
+# 			brew install cmake; \
+# 			echo "cmake successfully installed"; \
+# 		else \
+# 			echo "Exit"; \
+# 			exit 2; \
+# 		fi \
+# 	fi
+# 	@if [ -d "$$HOME/homebrew/opt/glfw/lib" ] || [ -d "$$HOME/.brew/opt/glfw/lib" ]; then \
+# 		echo "glfw is already installed"; \
+# 	else \
+# 		echo "glfw not found"; \
+# 		read -p "Do you want to install glfw? y/n: " glfwchoice; \
+# 		if [ "$$glfwchoice" = "y" ]; then \
+# 			brew install glfw; \
+# 			echo "glfw successfully installed"; \
+# 		else \
+# 			echo "Exit"; \
+# 			exit 2; \
+# 		fi \
+# 	fi
 
 $(LIBMLX): $(MLXDIR)
 	@cmake $(MLXDIR) -B $(MLXDIR)/build && make -C $(MLXDIR)/build -j4
