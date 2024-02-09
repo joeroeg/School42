@@ -8,13 +8,14 @@
             // "program": "${workspaceFolder}/a.out",
             // "program": "${workspaceFolder}/playground/a.out",
             // "program": "${workspaceFolder}/playground/42course/MLX42_testing/fractol",
-            "program": "/Users/hezhukov/Desktop/04-Fractol/fractol",
-            "args": ["1"],
+            // "program": "/Users/hezhukov/Desktop/04-Fractol/fractol",
+            "program": "${workspaceFolder}/maincourse/minishell_february/minishell",
+            "args": [""],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "lldb",
+            "MIMode": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
