@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_execution_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: device <device@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:56:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/17 14:50:11 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/02/15 13:37:47 by device           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ int	execute(char *fullpath, char *const argv[], char *const envp[])
 {
 	if (fullpath)
 	{
+		// dprintf(2, "path: %s\n", fullpath);
+		// dprintf(2, "argv[0] = %s\n", argv[0]);
+		// dprintf(2, "argv[1] = %s\n", argv[1]);
+		// dprintf(2, "argv[2] = %s\n", argv[2]);
 		execve(fullpath, argv, envp);
 		perror("execve");
 		free(fullpath);
