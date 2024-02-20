@@ -11,13 +11,13 @@
             // "program": "/Users/hezhukov/Desktop/04-Fractol/fractol",
             "program": "${workspaceFolder}/maincourse/minishell_february/minishell",
             // "program": "${workspaceFolder}/maincourse/pipex/pipex_bonus",
-            "args": [""],
+            "args": ["ls", "|", "sort"],
             // "args": ["infile", "cat -e", "sort -r", "oufile"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "gdb",
+            "MIMode": "lldb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

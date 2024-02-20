@@ -1,0 +1,66 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "maincourse/minishell_february"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"stdlib.h": "c",
+			"string.h": "c",
+			"iterator": "c",
+			"random": "c",
+			"__hash_table": "c",
+			"__split_buffer": "c",
+			"__tree": "c",
+			"array": "c",
+			"bitset": "c",
+			"deque": "c",
+			"initializer_list": "c",
+			"map": "c",
+			"stack": "c",
+			"string": "c",
+			"string_view": "c",
+			"unordered_map": "c",
+			"utility": "c",
+			"vector": "c",
+			"__locale": "c",
+			"sstream": "c",
+			"libft.h": "c",
+			"cstring": "c",
+			"stddef.h": "c",
+			"stdio.h": "c",
+			"fcntl.h": "c",
+			"__config": "c",
+			"__string": "c",
+			"memory": "c",
+			"stdint.h": "c",
+			"algorithm": "c",
+			"cstdio": "c",
+			"limits": "c",
+			"ratio": "c",
+			"ctype.h": "c",
+			"locale": "c",
+			"__node_handle": "c",
+			"_types.h": "c",
+			"__bit_reference": "c",
+			"__functional_base": "c",
+			"atomic": "c",
+			"chrono": "c",
+			"__memory": "c",
+			"functional": "c",
+			"optional": "c",
+			"system_error": "c",
+			"tuple": "c",
+			"type_traits": "c",
+			"ft_printf.h": "c",
+			"filesystem": "c",
+			"tests.h": "c",
+			"unistd.h": "c",
+			"stdarg.h": "c"
+		}
+	}
+}
