@@ -51,7 +51,9 @@
 		"filesystem": "c",
 		"tests.h": "c",
 		"unistd.h": "c",
-		"stdarg.h": "c"
+		"stdarg.h": "c",
+		"minishell.h": "c",
+		"readline.h": "c"
 	},
 	"[c]": {
 	"files.autoSave": "onFocusChange",
