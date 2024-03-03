@@ -4,15 +4,8 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            // "program": "${workspaceFolder}/maincourse/fractol/fractol",
-            // "program": "${workspaceFolder}/a.out",
-            // "program": "${workspaceFolder}/playground/a.out",
-            // "program": "${workspaceFolder}/playground/42course/MLX42_testing/fractol",
-            // "program": "/Users/hezhukov/Desktop/04-Fractol/fractol",
             "program": "${workspaceFolder}/maincourse/minishell_february/minishell",
-            // "program": "${workspaceFolder}/maincourse/pipex/pipex_bonus",
             "args": [],
-            // "args": ["here_doc", "EOF", "cat -e", "sort -r", "oufile"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
@@ -30,10 +23,21 @@
                     "ignoreFailures": true
                 },
                 {
+                    "description": "Set follow-fork-mode parent",
+                    "text": "-gdb-set follow-fork-mode parent",
+                    "ignoreFailures": true
+                },
+                {
                     "description": "Set Disassembly Flavor to Intel",
                     "text": "-gdb-set disassembly-flavor intel",
                     "ignoreFailures": true
+                },
+                {
+                    "description": "Disable detach-on-fork",
+                    "text": "set detach-on-fork off",
+                    "ignoreFailures": false
                 }
+
             ]
         },
     ],
