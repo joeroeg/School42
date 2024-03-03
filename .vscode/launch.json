@@ -4,13 +4,14 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/maincourse/minishell_february/minishell",
+            // "program": "${workspaceFolder}/maincourse/minishell_february/minishell",
+            "program": "${workspaceRoot}/playground/42course/exam03/gnl/a.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "gdb",
+            "MIMode": "lldb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
