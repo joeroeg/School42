@@ -10,7 +10,7 @@
 # endif
 
 # ifndef MAX_FD
-#  define MAX_FD 10
+#  define MAX_FD 5
 # endif
 
 char *ft_strchr(const char *s, int c) {
@@ -108,18 +108,19 @@ char *get_next_line(int fd)
     {
         read_length = read(fd, read_buffer, BUFFER_SIZE);
         if (read_length <= 0)
-            break; // EOF or error
+            break;
         read_buffer[read_length] = '\0';
         char *temp = ft_strjoin(static_buffer[fd], read_buffer);
         free_buffer(&static_buffer[fd]);
         static_buffer[fd] = temp;
+        printf("%s", static_buffer[fd]);
     }
     return extract_line(&static_buffer[fd]);
 }
 
 int main(void) {
-    const char* command = "for i in {1..5}; do echo \"file 1 line $i\"; done > file1.txt";
-    int return_value = system(command);
+    // const char* command = "for i in {1..5}; do echo \"file 1 line $i\"; done > file1.txt";
+    // int return_value = system(command);
     int fd = open("file1.txt", O_RDONLY);
     char *line;
 
@@ -128,7 +129,7 @@ int main(void) {
         free(line); // Free each line after use
     }
     close(fd);
-    const char* filename = "file1.txt";
-    remove(filename);
+    // const char* filename = "file1.txt";
+    // remove(filename);
     return 0;
 }
