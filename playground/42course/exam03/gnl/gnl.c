@@ -44,6 +44,7 @@ char *extract_line(char **sb)
 		line = malloc(line_len + 1);
 		ft_strncpy(line, *sb, line_len);
 		line[line_len] = '\0';
+
 		temp = ft_strdup(newline_pos + 1);
 		free(*sb);
 		*sb = temp;

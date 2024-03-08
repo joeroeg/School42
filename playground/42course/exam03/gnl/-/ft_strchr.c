@@ -1,14 +1,28 @@
 #include <stdio.h>
 
+/*
 char *ft_strchr(const char *s, int c) {
     while (*s != (char)c) {
         if (!*s++) return (NULL);
     }
     return (char *)s;
 }
+*/
+
+char *ft_strchr(char *s, char c)
+{
+    while (*s != c)
+    {
+        if (*s == '\0')
+            return NULL;
+        s++; // Corrected increment here
+    }
+    return s;
+}
+
 
 int main() {
-    const char *str = "Hello, World!";
+    char *str = "Hello, World!";
     int testChars[] = {'H', 'W', '!', 'x', '\0'}; // Characters to test: existing, not existing, and the null terminator
     char *result;
 

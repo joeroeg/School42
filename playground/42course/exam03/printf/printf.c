@@ -48,3 +48,19 @@ int	ft_printf(const char *format, ...)
 	}
 	return (va_end(pointer), length);
 }
+
+
+int main()
+{
+	int num = -2147483648;
+	char *str = "hello";
+
+	// printf("%d\n", num);
+	// printf("%s\n", str);
+	// printf("%x\n", num);
+
+	ft_printf("%d\n", num);
+	ft_printf("%s\n", str);
+	ft_printf("%x\n", num);
+
+}
