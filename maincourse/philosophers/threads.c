@@ -1,24 +1,39 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <time.h>
 
 void *eating(void *arg)
 {
-	for (int i = 0; i < 8; i++)
-	{
-		sleep(1);
-		printf("eating   %d \n", i);
-	}
-	printf("eating   done\n");
-	return NULL;
+    struct timespec start, end;
+
+    for (int i = 0; i < 8; i++)
+    {
+    	clock_gettime(CLOCK_MONOTONIC, &start); // Measure start time
+        sleep(2);
+    	clock_gettime(CLOCK_MONOTONIC, &end); // Measure end time
+		// Calculate the time difference
+		double time_taken = (end.tv_sec - start.tv_sec) * 1e9;
+		double time_taken_ms = ((end.tv_sec - start.tv_sec) * 1e3) + ((end.tv_nsec - start.tv_nsec) / 1e6);
+        printf("eating   %.1f \n", time_taken_ms);
+    }
+    printf("eating   done\n");
+    return NULL;
 }
+
 
 void *sleeping(void *arg)
 {
-	for (int i = 0; i < 3; i++)
+	struct timespec start, end;
+
+	for (int i = 0; i < 5; i++)
 	{
-		sleep(2);
-		printf("sleeping %d \n", i);
+    	clock_gettime(CLOCK_MONOTONIC, &start); // Measure start time]
+		sleep(3);
+		clock_gettime(CLOCK_MONOTONIC, &end); // Measure end time
+		double time_taken = (end.tv_sec - start.tv_sec) * 1e9;
+		double time_taken_ms = ((end.tv_sec - start.tv_sec) * 1e3) + ((end.tv_nsec - start.tv_nsec) / 1e6);
+		printf("sleeping %.1f \n", time_taken_ms);
 	}
 	printf("sleeping done\n");
 	return NULL;
@@ -26,10 +41,17 @@ void *sleeping(void *arg)
 
 void *thinking(void *arg)
 {
-	for (int i = 0; i < 5; i++)
+	struct timespec start, end;
+
+	for (int i = 0; i < 3; i++)
 	{
-		sleep(2);
-		printf("thinking %d \n", i);
+    	clock_gettime(CLOCK_MONOTONIC, &start); // Measure start time
+		sleep(4);
+		clock_gettime(CLOCK_MONOTONIC, &end); // Measure end time
+		// Calculate the time difference
+		double time_taken = (end.tv_sec - start.tv_sec) * 1e9;
+		double time_taken_ms = ((end.tv_sec - start.tv_sec) * 1e3) + ((end.tv_nsec - start.tv_nsec) / 1e6);
+		printf("thinking %.1f \n", time_taken_ms);
 	}
 	printf("thinking done\n");
 	return NULL;
@@ -37,10 +59,17 @@ void *thinking(void *arg)
 
 void waiting()
 {
+	struct timespec start, end;
+
 	for (int i = 0; i < 8; i++)
 	{
-		sleep(2);
-		printf("waiting  %d \n", i);
+    	clock_gettime(CLOCK_MONOTONIC, &start); // Measure start time
+		sleep(1);
+		clock_gettime(CLOCK_MONOTONIC, &end); // Measure end time
+		// Calculate the time difference
+		double time_taken = (end.tv_sec - start.tv_sec) * 1e9;
+		double time_taken_ms = ((end.tv_sec - start.tv_sec) * 1e3) + ((end.tv_nsec - start.tv_nsec) / 1e6);
+		printf("waiting  %.1f \n", time_taken_ms);
 	}
 	printf("waiting  done\n");
 }
