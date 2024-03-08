@@ -4,3 +4,10 @@
 - search and delete without confirmation: `find ./ -name .git -type d -exec rm -rf {} \;`
 - generate a file and fill it with lines `for i in {1..10000}; do echo "file 1 line $i"; done > output_file.txt`
 
+
+
+## Git
+- to list local branches `git branch`
+- to list remote branches `git branch -r`
+- to delete a branch locally `git branch -d branch-name`
+- to delete it from a remote repository `git push origin --delete branch-name`
