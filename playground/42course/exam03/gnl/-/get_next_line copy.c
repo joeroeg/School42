@@ -41,7 +41,7 @@ void ft_strncpy(char *s1, char *s2, size_t n)
 {
     size_t i = 0;
     for (; i < n; i++) *s1++ = *s2++;
-	for (; i < n; i++) *s1++ = '\0';
+    for (; *s1; i++) *s1 = '\0';
 }
 
 
@@ -84,9 +84,9 @@ char *extract_line(char **sb)
 char *get_next_line(int fd)
 {
     static char *sb = NULL;
-    char 		read_buffer[BUFFER_SIZE + 1];
-    int 		read_bytes = 0;
-    char 		*temp = NULL;
+    char read_buffer[BUFFER_SIZE + 1];
+    int read_bytes = 0;
+    char *temp = NULL;
 
     if (!sb)
     {
@@ -116,16 +116,17 @@ char *get_next_line(int fd)
         sb = temp;
     }
     char *line = extract_line(&sb);
-    return NULL;
+    return line;
 }
 
 int main()
 {
-	int fd = open("in", O_RDONLY);
-	char *line = NULL;
+	// int fd = open("../test", O_RDONLY);
+    int fd = open("in", O_RDONLY);
+	char *line;
 	while ((line = get_next_line(fd)))
 	{
-		// printf("%s", line);
+		printf("%s", line);
 		free(line);
 	}
 }

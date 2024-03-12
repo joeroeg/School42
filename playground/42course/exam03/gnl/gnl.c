@@ -1,98 +1,83 @@
-#include "get_next_line.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <string.h>
 
-void ft_strcpy(char *dest, const char *src) {
-    while ((*dest++ = *src++));
-}
+#ifndef BUFFER_SIZE
+#define BUFFER_SIZE 5
+#endif
 
-void ft_strcat(char *dest, const char *src) {
-    while (*dest) dest++;
-    while ((*dest++ = *src++));
-}
-
-void ft_strncpy(char *dest, const char *src, size_t n) {
-    size_t i;
-    for (i = 0; i < n; i++) {
-        dest[i] = src[i];
-    }
-    for ( ; i < n; i++) {
-        dest[i] = '\0';
-    }
-}
-
-char *ft_strchr(const char *s, int c) {
-    while (*s != (char)c) if (!*s++) return NULL;
-    return (char *)s;
-}
-
-char *ft_strdup(const char *s) {
-    char *d = malloc(strlen(s) + 1);
-    if (d == NULL) return NULL;
-    ft_strcpy(d, s);
-    return d;
-}
-
-char *extract_line(char **sb)
+char *extract_line(char **static_buffer)
 {
+	char	*newline_pos = strchr(*static_buffer, '\n');
+	size_t	line_len = 0;
 	char	*line = NULL;
-	char	*newline_pos = ft_strchr(*sb, '\n');
 	char	*temp = NULL;
-	size_t	line_len;
 
-	if (newline_pos != NULL)
+	if (newline_pos)
 	{
-		line_len = newline_pos - *sb + 1;
+		line_len = newline_pos - *static_buffer + 1;
 		line = malloc(line_len + 1);
-		ft_strncpy(line, *sb, line_len);
+		strncpy(line, *static_buffer, line_len);
 		line[line_len] = '\0';
-
-		temp = ft_strdup(newline_pos + 1);
-		free(*sb);
-		*sb = temp;
+		temp = strdup(newline_pos + 1);
+		free (*static_buffer);
+		*static_buffer = temp;
+	}
+	else if (strlen(*static_buffer))
+	{
+		line = strdup(*static_buffer);
+		free (*static_buffer);
+		*static_buffer = NULL;
 	}
 	return line;
 }
 
 char *get_next_line(int fd)
 {
-	static char *static_buffer = NULL;
-	char		read_buffer[BUFFER_SIZE + 1] = {0};
-	int			read_len = 0;
-	char		*temp = NULL;
-	char		*line = NULL;
+    static char *sb = NULL;
+    char        read_buffer[BUFFER_SIZE] = {0};
+    int         read_bytes = 0;
+    char        *line = NULL;
+    char        *temp = NULL;
 
-	if (fd < 0 || BUFFER_SIZE <= 0) return NULL;
-	if (!static_buffer)
-	{
-		static_buffer = malloc(1);
-		if (!static_buffer) return NULL;
-		static_buffer[0] = '\0';
-	}
-	while (!ft_strchr(static_buffer, '\n'))
-	{
-		read_len = read(fd, read_buffer, BUFFER_SIZE);
-		if (read_len <= 0) break;
-		temp = malloc(read_len + strlen(static_buffer) + 1);
-		ft_strcpy(temp, static_buffer);
-		ft_strcat(temp, read_buffer);
-		free(static_buffer);
-		static_buffer = temp;
-	}
-
-	line = extract_line(&static_buffer);
-	if (read_len <= 0 && static_buffer) { // After last line extraction, check if EOF or read error
-        free(static_buffer); // Cleanup static buffer if EOF or read error and no more data to process
-        static_buffer = NULL;
+    if (!sb)
+    {
+        sb = malloc(1);
+        sb[0] = '\0';
     }
-	return (line);
+    while (!strchr(sb, '\n'))
+	{
+		read_bytes = read(fd, read_buffer, BUFFER_SIZE);
+		if (read_bytes < 0) return NULL;
+		if (read_bytes == 0 && strlen(sb) == 0)
+		{
+			free(sb);
+			sb = NULL;
+			return NULL;
+		}
+		if (read_bytes == 0) break;
+		read_buffer[read_bytes] = '\0';
+		int len1 = strlen(sb);
+		int len2 = strlen(read_buffer);
+		temp = malloc(len1 + len2 + 1);
+		strcpy(temp, sb);
+		strcat(temp, read_buffer);
+		free (sb);
+		sb = temp;
+	}
+    line = extract_line(&sb);
+    return line;
 }
 
 int main()
 {
-	int fd = open("file1.txt", O_RDONLY);
-	char *line;
-	while ((line = get_next_line(fd)))
-	{
-		printf("%s", line);
-		free(line);
-	}
+    int     fd = open("test", O_RDONLY);
+    char    *line = NULL;
+    while ((line = get_next_line(fd)))
+    {
+        printf("%s", line);
+        free (line);
+    }
 }

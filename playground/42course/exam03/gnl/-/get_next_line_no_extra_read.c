@@ -41,7 +41,7 @@ void ft_strncpy(char *s1, char *s2, size_t n)
 {
     size_t i = 0;
     for (; i < n; i++) *s1++ = *s2++;
-	for (; i < n; i++) *s1++ = '\0';
+    for (; *s1; i++) *s1 = '\0';
 }
 
 
@@ -84,45 +84,51 @@ char *extract_line(char **sb)
 char *get_next_line(int fd)
 {
     static char *sb = NULL;
-    char 		read_buffer[BUFFER_SIZE + 1];
-    int 		read_bytes = 0;
-    char 		*temp = NULL;
+    char read_buffer[BUFFER_SIZE + 1] = {0};
+    int read_bytes = 0;
+    char *line = NULL;
+    char *temp = NULL;
 
     if (!sb)
     {
         sb = malloc(1);
-        if (!sb) return NULL; // Ensure memory was allocated
-        *sb = '\0';
+        sb[0] = '\0';
     }
-
     while (!ft_strchr(sb, '\n'))
     {
         read_bytes = read(fd, read_buffer, BUFFER_SIZE);
-        if (read_bytes == 0 && ft_strlen(sb) == 0)
+        if (read_bytes == 0)
         {
-            free(sb);
-            sb = NULL;
-            return NULL;
+            if (ft_strlen(sb) == 0)
+            {
+                free(sb);
+                sb = NULL;
+                return NULL;
+            }
         }
         if (read_bytes < 0) return NULL;
         if (read_bytes == 0) break;
         read_buffer[read_bytes] = '\0';
-        temp = malloc(ft_strlen(sb) + read_bytes + 1);
-        if (!temp) return NULL; // Ensure memory was allocated
-
+        temp = malloc(read_bytes + (ft_strlen(sb)) + 1);
         ft_strcpy(temp, sb);
         ft_strcat(temp, read_buffer);
         free(sb);
         sb = temp;
     }
-    char *line = extract_line(&sb);
-    return NULL;
+    line = extract_line(&sb);
+    if (read_bytes <= 0 && sb)
+    {
+        free (sb);
+        sb = NULL;
+    }
+    printf("line: %s address: %p\n", line, line);
+    return line;
 }
 
 int main()
 {
-	int fd = open("in", O_RDONLY);
-	char *line = NULL;
+	int fd = open("file", O_RDONLY);
+	char *line;
 	while ((line = get_next_line(fd)))
 	{
 		// printf("%s", line);
