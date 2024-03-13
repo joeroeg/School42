@@ -33,7 +33,7 @@ void *thread_function(void* arg)
     return NULL;
 }
 
-int main()
+int main(int argc, char **argv)
 {
 	t_philosopher philosophers[N];
 	pthread_mutex_t	forks[N];

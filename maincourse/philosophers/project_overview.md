@@ -4,6 +4,20 @@
 This project simulates the classic **Dining Philosophers Problem** using threads and mutexes to manage philosopher actions and their access to resources (forks). The goal is to implement a system where philosophers alternate between eating, thinking, and sleeping without encountering deadlocks or starving any philosopher.
 
 ## Global Rules
+- Global variables are forbidden!
+- Your(s) program(s) should take the following arguments:
+`number_of_philosophers`
+`time_to_die`
+`time_to_eat`
+`time_to_sleep`
+`number_of_times_each_philosopher_must_eat`
+
+---
+- `number_of_philosophers`: The number of philosophers and also the number of forks.
+- `time_to_die` (in milliseconds): If a philosopher didn’t start eating time_to_die milliseconds since the beginning of their last meal or the beginning of the  simulation, they die.
+- `time_to_eat` (in milliseconds): The time it takes for a philosopher to eat. During that time, they will need to hold two forks.
+- `time_to_sleep` (in milliseconds): The time a philosopher will spend sleeping.
+- `number_of_times_each_philosopher_must_eat` (optional argument): If all philosophers have eaten at least number_of_times_each_philosopher_must_eat times, the  simulation stops. If not specified, the simulation stops when a philosopher dies.
 
 ### Program Arguments
 Your program, named `philo`, must accept the following arguments:
@@ -72,8 +86,16 @@ Replace `timestamp_in_ms` with the current timestamp in milliseconds and `X` wit
 ### Thread Management
 
 - **`pthread_create`**: Creates a new thread, starting with execution of a specified function. Returns 0 on success.
+
 - **`pthread_detach`**: Marks a thread for detachment. Once a detached thread terminates, its resources are automatically released back to the system.
-- **`pthread_join`**: Waits for a specified thread to terminate. Threads being waited upon through `pthread_join` cannot be detached.
+
+- **`pthread_join`**: is a function used in POSIX threads programming, which allows one thread to wait for the completion of another thread. When you're dealing with multiple threads in a program, pthread_join helps you synchronize the termination of these threads.
+
+`int pthread_join(pthread_t thread, void **retval);`
+- `pthread_t thread`: This is the identifier of the thread you're waiting on.
+
+- `void **retval`: This is a pointer to a pointer where the exit status of the joined thread will be stored. If the thread was set up to return a value upon exit, retval points to that value once pthread_join completes. If you're not interested in the return value, you can just pass NULL.
+
 
 ### Mutex Operations
 
@@ -126,6 +148,25 @@ The Dining Philosophers problem is a classic synchronization issue in computer s
 - [Dining Philosophers Problem on Wikipedia](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
 - [Dijkstra's Algorithm Implementation in C](https://rosettacode.org/wiki/Dijkstra%27s_algorithm#C)
 - [Philosophers Visualizer](https://nafuka11.github.io/philosophers-visualizer/)
+
+## Q&A
+
+### What is the difference between threads and processes?
+`Threads` are components of a process that can run concurrently, sharing the process's resources like memory and file descriptors. They are lightweight, have a shared memory space, and can communicate with each other more efficiently due to this shared space. However, because they share resources, they require synchronization to avoid conflicts, such as race conditions.
+
+`Processes` are instances of programs that run independently from each other, each with its own memory space. This isolation prevents processes from directly accessing each other's resources, leading to higher stability and security but at the cost of slower communication through inter-process communication (IPC) mechanisms.
+
+
+#### When use processes and when to use threads?
+Use Processes when:
+- `Isolation` is a priority. Since each process operates in its own memory space, the failure of one process won't directly affect the memory or resources of another process.
+- `Security` concerns dictate that separate tasks must not interfere with each other's resources or memory space.
+- `Stability` is crucial. The crash of one process does not affect the execution of another, maintaining system robustness.
+
+Use Threads when:
+- `Efficiency` in communication and memory usage is necessary. Threads within the same process can share memory and resources directly, making data exchange and communication faster and more resource-efficient.
+- `Speed` is a concern. Creating and managing threads is faster than doing so for processes because threads share resources and the operating system does not have to allocate separate memory spaces or perform complex context switches.
+- `Shared` State is required. Tasks that need to work on the same data set or maintain shared state for efficiency reasons are well-suited for threading, as threads inherently have access to the process's shared memory.
 
 ## Additional Resources
 
