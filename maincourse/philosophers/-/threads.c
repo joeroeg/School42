@@ -85,10 +85,6 @@ void waiting()
 	printf("waiting     done\n");
 }
 
-
-/**
- * thread_join
-*/
 int main()
 {
 	pthread_t eating_thread;
@@ -101,10 +97,13 @@ int main()
 	pthread_create(&eating_thread, NULL, eating, &v);
 	pthread_create(&sleeping_thread, NULL, sleeping, NULL);
 	pthread_create(&thinking_thread, NULL, thinking, NULL);
+
 	waiting();
+
 	pthread_join(eating_thread, NULL);
 	pthread_join(sleeping_thread, (void *)&sleeping_result);
 	pthread_join(thinking_thread, NULL);
 
 	printf("sleeping result: %d\n", *sleeping_result);
+	free(sleeping_result);
 }
