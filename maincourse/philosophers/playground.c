@@ -50,8 +50,6 @@ void *eating(void *arg) {
     return NULL;
 }
 
-
-
 void *thinking(void *arg)
 {
     philosopher_args *philosopher = (philosopher_args *)arg;
@@ -114,13 +112,12 @@ int check_survival(philosopher_args* philosopher) {
     long long current_time = (now.tv_sec * 1000) + (now.tv_usec / 1000);
     long long time_since_last_meal = current_time - philosopher->last_meal_time;
 
-    // Check if the philosopher has survived
     if (time_since_last_meal > philosopher->time_to_die) {
         // Philosopher has not survived
         action_print(philosopher, philosopher->philosopher_id, "has died");
-        return 0; // Indicate death
+        return 0; // if 0 then he's dead
     }
-    return 1; // Philosopher is still alive
+    return 1; // if 1 he's still alive
 }
 
 void *philosopher_routine(void* arg) {
@@ -133,17 +130,17 @@ void *philosopher_routine(void* arg) {
 
     while (1) {
         if (!check_survival(args)) {
-            break; // Exit loop if philosopher didn't survive
+            break;
         }
 
-        wait_for_forks(args); // Attempt to eat
+        wait_for_forks(args);
         if (!check_survival(args)) {
-            // Additional check after eating attempt in case philosopher couldn't eat in time
             break;
         }
 
         sleeping(args);
         thinking(args);
+		// printf("-->");
     }
 
     return NULL;
@@ -166,7 +163,6 @@ void create_threads(philosopher_args *philosopher) {
 
     if (threads == NULL || dataPointers == NULL) {
         fprintf(stderr, "Failed to allocate memory for threads or philosopher args pointers\n");
-        // Free whichever was successfully allocated before exiting
         if (threads != NULL) free(threads);
         if (dataPointers != NULL) free(dataPointers);
         exit(1);
@@ -180,24 +176,24 @@ void create_threads(philosopher_args *philosopher) {
             exit(1);
         }
         *data = *philosopher;
-        data->philosopher_id = i + 1; // Adjusted to be zero-index safe
+        data->philosopher_id = i + 1; // because we need to start from 1 philo
 
-        dataPointers[i] = data; // Store the pointer to free later
+        dataPointers[i] = data; // we need to copy already initialized data
 
         if (pthread_create(&threads[i], NULL, philosopher_routine, data) != 0) {
             fprintf(stderr, "Failed to create thread %d\n", i + 1);
-            free(data); // Cleanup immediately if thread creation fails
+            free(data);
             continue;
         }
     }
 
-    // Wait for all threads to complete and free their philosopher_args
+    // We need to wait for all threads to complete and free their philosopher_args
     for (int i = 0; i < philosopher->num_philosophers; i++) {
         pthread_join(threads[i], NULL);
-        free(dataPointers[i]); // Free the memory allocated for the philosopher's arguments
+        free(dataPointers[i]);
     }
-    free(dataPointers); // Finally, free the array of pointers itself
-    free(threads); // Cleanup
+    free(dataPointers);
+    free(threads);
 }
 
 void initialize_dining_table(philosopher_args *philosopher) {
