@@ -22,7 +22,7 @@ void action_print(t_philosopher *philosopher, const char *action) {
     if (!philosopher->shared->someone_died) {
         long long current_timestamp = get_current_timestamp_ms();
         long long elapsed_time = current_timestamp - philosopher->shared->start_time;
-        printf("%lli %d %s\n", elapsed_time, philosopher->id, action);
+        printf("%lld %lli %d %s\n", current_timestamp, elapsed_time, philosopher->id, action);
     }
     pthread_mutex_unlock(&(philosopher->shared->write_mutex));
 }

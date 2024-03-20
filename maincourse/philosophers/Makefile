@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror -pthread -fsanitize=thread
+CFLAGS = -g -Wall -Wextra -Werror -pthread #-fsanitize=thread
 
 # Name of the executable
 NAME = philo
@@ -25,21 +25,21 @@ $(NAME): $(OBJ)
 
 # Clean object files
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 # Full clean (objects + executable)
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 # Rebuild everything
 re: fclean all
 
 # Run command
-run: philo
+run: re
 	@./philo 2 300 200 100
 
 val: philo
-	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 2 400 200 100
+	@valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 2 400 200 100
 
 # Prevent make from doing something with a file named 'clean', 'fclean', or 're'
 .PHONY: all clean fclean re

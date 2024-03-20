@@ -2,7 +2,7 @@
 
 void start_philosopher_threads(t_simulation *sim) {
     for (int i = 0; i < sim->shared_resources.nb_philo; i++) {
-		sim->shared_resources.start_time = get_current_timestamp_ms();
+		// sim->shared_resources.start_time = get_current_timestamp_ms(); // this causes dataraces but i'm not sure if I get time here.
         if (pthread_create(&sim->philosophers[i].thread, NULL, philosopher_routine, (void *)&sim->philosophers[i]) != 0) {
             fprintf(stderr, "Error creating thread for philosopher %d\n", sim->philosophers[i].id);
             // Handle thread creation failure (e.g., by cleaning up and exiting)
