@@ -3,6 +3,16 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/time.h>
+#include <sys/types.h>
+#include <stdint.h>
+
+/*
+	Test 1 800 200 200. The philosopher should not eat and should die.</li>
+	Test 5 800 200 200. No philosopher should die.</li>
+	Test 5 800 200 200 7. No philosopher should die and the simulation should stop when every philosopher has eaten at least 7 times.
+	Test 4 410 200 200. No philosopher should die.
+	Test 4 310 200 100. One philosopher should die.
+*/
 
 typedef struct {
     pthread_mutex_t* forks;
@@ -11,10 +21,10 @@ typedef struct {
 typedef struct {
 	int num_philosophers;
     int philosopher_id;
-	int time_to_die;
-	int time_to_eat;
-	int time_to_sleep;
-	int times_to_eat;
+	long long time_to_die;
+	long long time_to_eat;
+	long long time_to_sleep;
+	long long times_to_eat;
 	long long first_timestamp;
 	long long last_meal_time;
 	pthread_mutex_t writing;
@@ -23,6 +33,38 @@ typedef struct {
 	DiningTable* table;
 } philosopher_args;
 
+// long long currentTimeInMicroseconds() {
+//     struct timeval tv;
+//     gettimeofday(&tv, NULL);
+//     return (long long)(tv.tv_sec) * 1000000 + tv.tv_usec;
+// }
+
+// void ft_usleep(long long microseconds) {
+//     const long long sleepFraction = microseconds * 0.9; // Sleep for 90% of the time
+//     usleep(sleepFraction); // Initial sleep for the majority of the time
+
+//     const long long endTime = currentTimeInMicroseconds() + (microseconds - sleepFraction);
+//     while (currentTimeInMicroseconds() < endTime) {
+//         // Busy wait for the remaining time
+//     }
+// }
+
+long long timestamp() {
+    struct timeval t;
+    gettimeofday(&t, NULL);
+    return (t.tv_sec * 1000LL) + (t.tv_usec / 1000);
+}
+
+void ft_usleep(long long timeInMilliseconds, philosopher_args *rules) {
+    long long startTime = timestamp();
+    while (!rules->dieded) {
+        if (timestamp() - startTime >= timeInMilliseconds) {
+            break; // Desired sleep time has elapsed
+        }
+        usleep(10); // Short sleep to yield CPU and check the condition frequently
+    }
+}
+
 void action_print(philosopher_args *philosopher, int id, char *string) {
     pthread_mutex_lock(&(philosopher->writing));
     if (!philosopher->dieded) {
@@ -30,7 +72,7 @@ void action_print(philosopher_args *philosopher, int id, char *string) {
         gettimeofday(&now, NULL);
         long long current_timestamp = (now.tv_sec * 1000) + (now.tv_usec / 1000);
         long long elapsed_time = current_timestamp - philosopher->first_timestamp;
-        printf("%lli %i %s\n", elapsed_time, id + 1, string);
+        printf("%lli %i %s\n", elapsed_time, id, string);
     }
     pthread_mutex_unlock(&(philosopher->writing));
 }
@@ -38,15 +80,12 @@ void action_print(philosopher_args *philosopher, int id, char *string) {
 void *eating(void *arg) {
     philosopher_args *philosopher = (philosopher_args *)arg;
     action_print(philosopher, philosopher->philosopher_id, "is eating");
-    usleep(philosopher->time_to_eat); // Simulate eating
-
+    ft_usleep(philosopher->time_to_eat, philosopher);
     struct timeval now;
     gettimeofday(&now, NULL);
-
     pthread_mutex_lock(&(philosopher->last_meal_mutex));
     philosopher->last_meal_time = (now.tv_sec * 1000) + (now.tv_usec / 1000);
     pthread_mutex_unlock(&(philosopher->last_meal_mutex));
-
     return NULL;
 }
 
@@ -54,7 +93,7 @@ void *thinking(void *arg)
 {
     philosopher_args *philosopher = (philosopher_args *)arg;
 	action_print(philosopher, philosopher->philosopher_id, "is thinking");
-    usleep(philosopher->time_to_sleep);
+    ft_usleep(philosopher->time_to_sleep, philosopher);
     return NULL;
 }
 
@@ -62,7 +101,7 @@ void *sleeping(void *arg)
 {
     philosopher_args *philosopher = (philosopher_args *)arg;
 	action_print(philosopher, philosopher->philosopher_id, "is sleeping");
-    usleep(philosopher->time_to_sleep);
+    ft_usleep(philosopher->time_to_sleep, philosopher);
     return NULL;
 }
 
@@ -70,9 +109,9 @@ philosopher_args *initialize_struct(int argc, char **argv)
 {
 	philosopher_args *philosopher = malloc(sizeof(philosopher_args));
 	philosopher->num_philosophers = atoi(argv[1]);
-	philosopher->time_to_die = atoi(argv[2]) * 1000;
-	philosopher->time_to_eat = atoi(argv[3]) * 1000;
-	philosopher->time_to_sleep = atoi(argv[4]) * 1000;
+	philosopher->time_to_die = atoi(argv[2]);
+	philosopher->time_to_eat = atoi(argv[3]);
+	philosopher->time_to_sleep = atoi(argv[4]);
 	if (argc == 6)
 		philosopher->times_to_eat = atoi(argv[5]);
 	else
@@ -87,7 +126,8 @@ void wait_for_forks(philosopher_args* args) {
     int left = philosopher - 1;
     int right = philosopher % num_philosophers;
 
-    if (philosopher == num_philosophers - 1) { // Last philosopher picks right fork first
+ 	// Last philosopher picks right fork first
+    if (philosopher == num_philosophers - 1) {
         pthread_mutex_lock(&table->forks[right]);
 		action_print(args, args->philosopher_id, "has taken a fork");
         pthread_mutex_lock(&table->forks[left]);
@@ -105,47 +145,51 @@ void wait_for_forks(philosopher_args* args) {
     pthread_mutex_unlock(&table->forks[right]);
 }
 
-
 int check_survival(philosopher_args* philosopher) {
     struct timeval now;
     gettimeofday(&now, NULL);
-    long long current_time = (now.tv_sec * 1000) + (now.tv_usec / 1000);
-    long long time_since_last_meal = current_time - philosopher->last_meal_time;
+	long long current_time = (now.tv_sec * 1000) + (now.tv_usec / 1000);
+	long long time_since_last_meal = current_time - philosopher->last_meal_time;
 
     if (time_since_last_meal > philosopher->time_to_die) {
-        // Philosopher has not survived
         action_print(philosopher, philosopher->philosopher_id, "has died");
-        return 0; // if 0 then he's dead
+		philosopher->dieded++;
+        return 0;
     }
-    return 1; // if 1 he's still alive
+	// printf("current_time: %lld\n", current_time);
+	// printf("last_meal_time: %lld\n", philosopher->last_meal_time);
+	// printf("time_since_last_meal: %lld\n", time_since_last_meal);
+	// printf("time_to_die: %lld\n", philosopher->time_to_die);
+	// printf("time_to_eat: %lld\n", philosopher->time_to_eat);
+	// printf("time_to_sleep: %lld\n", philosopher->time_to_sleep);
+	// printf("philosopler id: [%i] is alive! time since last meal: [%lli]  \n", philosopher->philosopher_id, time_since_last_meal);
+    return 1;
 }
 
 void *philosopher_routine(void* arg) {
     philosopher_args* args = (philosopher_args*)arg;
 
     // Initialize last meal time at the start to ensure no false positives for death
-    struct timeval now;
-    gettimeofday(&now, NULL);
-    args->last_meal_time = (now.tv_sec * 1000) + (now.tv_usec / 1000);
+	struct timeval now;
+	gettimeofday(&now, NULL);
+	args->last_meal_time = (now.tv_sec * 1000) + (now.tv_usec / 1000);
 
-    while (1) {
-        if (!check_survival(args)) {
+    while (1)
+	{
+        if (!check_survival(args))
             break;
-        }
-
         wait_for_forks(args);
-        if (!check_survival(args)) {
+		if (!check_survival(args))
             break;
-        }
-
         sleeping(args);
+		if (!check_survival(args))
+            break;
         thinking(args);
-		// printf("-->");
+		if (!check_survival(args))
+            break;
     }
-
     return NULL;
 }
-
 
 void initialize_rules(philosopher_args *philosopher_args) {
     struct timeval start;
@@ -155,7 +199,6 @@ void initialize_rules(philosopher_args *philosopher_args) {
 	pthread_mutex_init(&(philosopher_args->last_meal_mutex), NULL);
     philosopher_args->dieded = 0;
 }
-
 
 void create_threads(philosopher_args *philosopher) {
     pthread_t *threads = malloc(philosopher->num_philosophers * sizeof(pthread_t));
@@ -176,10 +219,8 @@ void create_threads(philosopher_args *philosopher) {
             exit(1);
         }
         *data = *philosopher;
-        data->philosopher_id = i + 1; // because we need to start from 1 philo
-
-        dataPointers[i] = data; // we need to copy already initialized data
-
+        data->philosopher_id = i + 1; // because i need to start from 1 philo
+        dataPointers[i] = data; // i need to copy already initialized data
         if (pthread_create(&threads[i], NULL, philosopher_routine, data) != 0) {
             fprintf(stderr, "Failed to create thread %d\n", i + 1);
             free(data);
@@ -187,7 +228,7 @@ void create_threads(philosopher_args *philosopher) {
         }
     }
 
-    // We need to wait for all threads to complete and free their philosopher_args
+    // i need to wait for all threads to complete and free their philosopher_args
     for (int i = 0; i < philosopher->num_philosophers; i++) {
         pthread_join(threads[i], NULL);
         free(dataPointers[i]);
