@@ -26,6 +26,7 @@ typedef struct s_shared_resources {
     pthread_mutex_t		forks[MAX_PHILOSOPHERS]; // Mutex for each fork
     pthread_mutex_t		write_mutex; // Mutex for writing to stdout to prevent interleaving
     pthread_mutex_t		status_mutex; // Mutex for checking/updating philosopher's status (alive or dead)
+	pthread_mutex_t		last_meal_time_mutex; // Mutex for checking the last meal time
     int					all_ate; // Flag to check if all philosophers have eaten `max_meals` times
     int					someone_died; // Flag to indicate if any philosopher has died
 } t_shared_resources;
@@ -33,8 +34,8 @@ typedef struct s_shared_resources {
 // Structure to represent each philosopher
 typedef struct s_philosopher {
     int					id; // Philosopher's unique identifier
-    int 				meals_eaten; // Count of how many times the philosopher has eaten
     long long			last_meal_time; // Timestamp of the last meal
+    int 				meals_eaten; // Count of how many times the philosopher has eaten
     t_shared_resources	*shared; // Pointer to shared resources and rules
     pthread_t 			thread; // Thread running this philosopher's lifecycle
 } t_philosopher;
@@ -50,7 +51,8 @@ void	cleanup_simulation(t_simulation *sim);
 
 // Utilities
 long long	get_current_timestamp_ms();
-void		ft_usleep(long long timeInMilliseconds, t_shared_resources *rules);
+// void		ft_usleep(long long timeInMilliseconds, t_shared_resources *rules);
+void		ft_usleep(long long time);
 void		action_print(t_philosopher *philosopher, const char *action);
 void		print_simulation_state(const t_simulation *sim);
 
@@ -60,5 +62,5 @@ void thinking(t_philosopher *philosopher);
 void eating(t_philosopher *philosopher);
 void sleeping(t_philosopher *philosopher);
 
-void check_death(t_philosopher *philosopher);
-
+// void check_death(t_philosopher *philosopher);
+int check_death(t_philosopher *philosopher);
