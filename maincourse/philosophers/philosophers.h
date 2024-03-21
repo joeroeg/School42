@@ -12,6 +12,7 @@
 #include <stdbool.h>
 
 #define MAX_PHILOSOPHERS 256 // Maximum number of philosophers
+#define MULTIPLIER 100000 // Multiplier to convert seconds to milliseconds
 
 // Structure to hold shared resources and simulation rules
 typedef struct s_shared_resources {
@@ -53,10 +54,11 @@ void		ft_usleep(long long timeInMilliseconds, t_shared_resources *rules);
 void		action_print(t_philosopher *philosopher, const char *action);
 void		print_simulation_state(const t_simulation *sim);
 
-
 // void thinking(void *arg);
 void *philosopher_routine(void *arg);
 void thinking(t_philosopher *philosopher);
 void eating(t_philosopher *philosopher);
 void sleeping(t_philosopher *philosopher);
+
+void check_death(t_philosopher *philosopher);
 

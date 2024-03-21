@@ -55,7 +55,6 @@ int init_simulation_mutexes(t_simulation *sim) {
             return -1;
         }
     }
-
     return EXIT_SUCCESS;
 }
 
@@ -80,7 +79,7 @@ int init_simulation(int argc, char **argv, t_simulation *sim) {
     }
 
     // Capture the start time at the beginning of the simulation
-    long long start_time = get_current_timestamp_ms();
+    long long start_time = get_current_timestamp_ms(); // @changes 001 I want to start_time before first thread
     sim->shared_resources.start_time = start_time;
 
     // Set simulation parameters
