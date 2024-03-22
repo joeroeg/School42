@@ -85,7 +85,6 @@ int main(int argc, char **argv)
 	print_simulation_state(&sim);
 	start_philosopher_threads(&sim);
     join_philosopher_threads(&sim);
-	printf("-->");
     cleanup_simulation(&sim);
     return 0;
 }

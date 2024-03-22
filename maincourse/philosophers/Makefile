@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror -pthread -fsanitize=thread
+CFLAGS = -g -Wall -Wextra -Werror -pthread #-fsanitize=thread
 
 # Name of the executable
 NAME = philo
@@ -50,7 +50,7 @@ run5: re # FAIL One philosopher should die.
 	./philo 4 310 200 100
 
 run6: re
-	./philo 2 1000 200 100 1
+	./philo 2 500 200 100 1
 
 val: philo
 	@valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 2 400 200 100
