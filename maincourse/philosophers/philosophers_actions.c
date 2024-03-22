@@ -15,7 +15,7 @@ void thinking(t_philosopher *philosopher) {
 void eating(t_philosopher *philosopher) {
 
     pthread_mutex_lock(&philosopher->shared->meal_mutex);
-	print_philosopher(philosopher);
+	// print_philosopher(philosopher);
 	action_print(philosopher, "is eating");
 
 	pthread_mutex_lock(&philosopher->shared->last_meal_time_mutex);
@@ -72,9 +72,7 @@ void put_down_forks(t_philosopher *philosopher) {
     int left = philosopher->id - 1;
     int right = philosopher->id % philosopher->shared->nb_philo;
     pthread_mutex_unlock(&philosopher->shared->forks[left]);
-	// action_print(philosopher, "has put down a fork");
     pthread_mutex_unlock(&philosopher->shared->forks[right]);
-	// action_print(philosopher, "has put down a fork");
 }
 
 int check_death(t_philosopher *philosopher)
@@ -97,7 +95,7 @@ int check_death(t_philosopher *philosopher)
 
 void *philosopher_routine(void *arg) {
     t_philosopher *philosopher = (t_philosopher *)arg;
-    while (1) {
+    while (true) {
         // Lock before reading shared variable
         pthread_mutex_lock(&philosopher->shared->status_mutex);
         int someone_died = philosopher->shared->someone_died;

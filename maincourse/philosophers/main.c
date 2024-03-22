@@ -19,24 +19,28 @@
 
 void *death_monitor_routine(void* arg) {
     t_philosopher *philosopher = (t_philosopher *)arg;
-    int frequency_ms = 1;
+    int frequency_ms = 10;
 
     while (true) {
         ft_usleep(frequency_ms); // Wait for the specified frequency before checking again
 
         pthread_mutex_lock(&philosopher->shared->status_mutex);
-        // Check if someone has died within the protected section
         if (philosopher->shared->someone_died) {
             pthread_mutex_unlock(&philosopher->shared->status_mutex);
             break; // Exit the loop if a death has been detected
         }
         pthread_mutex_unlock(&philosopher->shared->status_mutex);
         // Now perform the death check, since we know no one has died up until the lock was released
+
+		// int satisfied_philosophers = philosopher->shared->satisfied_philosophers;
+
 		pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
-		int satisfied_philosophers = philosopher->shared->satisfied_philosophers;
-		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
-		if (satisfied_philosophers == philosopher->shared->nb_philo)
+		if (philosopher->shared->satisfied_philosophers == philosopher->shared->nb_philo)
+		{
+			pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
 			break ;
+		}
+		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
 		// If a death is detected, the shared variable is set within the check_death function, which should also handle locking
         if (check_death(philosopher))
             break; // Exit the loop as the simulation should stop

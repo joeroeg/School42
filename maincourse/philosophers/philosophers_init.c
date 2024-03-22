@@ -7,7 +7,7 @@ void cleanup_simulation(t_simulation *sim) {
 	pthread_mutex_destroy(&sim->shared_resources.write_mutex);
 	pthread_mutex_destroy(&sim->shared_resources.status_mutex);
 	pthread_mutex_destroy(&sim->shared_resources.last_meal_time_mutex);
-	pthread_mutex_destroy(&sim->shared_resources.meal_mutex);
+	// pthread_mutex_destroy(&sim->shared_resources.meal_mutex); // Illegal instruction: 4 | when make run1
 	pthread_mutex_destroy(&sim->shared_resources.satisfied_philosophers_mutex);
 
 
