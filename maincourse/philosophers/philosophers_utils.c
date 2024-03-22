@@ -40,8 +40,7 @@ void print_simulation_state(const t_simulation *sim) {
     printf("           Time to Sleep: %d\n", sim->shared_resources.time_to_sleep);
     printf("               Max Meals: %d\n", sim->shared_resources.max_meals);
     printf("              Start Time: %lld\n", sim->shared_resources.start_time % MULTIPLIER);
-    printf("                 All Ate: %d\n", sim->shared_resources.all_ate);
-    printf("           So meone Died: %d\n", sim->shared_resources.someone_died);
+    printf("           Someone Died: %d\n", sim->shared_resources.someone_died);
     // Note: Mutexes are not printed as their state isn't easily represented in a simple printout
 
     printf("\nPhilosophers:\n");

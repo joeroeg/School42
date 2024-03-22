@@ -49,6 +49,9 @@ run4: re # The philosopher should not eat and should die.
 run5: re # No philosopher should die.
 	./philo 5 800 200 200
 
+run6: re # No philosopher should die.
+	./philo 2 500 200 100 2
+
 val: philo
 	@valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 2 400 200 100
 

@@ -28,6 +28,7 @@ typedef struct s_shared_resources {
     pthread_mutex_t		status_mutex; // Mutex for checking/updating philosopher's status (alive or dead)
 	pthread_mutex_t		last_meal_time_mutex; // Mutex for checking the last meal time
 	pthread_mutex_t		meal_mutex; // Mutex for checking the last meal time
+	pthread_mutex_t		satisfied_philosophers_mutex; // Mutex for checking the last meal time
     int					all_ate; // Flag to check if all philosophers have eaten `max_meals` times
     int					someone_died; // Flag to indicate if any philosopher has died
 	int					satisfied_philosophers;

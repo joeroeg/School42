@@ -97,6 +97,7 @@ int init_simulation(int argc, char **argv, t_simulation *sim) {
     } else {
         sim->shared_resources.max_meals = -1;
     }
+	sim->shared_resources.satisfied_philosophers = 0;
     sim->shared_resources.all_ate = 0;
     sim->shared_resources.someone_died = 0;
     // sim->shared_resources.time_to_think = 0; // Assuming this is intentional
