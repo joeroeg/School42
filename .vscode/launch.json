@@ -6,13 +6,13 @@
             "request": "launch",
             "program": "${workspaceRoot}/maincourse/philosophers/philo",
             // "program": "${workspaceRoot}/playground/42course/philosophers/a.out",
-            "args": ["2", "500", "200", "100", "2"],
+            "args": ["2", "500000000000", "200", "100", "2"],
             // "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "lldb",
+            "MIMode": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
