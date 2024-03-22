@@ -46,7 +46,8 @@ int init_simulation_mutexes(t_simulation *sim)
 {
     if ((pthread_mutex_init(&sim->shared_resources.write_mutex, NULL) != 0 ||
 		pthread_mutex_init(&sim->shared_resources.status_mutex, NULL) != 0) ||
-		pthread_mutex_init(&sim->shared_resources.last_meal_time_mutex, NULL) != 0)
+		pthread_mutex_init(&sim->shared_resources.last_meal_time_mutex, NULL) != 0 ||
+		pthread_mutex_init(&sim->shared_resources.satisfied_philosophers_mutex, NULL) != 0)
 	{
         fprintf(stderr, "Failed to initialize control mutexes.\n");
         return -1;

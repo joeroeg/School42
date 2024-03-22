@@ -1,11 +1,11 @@
 #include "philosophers.h"
 
 /*
-	Test 1 800 200 200. The philosopher should not eat and should die.
-	Test 5 800 200 200. No philosopher should die.
-	Test 5 800 200 200 7. No philosopher should die and the simulation should stop when every philosopher has eaten at least 7 times.
-	Test 4 410 200 200. No philosopher should die.
-	Test 4 310 200 100. One philosopher should die.
+	run1 1 800 200 200 PASS die
+	run2 5 800 200 200 FAIL no die
+	run3 5 800 200 200 7 FAIL no die stop after 7 meals
+	run4 4 410 200 200 PASS no die (NO SANITY CHECK)
+	run5 4 310 200 100 PASS die
 */
 
 /**
@@ -31,12 +31,15 @@ void *death_monitor_routine(void* arg) {
             break; // Exit the loop if a death has been detected
         }
         pthread_mutex_unlock(&philosopher->shared->status_mutex);
-
         // Now perform the death check, since we know no one has died up until the lock was released
-        if (check_death(philosopher)) {
-            // If a death is detected, the shared variable is set within the check_death function, which should also handle locking
+		pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
+		int satisfied_philosophers = philosopher->shared->satisfied_philosophers;
+		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
+		if (satisfied_philosophers == philosopher->shared->nb_philo)
+			break ;
+		// If a death is detected, the shared variable is set within the check_death function, which should also handle locking
+        if (check_death(philosopher))
             break; // Exit the loop as the simulation should stop
-        }
     }
     return NULL;
 }
@@ -82,6 +85,7 @@ int main(int argc, char **argv)
 	print_simulation_state(&sim);
 	start_philosopher_threads(&sim);
     join_philosopher_threads(&sim);
+	printf("-->");
     cleanup_simulation(&sim);
     return 0;
 }

@@ -8,43 +8,28 @@ void print_philosopher(const t_philosopher *philosopher) {
 	printf("\033[0;32mExpected Time to Die: %lld\033[0m\n", (philosopher->last_meal_time + philosopher->shared->time_to_die) % MULTIPLIER);    // Assuming t_shared_resources is defined elsewhere, you can print its members accordingly
 }
 
-// time_to_think is initialized to 0 and not passed as an argument.
 void thinking(t_philosopher *philosopher) {
-	if (philosopher->shared->someone_died || philosopher->shared->all_ate)
-		return ;
     action_print(philosopher, "is thinking");
 }
 
-// void	eating(t_philosopher *philosopher)
-// {
-// 	action_print(philosopher, "is eating");
-// 	print_philosopher(philosopher);
-// 	philosopher->meals_eaten++;
-// 	pthread_mutex_lock(&philosopher->shared->last_meal_time_mutex);
-// 	philosopher->last_meal_time = get_current_timestamp_ms();
-// 	pthread_mutex_unlock(&philosopher->shared->last_meal_time_mutex);
-// 	ft_usleep(philosopher->shared->time_to_eat);
-// }
-
-/**
- * @brief new eating function that checks if the philosopher has eaten the maximum number of meals
- * @changes: Added the check for the all_ate flag in the while loop but it doesn't affect the logic of the function.
- * @todo   : Implement minmum meals eaten
-
-*/
 void eating(t_philosopher *philosopher) {
-    pthread_mutex_unlock(&philosopher->shared->meal_mutex);
-	// print_philosopher(philosopher);
+
+    pthread_mutex_lock(&philosopher->shared->meal_mutex);
+	print_philosopher(philosopher);
 	action_print(philosopher, "is eating");
+
 	pthread_mutex_lock(&philosopher->shared->last_meal_time_mutex);
 	philosopher->last_meal_time = get_current_timestamp_ms();
 	pthread_mutex_unlock(&philosopher->shared->last_meal_time_mutex);
+
 	ft_usleep(philosopher->shared->time_to_eat);
     philosopher->meals_eaten++;
-    pthread_mutex_lock(&philosopher->shared->meal_mutex);
+    pthread_mutex_unlock(&philosopher->shared->meal_mutex);
+
     if (philosopher->meals_eaten == philosopher->shared->max_meals) {
 		pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
         philosopher->shared->satisfied_philosophers++;
+		printf("Philosopher %d has eaten %d meals\n", philosopher->id, philosopher->meals_eaten);
 		// printf("Philosopher %d has eaten %d meals\n", philosopher->id, philosopher->meals_eaten);
 		// printf("Satisfied Philosophers: %d\n", philosopher->shared->satisfied_philosophers);
 		// printf("Total Philosophers: %d\n", philosopher->shared->nb_philo);
@@ -58,18 +43,14 @@ void eating(t_philosopher *philosopher) {
 
 
 void sleeping(t_philosopher *philosopher) {
-	if (philosopher->shared->someone_died || philosopher->shared->all_ate)
-		return ;
     action_print(philosopher, "is sleeping");
     ft_usleep(philosopher->shared->time_to_sleep);
 }
 
 void pick_up_forks(t_philosopher *philosopher) {
-    int left_fork = philosopher->id - 1; // Assuming ID starts from 1
-    int right_fork = philosopher->id % philosopher->shared->nb_philo; // Wrap around for the last philosopher
+    int left_fork = philosopher->id - 1;
+    int right_fork = philosopher->id % philosopher->shared->nb_philo;
 
-	if (philosopher->shared->someone_died || philosopher->shared->all_ate)
-		return ;
     if (philosopher->id % 2 == 0) {
         // Even ID philosophers pick up the right fork first
         pthread_mutex_lock(&(philosopher->shared->forks[right_fork]));
@@ -88,10 +69,8 @@ void pick_up_forks(t_philosopher *philosopher) {
 }
 
 void put_down_forks(t_philosopher *philosopher) {
-    int left = philosopher->id - 1; // Assuming ID starts from 1
-    int right = philosopher->id % philosopher->shared->nb_philo; // Wrap around for the last philosopher
-	if (philosopher->shared->someone_died || philosopher->shared->all_ate)
-		return ;
+    int left = philosopher->id - 1;
+    int right = philosopher->id % philosopher->shared->nb_philo;
     pthread_mutex_unlock(&philosopher->shared->forks[left]);
 	// action_print(philosopher, "has put down a fork");
     pthread_mutex_unlock(&philosopher->shared->forks[right]);
@@ -116,18 +95,26 @@ int check_death(t_philosopher *philosopher)
     return 0; // Philosopher is still alive
 }
 
-/**
- * @changes: Added the check for the all_ate flag in the while loop but it doesn't affect the logic of the function.
- * @todo   : Implement minmum meals eaten
-*/
 void *philosopher_routine(void *arg) {
     t_philosopher *philosopher = (t_philosopher *)arg;
-    while (!philosopher->shared->someone_died && !philosopher->shared->satisfied_philosophers && !philosopher->shared->all_ate) {
-        thinking(philosopher);
+    while (1) {
+        // Lock before reading shared variable
+        pthread_mutex_lock(&philosopher->shared->status_mutex);
+        int someone_died = philosopher->shared->someone_died;
+        pthread_mutex_unlock(&philosopher->shared->status_mutex);
+		if (someone_died)
+			break ;
+        // thinking(philosopher);
         pick_up_forks(philosopher);
         eating(philosopher);
+		pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
+		int all_ate = philosopher->shared->all_ate;
+		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
+        if (all_ate)
+            break;
         put_down_forks(philosopher);
         sleeping(philosopher);
     }
     return NULL;
 }
+
