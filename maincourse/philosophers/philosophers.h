@@ -27,8 +27,10 @@ typedef struct s_shared_resources {
     pthread_mutex_t		write_mutex; // Mutex for writing to stdout to prevent interleaving
     pthread_mutex_t		status_mutex; // Mutex for checking/updating philosopher's status (alive or dead)
 	pthread_mutex_t		last_meal_time_mutex; // Mutex for checking the last meal time
+	pthread_mutex_t		meal_mutex; // Mutex for checking the last meal time
     int					all_ate; // Flag to check if all philosophers have eaten `max_meals` times
     int					someone_died; // Flag to indicate if any philosopher has died
+	int					satisfied_philosophers;
 } t_shared_resources;
 
 // Structure to represent each philosopher
@@ -51,16 +53,15 @@ void	cleanup_simulation(t_simulation *sim);
 
 // Utilities
 long long	get_current_timestamp_ms();
-// void		ft_usleep(long long timeInMilliseconds, t_shared_resources *rules);
 void		ft_usleep(long long time);
 void		action_print(t_philosopher *philosopher, const char *action);
 void		print_simulation_state(const t_simulation *sim);
 
 // void thinking(void *arg);
-void *philosopher_routine(void *arg);
-void thinking(t_philosopher *philosopher);
-void eating(t_philosopher *philosopher);
-void sleeping(t_philosopher *philosopher);
+void	*philosopher_routine(void *arg);
+void	thinking(t_philosopher *philosopher);
+void	eating(t_philosopher *philosopher);
+void	sleeping(t_philosopher *philosopher);
+int		check_death(t_philosopher *philosopher);
 
-// void check_death(t_philosopher *philosopher);
-int check_death(t_philosopher *philosopher);
+

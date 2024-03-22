@@ -9,12 +9,12 @@
 */
 
 /**
- * @done fix data race
  * @todo add minimum meals to eat
  * @todo handle case with 1 philosopher
  * @todo replace all forbidden functions
  * @todo limit to accept only numbers with atoi
  * @todo norminette
+ * @done fix data race
 */
 
 void *death_monitor_routine(void* arg) {
@@ -22,7 +22,7 @@ void *death_monitor_routine(void* arg) {
     int frequency_ms = 1;
 
     while (true) {
-        usleep(frequency_ms * 1000); // Wait for the specified frequency before checking again
+        ft_usleep(frequency_ms); // Wait for the specified frequency before checking again
 
         pthread_mutex_lock(&philosopher->shared->status_mutex);
         // Check if someone has died within the protected section
@@ -65,7 +65,6 @@ void join_philosopher_threads(t_simulation *sim) {
 int main(int argc, char **argv)
 {
     t_simulation	sim;
-
     if (argc < 5 || argc > 6)
 	{
         fprintf(stderr, "Usage: %s <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [max_meals]\n", argv[0]);

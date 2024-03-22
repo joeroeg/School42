@@ -13,15 +13,41 @@ void thinking(t_philosopher *philosopher) {
     action_print(philosopher, "is thinking");
 }
 
+// void	eating(t_philosopher *philosopher)
+// {
+// 	action_print(philosopher, "is eating");
+// 	print_philosopher(philosopher);
+// 	philosopher->meals_eaten++;
+// 	pthread_mutex_lock(&philosopher->shared->last_meal_time_mutex);
+// 	philosopher->last_meal_time = get_current_timestamp_ms();
+// 	pthread_mutex_unlock(&philosopher->shared->last_meal_time_mutex);
+// 	ft_usleep(philosopher->shared->time_to_eat);
+// }
+
+/**
+ * @brief new eating function that checks if the philosopher has eaten the maximum number of meals
+ * @changes: Added the check for the all_ate flag in the while loop but it doesn't affect the logic of the function.
+ * @todo   : Implement minmum meals eaten
+*/
 void eating(t_philosopher *philosopher) {
-    action_print(philosopher, "is eating");
+	action_print(philosopher, "is eating");
 	print_philosopher(philosopher);
 	pthread_mutex_lock(&philosopher->shared->last_meal_time_mutex);
-    philosopher->last_meal_time = get_current_timestamp_ms();
+	philosopher->last_meal_time = get_current_timestamp_ms();
 	pthread_mutex_unlock(&philosopher->shared->last_meal_time_mutex);
-    ft_usleep(philosopher->shared->time_to_eat);
-	philosopher->meals_eaten++;
+	ft_usleep(philosopher->shared->time_to_eat);
+    philosopher->meals_eaten++;
+    pthread_mutex_lock(&philosopher->shared->meal_mutex);
+    if (philosopher->meals_eaten == philosopher->shared->max_meals) {
+        philosopher->shared->satisfied_philosophers++;
+		printf("\033[0;32mPhilosopher %d has eaten %d meals\033[0m\n", philosopher->id, philosopher->meals_eaten);
+        if (philosopher->shared->satisfied_philosophers == philosopher->shared->nb_philo) {
+            philosopher->shared->all_ate = 1;
+        }
+    }
+    pthread_mutex_unlock(&philosopher->shared->meal_mutex);
 }
+
 
 void sleeping(t_philosopher *philosopher) {
     action_print(philosopher, "is sleeping");
@@ -73,10 +99,14 @@ int check_death(t_philosopher *philosopher)
     return 0; // Philosopher is still alive
 }
 
+/**
+ * @changes: Added the check for the all_ate flag in the while loop but it doesn't affect the logic of the function.
+ * @todo   : Implement minmum meals eaten
+*/
 void *philosopher_routine(void *arg) {
     t_philosopher *philosopher = (t_philosopher *)arg;
 
-    while (!philosopher->shared->someone_died) {
+    while (!philosopher->shared->someone_died && !philosopher->shared->all_ate) {
         thinking(philosopher);
         pick_up_forks(philosopher);
         eating(philosopher);
