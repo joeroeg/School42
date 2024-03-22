@@ -34,23 +34,20 @@ fclean: clean
 # Rebuild everything
 re: fclean all
 
-run1: re # No philosopher should die.
-	./philo 4 410 200 200
-
-run2: re # One philosopher should die.
-	./philo 4 310 200 100
-
-run3: re # No philosopher should die and the simulation should stop when every philosopher has eaten at least 7 times.
-	./philo 5 800 200 200 7
-
-run4: re # The philosopher should not eat and should die.
+run1: re
 	./philo 1 800 200 200
 
-run5: re # No philosopher should die.
-	./philo 5 800 200 200
+run2: re
+	./philo 5 800 200 100
 
-run6: re # No philosopher should die.
-	./philo 2 500 200 100 2
+run3: re
+	./philo 5 800 200 200 7
+
+run4: re
+	./philo 4 310 200 200
+
+run5: re
+	./philo 4 310 200 100
 
 val: philo
 	@valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 2 400 200 100
