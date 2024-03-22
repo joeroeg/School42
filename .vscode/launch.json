@@ -6,7 +6,7 @@
             "request": "launch",
             "program": "${workspaceRoot}/maincourse/philosophers/philo",
             // "program": "${workspaceRoot}/playground/42course/philosophers/a.out",
-            "args": ["2", "300", "200", "100"],
+            "args": ["1", "800", "200", "100"],
             // "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

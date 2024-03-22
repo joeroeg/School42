@@ -28,14 +28,19 @@ void thinking(t_philosopher *philosopher) {
  * @brief new eating function that checks if the philosopher has eaten the maximum number of meals
  * @changes: Added the check for the all_ate flag in the while loop but it doesn't affect the logic of the function.
  * @todo   : Implement minmum meals eaten
+
 */
 void eating(t_philosopher *philosopher) {
 	action_print(philosopher, "is eating");
-	print_philosopher(philosopher);
 	pthread_mutex_lock(&philosopher->shared->last_meal_time_mutex);
 	philosopher->last_meal_time = get_current_timestamp_ms();
+	print_philosopher(philosopher);
 	pthread_mutex_unlock(&philosopher->shared->last_meal_time_mutex);
 	ft_usleep(philosopher->shared->time_to_eat);
+	// pthread_mutex_lock(&philosopher->shared->last_meal_time_mutex);
+	// philosopher->last_meal_time = get_current_timestamp_ms();
+	// print_philosopher(philosopher);
+	// pthread_mutex_unlock(&philosopher->shared->last_meal_time_mutex);
     philosopher->meals_eaten++;
     pthread_mutex_lock(&philosopher->shared->meal_mutex);
     if (philosopher->meals_eaten == philosopher->shared->max_meals) {
@@ -78,7 +83,9 @@ void put_down_forks(t_philosopher *philosopher) {
     int left = philosopher->id - 1; // Assuming ID starts from 1
     int right = philosopher->id % philosopher->shared->nb_philo; // Wrap around for the last philosopher
     pthread_mutex_unlock(&philosopher->shared->forks[left]);
+	printf("\033[0;32mPhilosopher %d has put down a fork\033[0m\n", philosopher->id);
     pthread_mutex_unlock(&philosopher->shared->forks[right]);
+	printf("\033[0;32mPhilosopher %d has put down a fork\033[0m\n", philosopher->id);
 }
 
 int check_death(t_philosopher *philosopher)
@@ -107,7 +114,7 @@ void *philosopher_routine(void *arg) {
     t_philosopher *philosopher = (t_philosopher *)arg;
 
     while (!philosopher->shared->someone_died && !philosopher->shared->all_ate) {
-        thinking(philosopher);
+        // thinking(philosopher);
         pick_up_forks(philosopher);
         eating(philosopher);
         put_down_forks(philosopher);

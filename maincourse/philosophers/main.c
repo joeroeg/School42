@@ -10,11 +10,11 @@
 
 /**
  * @todo add minimum meals to eat
- * @todo handle case with 1 philosopher
  * @todo replace all forbidden functions
  * @todo limit to accept only numbers with atoi
  * @todo norminette
  * @done fix data race
+ * @done handle case with 1 philosopher
 */
 
 void *death_monitor_routine(void* arg) {
@@ -57,6 +57,11 @@ void start_philosopher_threads(t_simulation *sim) {
 }
 
 void join_philosopher_threads(t_simulation *sim) {
+	if (sim->shared_resources.nb_philo == 1)
+	{
+		ft_usleep(sim->shared_resources.time_to_die);
+		return ;
+	}
     for (int i = 0; i < sim->shared_resources.nb_philo; i++) {
         pthread_join(sim->philosophers[i].thread, NULL);
     }
