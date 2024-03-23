@@ -21,14 +21,14 @@ void	eating(t_philosopher *philosopher)
 		return ;
 	}
 	pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
-	// pthread_mutex_lock(&philosopher->shared->meal_mutex);
 	action_print(philosopher, "is eating");
 	pthread_mutex_lock(&philosopher->shared->last_meal_time_mutex);
 	philosopher->last_meal_time = get_current_timestamp_ms();
 	pthread_mutex_unlock(&philosopher->shared->last_meal_time_mutex);
+	pthread_mutex_lock(&philosopher->shared->meal_mutex);
 	ft_usleep(philosopher->shared->time_to_eat);
 	philosopher->meals_eaten++;
-	// pthread_mutex_unlock(&philosopher->shared->meal_mutex);
+	pthread_mutex_unlock(&philosopher->shared->meal_mutex);
 	if (philosopher->meals_eaten == philosopher->shared->max_meals)
 	{
 		pthread_mutex_lock(&philosopher->shared->satisfied_mutex);
