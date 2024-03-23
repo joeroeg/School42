@@ -45,7 +45,7 @@ typedef struct s_shared_resources
 	int					max_meals;
 	long long			start_time;
 	pthread_mutex_t		forks[MAX_PHILOSOPHERS];
-	pthread_mutex_t		write_mutex;
+	pthread_mutex_t		write_mutex; // is not used
 	pthread_mutex_t		status_mutex;
 	pthread_mutex_t		last_meal_time_mutex;
 	pthread_mutex_t		meal_mutex;

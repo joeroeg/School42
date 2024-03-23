@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror -pthread #-fsanitize=thread
+CFLAGS = -g -Wall -Wextra -Werror -pthread -fsanitize=thread
 
 # Name of the executable
 NAME = philo
