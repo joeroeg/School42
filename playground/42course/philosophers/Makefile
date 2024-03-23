@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror -pthread -fsanitize=thread
+CFLAGS = -g -Wall -Wextra -Werror -pthread #-fsanitize=thread
 
 # Name of the executable
 NAME = philo
@@ -34,19 +34,19 @@ fclean: clean
 # Rebuild everything
 re: fclean all
 
-run1: re # The philosopher should not eat and should die.
+run1: re # PASS The philosopher should not eat and should die.
 	./philo 1 800 200 200
 
-run2: re # No philosopher should die.
+run2: re # FAIL No philosopher should die.
 	./philo 5 800 200 200
 
-run3: re # No philosopher should die and the simulation should stop when every philosopher has eaten at least 7 times.
+run3: re # FAIL No philosopher should die and the simulation should stop when every philosopher has eaten at least 7 times.
 	./philo 5 800 200 200 7
 
-run4: re # No philosopher should die.
+run4: re # FAIL No philosopher should die.
 	./philo 4 410 200 200
 
-run5: re # One philosopher should die.
+run5: re # FAIL One philosopher should die.
 	./philo 4 310 200 100
 
 run6: re

@@ -9,24 +9,24 @@ void print_philosopher(const t_philosopher *philosopher) {
 }
 
 void thinking(t_philosopher *philosopher) {
-	pthread_mutex_lock(&philosopher->shared->satisfied_mutex);
+	pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
 	if (philosopher->shared->all_ate)
 	{
-		pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
+		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
 		return ;
 	}
-	pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
+	pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
     action_print(philosopher, "is thinking");
 }
 
 void eating(t_philosopher *philosopher) {
-	pthread_mutex_lock(&philosopher->shared->satisfied_mutex);
+	pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
 	if (philosopher->shared->all_ate)
 	{
-		pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
+		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
 		return ;
 	}
-	pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
+	pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
     pthread_mutex_lock(&philosopher->shared->meal_mutex);
 	action_print(philosopher, "is eating");
 
@@ -40,28 +40,28 @@ void eating(t_philosopher *philosopher) {
     pthread_mutex_unlock(&philosopher->shared->meal_mutex);
 
     if (philosopher->meals_eaten == philosopher->shared->max_meals) {
-		pthread_mutex_lock(&philosopher->shared->satisfied_mutex);
-        philosopher->shared->satisfied++;
+		pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
+        philosopher->shared->satisfied_philosophers++;
 		printf("Philosopher %d has eaten %d meals\n", philosopher->id, philosopher->meals_eaten);
 		printf("Philosopher %d has eaten %d meals\n", philosopher->id, philosopher->meals_eaten);
-		printf("Satisfied Philosophers: %d\n", philosopher->shared->satisfied);
+		printf("Satisfied Philosophers: %d\n", philosopher->shared->satisfied_philosophers);
 		printf("Total Philosophers: %d\n", philosopher->shared->nb_philo);
-        if (philosopher->shared->satisfied == philosopher->shared->nb_philo) {
+        if (philosopher->shared->satisfied_philosophers == philosopher->shared->nb_philo) {
             philosopher->shared->all_ate = 1;
 			printf("\033[0;31mAll Philosophers have eaten %d meals\033[0m\n", philosopher->shared->max_meals);
         }
-		pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
+		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
     }
 }
 
 void sleeping(t_philosopher *philosopher) {
-	pthread_mutex_lock(&philosopher->shared->satisfied_mutex);
+	pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
 	if (philosopher->shared->all_ate)
 	{
-		pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
+		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
 		return ;
 	}
-	pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
+	pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
     action_print(philosopher, "is sleeping");
     ft_usleep(philosopher->shared->time_to_sleep);
 }
@@ -70,13 +70,13 @@ void pick_up_forks(t_philosopher *philosopher) {
     int left_fork = philosopher->id - 1;
     int right_fork = philosopher->id % philosopher->shared->nb_philo;
 
-	pthread_mutex_lock(&philosopher->shared->satisfied_mutex);
+	pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
 	if (philosopher->shared->all_ate)
 	{
-		pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
+		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
 		return ;
 	}
-	pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
+	pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
 
     if (philosopher->id % 2 == 0) {
         // Even ID philosophers pick up the right fork first
@@ -137,9 +137,9 @@ void *philosopher_routine(void *arg) {
         thinking(philosopher);
         pick_up_forks(philosopher);
         eating(philosopher);
-		pthread_mutex_lock(&philosopher->shared->satisfied_mutex);
+		pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
 		all_ate = philosopher->shared->all_ate;
-		pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
+		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
         if (all_ate)
 		{
 			put_down_forks(philosopher);

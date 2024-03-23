@@ -8,7 +8,7 @@ void cleanup_simulation(t_simulation *sim) {
 	pthread_mutex_destroy(&sim->shared_resources.status_mutex);
 	pthread_mutex_destroy(&sim->shared_resources.last_meal_time_mutex);
 	// pthread_mutex_destroy(&sim->shared_resources.meal_mutex); // Illegal instruction: 4 | when make run1
-	pthread_mutex_destroy(&sim->shared_resources.satisfied_mutex);
+	pthread_mutex_destroy(&sim->shared_resources.satisfied_philosophers_mutex);
 
 
 
@@ -50,7 +50,7 @@ int init_simulation_mutexes(t_simulation *sim)
     if ((pthread_mutex_init(&sim->shared_resources.write_mutex, NULL) != 0 ||
 		pthread_mutex_init(&sim->shared_resources.status_mutex, NULL) != 0) ||
 		pthread_mutex_init(&sim->shared_resources.last_meal_time_mutex, NULL) != 0 ||
-		pthread_mutex_init(&sim->shared_resources.satisfied_mutex, NULL) != 0)
+		pthread_mutex_init(&sim->shared_resources.satisfied_philosophers_mutex, NULL) != 0)
 	{
 		write(2, "Failed to initialize control mutexes.\n", 38);
         return -1;
@@ -101,7 +101,7 @@ int init_simulation(int argc, char **argv, t_simulation *sim) {
     } else {
         sim->shared_resources.max_meals = -1;
     }
-	sim->shared_resources.satisfied = 0;
+	sim->shared_resources.satisfied_philosophers = 0;
     sim->shared_resources.all_ate = 0;
     sim->shared_resources.someone_died = 0;
     // sim->shared_resources.time_to_think = 0; // Assuming this is intentional
