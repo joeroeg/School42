@@ -20,6 +20,31 @@
  * @done handle case with 1 philosopher
 */
 
+/**
+ * @brief Check if the philosopher has died
+ * @param philosopher Philosopher to check
+ * @return 1 if the philosopher has died, 0 otherwise
+*/
+int	check_death(t_philosopher *philosopher)
+{
+	long long	current_time;
+	long long	time_since_last_meal;
+
+	current_time = get_current_timestamp_ms();
+	pthread_mutex_lock(&philosopher->shared->last_meal_time_mutex);
+	time_since_last_meal = current_time - philosopher->last_meal_time;
+	pthread_mutex_unlock(&philosopher->shared->last_meal_time_mutex);
+	if (time_since_last_meal >= philosopher->shared->time_to_die)
+	{
+		pthread_mutex_lock(&philosopher->shared->status_mutex);
+		printf("%lld %d has died\n",current_time - philosopher->shared->start_time, philosopher->id);
+		philosopher->shared->someone_died = 1;
+		pthread_mutex_unlock(&philosopher->shared->status_mutex);
+		return (1);
+	}
+	return (0);
+}
+
 void	*death_monitor_routine(void *arg)
 {
 	t_philosopher	*philosopher;
@@ -100,7 +125,6 @@ int	main(int argc, char **argv)
 		write(2, "Failed to initialize simulation.\n", 34);
 		return (EXIT_FAILURE);
 	}
-	print_simulation_state(&sim);
 	start_philosopher_threads(&sim);
 	join_philosopher_threads(&sim);
 	cleanup_simulation(&sim);
