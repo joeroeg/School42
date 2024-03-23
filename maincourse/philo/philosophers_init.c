@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 19:13:34 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/03/23 19:14:12 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:21:07 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	init_simulation_mutexes(t_simulation *sim)
 	i = 0;
 	if ((pthread_mutex_init(&sim->shared_resources.write_mutex, NULL) != 0 || \
 		pthread_mutex_init(&sim->shared_resources.status_mutex, NULL) != 0) || \
-		pthread_mutex_init(&sim->shared_resources.last_meal_time_mutex, NULL) != 0 || \
+		pthread_mutex_init(&sim->shared_resources.last_meal_time_mutex, \
+			NULL) != 0 || \
 		pthread_mutex_init(&sim->shared_resources.satisfied_mutex, NULL) != 0)
 	{
 		write(2, "Failed to initialize control mutexes.\n", 38);

@@ -6,25 +6,16 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 19:12:54 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/03/23 19:14:59 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:20:27 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-/*
-	run1 1 800 200 200 PASS die
-	run2 5 800 200 200 PASS no die
-	run3 5 800 200 200 7 PASS no die stop after 7 meals
-	run4 4 410 200 200 PASS no die (NO SANITY CHECK)
-	run5 4 310 200 100 PASS die
-*/
-
 /**
  * @todo norminette
- * @todo replace all forbidden functions
- * @todo destroy all mutexes
- * @todo Think of how to stop simulation after all philosophers have eaten minimum meals
+ * @done replace all forbidden functions
+ * @done destroy all mutexes
  * @done check memory leaks
  * @done limit to accept only numbers with atoi
  * @done add minimum meals to eat
@@ -49,7 +40,8 @@ int	check_death(t_philosopher *philosopher)
 	if (time_since_last_meal >= philosopher->shared->time_to_die)
 	{
 		pthread_mutex_lock(&philosopher->shared->status_mutex);
-		printf("%lld %d has died\n", current_time - philosopher->shared->start_time, philosopher->id);
+		printf("%lld %d has died\n", \
+			current_time - philosopher->shared->start_time, philosopher->id);
 		philosopher->shared->someone_died = 1;
 		pthread_mutex_unlock(&philosopher->shared->status_mutex);
 		return (1);
@@ -60,13 +52,11 @@ int	check_death(t_philosopher *philosopher)
 void	*death_monitor_routine(void *arg)
 {
 	t_philosopher	*philosopher;
-	int				frequency_ms;
 
 	philosopher = (t_philosopher *)arg;
-	frequency_ms = 1;
 	while (true)
 	{
-		ft_usleep(frequency_ms);
+		ft_usleep(1);
 		pthread_mutex_lock(&philosopher->shared->status_mutex);
 		if (philosopher->shared->someone_died)
 		{
