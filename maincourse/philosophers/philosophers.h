@@ -1,19 +1,30 @@
-#ifndef PHILOSOPHERS
-#define PHILOSOPHERS_H
-#endif
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/23 19:13:02 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/03/23 19:18:03 by hezhukov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <stdint.h>
-#include <stdbool.h>
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
+
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <sys/types.h>
+# include <stdint.h>
+# include <stdbool.h>
 
 // Maximum number of philosophers
-#define MAX_PHILOSOPHERS 200
-#define MULTIPLIER 100000
+# define MAX_PHILOSOPHERS 200
+# define MULTIPLIER 100000
 
 /**
  * @brief Structure to hold shared resources and simulation rules
@@ -93,6 +104,7 @@ void		ft_usleep(long long time);
 void		action_print(t_philosopher *philosopher, const char *action);
 void		print_simulation_state(const t_simulation *sim);
 int			ft_atoi(const char *str);
+void		put_down_forks(t_philosopher *philosopher);
 
 // void thinking(void *arg);
 void		*philosopher_routine(void *arg);
@@ -100,3 +112,4 @@ void		thinking(t_philosopher *philosopher);
 void		eating(t_philosopher *philosopher);
 void		sleeping(t_philosopher *philosopher);
 int			check_death(t_philosopher *philosopher);
+#endif

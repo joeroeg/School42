@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/23 19:12:54 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/03/23 19:14:59 by hezhukov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 /*
@@ -37,7 +49,7 @@ int	check_death(t_philosopher *philosopher)
 	if (time_since_last_meal >= philosopher->shared->time_to_die)
 	{
 		pthread_mutex_lock(&philosopher->shared->status_mutex);
-		printf("%lld %d has died\n",current_time - philosopher->shared->start_time, philosopher->id);
+		printf("%lld %d has died\n", current_time - philosopher->shared->start_time, philosopher->id);
 		philosopher->shared->someone_died = 1;
 		pthread_mutex_unlock(&philosopher->shared->status_mutex);
 		return (1);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers_actions.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/23 19:13:28 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/03/23 19:18:17 by hezhukov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 void	thinking(t_philosopher *philosopher)
@@ -82,18 +94,7 @@ void	pick_up_forks(t_philosopher *philosopher)
 	}
 }
 
-void	put_down_forks(t_philosopher *philosopher)
-{
-	int	left;
-	int	right;
-
-	left = philosopher->id - 1;
-	right = philosopher->id % philosopher->shared->nb_philo;
-	pthread_mutex_unlock(&philosopher->shared->forks[left]);
-	pthread_mutex_unlock(&philosopher->shared->forks[right]);
-}
-
-void *philosopher_routine(void *arg)
+void	*philosopher_routine(void *arg)
 {
 	t_philosopher	*philosopher;
 	int				all_ate;

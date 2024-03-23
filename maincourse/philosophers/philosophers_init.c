@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers_init.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/23 19:13:34 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/03/23 19:14:12 by hezhukov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 void	cleanup_simulation(t_simulation *sim)
@@ -35,7 +47,7 @@ int	validate_simulation_params(int argc, char **argv)
 	else
 		max_meals = -1;
 	if (nb_philo <= 0 || nb_philo > MAX_PHILOSOPHERS || \
-		time_to_die <= 0 || time_to_eat <= 0 || time_to_sleep <= 0 ||
+		time_to_die <= 0 || time_to_eat <= 0 || time_to_sleep <= 0 || \
 		(argc == 6 && max_meals < 0))
 	{
 		write(2, "Invalid All parameters must be positive integers.\n", 50);
