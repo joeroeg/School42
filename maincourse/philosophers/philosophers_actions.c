@@ -15,10 +15,10 @@ void thinking(t_philosopher *philosopher) {
 void eating(t_philosopher *philosopher) {
 
     pthread_mutex_lock(&philosopher->shared->meal_mutex);
-	// print_philosopher(philosopher);
-	action_print(philosopher, "is eating");
+	action_print(philosopher, "\033[0;34mis eating\033[0m");
 
 	pthread_mutex_lock(&philosopher->shared->last_meal_time_mutex);
+	print_philosopher(philosopher);
 	philosopher->last_meal_time = get_current_timestamp_ms();
 	pthread_mutex_unlock(&philosopher->shared->last_meal_time_mutex);
 
@@ -101,15 +101,21 @@ void *philosopher_routine(void *arg) {
         int someone_died = philosopher->shared->someone_died;
         pthread_mutex_unlock(&philosopher->shared->status_mutex);
 		if (someone_died)
+		{
+			put_down_forks(philosopher);
 			break ;
-        // thinking(philosopher);
+		}
+        thinking(philosopher);
         pick_up_forks(philosopher);
         eating(philosopher);
 		pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
 		int all_ate = philosopher->shared->all_ate;
 		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
         if (all_ate)
+		{
+			put_down_forks(philosopher);
             break;
+		}
         put_down_forks(philosopher);
         sleeping(philosopher);
     }

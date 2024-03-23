@@ -19,7 +19,7 @@
 
 void *death_monitor_routine(void* arg) {
     t_philosopher *philosopher = (t_philosopher *)arg;
-    int frequency_ms = 10;
+    int frequency_ms = 1;
 
     while (true) {
         ft_usleep(frequency_ms); // Wait for the specified frequency before checking again
