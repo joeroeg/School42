@@ -2,17 +2,20 @@
 
 /*
 	run1 1 800 200 200 PASS die
-	run2 5 800 200 200 FAIL no die
-	run3 5 800 200 200 7 FAIL no die stop after 7 meals
+	run2 5 800 200 200 PASS no die
+	run3 5 800 200 200 7 PASS no die stop after 7 meals
 	run4 4 410 200 200 PASS no die (NO SANITY CHECK)
 	run5 4 310 200 100 PASS die
 */
 
 /**
- * @todo add minimum meals to eat
  * @todo replace all forbidden functions
- * @todo limit to accept only numbers with atoi
+ * @todo destroy mutexes
+ * @todo check memory leaks
+ * @todo Think of how to stop simulation after all philosophers have eaten minimum meals
  * @todo norminette
+ * @done limit to accept only numbers with atoi
+ * @done add minimum meals to eat
  * @done fix data race
  * @done handle case with 1 philosopher
 */
@@ -22,18 +25,14 @@ void *death_monitor_routine(void* arg) {
     int frequency_ms = 1;
 
     while (true) {
-        ft_usleep(frequency_ms); // Wait for the specified frequency before checking again
+        ft_usleep(frequency_ms);
 
         pthread_mutex_lock(&philosopher->shared->status_mutex);
         if (philosopher->shared->someone_died) {
             pthread_mutex_unlock(&philosopher->shared->status_mutex);
-            break; // Exit the loop if a death has been detected
+            break;
         }
         pthread_mutex_unlock(&philosopher->shared->status_mutex);
-        // Now perform the death check, since we know no one has died up until the lock was released
-
-		// int satisfied_philosophers = philosopher->shared->satisfied_philosophers;
-
 		pthread_mutex_lock(&philosopher->shared->satisfied_philosophers_mutex);
 		if (philosopher->shared->satisfied_philosophers == philosopher->shared->nb_philo)
 		{
@@ -41,9 +40,8 @@ void *death_monitor_routine(void* arg) {
 			break ;
 		}
 		pthread_mutex_unlock(&philosopher->shared->satisfied_philosophers_mutex);
-		// If a death is detected, the shared variable is set within the check_death function, which should also handle locking
         if (check_death(philosopher))
-            break; // Exit the loop as the simulation should stop
+            break;
     }
     return NULL;
 }
@@ -54,10 +52,10 @@ void start_philosopher_threads(t_simulation *sim) {
 
     for (int i = 0; i < sim->shared_resources.nb_philo; i++) {
         if (pthread_create(&sim->philosophers[i].thread, NULL, philosopher_routine, (void *)&sim->philosophers[i]) != 0) {
-            fprintf(stderr, "Error creating philosopher thread %d\n", sim->philosophers[i].id);
+			write(2, "Error creating philosopher thread\n", 35);
         }
         if (pthread_create(&monitor_thread, NULL, death_monitor_routine, (void *)&sim->philosophers[i]) != 0) {
-            fprintf(stderr, "Error creating monitor thread for philosopher %d\n", sim->philosophers[i].id);
+			write(2, "Error creating monitor thread\n", 31);
         }
         pthread_detach(monitor_thread);
     }
@@ -79,11 +77,11 @@ int main(int argc, char **argv)
     t_simulation	sim;
     if (argc < 5 || argc > 6)
 	{
-        fprintf(stderr, "Usage: %s <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [max_meals]\n", argv[0]);
+		write(2, "Error: Invalid number of arguments\n", 36);
         return EXIT_FAILURE;
     }
     if (init_simulation(argc, argv, &sim) != 0) {
-        fprintf(stderr, "Failed to initialize simulation.\n");
+		write(2, "Failed to initialize simulation.\n", 34);
         return EXIT_FAILURE;
     }
 	print_simulation_state(&sim);

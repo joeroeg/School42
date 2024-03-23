@@ -1,6 +1,5 @@
 #include "philosophers.h"
 
-// Convert seconds to milliseconds and add microseconds converted to milliseconds
 long long get_current_timestamp_ms() {
     struct timeval now;
     gettimeofday(&now, NULL);
@@ -21,7 +20,7 @@ void action_print(t_philosopher *philosopher, const char *action) {
     if (!philosopher->shared->someone_died) {
         long long current_timestamp = get_current_timestamp_ms();
         long long elapsed_time = current_timestamp - philosopher->shared->start_time;
-        printf("\033[0;30m%lld\033[0m %lli %d %s\n", current_timestamp % MULTIPLIER, elapsed_time, philosopher->id, action);
+		printf("%lli %d %s\n", elapsed_time, philosopher->id, action);
     }
     pthread_mutex_unlock(&(philosopher->shared->status_mutex));
 }
@@ -41,7 +40,6 @@ void print_simulation_state(const t_simulation *sim) {
     printf("               Max Meals: %d\n", sim->shared_resources.max_meals);
     printf("              Start Time: %lld\n", sim->shared_resources.start_time % MULTIPLIER);
     printf("           Someone Died: %d\n", sim->shared_resources.someone_died);
-    // Note: Mutexes are not printed as their state isn't easily represented in a simple printout
 
     printf("\nPhilosophers:\n");
     for (int i = 0; i < sim->shared_resources.nb_philo; i++) {
@@ -53,4 +51,24 @@ void print_simulation_state(const t_simulation *sim) {
         // Not printing the thread ID as it's not easily represented in a printout
     }
 	printf("-----------------------------------------------------------\n");
+}
+
+int ft_atoi(const char *str) {
+    int	result;
+	int	i;
+
+	result = 0;
+	i = 0;
+    if (!str)
+        return 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return 0;
+		if (result > 2147483647 / 10 || (result == 2147483647 / 10 && (str[i] - '0') > 2147483647 % 10))
+			return 0;
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+    return (result);
 }

@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define MAX_PHILOSOPHERS 256 // Maximum number of philosophers
+#define MAX_PHILOSOPHERS 200 // Maximum number of philosophers
 #define MULTIPLIER 100000 // Multiplier to convert seconds to milliseconds
 
 // Structure to hold shared resources and simulation rules
@@ -57,6 +57,7 @@ long long	get_current_timestamp_ms();
 void		ft_usleep(long long time);
 void		action_print(t_philosopher *philosopher, const char *action);
 void		print_simulation_state(const t_simulation *sim);
+int			ft_atoi(const char *str);
 
 // void thinking(void *arg);
 void	*philosopher_routine(void *arg);
