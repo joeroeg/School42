@@ -6,28 +6,12 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 19:12:54 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/03/23 19:20:27 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/03/23 20:06:30 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-/**
- * @todo norminette
- * @done replace all forbidden functions
- * @done destroy all mutexes
- * @done check memory leaks
- * @done limit to accept only numbers with atoi
- * @done add minimum meals to eat
- * @done fix data race
- * @done handle case with 1 philosopher
-*/
-
-/**
- * @brief Check if the philosopher has died
- * @param philosopher Philosopher to check
- * @return 1 if the philosopher has died, 0 otherwise
-*/
 int	check_death(t_philosopher *philosopher)
 {
 	long long	current_time;

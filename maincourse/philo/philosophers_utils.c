@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 19:13:43 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/03/23 19:17:49 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/03/23 20:06:35 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,4 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (result);
-}
-
-void	put_down_forks(t_philosopher *philosopher)
-{
-	int	left;
-	int	right;
-
-	left = philosopher->id - 1;
-	right = philosopher->id % philosopher->shared->nb_philo;
-	pthread_mutex_unlock(&philosopher->shared->forks[left]);
-	pthread_mutex_unlock(&philosopher->shared->forks[right]);
 }

@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 19:13:28 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/03/23 19:18:17 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/03/23 20:06:32 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ void	eating(t_philosopher *philosopher)
 		pthread_mutex_lock(&philosopher->shared->satisfied_mutex);
 		philosopher->shared->satisfied++;
 		pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
+		pthread_mutex_lock(&philosopher->shared->satisfied_mutex);
 		if (philosopher->shared->satisfied == philosopher->shared->nb_philo)
 			philosopher->shared->all_ate = 1;
+		pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
 	}
 }
 
@@ -64,34 +66,11 @@ void	sleeping(t_philosopher *philosopher)
 	ft_usleep(philosopher->shared->time_to_sleep);
 }
 
-void	pick_up_forks(t_philosopher *philosopher)
+void	check_and_handle_death(t_philosopher *philosopher, int *someone_died)
 {
-	int	left_fork;
-	int	right_fork;
-
-	left_fork = philosopher->id - 1;
-	right_fork = philosopher->id % philosopher->shared->nb_philo;
-	pthread_mutex_lock(&philosopher->shared->satisfied_mutex);
-	if (philosopher->shared->all_ate)
-	{
-		pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
-		return ;
-	}
-	pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
-	if (philosopher->id % 2 == 0)
-	{
-		pthread_mutex_lock(&(philosopher->shared->forks[right_fork]));
-		action_print(philosopher, "has taken a fork");
-		pthread_mutex_lock(&(philosopher->shared->forks[left_fork]));
-		action_print(philosopher, "has taken a fork");
-	}
-	else
-	{
-		pthread_mutex_lock(&(philosopher->shared->forks[left_fork]));
-		action_print(philosopher, "has taken a fork");
-		pthread_mutex_lock(&(philosopher->shared->forks[right_fork]));
-		action_print(philosopher, "has taken a fork");
-	}
+	pthread_mutex_lock(&philosopher->shared->status_mutex);
+	*someone_died = philosopher->shared->someone_died;
+	pthread_mutex_unlock(&philosopher->shared->status_mutex);
 }
 
 void	*philosopher_routine(void *arg)
@@ -101,12 +80,9 @@ void	*philosopher_routine(void *arg)
 	int				someone_died;
 
 	philosopher = (t_philosopher *)arg;
-	all_ate = 0;
 	while (true)
 	{
-		pthread_mutex_lock(&philosopher->shared->status_mutex);
-		someone_died = philosopher->shared->someone_died;
-		pthread_mutex_unlock(&philosopher->shared->status_mutex);
+		check_and_handle_death(philosopher, &someone_died);
 		if (someone_died)
 		{
 			put_down_forks(philosopher);
@@ -115,15 +91,10 @@ void	*philosopher_routine(void *arg)
 		thinking(philosopher);
 		pick_up_forks(philosopher);
 		eating(philosopher);
-		pthread_mutex_lock(&philosopher->shared->satisfied_mutex);
-		all_ate = philosopher->shared->all_ate;
-		pthread_mutex_unlock(&philosopher->shared->satisfied_mutex);
-		if (all_ate)
-		{
-			put_down_forks(philosopher);
-			break ;
-		}
 		put_down_forks(philosopher);
+		check_and_handle_satisfaction(philosopher, &all_ate);
+		if (all_ate)
+			break ;
 		sleeping(philosopher);
 		usleep(1000);
 	}

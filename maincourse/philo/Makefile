@@ -6,7 +6,7 @@ CFLAGS = -g -Wall -Wextra -Werror -pthread -fsanitize=thread
 NAME = philo
 
 # Source and object files
-SRC = main.c philosophers_init.c philosophers_utils.c philosophers_actions.c
+SRC = main.c philosophers_init.c philosophers_utils.c philosophers_actions.c philosophers_utils2.c
 OBJ = $(SRC:.c=.o)
 
 # Header files
@@ -43,7 +43,7 @@ run2: re # No philosopher should die.
 run3: re # No philosopher should die and the simulation should stop when every philosopher has eaten at least 7 times.
 	./philo 5 800 200 200 7
 
-run4: re # No philosopher should die.
+run4: re # No philosopher should die. Do not use -fsanitize=thread. It slows down the simulation.
 	./philo 4 410 200 200
 
 run5: re # One philosopher should die.
