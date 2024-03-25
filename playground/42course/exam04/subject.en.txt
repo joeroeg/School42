@@ -24,6 +24,12 @@ microshell
 i love my microshell
 $>
 
+error: fatal\n
+error: cd: bad arguments\n
+error: cd: cannot change directory to path_to_change\n
+error: cannot execute <command>\n
+
+
 Hints:
 Don't forget to pass the environment variable to execve
 
