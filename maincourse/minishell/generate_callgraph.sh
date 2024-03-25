@@ -2,14 +2,14 @@
 
 # Define modules or components
 declare -a modules=( \
-    # "main.c" \
-    # "tokenizer" \
-    # "parser" \
-    # "extender" \
+    "main.c" \
+    "tokenizer" \
+    "parser" \
+    "extender" \
     "execution" \
-    # "utils" \
-    # "builtins" \
-    # "signals"
+    "utils" \
+    "builtins" \
+    "signals"
     )
 
 # Option to delete .dot and .txt files after generation (1 = delete, 0 = keep)
