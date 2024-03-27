@@ -11,5 +11,21 @@
 # include <unistd.h>
 # include <math.h>
 
+# define MALLOC_ERROR "Error when allocating memory on the heap"
+
+typedef struct s_mblock
+{
+	void			*address;
+	struct s_mblock	*next;
+}	t_mblock;
+
+typedef struct s_cube
+{
+	int				fd;
+	char			*content;
+	char			**tokens;
+	char			**map;
+	bool			found_map;
+}					t_cube;
 
 #endif
