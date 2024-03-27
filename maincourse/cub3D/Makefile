@@ -37,25 +37,25 @@ $(BIN_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(MLX42):
-	@if [ ! -d "$(MLX_DIR)" ]; then \
-        git clone https://github.com/codam-coding-college/MLX42.git $(MLX_DIR); \
+	if [ ! -d "$(MLX_DIR)" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git $(MLX_DIR); \
 	fi
-	@cd $(MLX_DIR) && cmake -B build && cmake --build build -j4
+	cd $(MLX_DIR) && cmake -B build && cmake --build build -j4
 
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR)
 
 clean:
-	@$(MAKE) clean -C $(LIBFT_DIR)
+	$(MAKE) clean -C $(LIBFT_DIR)
 	rm -rf $(BIN_DIR)
 
 mlx_clean:
-	@make -C $(MLX_BUILD_DIR) clean
+	make -C $(MLX_BUILD_DIR) clean
 
 fclean: clean mlx_clean
 	rm -f $(NAME)
-	@$(MAKE) fclean -C $(LIBFT_DIR)
-	@rm -rf $(MLX_DIR) # Optional: Remove this line if you want to keep MLX42 after clean
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	rm -rf $(MLX_DIR) # Optional: Remove this line if you want to keep MLX42 after clean
 
 re: fclean all
 

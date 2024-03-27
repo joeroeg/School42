@@ -2,5 +2,6 @@
 
 int main()
 {
-	printf("hello world");
+	printf("hello world from linux\n");
+	printf("hello world from mac\n");
 }
