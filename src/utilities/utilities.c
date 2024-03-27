@@ -6,13 +6,18 @@
  * @param should_exit flag if should exit after printing the message or no
  * @return void
 */
-
-void	error_message(const char *message, int should_exit)
+void	exit_error_message(char *message, int should_exit)
 {
-	write(2, message, ft_strlen(message));
+	ft_putendl_fd(message, STDERR_FILENO);
 	if (should_exit == EXIT_FAILURE)
 	{
-		gc_free_all();
+		// gc_free_all();
 		exit(EXIT_FAILURE);
 	}
+}
+
+int	return_error_message(char *message, int return_value)
+{
+	ft_putendl_fd(message, STDERR_FILENO);
+	return (return_value);
 }

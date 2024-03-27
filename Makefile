@@ -5,6 +5,8 @@ LIB_DIR = lib/
 SRC_DIR = src/
 BIN_DIR = bin/
 MAP_DIR = maps/
+MAP_DIR_INVALID = maps/invalid/
+MAP_DIR_VALID = maps/valid/
 MLX_DIR = $(LIB_DIR)MLX42/
 MLX_BUILD_DIR = $(MLX_DIR)build/
 LIBFT_DIR = $(LIB_DIR)libft/
@@ -58,5 +60,16 @@ fclean: clean mlx_clean
 	rm -rf $(MLX_DIR) # Optional: Remove this line if you want to keep MLX42 after clean
 
 re: fclean all
+
+# --show-leak-kinds=all
+# --leak-check=full
+# --track-origins=yes
+# --track-fds=yes
+
+val: all
+	valgrind --track-fds=yes --suppressions=./suppressions.supp ./$(NAME) $(MAP_DIR_INVALID)invalid_extension.cux
+
+run: all
+	./$(NAME) $(MAP_DIR)map.cub
 
 .PHONY: all clean mlx_clean fclean re

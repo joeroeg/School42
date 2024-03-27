@@ -26,12 +26,12 @@ void	*gc_malloc(size_t size)
 
 	memory_block = malloc(sizeof(t_mblock) * 1);
 	if (!memory_block)
-		error_message(MALLOC_ERROR, EXIT_FAILURE);
+		exit_error_message(MALLOC_ERROR, EXIT_FAILURE);
 	memory_block->next = garbage_collector()->next;
 	garbage_collector()->next = memory_block;
 	memory_block->address = malloc(size);
 	if (!memory_block->address)
-		error_message(MALLOC_ERROR, EXIT_FAILURE);
+		exit_error_message(MALLOC_ERROR, EXIT_FAILURE);
 	return (memory_block->address);
 }
 
