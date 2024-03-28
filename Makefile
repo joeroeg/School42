@@ -61,13 +61,8 @@ fclean: clean mlx_clean
 
 re: fclean all
 
-# --show-leak-kinds=all
-# --leak-check=full
-# --track-origins=yes
-# --track-fds=yes
-
 val: all
-	valgrind --track-fds=yes --suppressions=./suppressions.supp ./$(NAME) $(MAP_DIR_INVALID)invalid_extension.cux
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=./suppressions.supp ./$(NAME) $(MAP_DIR_INVALID)invalid_file_empty_lines.cub
 
 run: all
 	./$(NAME) $(MAP_DIR)map.cub

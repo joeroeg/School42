@@ -21,6 +21,16 @@ typedef struct s_mblock
 	struct s_mblock	*next;
 }	t_mblock;
 
+typedef struct s_config
+{
+	char	*north_texture;
+	char	*south_texture;
+	char	*east_texture;
+	char	*west_texture;
+	int		floor_color;
+	int		ceiling_color;
+}	t_config;
+
 typedef struct s_cube
 {
 	int				fd;
@@ -32,18 +42,15 @@ typedef struct s_cube
 
 // Memory management
 void	*gc_malloc(size_t size);
+void	*gc_calloc(size_t count, size_t size);
 void	gc_free(void *address);
 void	gc_free_all(void);
-void	*gc_calloc(size_t count, size_t size);
-
 
 
 // Validation
-int		validate_file(const char *filename);
+int		validate_map_file(const char *filename);
 int		check_extension(const char *filename, const char *expected_extension);
 int		check_empty_file(int fd);
-
-
 
 
 // Utilities
