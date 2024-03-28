@@ -36,6 +36,7 @@ This summary provides a structured framework for your map parsing feature, ensur
 
 
 ## ToDo
-- [ ] Validate file extension
-- [ ] Validate the file any information goes before a map
-- [ ]
+- [ ] Validate
+  - [X] file extension
+  - [ ] file is not empty
+  - [ ] information goes before a map

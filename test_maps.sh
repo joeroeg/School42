@@ -6,10 +6,10 @@ PROGRAM="./cub3D"
 # Function to test a map file
 test_map() {
   if "$PROGRAM" "$1" > /dev/null 2>&1; then
-    echo "✅ Valid map $1"
+    echo "✅ $1"
   else
     # Assuming your program exits with a non-zero status on failure
-    echo "❌ Invalid map $1"
+    echo "❌ $1"
   fi
 }
 
@@ -17,6 +17,10 @@ test_map() {
 VALID_MAPS_DIR="./maps/valid_maps"
 INVALID_MAPS_DIR="./maps/invalid_maps"
 
+echo "
+❌ = invalid map
+✅ = valid map"
+echo " "
 echo "Testing valid maps:"
 for FILE in "$VALID_MAPS_DIR"/*; do
   test_map "$FILE"

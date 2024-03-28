@@ -30,8 +30,25 @@ typedef struct s_cube
 	bool			found_map;
 }					t_cube;
 
+// Memory management
+void	*gc_malloc(size_t size);
+void	gc_free(void *address);
+void	gc_free_all(void);
+void	*gc_calloc(size_t count, size_t size);
+
+
+
+// Validation
+int		validate_file(const char *filename);
+int		check_extension(const char *filename, const char *expected_extension);
+int		check_empty_file(int fd);
+
+
+
+
 // Utilities
 void	exit_error_message(char *message, int should_exit);
 int		return_error_message(char *message, int return_value);
+int		get_next_line(int fd, char **line);
 
 #endif
