@@ -15,7 +15,7 @@ MLX42 = $(MLX_BUILD_DIR)libmlx42.a
 
 # Compiler settings
 CC = gcc
-CFLAGS = -g
+CFLAGS = -g #-Wall -Wextra -Werror
 INCLUDES = -I./lib/libft/ -I./lib/MLX42/include/MLX42/ -I./ -I./src/ -I./include
 MLXFL = -ldl -lglfw -pthread -lm
 ifeq ($(shell uname), Darwin)
@@ -63,6 +63,6 @@ val: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=./suppressions.supp ./$(NAME) $(MAP_DIR)invalid_maps/invalid_file_empty_lines.cub
 
 run: all
-	./$(NAME) $(MAP_DIR)invalid_maps/invalid_file_empty_lines.cub
+	./$(NAME) $(MAP_DIR)map.cub
 
 .PHONY: all clean mlx_clean fclean re
