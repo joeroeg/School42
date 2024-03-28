@@ -38,5 +38,10 @@ This summary provides a structured framework for your map parsing feature, ensur
 ## ToDo
 - [ ] Validate
   - [X] file extension
-  - [ ] file is not empty
+  - [X] file is not empty
+  - [ ] check config parameters
+    - [ ] find NO SO WE EA F and C identofiers
   - [ ] information goes before a map
+
+- [ ] Memory management
+  - [ ] implement gc_free_all function

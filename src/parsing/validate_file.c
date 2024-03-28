@@ -1,26 +1,31 @@
 #include "cub3d.h"
 
 /**
- * @brief validate_file checks if the file exists
+ * @brief validates the given file
  * @param filename is the name of the file to be validated
 */
-int	validate_map_file(const char *filename)
+void	validate_map_file(const char *filename)
 {
 	int	fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (return_error_message("Error: File does not exist", FAILURE));
+		exit_error_message("Error: File does not exist", FAILURE);
 	if (check_extension(filename, ".cub") == FAILURE)
+	{
+		close(fd);
 		exit_error_message("Error: Invalid file extension", EXIT_FAILURE);
+	}
 	if (check_empty_file(fd) == FAILURE)
+	{
+		close(fd);
 		exit_error_message("Error: File is empty", EXIT_FAILURE);
+	}
 	close(fd);
-	return (EXIT_SUCCESS);
 }
 
 /**
- * @brief check_extension checks if the file has a valid extension
+ * @brief checks if the file has a valid extension
  * @param filename is the name of the file to be checked
  * @return SUCCESS if the file has a valid extension, otherwise FAILURE
 */
@@ -37,38 +42,36 @@ int	check_extension(const char *filename, const char *expected_extension)
 }
 
 /**
- * @brief Checks if the given file is empty.
- * @param fd The file descriptor of the opened file.
- * @return SUCCESS if the file is not empty, otherwise FAILURE.
- * @details
- * it checks if the first character is not the null terminator,
- * indicating that the line contains more than just a newline.
- * the idea is that if the loop completes without finding any content
- * then the file is considered empty
- */
+ * @brief checks if the file is empty
+ * @param fd is the file descriptor of the file to be checked
+ * @return SUCCESS if the file is not empty, otherwise FAILURE
+ * @note a file is considered empty if it contains only whitespaces
+ * or non-printable characters
+*/
 int	check_empty_file(int fd)
 {
 	char	*line;
 	int		result;
+	char	*current_char;
 
-	line = NULL;
 	result = get_next_line(fd, &line);
 	while (result > 0)
 	{
-		if (line[0] != '\0')
+		current_char = line;
+		while (*current_char != '\0')
 		{
-			gc_free(line);
-			return (SUCCESS);
+			if (isascii(*current_char) && !isspace(*current_char))
+			{
+				gc_free(line);
+				return (SUCCESS);
+			}
+			current_char++;
 		}
 		gc_free(line);
-		line = NULL;
 		result = get_next_line(fd, &line);
 	}
-	if (line != NULL)
-		free(line);
-	if (result == 0)
-		return (FAILURE);
-	else
-		exit_error_message("Error: Read failed", EXIT_FAILURE);
-	return (SUCCESS);
+	if (result == 0 && line != NULL)
+		gc_free(line);
+	return (FAILURE);
 }
+

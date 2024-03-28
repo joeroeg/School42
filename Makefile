@@ -5,8 +5,6 @@ LIB_DIR = lib/
 SRC_DIR = src/
 BIN_DIR = bin/
 MAP_DIR = maps/
-MAP_DIR_INVALID = maps/invalid/
-MAP_DIR_VALID = maps/valid/
 MLX_DIR = $(LIB_DIR)MLX42/
 MLX_BUILD_DIR = $(MLX_DIR)build/
 LIBFT_DIR = $(LIB_DIR)libft/
@@ -62,9 +60,9 @@ fclean: clean mlx_clean
 re: fclean all
 
 val: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=./suppressions.supp ./$(NAME) $(MAP_DIR_INVALID)invalid_file_empty_lines.cub
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=./suppressions.supp ./$(NAME) $(MAP_DIR)invalid_maps/invalid_file_empty_lines.cub
 
 run: all
-	./$(NAME) $(MAP_DIR)map.cub
+	./$(NAME) $(MAP_DIR)invalid_maps/invalid_file_empty_lines.cub
 
 .PHONY: all clean mlx_clean fclean re
