@@ -31,8 +31,33 @@ void	parse_map_parameters(t_cub *data)
 		gc_free(line);
 }
 
+void	validate_texture_path(t_cub *data, const char *path)
+{
+	if (path == NULL || path[0] == '\0')
+		exit_error_message("Error: Invalid texture path.", EXIT_FAILURE);
+	if (check_extension(data->config.north_texture, ".png") == FAILURE)
+	{
+		printf("path: %s\n", data->config.north_texture);
+		exit_error_message("Error: Invalid north_texture extension.", EXIT_FAILURE);
+	}
+	if (check_extension(data->config.south_texture, ".png") == FAILURE)
+	{
+		printf("path: %s\n", data->config.south_texture);
+		exit_error_message("Error: Invalid south_texture extension.", EXIT_FAILURE);
+	}
+	if (check_extension(data->config.east_texture, ".png") == FAILURE)
+	{
+		printf("path: %s\n", data->config.east_texture);
+		exit_error_message("Error: Invalid east_texture extension.", EXIT_FAILURE);
+	}
+	if (check_extension(data->config.west_texture, ".png") == FAILURE)
+	{
+		printf("path: %s\n", data->config.west_texture);
+		exit_error_message("Error: Invalid west_texture extension.", EXIT_FAILURE);
+	}
+}
+
 /**
- * @todo validate color range
  * @todo validate texture path
  * @todo validate invalid symbols config
 */
@@ -56,9 +81,16 @@ void	parse_texture(t_cub *data, const char *line)
 		strncpy(*texture_ptr, path, MAX_PATH_LENGTH - 1); // replace with ft_strncpy
 		(*texture_ptr)[MAX_PATH_LENGTH - 1] = '\0';
 	}
+	// validate_texture_path(data, *texture_ptr);
 }
 
-
+/**
+ * @todo validate color range
+ * @todo validate invalid symbols config
+ * @todo validate invalid color config
+ * @bug if no space between cardinals and path it will not be parsed (e.g. "NO./path")
+ * @bug if no space between color type and color it will not be parsed (e.g. "F255,255,255")
+*/
 void	parse_color(t_cub *data, const char *line, char color_type)
 {
 	char	*token;

@@ -20,8 +20,6 @@
 # define FALSE 0
 # define MAX_PATH_LENGTH 255
 # define MAX_LINE_LENGTH 512
-# define MAX_FD 1024
-# define BUFFER_SIZE 32
 
 typedef enum e_parameter_type
 {
