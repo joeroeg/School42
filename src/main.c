@@ -4,6 +4,7 @@
 /**
  * @todo add a before map
  * @todo implement parser for map
+ * @bug does not parse first line of a config file
 */
 void	parse_map_parameters(t_cub *data)
 {
@@ -30,6 +31,11 @@ void	parse_map_parameters(t_cub *data)
 		gc_free(line);
 }
 
+/**
+ * @todo validate color range
+ * @todo validate texture path
+ * @todo validate invalid symbols config
+*/
 void	parse_texture(t_cub *data, const char *line)
 {
 	char		(*texture_ptr)[MAX_PATH_LENGTH];
