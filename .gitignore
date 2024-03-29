@@ -2,7 +2,7 @@
 *.o
 cub3D.dSYM
 cub3D
-cub3D
+fractol/*
 lib/MLX42
 lib/libft/libft.a
 .idea/

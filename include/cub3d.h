@@ -12,6 +12,7 @@
 # include <math.h>
 # include <ctype.h>
 # include <errno.h>
+# include <stdbool.h>
 
 # define MALLOC_ERROR "Error when allocating memory on the heap"
 # define FAILURE 1
@@ -67,6 +68,14 @@ typedef struct s_cub
 	int			map_height;
 	int			found_map;
 }	t_cub;
+
+typedef struct s_entity
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+}	t_entity;
 
 // Memory management
 t_mblock	*garbage_collector(void);

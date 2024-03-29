@@ -28,6 +28,8 @@ OBJ_FILES = $(SRC_FILES:$(SRC_DIR)%.c=$(BIN_DIR)%.o)
 
 # Targets
 all: $(NAME)
+	@echo $(SRC_FILES)
+	@echo $(OBJ_FILES)
 
 $(NAME): $(MLX42) $(LIBFT) $(OBJ_FILES)
 	@$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBFT) $(MLX42) $(MLXFL) $(INCLUDES) -o $(NAME)
