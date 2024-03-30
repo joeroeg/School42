@@ -102,5 +102,6 @@ int		ft_putstr(char *s, int fd);
 int		count_dig(int n);
 int		ft_putnbr(int n, int fd);
 int		ft_isspace(int c);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
 
 #endif

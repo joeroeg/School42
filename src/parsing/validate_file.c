@@ -3,7 +3,7 @@
 
 void	validate_map_file(t_cub *data)
 {
-	if (check_extension(data->filename, ".cub") == FAILURE)
+	if (check_extension(data->file, ".cub") == FAILURE)
 	{
 		close(data->fd);
 		exit_error_message("Error: Invalid file extension", EXIT_FAILURE);
@@ -13,6 +13,7 @@ void	validate_map_file(t_cub *data)
 		close(data->fd);
 		exit_error_message("Error: File is empty", EXIT_FAILURE);
 	}
+	close(data->fd);
 }
 
 
@@ -50,6 +51,7 @@ int	check_empty_file(int fd)
 		}
 		gc_free(line);
 		result = get_next_line(fd, &line);
+		close(fd);
 	}
 	if (result == 0 && line != NULL)
 		gc_free(line);

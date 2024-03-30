@@ -50,6 +50,7 @@ int	get_next_line(int fd, char **line)
 	return (ret);
 }
 
+
 char	*trim_space(const char *str)
 {
 	char	*end;

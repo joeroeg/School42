@@ -1,5 +1,14 @@
 #include "cub3d.h"
 
+void	validate_all_texture_paths_exist(const t_config *config)
+{
+	if (config->north_texture[0] == '\0' || \
+		config->south_texture[0] == '\0' || \
+		config->west_texture[0] == '\0' || \
+		config->east_texture[0] == '\0')
+		exit_error_message(\
+		"Error: All required textures are not specified.\n", EXIT_FAILURE);
+}
 
 /**
  * @todo add a before map
@@ -12,59 +21,32 @@ void	parse_map_parameters(t_cub *data)
 	char	*trimmed_line;
 
 	line = NULL;
+	trimmed_line = NULL;
+	open(data->file, O_RDONLY);
 	while (get_next_line(data->fd, &line) > 0)
 	{
 		trimmed_line = trim_space(line);
-		printf("trimmed_line: %s\n", trimmed_line);
 		if (ft_strncmp(trimmed_line, "NO ", 3) == 0 || \
 			ft_strncmp(trimmed_line, "SO ", 3) == 0 || \
 			ft_strncmp(trimmed_line, "WE ", 3) == 0 || \
 			ft_strncmp(trimmed_line, "EA ", 3) == 0)
 			parse_texture(data, trimmed_line);
-		else if (strncmp(trimmed_line, "F ", 2) == 0)
+		else if (ft_strncmp(trimmed_line, "F ", 2) == 0)
 			parse_color(data, trimmed_line, 'F');
-		else if (strncmp(trimmed_line, "C ", 2) == 0)
+		else if (ft_strncmp(trimmed_line, "C ", 2) == 0)
 			parse_color(data, trimmed_line, 'C');
 		gc_free(line);
 	}
+	validate_all_texture_paths_exist(&data->config);
 	if (line)
 		gc_free(line);
 }
 
-void	validate_texture_path(t_cub *data, const char *path)
-{
-	if (path == NULL || path[0] == '\0')
-		exit_error_message("Error: Invalid texture path.", EXIT_FAILURE);
-	if (check_extension(data->config.north_texture, ".png") == FAILURE)
-	{
-		printf("path: %s\n", data->config.north_texture);
-		exit_error_message("Error: Invalid north_texture extension.", EXIT_FAILURE);
-	}
-	if (check_extension(data->config.south_texture, ".png") == FAILURE)
-	{
-		printf("path: %s\n", data->config.south_texture);
-		exit_error_message("Error: Invalid south_texture extension.", EXIT_FAILURE);
-	}
-	if (check_extension(data->config.east_texture, ".png") == FAILURE)
-	{
-		printf("path: %s\n", data->config.east_texture);
-		exit_error_message("Error: Invalid east_texture extension.", EXIT_FAILURE);
-	}
-	if (check_extension(data->config.west_texture, ".png") == FAILURE)
-	{
-		printf("path: %s\n", data->config.west_texture);
-		exit_error_message("Error: Invalid west_texture extension.", EXIT_FAILURE);
-	}
-}
-
-/**
- * @todo validate texture path
- * @todo validate invalid symbols config
-*/
 void	parse_texture(t_cub *data, const char *line)
 {
 	char		(*texture_ptr)[MAX_PATH_LENGTH];
 	const char	*path;
+	int			texture_count;
 
 	texture_ptr = NULL;
 	if (ft_strncmp(line, "NO ", 3) == 0)
@@ -78,11 +60,15 @@ void	parse_texture(t_cub *data, const char *line)
 	if (texture_ptr)
 	{
 		path = trim_space(line + 3);
-		strncpy(*texture_ptr, path, MAX_PATH_LENGTH - 1); // replace with ft_strncpy
+		ft_strncpy(*texture_ptr, path, MAX_PATH_LENGTH - 1);
 		(*texture_ptr)[MAX_PATH_LENGTH - 1] = '\0';
+		if (strchr(*texture_ptr, ' '))
+			exit_error_message("Error: Invalid path", EXIT_FAILURE);
+		if (check_extension(*texture_ptr, ".png") != SUCCESS)
+			exit_error_message("Error: Invalid file extension", EXIT_FAILURE);
 	}
-	// validate_texture_path(data, *texture_ptr);
 }
+
 
 /**
  * @todo validate color range
@@ -106,7 +92,6 @@ void	parse_color(t_cub *data, const char *line, char color_type)
 	g = ft_atoi(token);
 	token = ft_strtok(NULL, ",");
 	b = ft_atoi(token);
-
 	if (color_type == 'F')
 	{
 		data->config.floor_color_r = r;
@@ -122,7 +107,6 @@ void	parse_color(t_cub *data, const char *line, char color_type)
 	free(line_cpy);
 }
 
-
 void	parse_map(t_cub *data)
 {
 
@@ -135,11 +119,10 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		exit_error_message("Error: Invalid number of arguments.", EXIT_FAILURE);
 	ft_memset(&data, 0, sizeof(t_cub));
-
 	data.fd = open(argv[1], O_RDONLY);
 	if (data.fd == -1)
 		exit_error_message("Error: Invalid file descriptor.", EXIT_FAILURE);
-	data.filename = argv[1];
+	data.file = argv[1];
 	validate_map_file(&data);
 	parse_map_parameters(&data);
 	print_cub_config(&data);

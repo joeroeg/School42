@@ -1,7 +1,7 @@
-O ./textures/redbrick.png
-O ./textures/redbrick.png
-E ./textures/redbrick.png
-A ./textures/redbrick.png
+NO ./textures/redbrick.png
+SO ./textures/redbrick.png
+WE ./textures/redbrick.png
+EA ./textures/redbrick.png
 F 2220,100,0
 C 2225,30,0
 
