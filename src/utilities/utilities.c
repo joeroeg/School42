@@ -99,6 +99,9 @@ void	print_cub_config(const t_cub *data)
 	printf("  Ceiling: R=%d, G=%d, B=%d\n",
 		data->config.ceiling_color_r, data->config.ceiling_color_g, \
 			data->config.ceiling_color_b);
+	// printf("Map:\n");
+	// for (int i = 0; data->map[i]; i++)
+	// 	printf("%s\n", data->map[i]);
 	printf("------------------------\n");
 }
 

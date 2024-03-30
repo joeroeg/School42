@@ -42,10 +42,6 @@ typedef struct s_config
 	char	south_texture[MAX_PATH_LENGTH];
 	char	east_texture[MAX_PATH_LENGTH];
 	char	west_texture[MAX_PATH_LENGTH];
-	bool	north_texture_set;
-	bool	south_texture_set;
-	bool	east_texture_set;
-	bool	west_texture_set;
 	int		floor_color_r;
 	int		floor_color_g;
 	int		floor_color_b;
@@ -56,7 +52,6 @@ typedef struct s_config
 
 typedef struct s_cub
 {
-	// int			fd;
 	char		*file;
 	t_mblock	*memory;
 	t_config	config;

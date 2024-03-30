@@ -7,10 +7,9 @@ void	parse_map_parameters(t_cub *data)
 	parsed_parameters = 0;
 	data->memory->fd = prepare_file_descriptor(data->file);
 	parse_parameters_loop(data, &parsed_parameters);
-	validate_all_parameters_set(parsed_parameters);
 	validate_all_texture_paths_exist(&data->config);
-	// Add here validate_all_color_setup if needed
-	// finalize_parameter_parsing(data);
+	validate_all_parameters_set(parsed_parameters);
+	parse_map(data);
 }
 
 void	parse_parameters_loop(t_cub *data, int *parsed_parameters)

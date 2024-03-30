@@ -55,7 +55,6 @@ int	parse_rgb_values(const char *line, int *rgb)
 	while (token != NULL)
 	{
 		value = ft_atoi(token);
-		printf("value: %d\n", value);
 		if (value < 0 || value > 255 || !is_string_numeric(token))
 			exit_error_message("Error: \
 				Invalid color range or non-numeric", EXIT_FAILURE);

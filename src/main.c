@@ -23,10 +23,8 @@ int	main(int argc, char **argv)
 	validate_map_file(&data);
 	parse_map_parameters(&data);
 	print_cub_config(&data);
-	// parse_map(&data);
-	// render_map();
+	// load_map(&data);
 	// mlx_loop();
-	// close(data.memory->fd);
 	gc_free_all();
 	return (SUCCESS);
 }
