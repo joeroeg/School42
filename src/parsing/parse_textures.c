@@ -44,13 +44,4 @@ void	validate_all_texture_paths_exist(const t_config *config)
 		One or more texture files cannot be read.\n", EXIT_FAILURE);
 }
 
-bool	can_read_file(const char *path)
-{
-	int	fd;
 
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (false);
-	close(fd);
-	return (true);
-}

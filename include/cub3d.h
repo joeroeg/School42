@@ -74,6 +74,7 @@ void	gc_free_all(void);
 int		gc_open(const char *pathname, int flags, mode_t mode);
 char	*ft_strjoin_gc(char *s1, char *s2);
 char	*ft_strdup_gc(const char *s);
+char	**ft_split_gc(char const *s, char c);
 
 // Validation
 void	validate_map_file(t_cub *data);

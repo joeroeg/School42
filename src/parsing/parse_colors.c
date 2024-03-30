@@ -1,39 +1,80 @@
 #include "cub3d.h"
 
-/**
- * @todo validate color range
- * @todo validate invalid symbols config
- * @todo validate invalid color config
- * @bug if no space between cardinals and path it will not be parsed (e.g. "NO./path")
- * @bug if no space between color type and color it will not be parsed (e.g. "F255,255,255")
-*/
-void	parse_color(t_cub *data, const char *line, char color_type, int *parsed_parameters)
+void	validate_color_range(t_cub *data)
 {
-	char	*token;
-	char	*line_cpy;
-	int		r;
-	int		g;
-	int		b;
+	if (data->config.floor_color_r < 0 || data->config.floor_color_r > 255 || \
+		data->config.floor_color_g < 0 || data->config.floor_color_g > 255 || \
+		data->config.floor_color_b < 0 || data->config.floor_color_b > 255 || \
+		data->config.ceiling_color_r < 0 || \
+		data->config.ceiling_color_r > 255 || \
+		data->config.ceiling_color_g < 0 || \
+		data->config.ceiling_color_g > 255 || \
+		data->config.ceiling_color_b < 0 || data->config.ceiling_color_b > 255)
+		exit_error_message("Error: Invalid color range", EXIT_FAILURE);
+}
 
-	line_cpy = ft_strdup_gc(line + 2);
-	token = ft_strtok(line_cpy, ",");
-	r = ft_atoi(token);
-	token = ft_strtok(NULL, ",");
-	g = ft_atoi(token);
-	token = ft_strtok(NULL, ",");
-	b = ft_atoi(token);
+bool	is_string_numeric(const char *str)
+{
+	if (*str == '-' || *str == '+')
+		str++;
+	if (!*str)
+		return (false);
+	while (*str)
+	{
+		if (!isdigit((unsigned char)*str))
+			return (false);
+		str++;
+	}
+	return (true);
+}
+
+void	set_color(t_cub *data, const int rgb[3], char color_type)
+{
 	if (color_type == 'F')
 	{
-		data->config.floor_color_r = r;
-		data->config.floor_color_g = g;
-		data->config.floor_color_b = b;
+		data->config.floor_color_r = rgb[0];
+		data->config.floor_color_g = rgb[1];
+		data->config.floor_color_b = rgb[2];
 	}
 	else if (color_type == 'C')
 	{
-		data->config.ceiling_color_r = r;
-		data->config.ceiling_color_g = g;
-		data->config.ceiling_color_b = b;
+		data->config.ceiling_color_r = rgb[0];
+		data->config.ceiling_color_g = rgb[1];
+		data->config.ceiling_color_b = rgb[2];
 	}
-	*parsed_parameters += 1;
-	gc_free(line_cpy);
 }
+
+int	parse_rgb_values(const char *line, int *rgb)
+{
+	char	*token;
+	int		i;
+	int		value;
+
+	token = ft_strtok((char *)line + 2, ",");
+	i = 0;
+	while (token != NULL)
+	{
+		value = ft_atoi(token);
+		printf("value: %d\n", value);
+		if (value < 0 || value > 255 || !is_string_numeric(token))
+			exit_error_message("Error: \
+				Invalid color range or non-numeric", EXIT_FAILURE);
+		rgb[i++] = value;
+		token = ft_strtok(NULL, ",");
+	}
+	if (i != 3 || ft_strtok(NULL, ",") != NULL)
+		exit_error_message("Error: Invalid color config", EXIT_FAILURE);
+	return (true);
+}
+
+void	parse_color(t_cub *data, const char *line, \
+	char color_type, int *parsed_parameters)
+{
+	int		rgb[3];
+
+	if (!parse_rgb_values(line, rgb))
+		exit_error_message("Error: Invalid color config", EXIT_FAILURE);
+	(*parsed_parameters)++;
+	set_color(data, rgb, color_type);
+}
+

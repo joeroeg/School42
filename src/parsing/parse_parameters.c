@@ -43,16 +43,6 @@ void	parse_parameter(t_cub *data, char *trimmed_line, int *parsed_parameters)
 	}
 }
 
-bool	is_texture_line(const char *line)
-{
-	if (strncmp(line, "NO ", 3) == 0 ||
-		strncmp(line, "SO ", 3) == 0 ||
-		strncmp(line, "WE ", 3) == 0 ||
-		strncmp(line, "EA ", 3) == 0)
-		return (true);
-	return (false);
-}
-
 void	validate_all_parameters_set(int parsed_parameters)
 {
 	int	total_parameters;
@@ -61,12 +51,4 @@ void	validate_all_parameters_set(int parsed_parameters)
 	if (parsed_parameters != total_parameters)
 		exit_error_message("Error: \
 		Not all parameters were specified.", EXIT_FAILURE);
-}
-
-bool	is_color_line(const char *line)
-{
-	if (strncmp(line, "F ", 2) == 0 ||
-		strncmp(line, "C ", 2) == 0)
-		return (true);
-	return (false);
 }

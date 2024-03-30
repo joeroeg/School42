@@ -14,7 +14,6 @@ void	setup(int argc, char **argv, t_cub *data)
 	data->file = argv[1];
 }
 
-
 int	main(int argc, char **argv)
 {
 	t_cub	data;
