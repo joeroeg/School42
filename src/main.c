@@ -6,8 +6,7 @@ void	validate_all_texture_paths_exist(const t_config *config)
 		config->south_texture[0] == '\0' || \
 		config->west_texture[0] == '\0' || \
 		config->east_texture[0] == '\0')
-		exit_error_message(\
-		"Error: All required textures are not specified.\n", EXIT_FAILURE);
+			exit_error_message("Error: All required textures are not specified.\n", EXIT_FAILURE);
 }
 
 /**
@@ -22,10 +21,13 @@ void	parse_map_parameters(t_cub *data)
 
 	line = NULL;
 	trimmed_line = NULL;
-	open(data->file, O_RDONLY);
+	data->fd = open(data->file, O_RDONLY);
+	if (data->fd == -1)
+		exit_error_message("Error: Invalid file descriptor.", EXIT_FAILURE);
 	while (get_next_line(data->fd, &line) > 0)
 	{
 		trimmed_line = trim_space(line);
+		printf("trimmed_line: %s\n", trimmed_line);
 		if (ft_strncmp(trimmed_line, "NO ", 3) == 0 || \
 			ft_strncmp(trimmed_line, "SO ", 3) == 0 || \
 			ft_strncmp(trimmed_line, "WE ", 3) == 0 || \
@@ -37,6 +39,7 @@ void	parse_map_parameters(t_cub *data)
 			parse_color(data, trimmed_line, 'C');
 		gc_free(line);
 	}
+	close(data->fd);
 	validate_all_texture_paths_exist(&data->config);
 	if (line)
 		gc_free(line);
@@ -104,7 +107,7 @@ void	parse_color(t_cub *data, const char *line, char color_type)
 		data->config.ceiling_color_g = g;
 		data->config.ceiling_color_b = b;
 	}
-	free(line_cpy);
+	gc_free(line_cpy);
 }
 
 void	parse_map(t_cub *data)
@@ -125,11 +128,12 @@ int	main(int argc, char **argv)
 	data.file = argv[1];
 	validate_map_file(&data);
 	parse_map_parameters(&data);
-	print_cub_config(&data);
 	// parse_map(&data);
 	// render_map();
 	// mlx_loop();
 	close(data.fd);
+
+	// print_cub_config(&data);
 	// gc_free_all();
 	return (SUCCESS);
 }

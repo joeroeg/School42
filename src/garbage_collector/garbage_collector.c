@@ -80,15 +80,28 @@ void	gc_free(void *address)
 	}
 }
 
-/**
- * @brief frees all dynamically allocated memory
- * @details It iterates through the memory blocks and frees them
- * It also closes the file descriptor and clears the mlx instance.
- * @return void
-*/
-void	gc_free_all(void)
+
+
+void gc_free_all(void)
 {
-	// free all memory blocks
-	// close the file descriptor
-	// clear the mlx instance
+    t_mblock *current = garbage_collector()->next;
+    t_mblock *next;
+
+    while (current != NULL) {
+        next = current->next; // Save next node
+
+        // if (current->fd != -1) {
+        //     close(current->fd); // Close the file descriptor if valid
+        // }
+
+        if (current->address) {
+            free(current->address); // Free the allocated memory
+        }
+
+        free(current); // Free the node
+        current = next; // Move to the next node
+    }
+
+    garbage_collector()->next = NULL; // Reset the list to empty
 }
+

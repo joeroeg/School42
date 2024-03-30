@@ -5,12 +5,12 @@ void	exit_error_message(char *message, int exit_value)
 	ft_putendl_fd(message, STDERR_FILENO);
 	if (exit_value == EXIT_FAILURE)
 	{
-		// gc_free_all();
+		gc_free_all();
 		exit(EXIT_FAILURE);
 	}
 	else if (exit_value == EXIT_SUCCESS)
 	{
-		// gc_free_all();
+		gc_free_all();
 		exit(EXIT_SUCCESS);
 	}
 }

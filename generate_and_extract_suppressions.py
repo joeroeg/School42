@@ -7,6 +7,8 @@ def run_valgrind_and_generate_suppressions(executable, args, output_log):
         "valgrind",
         "--leak-check=full",
         "--show-leak-kinds=all",
+        "--track-origins=yes",
+        "--track-fds=yes",
         "--gen-suppressions=all",
         "--log-file={}".format(output_log)
     ] + [executable] + args
@@ -30,7 +32,8 @@ def extract_suppressions(input_file, output_file):
 
 if __name__ == "__main__":
     executable_path = "./cub3D"
-    executable_args = ["maps/invalid/invalid_extension.cux"]
+    # executable_args = ["maps/invalid/invalid_extension.cux"]
+    executable_args = [""]
     valgrind_log = "valgrind-out.txt"
     suppressions_file = "suppressions.supp"
     run_valgrind_and_generate_suppressions(executable_path, executable_args, valgrind_log)
