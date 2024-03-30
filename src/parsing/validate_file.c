@@ -5,15 +5,15 @@ void	validate_map_file(t_cub *data)
 {
 	if (check_extension(data->file, ".cub") == FAILURE)
 	{
-		close(data->fd);
+		close(data->memory->fd);
 		exit_error_message("Error: Invalid file extension", EXIT_FAILURE);
 	}
-	if (check_empty_file(data->fd) == FAILURE)
+	if (check_empty_file(data->memory->fd) == FAILURE)
 	{
-		close(data->fd);
+		close(data->memory->fd);
 		exit_error_message("Error: File is empty", EXIT_FAILURE);
 	}
-	close(data->fd);
+	close(data->memory->fd);
 }
 
 

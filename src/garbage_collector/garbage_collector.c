@@ -7,7 +7,7 @@
 */
 t_mblock	*garbage_collector(void)
 {
-	static t_mblock	head = {NULL, NULL};
+	static t_mblock	head = {NULL, -1, NULL};
 
 	return (&head);
 }
@@ -24,16 +24,21 @@ void	*gc_malloc(size_t size)
 {
 	t_mblock	*memory_block;
 
-	memory_block = malloc(sizeof(t_mblock) * 1);
+	memory_block = malloc(sizeof(t_mblock));
 	if (!memory_block)
 		exit_error_message(MALLOC_ERROR, EXIT_FAILURE);
+	memory_block->fd = -1;
 	memory_block->next = garbage_collector()->next;
 	garbage_collector()->next = memory_block;
 	memory_block->address = malloc(size);
 	if (!memory_block->address)
+	{
+		free(memory_block);
 		exit_error_message(MALLOC_ERROR, EXIT_FAILURE);
+	}
 	return (memory_block->address);
 }
+
 
 /**
  * @brief gc_calloc allocates memory and keeps track of it in a linked list
@@ -80,28 +85,44 @@ void	gc_free(void *address)
 	}
 }
 
-
-
-void gc_free_all(void)
+int	gc_open(const char *pathname, int flags, mode_t mode)
 {
-    t_mblock *current = garbage_collector()->next;
-    t_mblock *next;
+	t_mblock	*memory_block;
+	int			fd;
 
-    while (current != NULL) {
-        next = current->next; // Save next node
+	memory_block = malloc(sizeof(t_mblock));
+	if (!memory_block)
+		exit_error_message(MALLOC_ERROR, EXIT_FAILURE);
+	fd = open(pathname, flags, mode);
+	if (fd == -1)
+	{
+		free(memory_block);
+		return (-1);
+	}
+	memory_block->fd = fd;
+	memory_block->address = NULL;
+	memory_block->next = garbage_collector()->next;
+	garbage_collector()->next = memory_block;
+	return (fd);
+}
 
-        // if (current->fd != -1) {
-        //     close(current->fd); // Close the file descriptor if valid
-        // }
 
-        if (current->address) {
-            free(current->address); // Free the allocated memory
-        }
+void	gc_free_all(void)
+{
+	t_mblock	*current;
+	t_mblock	*next;
 
-        free(current); // Free the node
-        current = next; // Move to the next node
-    }
-
-    garbage_collector()->next = NULL; // Reset the list to empty
+	current = garbage_collector()->next;
+	while (current != NULL)
+	{
+		next = current->next;
+		if (current->fd != -1)
+			close(current->fd);
+		if (current->address)
+			free(current->address);
+		free(current);
+		current = next;
+	}
+	garbage_collector()->next = NULL;
 }
 

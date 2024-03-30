@@ -38,7 +38,7 @@ for PARAM in "${INPUT_PARAMS[@]}"; do
     fi
 done
 if [ "$SUCCESS_COUNT" -eq "$TOTAL_COUNT" ]; then
-    echo -e "${GREEN}Final Result: ${SUCCESS_COUNT}/${TOTAL_COUNT} (All tests passed)${NO_COLOR}"
+    echo -e "${GREEN}Final Result: ${SUCCESS_COUNT}/${TOTAL_COUNT} (All leak tests passed)${NO_COLOR}"
 else
-    echo -e "${RED}Final Result: ${SUCCESS_COUNT}/${TOTAL_COUNT} (Some tests failed)${NO_COLOR}"
+    echo -e "${RED}Final Result: ${SUCCESS_COUNT}/${TOTAL_COUNT} (Some leak ggtests failed)${NO_COLOR}"
 fi

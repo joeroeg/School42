@@ -50,40 +50,64 @@ int	get_next_line(int fd, char **line)
 	return (ret);
 }
 
-
 char	*trim_space(const char *str)
 {
-	char	*end;
-	char	*copy;
+	const char	*start;
+	const char	*end;
+	char		*trimmed;
+	size_t		trimmed_length;
 
-	copy = ft_strdup_gc(str);
-	while (ft_isspace((unsigned char)*copy))
-		copy++;
-	if (*copy == 0)
-		return (copy);
-	end = copy + ft_strlen(str) - 1;
-	while (end > copy && ft_isspace((unsigned char)*end))
+	start = str;
+	while (ft_isspace((unsigned char)*start))
+		start++;
+	if (*start == 0)
+	{
+		trimmed = gc_malloc(1);
+		if (!trimmed)
+			exit_error_message(MALLOC_ERROR, EXIT_FAILURE);
+		*trimmed = '\0';
+		return (trimmed);
+	}
+	end = str + ft_strlen(str) - 1;
+	while (end > start && ft_isspace((unsigned char)*end))
 		end--;
-	*(end + 1) = 0;
-	return (copy);
+	trimmed_length = end - start + 1;
+	trimmed = gc_malloc(trimmed_length + 1);
+	if (!trimmed)
+		exit_error_message(MALLOC_ERROR, EXIT_FAILURE);
+	strncpy(trimmed, start, trimmed_length);
+	trimmed[trimmed_length] = '\0';
+	return (trimmed);
 }
 
-void print_cub_config(const t_cub *data) {
-	printf("------------------------\n");
-    printf("Data Configuration:\n");
-    printf("File Descriptor: %d\n", data->fd);
-    printf("Found Map: %d\n", data->found_map);
 
-    printf("Textures:\n");
-    printf("  North: %s\n", data->config.north_texture);
-    printf("  South: %s\n", data->config.south_texture);
-    printf("  West: %s\n", data->config.west_texture);
-    printf("  East: %s\n", data->config.east_texture);
-
-    printf("Colors:\n");
-    printf("  Floor: R=%d, G=%d, B=%d\n",
-           data->config.floor_color_r, data->config.floor_color_g, data->config.floor_color_b);
-    printf("  Ceiling: R=%d, G=%d, B=%d\n",
-           data->config.ceiling_color_r, data->config.ceiling_color_g, data->config.ceiling_color_b);
+void	print_cub_config(const t_cub *data)
+{
 	printf("------------------------\n");
+	printf("Data Configuration:\n");
+	printf("File Descriptor: %d\n", data->memory->fd);
+	printf("Found Map: %d\n", data->found_map);
+	printf("Textures:\n");
+	printf("  North: %s\n", data->config.north_texture);
+	printf("  South: %s\n", data->config.south_texture);
+	printf("  West: %s\n", data->config.west_texture);
+	printf("  East: %s\n", data->config.east_texture);
+	printf("Colors:\n");
+	printf("  Floor: R=%d, G=%d, B=%d\n",
+		data->config.floor_color_r, data->config.floor_color_g, \
+			data->config.floor_color_b);
+	printf("  Ceiling: R=%d, G=%d, B=%d\n",
+		data->config.ceiling_color_r, data->config.ceiling_color_g, \
+			data->config.ceiling_color_b);
+	printf("------------------------\n");
+}
+
+int	prepare_file_descriptor(const char *file_path)
+{
+	int	fd;
+
+	fd = gc_open(file_path, O_RDONLY, 0);
+	if (fd == -1)
+		exit_error_message("Error: Invalid file descriptor.", EXIT_FAILURE);
+	return (fd);
 }
