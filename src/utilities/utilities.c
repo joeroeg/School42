@@ -99,10 +99,32 @@ void	print_cub_config(const t_cub *data)
 	printf("  Ceiling: R=%d, G=%d, B=%d\n",
 		data->config.ceiling_color_r, data->config.ceiling_color_g, \
 			data->config.ceiling_color_b);
-	// printf("Map:\n");
-	// for (int i = 0; data->map[i]; i++)
-	// 	printf("%s\n", data->map[i]);
+	printf("Map:\n");
+	for (int i = 0; i < data->map_height; i++)
+		printf("%s\n", data->map[i]);
 	printf("------------------------\n");
+}
+
+void print_struct(t_cub *data)
+{
+	printf("File: %s\n", data->file);
+	printf("Memory: %p\n", data->memory);
+	printf("Config:\n");
+	printf("  North: %s\n", data->config.north_texture);
+	printf("  South: %s\n", data->config.south_texture);
+	printf("  East: %s\n", data->config.east_texture);
+	printf("  West: %s\n", data->config.west_texture);
+	printf("  Floor: R=%d, G=%d, B=%d\n",
+		data->config.floor_color_r, data->config.floor_color_g, \
+			data->config.floor_color_b);
+	printf("  Ceiling: R=%d, G=%d, B=%d\n",
+		data->config.ceiling_color_r, data->config.ceiling_color_g, \
+			data->config.ceiling_color_b);
+	printf("Map:\n");
+	for (int i = 0; i < data->map_height; i++)
+		printf("%s\n", data->map[i]);
+	printf("Map Height: %d\n", data->map_height);
+	printf("Found Map: %d\n", data->found_map);
 }
 
 int	prepare_file_descriptor(const char *file_path)

@@ -1,22 +1,7 @@
 #include "cub3d.h"
 
-void	validate_color_range(t_cub *data)
-{
-	if (data->config.floor_color_r < 0 || data->config.floor_color_r > 255 || \
-		data->config.floor_color_g < 0 || data->config.floor_color_g > 255 || \
-		data->config.floor_color_b < 0 || data->config.floor_color_b > 255 || \
-		data->config.ceiling_color_r < 0 || \
-		data->config.ceiling_color_r > 255 || \
-		data->config.ceiling_color_g < 0 || \
-		data->config.ceiling_color_g > 255 || \
-		data->config.ceiling_color_b < 0 || data->config.ceiling_color_b > 255)
-		exit_error_message("Error: Invalid color range", EXIT_FAILURE);
-}
-
 bool	is_string_numeric(const char *str)
 {
-	if (*str == '-' || *str == '+')
-		str++;
 	if (!*str)
 		return (false);
 	while (*str)

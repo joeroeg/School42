@@ -57,7 +57,6 @@ void	*gc_calloc(size_t count, size_t size)
 	return (address);
 }
 
-
 /**
  * @brief frees all dynamically allocated memory
  * @details It iterates through memory blocks and frees them

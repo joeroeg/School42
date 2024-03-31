@@ -18,6 +18,9 @@
 # define SUCCESS 0
 # define MAX_PATH_LENGTH 255
 # define MAX_LINE_LENGTH 512
+# define MAX_MAP_WIDTH  100
+# define MAX_MAP_HEIGHT 100
+
 
 typedef enum e_parameter_type
 {
@@ -55,9 +58,8 @@ typedef struct s_cub
 	char		*file;
 	t_mblock	*memory;
 	t_config	config;
-	char		*content;
-	char		**tokens;
-	char		**map;
+	char		map[MAX_MAP_HEIGHT][MAX_MAP_WIDTH + 1];
+	int			map_height;
 	int			found_map;
 }	t_cub;
 
@@ -83,6 +85,7 @@ int		get_next_line(int fd, char **line);
 char	*trim_space(const char *str);
 int		prepare_file_descriptor(const char *file_path);
 void	print_cub_config(const t_cub *data);
+void	print_struct(t_cub *data);
 
 // Parsing configuration
 void	parse_map_parameters(t_cub *data);
