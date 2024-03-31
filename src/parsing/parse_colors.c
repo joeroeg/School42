@@ -41,13 +41,14 @@ int	parse_rgb_values(const char *line, int *rgb)
 	{
 		value = ft_atoi(token);
 		if (value < 0 || value > 255 || !is_string_numeric(token))
-			exit_error_message("Error: \
-				Invalid color range or non-numeric", EXIT_FAILURE);
+			exit_error_message("Error: Invalid color range or non-numeric", \
+			EXIT_FAILURE);
 		rgb[i++] = value;
 		token = ft_strtok(NULL, ",");
 	}
 	if (i != 3 || ft_strtok(NULL, ",") != NULL)
-		exit_error_message("Error: Invalid color config", EXIT_FAILURE);
+		exit_error_message("Error: Invalid num of color param were specified.", \
+		EXIT_FAILURE);
 	return (true);
 }
 
@@ -57,8 +58,8 @@ void	parse_color(t_cub *data, const char *line, \
 	int		rgb[3];
 
 	if (!parse_rgb_values(line, rgb))
-		exit_error_message("Error: Invalid color config", EXIT_FAILURE);
+		exit_error_message("Error: Not all color parameters were specified.", \
+		EXIT_FAILURE);
 	(*parsed_parameters)++;
 	set_color(data, rgb, color_type);
 }
-

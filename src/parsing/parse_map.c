@@ -1,6 +1,7 @@
 #include "cub3d.h"
 
-bool is_map_enclosed(t_cub *data) {
+bool is_map_enclosed(t_cub *data)
+{
     // Check top and bottom borders
     for (int i = 0; i < strlen(data->map[0]); i++) {
         if (data->map[0][i] != '1' || data->map[data->map_height - 1][i] != '1') {
@@ -135,6 +136,7 @@ void parse_map(t_cub *data) {
     }
     data->map_height = line_number;
     validate_map_playability(data);
+    printf("Map loaded successfully.\n");
     for (int i = 0; i < data->map_height; i++) {
         printf("%s\n", data->map[i]);
     }

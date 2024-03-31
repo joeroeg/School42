@@ -1,18 +1,6 @@
 #include "cub3d.h"
 
 /**
- * @brief garbage_collector serves as an access point to the system
- * @return Return the address of the head
- * @param head Static variable to keep track of the head of the linked list
-*/
-t_mblock	*garbage_collector(void)
-{
-	static t_mblock	head = {NULL, -1, NULL};
-
-	return (&head);
-}
-
-/**
  * @brief allocates memory and keeps track of it in a linked list
  * @param size is the size of the memory block to be allocated
  * @param memory_block is a pointer to a memory block structure
@@ -38,7 +26,6 @@ void	*gc_malloc(size_t size)
 	}
 	return (memory_block->address);
 }
-
 
 /**
  * @brief gc_calloc allocates memory and keeps track of it in a linked list
@@ -105,7 +92,6 @@ int	gc_open(const char *pathname, int flags, mode_t mode)
 	return (fd);
 }
 
-
 void	gc_free_all(void)
 {
 	t_mblock	*current;
@@ -124,4 +110,3 @@ void	gc_free_all(void)
 	}
 	garbage_collector()->next = NULL;
 }
-

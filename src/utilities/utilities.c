@@ -80,7 +80,6 @@ char	*trim_space(const char *str)
 	return (trimmed);
 }
 
-
 void	print_cub_config(const t_cub *data)
 {
 	printf("------------------------\n");
@@ -99,6 +98,12 @@ void	print_cub_config(const t_cub *data)
 	printf("  Ceiling: R=%d, G=%d, B=%d\n",
 		data->config.ceiling_color_r, data->config.ceiling_color_g, \
 			data->config.ceiling_color_b);
+	printf(" North Set: %d\n", data->config.north_set);
+	printf(" South Set: %d\n", data->config.south_set);
+	printf(" West Set: %d\n", data->config.west_set);
+	printf(" East Set: %d\n", data->config.east_set);
+	printf(" Floor Set: %d\n", data->config.floor_set);
+	printf(" Ceiling Set: %d\n", data->config.ceiling_set);
 	printf("Map:\n");
 	for (int i = 0; i < data->map_height; i++)
 		printf("%s\n", data->map[i]);

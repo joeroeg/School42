@@ -47,6 +47,7 @@ void	validate_all_parameters_set(int parsed_parameters)
 	int	total_parameters;
 
 	total_parameters = 6;
+	printf("parsed_parameters: %d\n", parsed_parameters);
 	if (parsed_parameters != total_parameters)
 		exit_error_message("Error: \
 		Not all parameters were specified.", EXIT_FAILURE);

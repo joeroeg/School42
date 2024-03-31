@@ -1,9 +1,13 @@
 #include "cub3d.h"
 
-
 void	validate_map_file(t_cub *data)
 {
-	if (check_extension(data->file, ".cub") == FAILURE)
+	const char	*valid_extensions[] = {".cub"};
+	int			num_extensions;
+
+	num_extensions = sizeof(valid_extensions) / sizeof(valid_extensions[0]);
+	if (check_extension(\
+	data->file, valid_extensions, num_extensions) == FAILURE)
 	{
 		close(data->memory->fd);
 		exit_error_message("Error: Invalid file extension", EXIT_FAILURE);
@@ -16,19 +20,25 @@ void	validate_map_file(t_cub *data)
 	close(data->memory->fd);
 }
 
-
-int	check_extension(char *filename, const char *expected_extension)
+int	check_extension(const char *filename, \
+const char *valid_extensions[], int num_extensions)
 {
 	const char	*found_extension;
+	const char	*dot;
+	int			i;
 
-	found_extension = ft_strrchr(filename, '.');
-	if (found_extension != NULL && \
-		ft_strcmp(found_extension, expected_extension) == 0)
-		return (SUCCESS);
-	else
+	dot = ft_strrchr(filename, '.');
+	if (!dot || dot == filename)
 		return (FAILURE);
+	i = 0;
+	while (i < num_extensions)
+	{
+		if (ft_strcmp(dot, valid_extensions[i]) == 0)
+			return (SUCCESS);
+		i++;
+	}
+	return (FAILURE);
 }
-
 
 int	check_empty_file(int fd)
 {
