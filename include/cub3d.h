@@ -119,9 +119,9 @@ void		set_east_texture(t_cub *data, \
 			const char *path, int *parsed_parameters);
 
 // Parsing color
-void		parse_color(t_cub *data, const char *line, \
+void		parse_color(t_cub *data, char *line, \
 			char color_type, int *parsed_parameters);
-bool		is_color_line(const char *line);
+bool		is_color_line(char *line);
 
 // Parsing map
 void		parse_map(t_cub *data);

@@ -11,7 +11,7 @@ bool	can_read_file(const char *path)
 	return (true);
 }
 
-bool	is_color_line(const char *line)
+bool	is_color_line(char *line)
 {
 	if (ft_strncmp(line, "F ", 2) == 0 || \
 		ft_strncmp(line, "C ", 2) == 0)

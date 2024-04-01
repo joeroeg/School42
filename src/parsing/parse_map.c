@@ -136,9 +136,9 @@ void parse_map(t_cub *data) {
     }
     data->map_height = line_number;
     validate_map_playability(data);
-    printf("Map loaded successfully.\n");
-    for (int i = 0; i < data->map_height; i++) {
-        printf("%s\n", data->map[i]);
-    }
+    // printf("Map loaded successfully.\n");
+    // for (int i = 0; i < data->map_height; i++) {
+    //     printf("%s\n", data->map[i]);
+    // }
 }
 

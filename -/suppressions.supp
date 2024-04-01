@@ -1388,6 +1388,24 @@
    <insert_a_suppression_name_here>
    Memcheck:Leak
    match-leak-kinds: reachable
+   fun:malloc_zone_calloc
+   fun:-[__NSPlaceholderArray initWithObjects:count:]
+   fun:__CFStringCreateImmutableFunnel3
+   fun:__CFStringCreateImmutableFunnel3
+   fun:__CFInitializeLinkCheck
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
    fun:calloc
    fun:_ZL27method_t_remappedImp_nolockPK8method_t
    fun:_ZN13list_array_ttI10property_t15property_list_t6RawPtrE11attachListsEPKPS1_j
@@ -1938,6 +1956,42 @@
    fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoaderPNS1_21InitializerTimingListE
    fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
    fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_ZN4objc8DenseMapIP10objc_classS2_NS_17DenseMapValueInfoIS2_EENS_12DenseMapInfoIS2_EENS_6detail12DenseMapPairIS2_S2_EEE4growEj
+   fun:_ZN10objc_class11mangledNameEv
+   fun:_ZL16addRemappedClassP10objc_classS0_
+   fun:objc_initializeClassPair
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:objc_msgLookup_fpret
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoaderPNS1_21InitializerTimingListE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_ZN4objc8DenseMapIP10objc_classS2_NS_17DenseMapValueInfoIS2_EENS_12DenseMapInfoIS2_EENS_6detail12DenseMapPairIS2_S2_EEE4growEj
+   fun:_ZN10objc_class11mangledNameEv
+   fun:_ZN10objc_class11mangledNameEv
+   fun:_ZL16addRemappedClassP10objc_classS0_
+   fun:objc_initializeClassPair
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:objc_msgLookup_fpret
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoaderPNS1_21InitializerTimingListE
    fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
    fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
 }
@@ -2755,24 +2809,6 @@
 {
    <insert_a_suppression_name_here>
    Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:calloc
-   fun:_ZN4objc8DenseMapIP10objc_classS2_NS_17DenseMapValueInfoIS2_EENS_12DenseMapInfoIS2_EENS_6detail12DenseMapPairIS2_S2_EEE4growEj
-   fun:_ZL16addRemappedClassP10objc_classS0_
-   fun:objc_initializeClassPair
-   fun:+[NSString initialize]
-   fun:_objc_addWillInitializeClassFunc
-   fun:_ZN13list_array_ttI8method_t13method_list_t24method_list_t_authed_ptrE11attachListsEPKPS1_j
-   fun:_ZL24realizeClassWithoutSwiftP10objc_classS0_
-   fun:-[NSObject dealloc]
-   fun:lookUpImpOrForward
-   fun:+[NSString initialize]
-   fun:_objc_addWillInitializeClassFunc
-}
-
-{
-   <insert_a_suppression_name_here>
-   Memcheck:Leak
    match-leak-kinds: possible
    fun:calloc
    fun:_ZN4objc8DenseMapIP10objc_classS2_NS_17DenseMapValueInfoIS2_EENS_12DenseMapInfoIS2_EENS_6detail12DenseMapPairIS2_S2_EEE4growEj
@@ -2894,42 +2930,6 @@
    fun:__CFStringCreateImmutableFunnel3
    fun:__CFInitialize
    fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
-}
-
-{
-   <insert_a_suppression_name_here>
-   Memcheck:Leak
-   match-leak-kinds: possible
-   fun:calloc
-   fun:_ZN4objc8DenseMapIP10objc_classS2_NS_17DenseMapValueInfoIS2_EENS_12DenseMapInfoIS2_EENS_6detail12DenseMapPairIS2_S2_EEE4growEj
-   fun:_ZN10objc_class11mangledNameEv
-   fun:_ZL16addRemappedClassP10objc_classS0_
-   fun:objc_initializeClassPair
-   fun:_NSToDoAtProcessStart
-   fun:_NSInitializePlatform
-   fun:objc_msgLookup_fpret
-   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoaderPNS1_21InitializerTimingListE
-   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
-   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
-   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
-}
-
-{
-   <insert_a_suppression_name_here>
-   Memcheck:Leak
-   match-leak-kinds: possible
-   fun:calloc
-   fun:_ZN4objc8DenseMapIP10objc_classS2_NS_17DenseMapValueInfoIS2_EENS_12DenseMapInfoIS2_EENS_6detail12DenseMapPairIS2_S2_EEE4growEj
-   fun:_ZN10objc_class11mangledNameEv
-   fun:_ZN10objc_class11mangledNameEv
-   fun:_ZL16addRemappedClassP10objc_classS0_
-   fun:objc_initializeClassPair
-   fun:_NSToDoAtProcessStart
-   fun:_NSInitializePlatform
-   fun:objc_msgLookup_fpret
-   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoaderPNS1_21InitializerTimingListE
-   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
-   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
 }
 
 {
@@ -3967,6 +3967,24 @@
    fun:_ZN11objc_object27sidetable_clearDeallocatingEv
    fun:_ZL19_finishInitializingP10objc_classS0_
    fun:lookUpImpOrForward
+   fun:_CFLocaleCopyCurrentGuts
+   fun:_CoreFoundationLinkedOnAfter
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_ZL13getClass_implPKc
+   fun:_ZN11objc_object27sidetable_clearDeallocatingEv
+   fun:_ZL19_finishInitializingP10objc_classS0_
+   fun:lookUpImpOrForward
    fun:_NSInitializePlatform
    fun:objc_msgLookup_fpret
    fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoaderPNS1_21InitializerTimingListE
@@ -4118,24 +4136,6 @@
    fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
    fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
    fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
-}
-
-{
-   <insert_a_suppression_name_here>
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:calloc
-   fun:_ZL13getClass_implPKc
-   fun:_ZN11objc_object27sidetable_clearDeallocatingEv
-   fun:_ZL19_finishInitializingP10objc_classS0_
-   fun:lookUpImpOrForward
-   fun:+[NSString initialize]
-   fun:_objc_addWillInitializeClassFunc
-   fun:_ZN13list_array_ttI8method_t13method_list_t24method_list_t_authed_ptrE11attachListsEPKPS1_j
-   fun:_ZL24realizeClassWithoutSwiftP10objc_classS0_
-   fun:-[NSObject dealloc]
-   fun:lookUpImpOrForward
-   fun:NSClassFromString
 }
 
 {
@@ -4442,24 +4442,6 @@
    fun:_NSToDoAtProcessStart
    fun:_NSInitializePlatform
    fun:objc_msgLookup_fpret
-}
-
-{
-   <insert_a_suppression_name_here>
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc_zone_calloc
-   fun:-[__NSPlaceholderArray initWithObjects:count:]
-   fun:__CFStringCreateImmutableFunnel3
-   fun:__CFStringCreateImmutableFunnel3
-   fun:__CFInitializeLinkCheck
-   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
-   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
-   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
-   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
-   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
-   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
-   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
 }
 
 {

@@ -61,7 +61,6 @@ int	check_empty_file(int fd)
 		}
 		gc_free(line);
 		result = get_next_line(fd, &line);
-		close(fd);
 	}
 	if (result == 0 && line != NULL)
 		gc_free(line);

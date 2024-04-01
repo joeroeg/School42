@@ -29,12 +29,29 @@ void	set_color(t_cub *data, const int rgb[3], char color_type)
 	}
 }
 
-int	parse_rgb_values(const char *line, int *rgb)
+void	remove_spaces(char *str)
+{
+	char	*src;
+	char	*dst;
+
+	src = str;
+	dst = str;
+	while (*src)
+	{
+		if (!ft_isspace((unsigned char)*src))
+			*dst++ = *src;
+		src++;
+	}
+	*dst = '\0';
+}
+
+int	parse_rgb_values(char *line, int *rgb)
 {
 	char	*token;
 	int		i;
 	int		value;
 
+	remove_spaces(line + 2);
 	token = ft_strtok((char *)line + 2, ",");
 	i = 0;
 	while (token != NULL)
@@ -52,7 +69,7 @@ int	parse_rgb_values(const char *line, int *rgb)
 	return (true);
 }
 
-void	parse_color(t_cub *data, const char *line, \
+void	parse_color(t_cub *data, char *line, \
 	char color_type, int *parsed_parameters)
 {
 	int		rgb[3];

@@ -32,8 +32,8 @@ def extract_suppressions(input_file, output_file):
 
 if __name__ == "__main__":
     executable_path = "./cub3D"
-    # executable_args = ["maps/invalid/invalid_extension.cux"]
-    executable_args = [""]
+    executable_args = ["maps/invalid/invalid_file_extension.xxx"]
+    # executable_args = [""]
     valgrind_log = "valgrind-out.txt"
     suppressions_file = "suppressions.supp"
     run_valgrind_and_generate_suppressions(executable_path, executable_args, valgrind_log)
