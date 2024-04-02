@@ -65,6 +65,7 @@ typedef struct s_cub
 	t_config	config;
 	char		map[MAX_MAP_HEIGHT][MAX_MAP_WIDTH + 1];
 	int			map_height;
+	int			map_width;
 	int			found_map;
 }	t_cub;
 
@@ -125,5 +126,18 @@ bool		is_color_line(char *line);
 
 // Parsing map
 void		parse_map(t_cub *data);
+void		free_and_reset_line(char **line);
+int			is_line_empty_or_whitespace(const char *line);
+void		trim_trailing_spaces(char *line);
+bool		is_line_valid(char *line);
+
+
+// Validate map
+void 		validate_map_playability(t_cub *data);
+bool 		validate_single_start_position(t_cub *data);
+bool 		is_player_position_valid(t_cub *data);
+bool 		is_map_enclosed(t_cub *data);
+
 
 #endif
+

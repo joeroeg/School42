@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	setup(argc, argv, &data);
 	validate_map_file(&data);
 	parse_map_parameters(&data);
-	print_cub_config(&data);
+	// print_cub_config(&data);
 	// load_map(&data);
 	// mlx_loop();
 	gc_free_all();

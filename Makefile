@@ -15,7 +15,7 @@ MLX42 = $(MLX_BUILD_DIR)libmlx42.a
 
 # Compiler settings
 CC = gcc
-CFLAGS = -g #-Wall -Wextra -Werror
+CFLAGS = -g -DDEBUG #-Wall -Wextra -Werror
 INCLUDES = -I./lib/libft/ -I./lib/MLX42/include/MLX42/ -I./include
 MLXFL = -ldl -lglfw -pthread -lm
 ifeq ($(shell uname), Darwin)
