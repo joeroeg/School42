@@ -59,6 +59,14 @@ typedef struct s_config
 	int		ceiling_set;
 }	t_config;
 
+typedef struct s_entity
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+}	t_entity;
+
 typedef struct s_cub
 {
 	char		*file;
@@ -67,15 +75,8 @@ typedef struct s_cub
 	char		map[MAX_MAP_HEIGHT][MAX_MAP_WIDTH + 1];
 	int			map_height;
 	int			found_map;
+	t_entity	player;
 }	t_cub;
-
-typedef struct s_entity
-{
-	double	x;
-	double	y;
-	double	dir_x;
-	double	dir_y;
-}	t_entity;
 
 // Memory management
 t_mblock	*garbage_collector(void);

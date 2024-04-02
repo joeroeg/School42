@@ -6,3 +6,4 @@ fractol/*
 lib/MLX42
 lib/libft/libft.a
 .idea/
+*.a
