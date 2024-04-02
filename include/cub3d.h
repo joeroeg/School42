@@ -21,6 +21,8 @@
 # define MAX_LINE_LENGTH 512
 # define MAX_MAP_WIDTH  100
 # define MAX_MAP_HEIGHT 100
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 600
 
 typedef enum e_parameter_type
 {
@@ -67,6 +69,13 @@ typedef struct s_entity
 	double	dir_y;
 }	t_entity;
 
+typedef struct s_render
+{
+	mlx_t			*mlx;
+	mlx_image_t		*screen;
+	mlx_texture_t	*textures[4];
+}	t_render;
+
 typedef struct s_cub
 {
 	char		*file;
@@ -76,6 +85,7 @@ typedef struct s_cub
 	int			map_height;
 	int			found_map;
 	t_entity	player;
+	t_render	render;
 }	t_cub;
 
 // Memory management
@@ -135,5 +145,12 @@ bool		is_color_line(char *line);
 
 // Parsing map
 void		parse_map(t_cub *data);
+
+// Rendering
+void		mlx_load(t_cub *data);
+void		mlx_render(t_cub *data);
+
+// Player
+void		load_player(t_cub *data);
 
 #endif

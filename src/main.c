@@ -23,7 +23,10 @@ int	main(int argc, char **argv)
 	validate_map_file(&data);
 	parse_map_parameters(&data);
 	print_cub_config(&data);
-	// load_map(&data);
+	load_player(&data);
+	mlx_load(&data);
+	mlx_loop_hook(data.render.mlx, (void (*)(void *)) mlx_render, &data);
+	mlx_loop(data.render.mlx);
 	// mlx_loop();
 	gc_free_all();
 	return (SUCCESS);

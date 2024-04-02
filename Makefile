@@ -17,10 +17,11 @@ MLX42 = $(MLX_BUILD_DIR)libmlx42.a
 CC = gcc
 CFLAGS = -g #-Wall -Wextra -Werror
 INCLUDES = -I./lib/libft/ -I./lib/MLX42/include/MLX42/ -I./include
-MLXFL = -ldl -lglfw -pthread -lm
+MLXFL = -ldl -lglfw3 -pthread -lm -L./GLFW/src
 ifeq ($(shell uname), Darwin)
     MLXFL += -L"/Users/$(USER)/.brew/opt/glfw/lib/" -framework Cocoa -framework OpenGL -framework IOKit
 endif
+
 
 # Source and object files
 SRC_FILES = $(shell find $(SRC_DIR) -name '*.c')
@@ -53,10 +54,10 @@ clean:
 mlx_clean:
 	@make -C $(MLX_BUILD_DIR) clean
 
-fclean: clean mlx_clean
+fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_DIR)
-	# rm -rf $(MLX_DIR) # Optional: Comment this line if you want to keep MLX42 after clean
+	@# rm -rf $(MLX_DIR) # Optional: Comment this line if you want to keep MLX42 after clean
 
 re: fclean all
 
