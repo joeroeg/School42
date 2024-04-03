@@ -66,6 +66,8 @@ typedef struct s_cub
 	char		map[MAX_MAP_HEIGHT][MAX_MAP_WIDTH + 1];
 	int			map_height;
 	int			map_width;
+	int			player_x;
+	int			player_y;
 	int			found_map;
 }	t_cub;
 
@@ -135,9 +137,8 @@ bool		is_line_valid(char *line);
 // Validate map
 void 		validate_map_playability(t_cub *data);
 bool 		validate_single_start_position(t_cub *data);
-bool 		is_player_position_valid(t_cub *data);
-bool 		is_map_enclosed(t_cub *data);
-
-
+bool		is_player_position_valid(t_cub *data);
+void		printMapWithCoordinates(t_cub *data);
+bool		findAndSetPlayerStartPosition(t_cub *data);
 #endif
 

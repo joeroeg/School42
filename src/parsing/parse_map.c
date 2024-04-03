@@ -31,8 +31,10 @@ void parse_map(t_cub *data)
         free_and_reset_line(&line);
     }
     data->map_height = line_number;
-    // validate_map_playability(data);
-    printf("----------------------------\n");
-    for (int i = 0; i < line_number; i++)
-        printf("%s\n", data->map[i]);
+    data->map_width = strlen(data->map[0]);
+    // printf("Map height: %d\n", data->map_height);
+    // printf("Map width: %d\n", data->map_width);
+    // for (int i = 0; i < line_number; i++)
+    //     printf("%s\n", data->map[i]);
+    validate_map_playability(data);
 }
