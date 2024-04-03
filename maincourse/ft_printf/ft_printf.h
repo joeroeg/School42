@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:57:57 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/08 16:30:06 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/03/28 11:31:16 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 int		ft_printf(const char *format, ...);
 int		ft_print_c(va_list *args);

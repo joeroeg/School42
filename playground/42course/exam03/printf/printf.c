@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdio.h>
 
 void	put_string(char *string, int *length)
 {
@@ -52,12 +53,14 @@ int	ft_printf(const char *format, ...)
 
 int main()
 {
-	int num = -2147483648;
+	int num = 52;
 	char *str = "hello";
 
-	// printf("%d\n", num);
-	// printf("%s\n", str);
-	// printf("%x\n", num);
+	printf("%d\n", num);
+	printf("%s\n", str);
+	printf("%x\n", num);
+
+	printf("\n");
 
 	ft_printf("%d\n", num);
 	ft_printf("%s\n", str);

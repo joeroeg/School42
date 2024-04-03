@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:24:13 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/08 16:48:36 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/03/28 11:53:07 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	ft_print_p(va_list *args)
 	char		buffer[17];
 
 	ptr_val = va_arg(*args, uintptr_t);
+	printf("ptr_val = %lu", ptr_val);
 	ft_memset(buffer, 0, sizeof(buffer));
 	ptr_to_hex(ptr_val, buffer);
 	return (print_formatted_ptr(buffer));
