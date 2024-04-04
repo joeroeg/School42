@@ -68,7 +68,7 @@ typedef struct s_cub
 	int			map_width;
 	int			player_x;
 	int			player_y;
-	int			found_map;
+	int			map_found;
 }	t_cub;
 
 // Memory management
@@ -130,15 +130,16 @@ bool		is_color_line(char *line);
 void		parse_map(t_cub *data);
 void		free_and_reset_line(char **line);
 int			is_line_empty_or_whitespace(const char *line);
-void		trim_trailing_spaces(char *line);
 bool		is_line_valid(char *line);
-
+void		initialize_map_parsing(t_cub *data, \
+			int *line_number, int *map_found, int *found_spaces);
+void		finalize_map_parsing(t_cub *data, int line_number);
 
 // Validate map
-void 		validate_map_playability(t_cub *data);
-bool 		validate_single_start_position(t_cub *data);
+void		validate_map_playability(t_cub *data);
+bool		validate_single_start_position(t_cub *data);
 bool		is_player_position_valid(t_cub *data);
 void		printMapWithCoordinates(t_cub *data);
-bool		findAndSetPlayerStartPosition(t_cub *data);
-#endif
+bool		find_player_position(t_cub *data);
 
+#endif
