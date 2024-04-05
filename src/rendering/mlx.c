@@ -83,7 +83,7 @@ static	void	player_move(t_cub *data)
 		data->player.y = new_y;
 }
 
-static	void	draw_player(t_cub *data)
+static	void	draw_player_2d(t_cub *data)
 {
 	int	x;
 	int	y;
@@ -107,8 +107,8 @@ void	fps_counter(t_cub *data)
 
 	current_time = mlx_get_time();
 	frames++;
-	fps = (frames / (current_time - last_time));
-	if ((int) current_time - (int)last_time > 0)
+	fps = (int) (frames / (current_time - last_time));
+	if ((int) current_time - (int) last_time > 0)
 	{
 		last_time = current_time;
 		frames = 0;
@@ -121,7 +121,7 @@ void	fps_counter(t_cub *data)
 	}
 }
 
-void	mlx_render(void *ptr)
+void	mlx_render_2d(void *ptr)
 {
 	int	i;
 	int	j;
@@ -140,17 +140,14 @@ void	mlx_render(void *ptr)
 			y = j / (WINDOW_HEIGHT / (MAX_MAP_HEIGHT / ZOOM));
 			if (data->map[y][x] == '1')
 				mlx_put_pixel(data->render.screen, i, j, 0x333333FF);
-//			else if (data->map[y][x] == 'N')
-//				mlx_put_pixel(data->render.screen, i, j, 0x0000FFFF);
 			else
 				mlx_put_pixel(data->render.screen, i, j, 0x666666FF);
-//			printf("i: %d, j: %d, x: %d, y: %d\n", i, j, x, y);
 			j++;
 		}
 		i++;
 	}
 	cub_rotate(data);
-	draw_player(data);
+	draw_player_2d(data);
 	fps_counter(data);
 }
 

@@ -150,7 +150,7 @@ void		parse_map(t_cub *data);
 
 // Rendering
 void		mlx_load(t_cub *data);
-void		mlx_render(void *data);
+void		mlx_render_2d(void *data);
 
 // Player
 void		load_player(t_cub *data);
