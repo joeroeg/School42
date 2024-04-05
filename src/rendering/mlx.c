@@ -3,6 +3,7 @@
 #define ZOOM 4
 
 void mlx_clear(mlx_image_t *pImage);
+void cub_key_hook(mlx_key_data_t key_data, void *param);
 
 static void	load_textures(t_cub *data)
 {
@@ -25,6 +26,7 @@ void	mlx_load(t_cub *data)
 		exit_error_message("Error: mlx_new_image() failed.", EXIT_FAILURE);
 	load_textures(data);
 	mlx_image_to_window(data->render.mlx, data->render.screen, 0, 0);
+	mlx_key_hook(data->render.mlx, cub_key_hook, data);
 }
 
 static void	draw_circle(mlx_image_t *pImage, int x, int y, int radius, unsigned int color)
@@ -90,4 +92,34 @@ void	mlx_render(t_cub *data)
 	draw_player(data);
 }
 
+void	cub_key_hook(mlx_key_data_t key_data, void *param)
+{
+	t_cub	*data;
 
+	data = (t_cub *) param;
+	if (key_data.key == MLX_KEY_ESCAPE)
+	{
+		mlx_close_window(data->render.mlx);
+		exit(EXIT_SUCCESS);
+	}
+	else if (key_data.key == MLX_KEY_W)
+	{
+		data->player.x += data->player.dir_x * 0.1;
+		data->player.y += data->player.dir_y * 0.1;
+	}
+	else if (key_data.key == MLX_KEY_S)
+	{
+		data->player.x -= data->player.dir_x * 0.1;
+		data->player.y -= data->player.dir_y * 0.1;
+	}
+	else if (key_data.key == MLX_KEY_D)
+	{
+		data->player.x -= data->player.dir_y * 0.1;
+		data->player.y += data->player.dir_x * 0.1;
+	}
+	else if (key_data.key == MLX_KEY_A)
+	{
+		data->player.x += data->player.dir_y * 0.1;
+		data->player.y -= data->player.dir_x * 0.1;
+	}
+}
