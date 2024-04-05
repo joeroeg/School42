@@ -1,9 +1,10 @@
 #include "cub3d.h"
 
 #define ZOOM 4
+#define MOVE_SPEED 0.1
 
-void mlx_clear(mlx_image_t *pImage);
 void cub_key_hook(mlx_key_data_t key_data, void *param);
+bool cub_check_collision(t_cub *data, double x, double y);
 
 static void	load_textures(t_cub *data)
 {
@@ -52,24 +53,63 @@ static void	draw_circle(mlx_image_t *pImage, int x, int y, int radius, unsigned 
 	}
 }
 
+static	void	player_move(t_cub *data)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = data->player.x + data->player.vel_x * MOVE_SPEED;
+	new_y = data->player.y + data->player.vel_y * MOVE_SPEED;
+	if (!cub_check_collision(data, new_x, data->player.y))
+		data->player.x = new_x;
+	if (!cub_check_collision(data, data->player.x, new_y))
+		data->player.y = new_y;
+}
+
 static	void	draw_player(t_cub *data)
 {
 	int	x;
 	int	y;
 
+	player_move(data);
 	x = (int) (data->player.x * ((double) WINDOW_WIDTH / ((double) MAX_MAP_WIDTH / ZOOM)));
 	y = (int) (data->player.y * ((double) WINDOW_HEIGHT / ((double)MAX_MAP_HEIGHT / ZOOM)));
 	draw_circle(data->render.screen, x, y, (WINDOW_HEIGHT / (MAX_MAP_HEIGHT / ZOOM)) / 4, 0x0000FFFF);
 }
 
-void	mlx_render(t_cub *data)
+void	fps_counter(t_cub *data)
+{
+	static int			frames = 0;
+	static int			fps = 0;
+	static double		last_time = 0;
+	double				current_time;
+	static mlx_image_t		*fps_image;
+
+	current_time = mlx_get_time();
+	frames++;
+	fps = (frames / (current_time - last_time));
+	if ((int) current_time - (int)last_time > 0)
+	{
+		last_time = current_time;
+		frames = 0;
+		mlx_delete_image(data->render.mlx, fps_image);
+		fps_image = mlx_put_string(data->render.mlx, ft_itoa(fps), 0, 0);
+	}
+	if (fps > 100)
+	{
+		printf("%d:%d FPS: %d\n", (int) current_time, (int) frames, fps);
+	}
+}
+
+void	mlx_render(void *ptr)
 {
 	int	i;
 	int	j;
 	int	x;
 	int	y;
-	unsigned int	color;
-	
+	t_cub	*data;
+
+	data = (t_cub *) ptr;
 	i = 0;
 	while (i < WINDOW_WIDTH)
 	{
@@ -89,7 +129,22 @@ void	mlx_render(t_cub *data)
 		}
 		i++;
 	}
+	fps_counter(data);
 	draw_player(data);
+}
+
+bool	cub_check_collision(t_cub *data, double x, double y)
+{
+	int	map_x;
+	int	map_y;
+
+	map_x = (int) x;
+	map_y = (int) y;
+	if (map_x < 0 || map_x >= MAX_MAP_WIDTH || map_y < 0 || map_y >= MAX_MAP_HEIGHT)
+		return (true);
+	if (data->map[map_y][map_x] == '1')
+		return (true);
+	return (false);
 }
 
 void	cub_key_hook(mlx_key_data_t key_data, void *param)
@@ -102,24 +157,26 @@ void	cub_key_hook(mlx_key_data_t key_data, void *param)
 		mlx_close_window(data->render.mlx);
 		exit(EXIT_SUCCESS);
 	}
-	else if (key_data.key == MLX_KEY_W)
+	if (key_data.action == MLX_PRESS)
 	{
-		data->player.x += data->player.dir_x * 0.1;
-		data->player.y += data->player.dir_y * 0.1;
+		if (key_data.key == MLX_KEY_UP)
+			data->player.vel_y += -1;
+		if (key_data.key == MLX_KEY_DOWN)
+			data->player.vel_y += 1;
+		if (key_data.key == MLX_KEY_LEFT)
+			data->player.vel_x += -1;
+		if (key_data.key == MLX_KEY_RIGHT)
+			data->player.vel_x += 1;
 	}
-	else if (key_data.key == MLX_KEY_S)
+	if (key_data.action == MLX_RELEASE)
 	{
-		data->player.x -= data->player.dir_x * 0.1;
-		data->player.y -= data->player.dir_y * 0.1;
-	}
-	else if (key_data.key == MLX_KEY_D)
-	{
-		data->player.x -= data->player.dir_y * 0.1;
-		data->player.y += data->player.dir_x * 0.1;
-	}
-	else if (key_data.key == MLX_KEY_A)
-	{
-		data->player.x += data->player.dir_y * 0.1;
-		data->player.y -= data->player.dir_x * 0.1;
+		if (key_data.key == MLX_KEY_UP)
+			data->player.vel_y -= -1;
+		if (key_data.key == MLX_KEY_DOWN)
+			data->player.vel_y -= 1;
+		if (key_data.key == MLX_KEY_LEFT)
+			data->player.vel_x -= -1;
+		if (key_data.key == MLX_KEY_RIGHT)
+			data->player.vel_x -= 1;
 	}
 }

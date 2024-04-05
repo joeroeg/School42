@@ -67,6 +67,8 @@ typedef struct s_entity
 	double	y;
 	double	dir_x;
 	double	dir_y;
+	int		vel_x;
+	int		vel_y;
 }	t_entity;
 
 typedef struct s_render
@@ -148,7 +150,7 @@ void		parse_map(t_cub *data);
 
 // Rendering
 void		mlx_load(t_cub *data);
-void		mlx_render(t_cub *data);
+void		mlx_render(void *data);
 
 // Player
 void		load_player(t_cub *data);
