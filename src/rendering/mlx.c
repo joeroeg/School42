@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-#define ZOOM 3
+#define ZOOM 4
 
 void mlx_clear(mlx_image_t *pImage);
 
@@ -54,10 +54,10 @@ static	void	draw_player(t_cub *data)
 {
 	int	x;
 	int	y;
-	
-	x = (data->player.x * (WINDOW_WIDTH / (MAX_MAP_WIDTH / ZOOM))) + (WINDOW_WIDTH / (MAX_MAP_WIDTH / ZOOM)) / 2;
-	y = (data->player.y * (WINDOW_HEIGHT / (MAX_MAP_HEIGHT / ZOOM))) + (WINDOW_HEIGHT / (MAX_MAP_HEIGHT / ZOOM)) / 2;
-	draw_circle(data->render.screen, x, y, (WINDOW_HEIGHT / (MAX_MAP_HEIGHT / ZOOM)) / 3, 0x0000FFFF);
+
+	x = (int) (data->player.x * ((double) WINDOW_WIDTH / ((double) MAX_MAP_WIDTH / ZOOM)));
+	y = (int) (data->player.y * ((double) WINDOW_HEIGHT / ((double)MAX_MAP_HEIGHT / ZOOM)));
+	draw_circle(data->render.screen, x, y, (WINDOW_HEIGHT / (MAX_MAP_HEIGHT / ZOOM)) / 4, 0x0000FFFF);
 }
 
 void	mlx_render(t_cub *data)

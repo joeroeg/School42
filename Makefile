@@ -17,7 +17,7 @@ MLX42 = $(MLX_BUILD_DIR)libmlx42.a
 CC = gcc
 CFLAGS = -g #-Wall -Wextra -Werror
 INCLUDES = -I./lib/libft/ -I./lib/MLX42/include/MLX42/ -I./include
-MLXFL = -ldl -lglfw3 -pthread -lm -L./GLFW/src
+MLXFL = -ldl -lglfw -pthread -lm
 ifeq ($(shell uname), Darwin)
     MLXFL += -L"/Users/$(USER)/.brew/opt/glfw/lib/" -framework Cocoa -framework OpenGL -framework IOKit
 endif
