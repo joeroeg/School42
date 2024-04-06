@@ -76,7 +76,6 @@ static	void	player_move(t_cub *data)
 	}
 	new_y = data->player.y - corrected_vel_y * MOVE_SPEED * data->player.dir_y + corrected_vel_x * MOVE_SPEED * data->player.dir_x;
 	new_x = data->player.x - corrected_vel_y * MOVE_SPEED * data->player.dir_x - corrected_vel_x * MOVE_SPEED * data->player.dir_y;
-//	new_y = data->player.y + data->player.vel_y * MOVE_SPEED * data->player.dir_y + data->player.vel_y * MOVE_SPEED * -data->player.dir_x;
 	if (!cub_check_collision(data, new_x, data->player.y))
 		data->player.x = new_x;
 	if (!cub_check_collision(data, data->player.x, new_y))
