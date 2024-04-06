@@ -2,7 +2,9 @@
 
 #define ZOOM 4
 #define MOVE_SPEED 0.05
-#define ROTATE_SPEED 0.005
+#define ROTATE_SPEED 0.0075
+#define VIEW_PLANE_SIZE 0.66
+#define VIEW_PLANE_DISTANCE 1
 
 void cub_key_hook(mlx_key_data_t key_data, void *param);
 bool cub_check_collision(t_cub *data, double x, double y);
@@ -32,6 +34,39 @@ void	mlx_load(t_cub *data)
 	mlx_key_hook(data->render.mlx, cub_key_hook, data);
 }
 
+static void	draw_line(mlx_image_t *pImage, int x0, int y0, int x1, int y1, unsigned int color)
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
+
+	dx = abs(x1 - x0);
+	dy = abs(y1 - y0);
+	sx = (x0 < x1) - (x0 >= x1);
+	sy = (y0 < y1) - (y0 >= y1);
+	err = (dx * (dx > dy) - dy * (dx < dy)) / 2;
+	while (true)
+	{
+		mlx_put_pixel(pImage, x0, y0, color);
+		if (x0 == x1 && y0 == y1)
+			break;
+		e2 = err;
+		if (e2 > -dx)
+		{
+			err -= dy;
+			x0 += sx;
+		}
+		if (e2 < dy)
+		{
+			err += dx;
+			y0 += sy;
+		}
+	}
+}
+
 static void	draw_circle(mlx_image_t *pImage, int x, int y, int radius, unsigned int color)
 {
 	int	i;
@@ -55,6 +90,22 @@ static void	draw_circle(mlx_image_t *pImage, int x, int y, int radius, unsigned 
 	}
 }
 
+double	delta_time(bool update)
+{
+	static double	current_time = 0;
+	static double	last_time = 0;
+	double	delta_time;
+
+	if (update)
+	{
+		last_time = current_time;
+		current_time = mlx_get_time();
+		return (0);
+	}
+	delta_time = current_time - last_time;
+	return (delta_time);
+}
+
 static	void	player_move(t_cub *data)
 {
 	double	new_x;
@@ -74,6 +125,8 @@ static	void	player_move(t_cub *data)
 		corrected_vel_x = data->player.vel_x;
 		corrected_vel_y = data->player.vel_y;
 	}
+		corrected_vel_x *= delta_time(false) * 60;
+		corrected_vel_y *= delta_time(false) * 60;
 	new_y = data->player.y - corrected_vel_y * MOVE_SPEED * data->player.dir_y + corrected_vel_x * MOVE_SPEED * data->player.dir_x;
 	new_x = data->player.x - corrected_vel_y * MOVE_SPEED * data->player.dir_x - corrected_vel_x * MOVE_SPEED * data->player.dir_y;
 	if (!cub_check_collision(data, new_x, data->player.y))
@@ -98,25 +151,38 @@ static	void	draw_player_2d(t_cub *data)
 
 void	fps_counter(t_cub *data)
 {
-	static int			frames = 0;
 	static int			fps = 0;
 	static double		last_time = 0;
 	double				current_time;
 	static mlx_image_t		*fps_image;
+	static mlx_image_t		*fps_image2;
+	static int				skipped_frames = 0;
+	char					*fps_str;
 
 	current_time = mlx_get_time();
-	frames++;
-	fps = (int) (frames / (current_time - last_time));
+	fps = (int) (1 / delta_time(false));
 	if ((int) current_time - (int) last_time > 0)
 	{
 		last_time = current_time;
-		frames = 0;
 		mlx_delete_image(data->render.mlx, fps_image);
-		fps_image = mlx_put_string(data->render.mlx, ft_itoa(fps), 0, 0);
+		fps_str = ft_strjoin("FPS: ", ft_itoa(fps));
+		fps_image = mlx_put_string(data->render.mlx, fps_str, 0, 0);
+		free(fps_str);
 	}
 	if (fps > 100)
 	{
-		printf("%f:%d FPS: %d\n", current_time, (int) frames, fps);
+		skipped_frames++;
+		last_time = current_time;
+		printf("%f FPS: %d\n", current_time, fps);
+		fps_str = ft_strjoin("FPS: ", ft_itoa(fps));
+		mlx_delete_image(data->render.mlx, fps_image);
+		fps_image = mlx_put_string(data->render.mlx, fps_str, 0, 0);
+		free(fps_str);
+		fps_str = ft_strjoin(ft_itoa(skipped_frames), " fast frames | last high FPS: ");
+		fps_str = ft_strjoin(fps_str, ft_itoa(fps));
+		mlx_delete_image(data->render.mlx, fps_image2);
+		fps_image2 = mlx_put_string(data->render.mlx, fps_str, 0, 20);
+		free(fps_str);
 	}
 }
 
@@ -130,6 +196,7 @@ void	mlx_render_2d(void *ptr)
 
 	data = (t_cub *) ptr;
 	i = 0;
+	delta_time(true);
 	while (i < WINDOW_WIDTH)
 	{
 		j = 0;
