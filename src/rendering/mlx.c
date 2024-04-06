@@ -5,6 +5,7 @@
 #define ROTATE_SPEED 0.0075
 #define VIEW_PLANE_SIZE 0.66
 #define VIEW_PLANE_DISTANCE 1
+#define TILE_SIZE 20
 
 void cub_key_hook(mlx_key_data_t key_data, void *param);
 bool cub_check_collision(t_cub *data, double x, double y);
@@ -48,7 +49,7 @@ static void	draw_line(mlx_image_t *pImage, int x0, int y0, int x1, int y1, unsig
 	sx = (x0 < x1) - (x0 >= x1);
 	sy = (y0 < y1) - (y0 >= y1);
 	err = (dx * (dx > dy) - dy * (dx < dy)) / 2;
-	while (true)
+	while (x0 >= 0 && x0 < WINDOW_WIDTH && y0 >= 0 && y0 < WINDOW_HEIGHT)
 	{
 		mlx_put_pixel(pImage, x0, y0, color);
 		if (x0 == x1 && y0 == y1)
@@ -176,30 +177,29 @@ static	void	draw_player_2d(t_cub *data)
 	double	precision_y;
 	double	plane_x;
 	double	plane_y;
-	const double	tile_size = (double) WINDOW_WIDTH / ((double) MAX_MAP_WIDTH / ZOOM);
 
 	player_move(data);
-	player_x = (int) (data->player.x * tile_size);
-	player_y = (int) (data->player.y * tile_size);
-	draw_circle(data->render.screen, player_x, player_y, (int) (tile_size / 4), 0x0000FFFF);
-	front_x = ((data->player.x + data->player.dir_x * VIEW_PLANE_DISTANCE) * tile_size);
-	front_y = ((data->player.y + data->player.dir_y * VIEW_PLANE_DISTANCE) * tile_size);
-	draw_circle(data->render.screen, (int) front_x, (int) front_y, (int) (tile_size / 8), 0x000000FF);
-	precision_x = ((data->player.x + data->player.dir_x * 1000) * tile_size);
-	precision_y = ((data->player.y + data->player.dir_y * 1000) * tile_size);
+	player_x = (int) (data->player.x * TILE_SIZE);
+	player_y = (int) (data->player.y * TILE_SIZE);
+	draw_circle(data->render.screen, player_x, player_y, (int) (TILE_SIZE / 4), 0x0000FFFF);
+	front_x = ((data->player.x + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE);
+	front_y = ((data->player.y + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE);
+	draw_circle(data->render.screen, (int) front_x, (int) front_y, (int) (TILE_SIZE / 8), 0x000000FF);
+	precision_x = ((data->player.x + data->player.dir_x * 1000) * TILE_SIZE);
+	precision_y = ((data->player.y + data->player.dir_y * 1000) * TILE_SIZE);
 	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0x000000FF);
-	plane_x = (data->player.x + data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * tile_size;
-	plane_y = (data->player.y - data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * tile_size;
-	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (tile_size / 16), 0xFF0000FF);
-	precision_x = (data->player.x + (data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * tile_size;
-	precision_y = (data->player.y + (- data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * tile_size;
+	plane_x = (data->player.x + data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE;
+	plane_y = (data->player.y - data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE;
+	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
+	precision_x = (data->player.x + (data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
+	precision_y = (data->player.y + (- data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
 	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0xFF0000FF);
 	draw_line(data->render.screen, (int) plane_x, (int) plane_y, (int) front_x, (int) front_y, 0xFFFF00FF);
-	plane_x = (data->player.x - data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * tile_size;
-	plane_y = (data->player.y + data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * tile_size;
-	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (tile_size / 16), 0xFF0000FF);
-	precision_x = (data->player.x + (- data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * tile_size;
-	precision_y = (data->player.y + (data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * tile_size;
+	plane_x = (data->player.x - data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE;
+	plane_y = (data->player.y + data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE;
+	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
+	precision_x = (data->player.x + (- data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
+	precision_y = (data->player.y + (data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
 	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0xFF0000FF);
 	draw_line(data->render.screen, (int) plane_x, (int) plane_y, (int) front_x, (int) front_y, 0xFFFF00FF);
 }
@@ -248,7 +248,6 @@ void	mlx_render_2d(void *ptr)
 	int	x;
 	int	y;
 	t_cub	*data;
-	const double tile_size = (double) WINDOW_WIDTH / ((double) MAX_MAP_WIDTH / ZOOM);
 
 	data = (t_cub *) ptr;
 	i = 0;
@@ -258,9 +257,9 @@ void	mlx_render_2d(void *ptr)
 		j = 0;
 		while (j < WINDOW_HEIGHT)
 		{
-			x = (int) (i / tile_size);
-			y = (int) (j / tile_size);
-			if (data->map[y][x] == '1')
+			x = (int) (i / TILE_SIZE);
+			y = (int) (j / TILE_SIZE);
+			if (x < data->map_height && y < data->map_height && data->map[y][x] == '1')
 				mlx_put_pixel(data->render.screen, i, j, 0x333333FF);
 			else
 				mlx_put_pixel(data->render.screen, i, j, 0x666666FF);
