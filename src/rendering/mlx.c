@@ -67,6 +67,37 @@ static void	draw_line(mlx_image_t *pImage, int x0, int y0, int x1, int y1, unsig
 	}
 }
 
+static void	draw_line_unending(mlx_image_t *pImage, int x0, int y0, int x1, int y1, unsigned int color)
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
+
+	dx = abs(x1 - x0);
+	dy = abs(y1 - y0);
+	sx = (x0 < x1) - (x0 >= x1);
+	sy = (y0 < y1) - (y0 >= y1);
+	err = (dx * (dx > dy) - dy * (dx < dy)) / 2;
+	while (x0 >= 0 && x0 < WINDOW_WIDTH && y0 >= 0 && y0 < WINDOW_HEIGHT)
+	{
+		mlx_put_pixel(pImage, x0, y0, color);
+		e2 = err;
+		if (e2 > -dx)
+		{
+			err -= dy;
+			x0 += sx;
+		}
+		if (e2 < dy)
+		{
+			err += dx;
+			y0 += sy;
+		}
+	}
+}
+
 static void	draw_circle(mlx_image_t *pImage, int x, int y, int radius, unsigned int color)
 {
 	int	i;
@@ -137,16 +168,22 @@ static	void	player_move(t_cub *data)
 
 static	void	draw_player_2d(t_cub *data)
 {
-	int	x;
-	int	y;
+	int	x0;
+	int	y0;
+	int	x1;
+	int	y1;
+	const double	tile_size = (double) WINDOW_WIDTH / ((double) MAX_MAP_WIDTH / ZOOM);
 
 	player_move(data);
-	x = (int) (data->player.x * ((double) WINDOW_WIDTH / ((double) MAX_MAP_WIDTH / ZOOM)));
-	y = (int) (data->player.y * ((double) WINDOW_WIDTH / ((double)MAX_MAP_WIDTH / ZOOM)));
-	draw_circle(data->render.screen, x, y, (WINDOW_WIDTH / (MAX_MAP_WIDTH / ZOOM)) / 4, 0x0000FFFF);
-	x = (int) ((data->player.x + data->player.dir_x) * ((double) WINDOW_WIDTH / ((double) MAX_MAP_WIDTH / ZOOM)));
-	y = (int) ((data->player.y + data->player.dir_y) * ((double) WINDOW_WIDTH / ((double)MAX_MAP_WIDTH / ZOOM)));
-	draw_circle(data->render.screen, x, y, (WINDOW_WIDTH / (MAX_MAP_WIDTH / ZOOM)) / 8, 0x000000FF);
+	x0 = (int) (data->player.x * tile_size);
+	y0 = (int) (data->player.y * tile_size);
+	draw_circle(data->render.screen, x0, y0, (int) tile_size / 4, 0x0000FFFF);
+	x1 = (int) ((data->player.x + data->player.dir_x) * tile_size);
+	y1 = (int) ((data->player.y + data->player.dir_y) * tile_size);
+	draw_circle(data->render.screen, x1, y1, (int) tile_size / 8, 0x000000FF);
+	x1 = (int) ((data->player.x + data->player.dir_x * 1000) * tile_size);
+	y1 = (int) ((data->player.y + data->player.dir_y * 1000) * tile_size);
+	draw_line_unending(data->render.screen, x0, y0, x1, y1, 0x000000FF);
 }
 
 void	fps_counter(t_cub *data)
@@ -173,16 +210,16 @@ void	fps_counter(t_cub *data)
 	{
 		skipped_frames++;
 		last_time = current_time;
-		printf("%f FPS: %d\n", current_time, fps);
-		fps_str = ft_strjoin("FPS: ", ft_itoa(fps));
-		mlx_delete_image(data->render.mlx, fps_image);
-		fps_image = mlx_put_string(data->render.mlx, fps_str, 0, 0);
-		free(fps_str);
 		fps_str = ft_strjoin(ft_itoa(skipped_frames), " fast frames | last high FPS: ");
 		fps_str = ft_strjoin(fps_str, ft_itoa(fps));
 		mlx_delete_image(data->render.mlx, fps_image2);
 		fps_image2 = mlx_put_string(data->render.mlx, fps_str, 0, 20);
 		free(fps_str);
+		fps_str = ft_strjoin("FPS: ", ft_itoa(fps));
+		mlx_delete_image(data->render.mlx, fps_image);
+		fps_image = mlx_put_string(data->render.mlx, fps_str, 0, 0);
+		free(fps_str);
+		printf("%f FPS: %d\n", current_time, fps);
 	}
 }
 
@@ -193,6 +230,7 @@ void	mlx_render_2d(void *ptr)
 	int	x;
 	int	y;
 	t_cub	*data;
+	const double tile_size = (double) WINDOW_WIDTH / ((double) MAX_MAP_WIDTH / ZOOM);
 
 	data = (t_cub *) ptr;
 	i = 0;
@@ -202,8 +240,8 @@ void	mlx_render_2d(void *ptr)
 		j = 0;
 		while (j < WINDOW_HEIGHT)
 		{
-			x = i / (WINDOW_WIDTH / (MAX_MAP_WIDTH / ZOOM));
-			y = j / (WINDOW_WIDTH / (MAX_MAP_WIDTH / ZOOM));
+			x = (int) (i / tile_size);
+			y = (int) (j / tile_size);
 			if (data->map[y][x] == '1')
 				mlx_put_pixel(data->render.screen, i, j, 0x333333FF);
 			else
