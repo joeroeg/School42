@@ -90,11 +90,11 @@ static	void	draw_player_2d(t_cub *data)
 
 	player_move(data);
 	x = (int) (data->player.x * ((double) WINDOW_WIDTH / ((double) MAX_MAP_WIDTH / ZOOM)));
-	y = (int) (data->player.y * ((double) WINDOW_HEIGHT / ((double)MAX_MAP_HEIGHT / ZOOM)));
-	draw_circle(data->render.screen, x, y, (WINDOW_HEIGHT / (MAX_MAP_HEIGHT / ZOOM)) / 4, 0x0000FFFF);
+	y = (int) (data->player.y * ((double) WINDOW_WIDTH / ((double)MAX_MAP_WIDTH / ZOOM)));
+	draw_circle(data->render.screen, x, y, (WINDOW_WIDTH / (MAX_MAP_WIDTH / ZOOM)) / 4, 0x0000FFFF);
 	x = (int) ((data->player.x + data->player.dir_x) * ((double) WINDOW_WIDTH / ((double) MAX_MAP_WIDTH / ZOOM)));
-	y = (int) ((data->player.y + data->player.dir_y) * ((double) WINDOW_HEIGHT / ((double)MAX_MAP_HEIGHT / ZOOM)));
-	draw_circle(data->render.screen, x, y, (WINDOW_HEIGHT / (MAX_MAP_HEIGHT / ZOOM)) / 8, 0x000000FF);
+	y = (int) ((data->player.y + data->player.dir_y) * ((double) WINDOW_WIDTH / ((double)MAX_MAP_WIDTH / ZOOM)));
+	draw_circle(data->render.screen, x, y, (WINDOW_WIDTH / (MAX_MAP_WIDTH / ZOOM)) / 8, 0x000000FF);
 }
 
 void	fps_counter(t_cub *data)
@@ -117,7 +117,7 @@ void	fps_counter(t_cub *data)
 	}
 	if (fps > 100)
 	{
-		printf("%d:%d FPS: %d\n", (int) current_time, (int) frames, fps);
+		printf("%f:%d FPS: %d\n", current_time, (int) frames, fps);
 	}
 }
 
@@ -137,7 +137,7 @@ void	mlx_render_2d(void *ptr)
 		while (j < WINDOW_HEIGHT)
 		{
 			x = i / (WINDOW_WIDTH / (MAX_MAP_WIDTH / ZOOM));
-			y = j / (WINDOW_HEIGHT / (MAX_MAP_HEIGHT / ZOOM));
+			y = j / (WINDOW_WIDTH / (MAX_MAP_WIDTH / ZOOM));
 			if (data->map[y][x] == '1')
 				mlx_put_pixel(data->render.screen, i, j, 0x333333FF);
 			else
