@@ -5,7 +5,7 @@
 #define ROTATE_SPEED 0.0075
 #define VIEW_PLANE_SIZE 0.66
 #define VIEW_PLANE_DISTANCE 1
-#define TILE_SIZE 20
+#define TILE_SIZE 40
 
 void cub_key_hook(mlx_key_data_t key_data, void *param);
 bool cub_check_collision(t_cub *data, double x, double y);
@@ -157,6 +157,11 @@ static	void	player_move(t_cub *data)
 		corrected_vel_x = data->player.vel_x;
 		corrected_vel_y = data->player.vel_y;
 	}
+	if (mlx_is_key_down(data->render.mlx, MLX_KEY_LEFT_SHIFT))
+	{
+		corrected_vel_x *= 2;
+		corrected_vel_y *= 2;
+	}
 		corrected_vel_x *= delta_time(false) * 60;
 		corrected_vel_y *= delta_time(false) * 60;
 	new_y = data->player.y - corrected_vel_y * MOVE_SPEED * data->player.dir_y + corrected_vel_x * MOVE_SPEED * data->player.dir_x;
@@ -165,6 +170,35 @@ static	void	player_move(t_cub *data)
 		data->player.x = new_x;
 	if (!cub_check_collision(data, data->player.x, new_y))
 		data->player.y = new_y;
+}
+
+static	void	draw_rays(t_cub *data)
+{
+	int	i;
+	double	delta_x;
+	double	delta_y;
+	double	slope;
+	const double	plane_left_x = data->player.x + data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE;
+	const double	plane_left_y = data->player.y - data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE;
+	const double	plane_right_x = data->player.x - data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE;
+	const double	plane_right_y = data->player.y + data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE;
+	double	ray_x;
+	double	ray_y;
+//	const int nb_rays = VIEW_PLANE_SIZE * 2 * TILE_SIZE;
+	const int nb_rays = 10;
+
+	i = (int) (- floor((double) nb_rays / 2));
+//	while (i < WINDOW_WIDTH)
+	while (i < (int) ceil((double) nb_rays / 2))
+	{
+		ray_x = data->player.x - (data->player.dir_y * (VIEW_PLANE_SIZE * 2 / nb_rays) * i) + data->player.dir_x * VIEW_PLANE_DISTANCE;
+		ray_y = data->player.y + (data->player.dir_x * (VIEW_PLANE_SIZE * 2 / nb_rays) * i) + data->player.dir_y * VIEW_PLANE_DISTANCE;
+		delta_x = ray_x - data->player.x;
+		delta_y = ray_y - data->player.y;
+		slope = delta_y / delta_x;
+		draw_line(data->render.screen, (int) (data->player.x * TILE_SIZE), (int) (data->player.y * TILE_SIZE), (int) (ray_x * TILE_SIZE), (int) (ray_y * TILE_SIZE), 0x00FF00FF);
+		i++;
+	}
 }
 
 static	void	draw_player_2d(t_cub *data)
@@ -190,18 +224,19 @@ static	void	draw_player_2d(t_cub *data)
 	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0x000000FF);
 	plane_x = (data->player.x + data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE;
 	plane_y = (data->player.y - data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE;
-	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
+//	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
 	precision_x = (data->player.x + (data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
 	precision_y = (data->player.y + (- data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
 	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0xFF0000FF);
 	draw_line(data->render.screen, (int) plane_x, (int) plane_y, (int) front_x, (int) front_y, 0xFFFF00FF);
 	plane_x = (data->player.x - data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE;
 	plane_y = (data->player.y + data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE;
-	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
+//	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
 	precision_x = (data->player.x + (- data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
 	precision_y = (data->player.y + (data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
 	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0xFF0000FF);
 	draw_line(data->render.screen, (int) plane_x, (int) plane_y, (int) front_x, (int) front_y, 0xFFFF00FF);
+	draw_rays(data);
 }
 
 void	fps_counter(t_cub *data)
