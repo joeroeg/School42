@@ -41,6 +41,14 @@ typedef struct s_mblock
 	struct s_mblock	*next;
 }	t_mblock;
 
+typedef enum e_direction
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_direction;
+
 typedef struct s_config
 {
 	char	north_texture[MAX_PATH_LENGTH];
