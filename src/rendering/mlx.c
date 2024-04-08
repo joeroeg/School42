@@ -200,6 +200,16 @@ void	draw_column(t_cub *data, double distance, int x, t_direction direction)
 	}
 }
 
+static void	plot_func(double a, double x, double b, t_cub *data)
+{
+	printf("y = %f * x + %f\n", a, b);
+	printf("x = %f\n", x);
+	printf("y = %f\n", a * x + b);
+	draw_line(data->render.screen, 0, (int) (b * TILE_SIZE), (int) (data->map_height * TILE_SIZE), (int) ((a * data->map_height + b) * TILE_SIZE), 0x00FF007F);
+//	draw_circle(data->render.screen, (int) (x * TILE_SIZE), (int) (a * x * TILE_SIZE + b * TILE_SIZE), 5, 0x00FF007F);
+
+}
+
 static	void	draw_rays(t_cub *data)
 {
 	int	i;
@@ -270,27 +280,43 @@ static	void	draw_rays(t_cub *data)
 		}
 		distance_y = sqrt(pow(ray_x - data->player.x, 2) +
 						  pow(ray_y - data->player.y, 2));
-//		double test = (data->player.dir_y / data->player.dir_x - data->player.dir_x / data->player.dir_y) / ((ray_y - (ray_x * data->player.dir_x / data->player.dir_y)) - (data->player.y - (data->player.x * data->player.dir_y / data->player.dir_x)));
-//		double test2 = test * (data->player.dir_x / data->player.dir_y) + (data->player.y - (data->player.x * data->player.dir_y / data->player.dir_x));
+		double	temp_y_x = ((ray_y - (ray_x * data->player.dir_y / data->player.dir_x)) - (data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y))) / ((-data->player.dir_x / data->player.dir_y) - (data->player.dir_y / data->player.dir_x));
+		double	temp_y_y = temp_y_x * (-data->player.dir_x / data->player.dir_y) + (data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y));
+		double	temp_x_x = ((fin_y - (fin_x * data->player.dir_y / data->player.dir_x)) - (data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y))) / ((-data->player.dir_x / data->player.dir_y) - (data->player.dir_y / data->player.dir_x));
+		double	temp_x_y = temp_x_x * (-data->player.dir_x / data->player.dir_y) + (data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y));
+		double	temp_y = sqrt(pow(temp_y_x - ray_x, 2) + pow(temp_y_y - ray_y, 2));
+		double	temp_x = sqrt(pow(temp_x_x - fin_x, 2) + pow(temp_x_y - fin_y, 2));
 		if (distance_x < distance_y)
-			draw_column(data, distance_x, i + WINDOW_WIDTH / 2,
+			draw_column(data, temp_x, i + WINDOW_WIDTH / 2,
 						dir_x < 0 ? WEST : EAST);
 		else
-			draw_column(data, distance_y, i + WINDOW_WIDTH / 2,
+			draw_column(data, temp_y, i + WINDOW_WIDTH / 2,
 						dir_y < 0 ? NORTH : SOUTH);
+//		if (distance_x < distance_y)
+//			draw_column(data, distance_x, i + WINDOW_WIDTH / 2,
+//						dir_x < 0 ? WEST : EAST);
+//		else
+//			draw_column(data, distance_y, i + WINDOW_WIDTH / 2,
+//						dir_y < 0 ? NORTH : SOUTH);
 //		if (distance_x > distance_y)
 //			draw_line(data->render.screen, (int) (data->player.x * TILE_SIZE), (int) (data->player.y * TILE_SIZE), (int) (ray_x * TILE_SIZE), (int) (ray_y * TILE_SIZE), dir_y < 0 ? 0x00FF0008 : 0x0000FF08);
 //		else
 //			draw_line(data->render.screen, (int) (data->player.x * TILE_SIZE), (int) (data->player.y * TILE_SIZE), (int) (fin_x * TILE_SIZE), (int) (fin_y * TILE_SIZE), dir_x < 0 ? 0xFF000008 : 0xFF00FF08);
 		i++;
-//	}
-//		double test = (data->player.dir_y / data->player.dir_x - data->player.dir_x / data->player.dir_y) / ((ray_y - (ray_x * data->player.dir_x / data->player.dir_y)) - (data->player.y - (data->player.x * data->player.dir_y / data->player.dir_x)));
-//		double test2 = test * (data->player.dir_x / data->player.dir_y) + (data->player.y - (data->player.x * data->player.dir_y / data->player.dir_x));
-//		draw_line(data->render.screen, (int) (data->player.x * TILE_SIZE), (int) (data->player.y * TILE_SIZE), (int) (ray_x * TILE_SIZE), (int) (ray_y * TILE_SIZE), 0x00FF007F);
-//		draw_line(data->render.screen, (int) (data->player.x * TILE_SIZE), (int) (data->player.y * TILE_SIZE), (int) (test * TILE_SIZE) + (int) (data->player.x * TILE_SIZE) , (int) (test2 * TILE_SIZE) + (int) (data->player.y * TILE_SIZE), 0xFF00007F);
-//		draw_line(data->render.screen, (int) (ray_x * TILE_SIZE), (int) (ray_y * TILE_SIZE), (int) (test * TILE_SIZE) + (int) (data->player.x * TILE_SIZE) , (int) (test2 * TILE_SIZE) + (int) (data->player.y * TILE_SIZE), 0xFF00007F);
-//		printf("test: %f %f\n", test, test2);
 	}
+//		double test = (- data->player.dir_x / data->player.dir_y + data->player.dir_y / data->player.dir_x) / ((ray_y + (ray_x * data->player.dir_y / data->player.dir_x)) - (data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y)));
+//		double test2 = test * (- data->player.dir_x / data->player.dir_y) + (data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y));
+//		draw_line(data->render.screen, (int) (data->player.x * TILE_SIZE), (int) (data->player.y * TILE_SIZE), (int) (ray_x * TILE_SIZE), (int) (ray_y * TILE_SIZE), 0x00FF007F);
+//		draw_line(data->render.screen, (int) (data->player.x * TILE_SIZE), (int) (data->player.y * TILE_SIZE), (int) (test * TILE_SIZE) , (int) (test2 * TILE_SIZE), 0x0000FF7F);
+//		draw_line(data->render.screen, (int) (ray_x * TILE_SIZE), (int) (ray_y * TILE_SIZE), (int) (test * TILE_SIZE) , (int) (test2 * TILE_SIZE), 0xFF00007F);
+//		double temp = (data->player.x + 5) * (data->player.dir_x / data->player.dir_y) + (data->player.y - (data->player.x * data->player.dir_x / data->player.dir_y));
+//		draw_line(data->render.screen, (int) (data->player.x * TILE_SIZE), (int) (data->player.y * TILE_SIZE), (int) (data->player.x + 5), (int) (temp * TILE_SIZE), 0x00FF007F);
+//	plot_func(- data->player.dir_x/data->player.dir_y, data->player.x, data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y), data);
+//	plot_func(data->player.dir_y/data->player.dir_x, data->player.x, ray_y - (ray_x * data->player.dir_y / data->player.dir_x), data);
+	double	temp = ((ray_y - (ray_x * data->player.dir_y / data->player.dir_x)) - (data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y))) / ((-data->player.dir_x / data->player.dir_y) - (data->player.dir_y / data->player.dir_x));
+	double	temp2 = temp * (-data->player.dir_x / data->player.dir_y) + (data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y));
+//	draw_circle(data->render.screen, (int) (temp * TILE_SIZE), (int) (temp2 * TILE_SIZE), 5, 0x00FF007F);
+	//		printf("test: %f %f\n", test, test2);
 }
 
 static	void	draw_player_2d(t_cub *data)
@@ -306,29 +332,29 @@ static	void	draw_player_2d(t_cub *data)
 
 	player_move(data);
 	draw_rays(data);
-	player_x = (int) (data->player.x * TILE_SIZE);
-	player_y = (int) (data->player.y * TILE_SIZE);
-	draw_circle(data->render.screen, player_x, player_y, (int) (TILE_SIZE / 4), 0x0000FF0F);
-	front_x = ((data->player.x + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE);
-	front_y = ((data->player.y + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE);
-	draw_circle(data->render.screen, (int) front_x, (int) front_y, (int) (TILE_SIZE / 8), 0x0000000F);
-//	precision_x = ((data->player.x + data->player.dir_x * 1000) * TILE_SIZE);
-//	precision_y = ((data->player.y + data->player.dir_y * 1000) * TILE_SIZE);
-//	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0x000000FF);
-	plane_x = (data->player.x + data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE;
-	plane_y = (data->player.y - data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE;
-//	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
-//	precision_x = (data->player.x + (data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
-//	precision_y = (data->player.y + (- data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
-//	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0xFF0000FF);
-	draw_line(data->render.screen, (int) front_x, (int) front_y, (int) plane_x, (int) plane_y, 0xFFFF000F);
-	plane_x = (data->player.x - data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE;
-	plane_y = (data->player.y + data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE;
-//	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
-//	precision_x = (data->player.x + (- data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
-//	precision_y = (data->player.y + (data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
-//	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0xFF0000FF);
-	draw_line(data->render.screen, (int) front_x, (int) front_y, (int) plane_x, (int) plane_y, 0xFFFF000F);
+//	player_x = (int) (data->player.x * TILE_SIZE);
+//	player_y = (int) (data->player.y * TILE_SIZE);
+//	draw_circle(data->render.screen, player_x, player_y, (int) (TILE_SIZE / 4), 0x0000FF0F);
+//	front_x = ((data->player.x + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE);
+//	front_y = ((data->player.y + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE);
+//	draw_circle(data->render.screen, (int) front_x, (int) front_y, (int) (TILE_SIZE / 8), 0x0000000F);
+////	precision_x = ((data->player.x + data->player.dir_x * 1000) * TILE_SIZE);
+////	precision_y = ((data->player.y + data->player.dir_y * 1000) * TILE_SIZE);
+////	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0x000000FF);
+//	plane_x = (data->player.x + data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE;
+//	plane_y = (data->player.y - data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE;
+////	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
+////	precision_x = (data->player.x + (data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
+////	precision_y = (data->player.y + (- data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
+////	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0xFF0000FF);
+//	draw_line(data->render.screen, (int) front_x, (int) front_y, (int) plane_x, (int) plane_y, 0xFFFF000F);
+//	plane_x = (data->player.x - data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE;
+//	plane_y = (data->player.y + data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE;
+////	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
+////	precision_x = (data->player.x + (- data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
+////	precision_y = (data->player.y + (data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
+////	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0xFF0000FF);
+//	draw_line(data->render.screen, (int) front_x, (int) front_y, (int) plane_x, (int) plane_y, 0xFFFF000F);
 
 }
 
@@ -382,21 +408,21 @@ void	mlx_render_2d(void *ptr)
 	delta_time(true);
 	cub_rotate(data);
 	draw_player_2d(data);
-	while (i < WINDOW_WIDTH)
-	{
-		j = 0;
-		while (j < WINDOW_HEIGHT)
-		{
-			x = (int) (i / TILE_SIZE);
-			y = (int) (j / TILE_SIZE);
-			if (x < data->map_height && y < data->map_height && data->map[y][x] == '1')
-				mlx_put_pixel(data->render.screen, i, j, 0x3333330F);
-//			else
-//				mlx_put_pixel(data->render.screen, i, j, 0x7777770F);
-			j++;
-		}
-		i++;
-	}
+//	while (i < WINDOW_WIDTH)
+//	{
+//		j = 0;
+//		while (j < WINDOW_HEIGHT)
+//		{
+//			x = (int) (i / TILE_SIZE);
+//			y = (int) (j / TILE_SIZE);
+//			if (x < data->map_height && y < data->map_height && data->map[y][x] == '1')
+//				mlx_put_pixel(data->render.screen, i, j, 0x3333330F);
+////			else
+////				mlx_put_pixel(data->render.screen, i, j, 0x7777770F);
+//			j++;
+//		}
+//		i++;
+//	}
 	fps_counter(data);
 }
 
