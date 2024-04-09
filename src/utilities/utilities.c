@@ -85,7 +85,7 @@ void	print_cub_config(const t_cub *data)
 	printf("------------------------\n");
 	printf("Data Configuration:\n");
 	printf("File Descriptor: %d\n", data->memory->fd);
-	printf("Found Map: %d\n", data->found_map);
+	printf("Found Map: %d\n", data->map_found);
 	printf("Textures:\n");
 	printf("  North: %s\n", data->config.north_texture);
 	printf("  South: %s\n", data->config.south_texture);
@@ -129,7 +129,7 @@ void print_struct(t_cub *data)
 	for (int i = 0; i < data->map_height; i++)
 		printf("%s\n", data->map[i]);
 	printf("Map Height: %d\n", data->map_height);
-	printf("Found Map: %d\n", data->found_map);
+	printf("Found Map: %d\n", data->map_found);
 }
 
 int	prepare_file_descriptor(const char *file_path)

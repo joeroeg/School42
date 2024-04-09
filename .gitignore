@@ -7,3 +7,4 @@ lib/MLX42
 lib/libft/libft.a
 .idea/
 *.a
+cub3d.code-workspace
