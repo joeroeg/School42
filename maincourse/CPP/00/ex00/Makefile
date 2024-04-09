@@ -3,22 +3,21 @@ TARGET = megaphone
 CXX = g++
 CXXFLAGS= -Wall -Werror -Wextra -std=c++98 -g
 SRCS = megaphone.cpp
-OBJS = megaphone.o
+OBJS=$(SRCS:.cpp=.o)
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	@$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
 megaphone.o: megaphone.cpp
-	@$(CXX) $(CXXFLAGS) -c -o megaphone.o megaphone.cpp
+	$(CXX) $(CXXFLAGS) -c -o megaphone.o megaphone.cpp
 
 clean:
-	@rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET)
 
 fclean: clean
-	@rm -f $(TARGET)
-	@echo clean $(TARGET)
+	rm -f $(TARGET)
 
 re: fclean all
 
@@ -34,15 +33,3 @@ test: all
 	@printf "\n"
 
 .PHONY: all
-
-
-
-
-
-
-
-
-
-
-
-
