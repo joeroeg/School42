@@ -15,8 +15,32 @@ void	load_player(t_cub *data)
 			{
 				data->player.x = j + 0.5;
 				data->player.y = i + 0.5;
-				data->player.dir_x = 0.1;
+				data->player.dir_x = 0;
 				data->player.dir_y = -1;
+				return ;
+			}
+			if (data->map[i][j] == 'S')
+			{
+				data->player.x = j + 0.5;
+				data->player.y = i + 0.5;
+				data->player.dir_x = 0;
+				data->player.dir_y = 1;
+				return ;
+			}
+			if (data->map[i][j] == 'E')
+			{
+				data->player.x = j + 0.5;
+				data->player.y = i + 0.5;
+				data->player.dir_x = 1;
+				data->player.dir_y = 0;
+				return ;
+			}
+			if (data->map[i][j] == 'W')
+			{
+				data->player.x = j + 0.5;
+				data->player.y = i + 0.5;
+				data->player.dir_x = -1;
+				data->player.dir_y = 0;
 				return ;
 			}
 			j++;

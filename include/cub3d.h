@@ -21,8 +21,8 @@
 # define MAX_LINE_LENGTH 512
 # define MAX_MAP_WIDTH  100
 # define MAX_MAP_HEIGHT 100
-# define WINDOW_WIDTH 1000
-# define WINDOW_HEIGHT 800
+# define WINDOW_WIDTH 1500
+# define WINDOW_HEIGHT 1200
 
 typedef enum e_parameter_type
 {

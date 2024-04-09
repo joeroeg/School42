@@ -33,6 +33,7 @@ void	mlx_load(t_cub *data)
 	load_textures(data);
 	mlx_image_to_window(data->render.mlx, data->render.screen, 0, 0);
 	mlx_key_hook(data->render.mlx, cub_key_hook, data);
+	mlx_set_cursor_mode(data->render.mlx, MLX_MOUSE_DISABLED);
 }
 
 static void	draw_line(mlx_image_t *pImage, int x0, int y0, int x1, int y1, unsigned int color)
@@ -183,8 +184,10 @@ void	draw_column(t_cub *data, double distance, int x, t_direction direction)
 	i = 0;
 	while (i < WINDOW_HEIGHT)
 	{
-		if (i < (WINDOW_HEIGHT - wall_height) / 2 || i > (WINDOW_HEIGHT + wall_height) / 2)
-			mlx_put_pixel(data->render.screen, x, i, 0x000000FF);
+		if (i < (WINDOW_HEIGHT - wall_height) / 2)
+			mlx_put_pixel(data->render.screen, x, i, data->config.ceiling_color_r << 24 | data->config.ceiling_color_g << 16 | data->config.ceiling_color_b << 8 | 0xFF);
+		else if (i > (WINDOW_HEIGHT + wall_height) / 2)
+			mlx_put_pixel(data->render.screen, x, i, data->config.floor_color_r << 24 | data->config.floor_color_g << 16 | data->config.floor_color_b << 8 | 0xFF);
 		else
 		{
 			if (direction == NORTH)
@@ -230,7 +233,6 @@ static	void	draw_rays(t_cub *data)
 //	const int nb_rays = 10;
 
 	i = (int) (- floor((double) nb_rays / 2));
-//	while (i < WINDOW_WIDTH)
 	while (i < (int) ceil((double) nb_rays / 2))
 	{
 		ray_x = data->player.x -
@@ -313,8 +315,6 @@ static	void	draw_rays(t_cub *data)
 //		draw_line(data->render.screen, (int) (data->player.x * TILE_SIZE), (int) (data->player.y * TILE_SIZE), (int) (data->player.x + 5), (int) (temp * TILE_SIZE), 0x00FF007F);
 //	plot_func(- data->player.dir_x/data->player.dir_y, data->player.x, data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y), data);
 //	plot_func(data->player.dir_y/data->player.dir_x, data->player.x, ray_y - (ray_x * data->player.dir_y / data->player.dir_x), data);
-	double	temp = ((ray_y - (ray_x * data->player.dir_y / data->player.dir_x)) - (data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y))) / ((-data->player.dir_x / data->player.dir_y) - (data->player.dir_y / data->player.dir_x));
-	double	temp2 = temp * (-data->player.dir_x / data->player.dir_y) + (data->player.y + (data->player.x * data->player.dir_x / data->player.dir_y));
 //	draw_circle(data->render.screen, (int) (temp * TILE_SIZE), (int) (temp2 * TILE_SIZE), 5, 0x00FF007F);
 	//		printf("test: %f %f\n", test, test2);
 }
@@ -338,22 +338,11 @@ static	void	draw_player_2d(t_cub *data)
 //	front_x = ((data->player.x + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE);
 //	front_y = ((data->player.y + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE);
 //	draw_circle(data->render.screen, (int) front_x, (int) front_y, (int) (TILE_SIZE / 8), 0x0000000F);
-////	precision_x = ((data->player.x + data->player.dir_x * 1000) * TILE_SIZE);
-////	precision_y = ((data->player.y + data->player.dir_y * 1000) * TILE_SIZE);
-////	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0x000000FF);
 //	plane_x = (data->player.x + data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE;
 //	plane_y = (data->player.y - data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE;
-////	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
-////	precision_x = (data->player.x + (data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
-////	precision_y = (data->player.y + (- data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
-////	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0xFF0000FF);
 //	draw_line(data->render.screen, (int) front_x, (int) front_y, (int) plane_x, (int) plane_y, 0xFFFF000F);
 //	plane_x = (data->player.x - data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * TILE_SIZE;
 //	plane_y = (data->player.y + data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * TILE_SIZE;
-////	draw_circle(data->render.screen, (int) plane_x, (int) plane_y, (int) (TILE_SIZE / 16), 0xFF0000FF);
-////	precision_x = (data->player.x + (- data->player.dir_y * VIEW_PLANE_SIZE + data->player.dir_x * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
-////	precision_y = (data->player.y + (data->player.dir_x * VIEW_PLANE_SIZE + data->player.dir_y * VIEW_PLANE_DISTANCE) * 1000) * TILE_SIZE;
-////	draw_line_unending(data->render.screen, player_x, player_y, (int) precision_x, (int) precision_y, 0xFF0000FF);
 //	draw_line(data->render.screen, (int) front_x, (int) front_y, (int) plane_x, (int) plane_y, 0xFFFF000F);
 
 }
@@ -491,11 +480,7 @@ void	cub_rotate(t_cub *data)
 	double		hold;
 
 	if (!init_flag)
-	{
 		mlx_get_mouse_pos(data->render.mlx, &previous_mouse_x, &delta);
-		init_flag = true;
-		return;
-	}
 	mlx_get_mouse_pos(data->render.mlx, &current_mouse_x, &delta);
 	delta = current_mouse_x - previous_mouse_x;
 	if (delta != 0)
@@ -504,5 +489,9 @@ void	cub_rotate(t_cub *data)
 		data->player.dir_y = data->player.dir_x * sin(delta * ROTATE_SPEED) + data->player.dir_y * cos(delta * ROTATE_SPEED);
 		data->player.dir_x = hold;
 	}
+	if (data->player.dir_x == 0)
+		data->player.dir_x = 0.01;
+	if (data->player.dir_y == 0)
+		data->player.dir_y = 0.01;
 	previous_mouse_x = current_mouse_x;
 }
