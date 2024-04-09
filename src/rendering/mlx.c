@@ -1,41 +1,9 @@
 #include "cub3d.h"
+#include "render.h"
+#include "player.h"
 
-#define MOVE_SPEED 0.05
-#define ROTATE_SPEED 0.0075
 #define VIEW_PLANE_SIZE 0.66
 #define VIEW_PLANE_DISTANCE 1
-
-void cub_key_hook(mlx_key_data_t key_data, void *param);
-
-bool cub_check_collision(t_cub *data, double x, double y);
-
-void cub_rotate(t_cub *data);
-
-static void load_textures(t_cub *data)
-{
-	data->render.textures[0] = mlx_load_png(data->config.north_texture);
-	data->render.textures[1] = mlx_load_png(data->config.south_texture);
-	data->render.textures[2] = mlx_load_png(data->config.west_texture);
-	data->render.textures[3] = mlx_load_png(data->config.east_texture);
-	if (!data->render.textures[0] || !data->render.textures[1] || \
-        !data->render.textures[2] || !data->render.textures[3])
-		exit_error_message("Error: mlx_load_png() failed.", EXIT_FAILURE);
-}
-
-void mlx_load(t_cub *data)
-{
-	data->render.mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", false);
-	if (!data->render.mlx)
-		exit_error_message("Error: mlx_init() failed.", EXIT_FAILURE);
-	data->render.screen = mlx_new_image(data->render.mlx, WINDOW_WIDTH,
-										WINDOW_HEIGHT);
-	if (!data->render.screen)
-		exit_error_message("Error: mlx_new_image() failed.", EXIT_FAILURE);
-	load_textures(data);
-	mlx_image_to_window(data->render.mlx, data->render.screen, 0, 0);
-	mlx_key_hook(data->render.mlx, cub_key_hook, data);
-	mlx_set_cursor_mode(data->render.mlx, MLX_MOUSE_DISABLED);
-}
 
 double delta_time(bool update)
 {
@@ -51,41 +19,6 @@ double delta_time(bool update)
 	}
 	delta_time = current_time - last_time;
 	return (delta_time);
-}
-
-static void player_move(t_cub *data)
-{
-	double new_x;
-	double new_y;
-	double corrected_vel_x;
-	double corrected_vel_y;
-
-	if (data->player.vel_x == 0 && data->player.vel_y == 0)
-		return;
-	if (data->player.vel_x != 0 && data->player.vel_y != 0)
-	{
-		corrected_vel_x = data->player.vel_x / sqrt(2);
-		corrected_vel_y = data->player.vel_y / sqrt(2);
-	} else
-	{
-		corrected_vel_x = data->player.vel_x;
-		corrected_vel_y = data->player.vel_y;
-	}
-	if (mlx_is_key_down(data->render.mlx, MLX_KEY_LEFT_SHIFT))
-	{
-		corrected_vel_x *= 2;
-		corrected_vel_y *= 2;
-	}
-	corrected_vel_x *= delta_time(false) * 60;
-	corrected_vel_y *= delta_time(false) * 60;
-	new_y = data->player.y - corrected_vel_y * MOVE_SPEED * data->player.dir_y +
-			corrected_vel_x * MOVE_SPEED * data->player.dir_x;
-	new_x = data->player.x - corrected_vel_y * MOVE_SPEED * data->player.dir_x -
-			corrected_vel_x * MOVE_SPEED * data->player.dir_y;
-	if (!cub_check_collision(data, new_x, data->player.y))
-		data->player.x = new_x;
-	if (!cub_check_collision(data, data->player.x, new_y))
-		data->player.y = new_y;
 }
 
 unsigned int get_pixel_color(mlx_texture_t *image, int x, int y)
@@ -292,21 +225,6 @@ void mlx_render(void *ptr)
 	fps_counter(data);
 }
 
-bool cub_check_collision(t_cub *data, double x, double y)
-{
-	int map_x;
-	int map_y;
-
-	map_x = (int) x;
-	map_y = (int) y;
-	if (map_x < 0 || map_x >= MAX_MAP_WIDTH || map_y < 0 ||
-		map_y >= MAX_MAP_HEIGHT)
-		return (true);
-	if (data->map[map_y][map_x] == '1')
-		return (true);
-	return (false);
-}
-
 void cub_key_hook(mlx_key_data_t key_data, void *param)
 {
 	t_cub *data;
@@ -363,34 +281,4 @@ void cub_key_hook(mlx_key_data_t key_data, void *param)
 			 !mlx_is_key_down(data->render.mlx, MLX_KEY_RIGHT)))
 			data->player.vel_x -= 1;
 	}
-}
-
-void cub_rotate(t_cub *data)
-{
-	static bool init_flag = false;
-	static int previous_mouse_x = 0;
-	int current_mouse_x;
-	int delta;
-	double hold;
-
-	if (!init_flag)
-	{
-		mlx_get_mouse_pos(data->render.mlx, &previous_mouse_x, &delta);
-		init_flag = true;
-	}
-	mlx_get_mouse_pos(data->render.mlx, &current_mouse_x, &delta);
-	delta = current_mouse_x - previous_mouse_x;
-	if (delta != 0)
-	{
-		hold = data->player.dir_x * cos(delta * ROTATE_SPEED) -
-			   data->player.dir_y * sin(delta * ROTATE_SPEED);
-		data->player.dir_y = data->player.dir_x * sin(delta * ROTATE_SPEED) +
-							 data->player.dir_y * cos(delta * ROTATE_SPEED);
-		data->player.dir_x = hold;
-	}
-	if (data->player.dir_x == 0)
-		data->player.dir_x = 0.01;
-	if (data->player.dir_y == 0)
-		data->player.dir_y = 0.01;
-	previous_mouse_x = current_mouse_x;
 }

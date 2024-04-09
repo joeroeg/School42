@@ -15,7 +15,7 @@ MLX42 = $(MLX_BUILD_DIR)libmlx42.a
 
 # Compiler settings
 CC = gcc
-CFLAGS = -g -DDEBUG #-Wall -Wextra -Werror
+CFLAGS = -g -DDEBUG -MMD #-Wall -Wextra -Werror
 INCLUDES = -I./lib/libft/ -I./lib/MLX42/include/MLX42/ -I./include
 MLXFL = -ldl -lglfw -pthread -lm
 ifeq ($(shell uname), Darwin)
@@ -35,7 +35,7 @@ $(NAME): $(MLX42) $(LIBFT) $(OBJ_FILES)
 
 $(BIN_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(MLX42):
 	if [ ! -d "$(MLX_DIR)" ]; then \
@@ -49,7 +49,7 @@ $(LIBFT):
 
 clean:
 	@$(MAKE) clean -C $(LIBFT_DIR)
-	@rm -rf $(BIN_DIR)
+	rm -rf $(OBJ_FILES)
 
 mlx_clean:
 	@make -C $(MLX_BUILD_DIR) clean
@@ -68,3 +68,5 @@ run: all
 	./$(NAME) $(MAP_DIR)map.cub
 
 .PHONY: all clean mlx_clean fclean re
+
+-include $(OBJ_FILES:.o=.d)

@@ -176,6 +176,7 @@ bool		find_player_position(t_cub *data);
 // Rendering
 void		mlx_load(t_cub *data);
 void		mlx_render(void *data);
+double		delta_time(bool update);
 
 // Player
 void		load_player(t_cub *data);
