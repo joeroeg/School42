@@ -1,5 +1,5 @@
 # Executable name
-TARGET = megaphone
+TARGET = PhoneBook
 CXX = g++
 CXXFLAGS= -Wall -Werror -Wextra -std=c++98 -g
 SRCS = megaphone.cpp

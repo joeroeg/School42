@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "car.hpp"
+#include "Car.hpp"
 
 /*****************************************************************************************************************************************************
  * @brief CLASSES AND OBJECTS
@@ -203,13 +203,12 @@ void decrement(int& value) {
  * @brief EXCEPTION HANDLING
 ********************************************************************************************************************************************************************/
 
-/*
 
-*/
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     std::string make = "Toyota";
     std::string model = "Corolla";
-    int year = 2022;
+    int* year = new int; // Dynamic memory allocation for the year
+    *year = 2022; // Dynamic memory allocation for the year
     int speed = 42;
     float speedLimit = 65.5;
 
@@ -218,10 +217,13 @@ int main(int argc, char *argv[]) {
     // std::cout << "Enter the model: ";
     // std::cin >> model;
     // std::cout << "Enter the year: ";
-    // std::cin >> year;
+    // std::cin >> *year;
 
-    Car myCar(make, model, year);
+    Car myCar(make, model, *year);
     // The Car class is used to create an instance of a car object.
+    Car* anotherCar = new Car("Ford", "Mustang", 2021); // Dynamic memory allocation for anotherCar
+    Car& refCar = myCar; // Reference to myCar
+    std::cout << "\nMy car:\n";
     myCar.display();
     myCar.drive();
     std::cout << "The speed limit is ";
@@ -234,7 +236,14 @@ int main(int argc, char *argv[]) {
     std::cout << "Current speed is ";
     print(speed); // The print function is overloaded to accept different types of arguments.
 
+    std::cout << "\nAnother car:\n";
+    anotherCar->display();
+    anotherCar->drive();
 
+    std::cout << "\nReference to my car:\n";
+    refCar.display();
+
+    std::cout << "\nUsing Namespaces:\n";
     // Namespaces are used to avoid name collisions between classes with the same name.
     AwesomeGraphicsLib::Renderer awesomeRenderer;
     MegaCoolGraphicsLib::Renderer megaCoolRenderer;
@@ -243,5 +252,6 @@ int main(int argc, char *argv[]) {
     megaCoolRenderer.render();
 
 
+    delete year; // Dynamic memory deallocation for the year
     return 0;
 }
