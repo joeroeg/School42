@@ -91,6 +91,7 @@ bool	find_player_position(t_cub *data)
 			{
 				data->player_x = i;
 				data->player_y = j;
+				data->player_direction = data->map[i][j];
 				return (true);
 			}
 			j++;

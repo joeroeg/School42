@@ -2,50 +2,10 @@
 
 void	load_player(t_cub *data)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < data->map_height)
-	{
-		j = 0;
-		while (j < MAX_MAP_WIDTH)
-		{
-			if (data->map[i][j] == 'N')
-			{
-				data->player.x = j + 0.5;
-				data->player.y = i + 0.5;
-				data->player.dir_x = 0;
-				data->player.dir_y = -1;
-				return ;
-			}
-			if (data->map[i][j] == 'S')
-			{
-				data->player.x = j + 0.5;
-				data->player.y = i + 0.5;
-				data->player.dir_x = 0;
-				data->player.dir_y = 1;
-				return ;
-			}
-			if (data->map[i][j] == 'E')
-			{
-				data->player.x = j + 0.5;
-				data->player.y = i + 0.5;
-				data->player.dir_x = 1;
-				data->player.dir_y = 0;
-				return ;
-			}
-			if (data->map[i][j] == 'W')
-			{
-				data->player.x = j + 0.5;
-				data->player.y = i + 0.5;
-				data->player.dir_x = -1;
-				data->player.dir_y = 0;
-				return ;
-			}
-			j++;
-		}
-		i++;
-	}
-	exit_error_message("Error: Player not found in map.", EXIT_FAILURE);
+	data->player.x = data->player_y + 0.5;
+	data->player.y = data->player_x + 0.5;
+	data->player.dir_x = (data->player_direction == 'E')
+			- (data->player_direction == 'W');
+	data->player.dir_y = (data->player_direction == 'S')
+			- (data->player_direction == 'N');
 }

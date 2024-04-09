@@ -96,6 +96,7 @@ typedef struct s_cub
 	t_entity	player;
 	t_render	render;
 	int			map_width;
+	char		player_direction;
 	int			player_x;
 	int			player_y;
 	int			map_found;
