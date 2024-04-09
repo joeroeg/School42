@@ -93,7 +93,6 @@ typedef struct s_cub
 	t_config	config;
 	char		map[MAX_MAP_HEIGHT][MAX_MAP_WIDTH + 1];
 	int			map_height;
-	int			found_map;
 	t_entity	player;
 	t_render	render;
 	int			map_width;
@@ -175,7 +174,7 @@ bool		find_player_position(t_cub *data);
 
 // Rendering
 void		mlx_load(t_cub *data);
-void		mlx_render_2d(void *data);
+void		mlx_render(void *data);
 
 // Player
 void		load_player(t_cub *data);

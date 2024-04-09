@@ -25,9 +25,8 @@ int	main(int argc, char **argv)
 	print_cub_config(&data);
 	load_player(&data);
 	mlx_load(&data);
-	mlx_loop_hook(data.render.mlx, mlx_render_2d, &data);
+	mlx_loop_hook(data.render.mlx, mlx_render, &data);
 	mlx_loop(data.render.mlx);
-	// mlx_loop();
 	gc_free_all();
 	return (SUCCESS);
 }
