@@ -174,33 +174,69 @@ static	void	player_move(t_cub *data)
 		data->player.y = new_y;
 }
 
-void	draw_column(t_cub *data, double distance, int x, t_direction direction)
+unsigned int	get_pixel_color(mlx_texture_t *image, int x, int y)
+{
+	unsigned char	*pixel;
+
+	pixel = &image->pixels[(y * image->width + x) * 4];
+	return ((unsigned int) (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]));
+}
+
+void	draw_wall(t_cub *data, int height, int x, t_direction direction, double trail)
+{
+	int	pixel;
+	int	i;
+
+	pixel = (int) (trail * data->render.textures[direction]->width);
+	i = 0;
+	while (i < WINDOW_HEIGHT)
+	{
+		if (i < (WINDOW_HEIGHT - height) / 2)
+			mlx_put_pixel(data->render.screen, x, i,
+						  data->config.ceiling_color_r << 24 |
+						  data->config.ceiling_color_g << 16 |
+						  data->config.ceiling_color_b << 8 | 0xFF);
+		else if (i > (WINDOW_HEIGHT + height) / 2)
+			mlx_put_pixel(data->render.screen, x, i,
+						  data->config.floor_color_r << 24 |
+						  data->config.floor_color_g << 16 |
+						  data->config.floor_color_b << 8 | 0xFF);
+		else
+			mlx_put_pixel(data->render.screen, x, i,
+						  get_pixel_color(data->render.textures[direction],
+										  pixel, (int) ((i - (WINDOW_HEIGHT - height) / 2) * data->render.textures[direction]->height / height)));
+		i++;
+	}
+}
+
+void	draw_column(t_cub *data, double distance, int x, t_direction direction, double trail)
 {
 	int		i;
 	int		j;
 	int		wall_height;
 
 	wall_height = WINDOW_HEIGHT / distance;
-	i = 0;
-	while (i < WINDOW_HEIGHT)
-	{
-		if (i < (WINDOW_HEIGHT - wall_height) / 2)
-			mlx_put_pixel(data->render.screen, x, i, data->config.ceiling_color_r << 24 | data->config.ceiling_color_g << 16 | data->config.ceiling_color_b << 8 | 0xFF);
-		else if (i > (WINDOW_HEIGHT + wall_height) / 2)
-			mlx_put_pixel(data->render.screen, x, i, data->config.floor_color_r << 24 | data->config.floor_color_g << 16 | data->config.floor_color_b << 8 | 0xFF);
-		else
-		{
-			if (direction == NORTH)
-				mlx_put_pixel(data->render.screen, x, i, 0x00FF00FF);
-			if (direction == SOUTH)
-				mlx_put_pixel(data->render.screen, x, i, 0x0000FFFF);
-			if (direction == EAST)
-				mlx_put_pixel(data->render.screen, x, i, 0xFF0000FF);
-			if (direction == WEST)
-				mlx_put_pixel(data->render.screen, x, i, 0xFF00FFFF);
-		}
-		i++;
-	}
+	draw_wall(data, wall_height, x, direction, trail);
+//	i = 0;
+//	while (i < WINDOW_HEIGHT)
+//	{
+//		if (i < (WINDOW_HEIGHT - wall_height) / 2)
+//			mlx_put_pixel(data->render.screen, x, i, data->config.ceiling_color_r << 24 | data->config.ceiling_color_g << 16 | data->config.ceiling_color_b << 8 | 0xFF);
+//		else if (i > (WINDOW_HEIGHT + wall_height) / 2)
+//			mlx_put_pixel(data->render.screen, x, i, data->config.floor_color_r << 24 | data->config.floor_color_g << 16 | data->config.floor_color_b << 8 | 0xFF);
+//		else
+//		{
+//			if (direction == NORTH)
+//				mlx_put_pixel(data->render.screen, x, i, 0x00FF00FF);
+//			if (direction == SOUTH)
+//				mlx_put_pixel(data->render.screen, x, i, 0x0000FFFF);
+//			if (direction == EAST)
+//				mlx_put_pixel(data->render.screen, x, i, 0xFF0000FF);
+//			if (direction == WEST)
+//				mlx_put_pixel(data->render.screen, x, i, 0xFF00FFFF);
+//		}
+//		i++;
+//	}
 }
 
 static void	plot_func(double a, double x, double b, t_cub *data)
@@ -290,10 +326,10 @@ static	void	draw_rays(t_cub *data)
 		double	temp_x = sqrt(pow(temp_x_x - fin_x, 2) + pow(temp_x_y - fin_y, 2));
 		if (distance_x < distance_y)
 			draw_column(data, temp_x, i + WINDOW_WIDTH / 2,
-						dir_x < 0 ? WEST : EAST);
+						dir_x < 0 ? WEST : EAST, fin_y - (int) fin_y);
 		else
 			draw_column(data, temp_y, i + WINDOW_WIDTH / 2,
-						dir_y < 0 ? NORTH : SOUTH);
+						dir_y < 0 ? NORTH : SOUTH, ray_x - (int) ray_x);
 //		if (distance_x < distance_y)
 //			draw_column(data, distance_x, i + WINDOW_WIDTH / 2,
 //						dir_x < 0 ? WEST : EAST);
@@ -480,7 +516,10 @@ void	cub_rotate(t_cub *data)
 	double		hold;
 
 	if (!init_flag)
+	{
 		mlx_get_mouse_pos(data->render.mlx, &previous_mouse_x, &delta);
+		init_flag = true;
+	}
 	mlx_get_mouse_pos(data->render.mlx, &current_mouse_x, &delta);
 	delta = current_mouse_x - previous_mouse_x;
 	if (delta != 0)
