@@ -1,5 +1,6 @@
 .DS_Store
 *.o
+*.d
 cub3D.dSYM
 cub3D
 fractol/*
