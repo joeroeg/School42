@@ -2,33 +2,7 @@
 #include "render.h"
 #include "player.h"
 
-double delta_time(bool update)
-{
-	static double current_time = 0;
-	static double last_time = 0;
-	double delta_time;
-
-	if (update)
-	{
-		last_time = current_time;
-		current_time = mlx_get_time();
-		return (0);
-	}
-	delta_time = current_time - last_time;
-	return (delta_time);
-}
-
-unsigned int get_pixel_color(mlx_texture_t *image, int x, int y)
-{
-	unsigned char *pixel;
-
-	pixel = &image->pixels[(y * image->width + x) * 4];
-	return ((unsigned int) (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 |
-							pixel[3]));
-}
-
-void
-draw_wall(t_cub *data, int height, int x, t_direction direction, double trail)
+void	draw_wall(t_cub *data, int height, int x, t_direction direction, double trail)
 {
 	int pixel;
 	int i;
@@ -67,14 +41,6 @@ void draw_column(t_cub *data, double distance, int x, t_direction direction,
 	draw_wall(data, wall_height, x, direction, trail);
 }
 
-
-
-static void draw_player_2d(t_cub *data)
-{
-	player_move(data);
-	draw_rays(data);
-}
-
 void fps_counter(t_cub *data)
 {
 	static int fps = 0;
@@ -105,7 +71,8 @@ void mlx_render(void *ptr)
 	data = (t_cub *) ptr;
 	delta_time(true);
 	cub_rotate(data);
-	draw_player_2d(data);
+	player_move(data);
+	draw_rays(data);
 	fps_counter(data);
 }
 

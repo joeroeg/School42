@@ -9,6 +9,8 @@ void draw_rays(t_cub *data);
 void draw_column(t_cub *data, double distance, int x, t_direction direction,
 		double trail);
 double pythagorean(double a, double b);
+unsigned int get_pixel_color(mlx_texture_t *image, int x, int y);
+
 
 typedef struct s_vector
 {
