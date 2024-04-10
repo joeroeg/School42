@@ -36,9 +36,9 @@
  * It returns a std::string.
  * @param std::string: A class that represents a sequence of characters.
  * @param std::toupper: A function that converts a character to uppercase.
- * @param input.size(): The number of characters in the input string.
+ * @param input.size(): A function that returns the number of characters in the string.
 */
-std::string toUpperCase(const std::string &input) {
+std::string touppercase(const std::string &input) {
     std::string result;
     for (size_t i = 0; i < input.size(); ++i) {
         result += std::toupper(input[i]);
@@ -55,16 +55,15 @@ std::string toUpperCase(const std::string &input) {
  * @param std::ends: Manipulator that inserts a null character into the output stream.
  * @param std::endl: Manipulator that inserts a newline character into the output stream.
 */
-int main(int argc, char *argv[]) {
+int main(int argc, char **argv) {
     std::string result = "";
-    if (argc == 1)
-    {
+    if (argc == 1) {
         std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
         return 0;
     }
     for (int i = 1; i < argc; ++i)
         result += argv[i];
-    result = toUpperCase(result);
+    result = touppercase(result);
     std::cout << result << std::endl;
     return 0;
 }

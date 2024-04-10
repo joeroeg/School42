@@ -2,7 +2,7 @@
 TARGET = PhoneBook
 CXX = g++
 CXXFLAGS= -Wall -Werror -Wextra -std=c++98 -g
-SRCS = megaphone.cpp
+SRCS = PhoneBook.cpp
 OBJS=$(SRCS:.cpp=.o)
 
 all: $(TARGET)
