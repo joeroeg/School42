@@ -50,7 +50,7 @@ static void	draw(t_cub *data, t_vector x_ray, t_vector y_ray, t_vector dir)
 	if (pythagorean(x_ray.x - data->player.x, x_ray.y - data->player.y)
 		< pythagorean(y_ray.x - data->player.x, y_ray.y - data->player.y))
 		draw_column(data, find_intersection(data, x_ray.x, x_ray.y),
-			(dir.x < 0) * WEST + (dir.x >= 0) * EAST,
+			(dir.x < 0) * EAST + (dir.x >= 0) * WEST,
 			x_ray.y - (int) x_ray.y);
 	else
 		draw_column(data, find_intersection(data, y_ray.x, y_ray.y),

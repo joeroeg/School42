@@ -30,7 +30,6 @@
 # define FAILURE 1
 # define SUCCESS 0
 # define MAX_PATH_LENGTH 255
-# define MAX_LINE_LENGTH 512
 # define MAX_MAP_WIDTH  100
 # define MAX_MAP_HEIGHT 100
 # define WINDOW_WIDTH 1600
@@ -38,20 +37,6 @@
 # define EMPTY '0'
 # define FILLED '2'
 # define WALL '1'
-# define N 'N'
-# define S 'S'
-# define E 'E'
-# define W 'W'
-
-typedef enum e_parameter_type
-{
-	NO,
-	SO,
-	WE,
-	EA,
-	F,
-	C
-}	t_parameter_type;
 
 typedef struct s_mblock
 {
@@ -80,12 +65,6 @@ typedef struct s_config
 	int		ceiling_color_r;
 	int		ceiling_color_g;
 	int		ceiling_color_b;
-	int		north_set;
-	int		south_set;
-	int		east_set;
-	int		west_set;
-	int		floor_set;
-	int		ceiling_set;
 }	t_config;
 
 typedef struct s_entity
@@ -125,13 +104,10 @@ typedef struct s_cub
 // Memory management
 t_mblock	*garbage_collector(void);
 void		*gc_malloc(size_t size);
-void		*gc_calloc(size_t count, size_t size);
 void		gc_free(void *address);
 void		gc_free_all(void);
 int			gc_open(const char *pathname, int flags, mode_t mode);
 char		*ft_strjoin_gc(char *s1, char *s2);
-char		*ft_strdup_gc(const char *s);
-char		**ft_split_gc(char const *s, char c);
 void		clear_mlx(t_render *cmlx);
 t_cub		*get_cub(void);
 
@@ -143,12 +119,9 @@ int			check_empty_file(int fd);
 
 // Utilities
 void		exit_error_message(char *message, int should_exit);
-int			return_error_message(char *message, int return_value);
 int			get_next_line(int fd, char **line);
 char		*trim_space(const char *str);
 int			prepare_file_descriptor(const char *file_path);
-void		print_cub_config(const t_cub *data);
-void		print_struct(t_cub *data);
 
 // Parsing configuration
 void		parse_map_parameters(t_cub *data);
@@ -183,7 +156,7 @@ bool		is_color_line(char *line);
 void		parse_map(t_cub *data);
 void		free_and_reset_line(char **line);
 int			is_line_empty_or_whitespace(const char *line);
-bool		is_line_valid(char *line);
+bool		is_line_valid(const char *line);
 void		initialize_map_parsing(t_cub *data, \
 			int *line_number, int *map_found, int *found_spaces);
 void		finalize_map_parsing(t_cub *data, int line_number);
@@ -192,10 +165,8 @@ void		finalize_map_parsing(t_cub *data, int line_number);
 void		validate_map_playability(t_cub *data);
 bool		validate_single_start_position(t_cub *data);
 bool		is_player_position_valid(t_cub *data);
-void		printMapWithCoordinates(t_cub *data);
 bool		find_player_position(t_cub *data);
 bool		is_boundary(t_cub *data, int x, int y);
-bool		is_fillable(char cell);
 bool		flood(t_cub *data, int x, int y);
 
 // Rendering

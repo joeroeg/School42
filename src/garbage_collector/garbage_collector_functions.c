@@ -30,16 +30,3 @@ char	*ft_strjoin_gc(char *s1, char *s2)
 	new_str[len1 + len2] = '\0';
 	return (new_str);
 }
-
-char	*ft_strdup_gc(const char *str)
-{
-	size_t	length;
-	char	*duplicate;
-
-	length = ft_strlen(str);
-	duplicate = gc_malloc(length + 1);
-	if (!duplicate)
-		return (NULL);
-	ft_strlcpy(duplicate, str, length + 1);
-	return (duplicate);
-}

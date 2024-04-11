@@ -40,23 +40,6 @@ void	*gc_malloc(size_t size)
 }
 
 /**
- * @brief gc_calloc allocates memory and keeps track of it in a linked list
- * @param count is the number of elements to be allocated
- * @param size is the size of each element
- * @return the address of the user data
-*/
-void	*gc_calloc(size_t count, size_t size)
-{
-	void	*address;
-
-	address = gc_malloc(count * size);
-	if (!address)
-		exit_error_message(MALLOC_ERROR, EXIT_FAILURE);
-	ft_memset(address, 0, count * size);
-	return (address);
-}
-
-/**
  * @brief frees all dynamically allocated memory
  * @details It iterates through memory blocks and frees them
  * It also closes the file descriptor and clears the mlx instance.

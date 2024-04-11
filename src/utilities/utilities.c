@@ -15,22 +15,8 @@
 void	exit_error_message(char *message, int exit_value)
 {
 	ft_putendl_fd(message, STDERR_FILENO);
-	if (exit_value == EXIT_FAILURE)
-	{
-		gc_free_all();
-		exit(EXIT_FAILURE);
-	}
-	else if (exit_value == EXIT_SUCCESS)
-	{
-		gc_free_all();
-		exit(EXIT_SUCCESS);
-	}
-}
-
-int	error_message(char *message, int return_value)
-{
-	ft_putendl_fd(message, STDERR_FILENO);
-	return (return_value);
+	gc_free_all();
+	exit(exit_value);
 }
 
 int	get_next_line(int fd, char **line)
@@ -45,7 +31,7 @@ int	get_next_line(int fd, char **line)
 	**line = '\0';
 	while (1)
 	{
-		ret = read(fd, buf, 1);
+		ret = (int) read(fd, buf, 1);
 		if (ret == -1)
 			exit_error_message("Error: Read failed", EXIT_FAILURE);
 		if (ret <= 0)
@@ -57,8 +43,6 @@ int	get_next_line(int fd, char **line)
 		gc_free(*line);
 		*line = temp;
 	}
-	if (ret == -1)
-		exit_error_message("Error: Read failed", EXIT_FAILURE);
 	return (ret);
 }
 

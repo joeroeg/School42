@@ -44,7 +44,6 @@ void	restore_map_state(t_cub *data)
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (i < data->map_height)
 	{
 		j = 0;

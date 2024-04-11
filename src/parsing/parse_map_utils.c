@@ -50,11 +50,11 @@ void	finalize_map_parsing(t_cub *data, int line_number)
 {
 	data->map_height = line_number;
 	if (line_number > 0)
-		data->map_width = ft_strlen(data->map[0]);
+		data->map_width = (int) ft_strlen(data->map[0]);
 	validate_map_playability(data);
 }
 
-bool	is_line_valid(char *line)
+bool	is_line_valid(const char *line)
 {
 	bool	valid_characters_only;
 	int		i;

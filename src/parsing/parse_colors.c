@@ -86,9 +86,7 @@ void	parse_color(t_cub *data, char *line, \
 {
 	int		rgb[3];
 
-	if (!parse_rgb_values(line, rgb))
-		exit_error_message("Error: Not all color parameters were specified.", \
-		EXIT_FAILURE);
+	parse_rgb_values(line, rgb);
 	(*parsed_parameters)++;
 	set_color(data, rgb, color_type);
 }
