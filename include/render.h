@@ -25,6 +25,7 @@ double			pythagorean(double a, double b);
 unsigned int	get_pixel_color(mlx_texture_t *image, int x, int y);
 unsigned int	ceiling_color(t_cub *data);
 unsigned int	floor_color(t_cub *data);
+void			unload(t_cub *data);
 
 typedef struct s_vector
 {

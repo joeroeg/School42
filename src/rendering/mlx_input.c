@@ -74,7 +74,7 @@ void	cub_key_hook(mlx_key_data_t key_data, void *param)
 	data = (t_cub *) param;
 	if (key_data.key == MLX_KEY_ESCAPE)
 	{
-		mlx_close_window(data->render.mlx);
+		unload(data);
 		exit(EXIT_SUCCESS);
 	}
 	if (key_data.action == MLX_PRESS)

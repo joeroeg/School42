@@ -19,10 +19,10 @@ bool	flood(t_cub *data, int x, int y)
 
 	if (is_boundary(data, x, y))
 		return (true);
-	if (data->map[x][y] != EMPTY && !(data->map[x][y] == 'N' || \
+	if (data->map[x][y] != EMPTY && !((data->map[x][y] == 'N' || \
 		data->map[x][y] == 'S' || \
 		data->map[x][y] == 'E' || \
-		data->map[x][y] == 'W' && data->map[x][y] == ' '))
+		data->map[x][y] == 'W') && data->map[x][y] == ' '))
 		return (false);
 	if (data->map[x][y] == WALL)
 		return (false);

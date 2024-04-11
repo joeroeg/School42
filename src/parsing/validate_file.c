@@ -35,7 +35,6 @@ void	validate_map_file(t_cub *data)
 int	check_extension(const char *filename, \
 const char *valid_extensions[], int num_extensions)
 {
-	const char	*found_extension;
 	const char	*dot;
 	int			i;
 

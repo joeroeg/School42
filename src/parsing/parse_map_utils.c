@@ -40,6 +40,8 @@ int	is_line_empty_or_whitespace(const char *line)
 void	initialize_map_parsing(t_cub *data, \
 	int *line_number, int *map_found, int *found_spaces)
 {
+	(void)data;
+
 	*line_number = 0;
 	*map_found = 0;
 	*found_spaces = 0;

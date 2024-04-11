@@ -13,6 +13,24 @@
 #include "cub3d.h"
 #include "render.h"
 
+void	unload(t_cub *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (data->render.textures[i])
+			mlx_delete_texture(data->render.textures[i]);
+		i++;
+	}
+	if (data->render.screen)
+		mlx_delete_image(data->render.mlx, data->render.screen);
+	if (data->render.mlx)
+		mlx_close_window(data->render.mlx);
+	gc_free_all();
+}
+
 void	load_textures(t_cub *data)
 {
 	data->render.textures[0] = mlx_load_png(data->config.north_texture);
@@ -37,4 +55,5 @@ void	mlx_load(t_cub *data)
 	mlx_image_to_window(data->render.mlx, data->render.screen, 0, 0);
 	mlx_key_hook(data->render.mlx, cub_key_hook, data);
 	mlx_set_cursor_mode(data->render.mlx, MLX_MOUSE_DISABLED);
+	mlx_close_hook(data->render.mlx, (mlx_closefunc) unload, data);
 }

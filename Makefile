@@ -15,7 +15,7 @@ MLX42 = $(MLX_BUILD_DIR)libmlx42.a
 
 # Compiler settings
 CC = gcc
-CFLAGS = -g -DDEBUG -MMD #-Wall -Wextra -Werror
+CFLAGS = -MMD -Wall -Wextra -Werror
 INCLUDES = -I./lib/libft/ -I./lib/MLX42/include/MLX42/ -I./include
 MLXFL = -ldl -lglfw -pthread -lm
 ifeq ($(shell uname), Darwin)
@@ -62,7 +62,7 @@ fclean: clean
 re: fclean all
 
 val: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=./suppressions.supp ./$(NAME) $(MAP_DIR)invalid_maps/invalid_file_empty_lines.cub
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=./suppressions.supp ./$(NAME) $(MAP_DIR)valid_maps/valid_dungeon.cub
 
 run: all
 	./$(NAME) $(MAP_DIR)map.cub

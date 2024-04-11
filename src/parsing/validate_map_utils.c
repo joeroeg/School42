@@ -99,15 +99,6 @@ bool	is_boundary(t_cub *data, int x, int y)
 	return (x < 0 || \
 			x >= data->map_height || \
 			y < 0 || y >= data->map_width || \
-			y >= strlen(data->map[x]) || \
+			y >= (int) ft_strlen(data->map[x]) || \
 			data->map[x][y] == ' ');
-}
-
-bool	is_fillable(char cell)
-{
-	return (cell == EMPTY || \
-	cell == NORTH || \
-	cell == SOUTH || \
-	cell == EAST || \
-	cell == WEST);
 }
