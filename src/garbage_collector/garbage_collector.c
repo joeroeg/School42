@@ -109,7 +109,6 @@ void	gc_free_all(void)
 	t_mblock	*current;
 	t_mblock	*next;
 
-	//TODO free mlx instance
 	current = garbage_collector()->next;
 	while (current != NULL)
 	{
