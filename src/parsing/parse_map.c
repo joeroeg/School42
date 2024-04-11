@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 17:34:19 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/04/10 17:35:23 by hezhukov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	check_map_dimensions(int line_number, char *line)
@@ -33,8 +45,6 @@ void	process_line(char *line, t_cub *data, \
 	}
 }
 
-
-
 void	parse_map(t_cub *data)
 {
 	char	*line;
@@ -52,4 +62,3 @@ void	parse_map(t_cub *data)
 	}
 	finalize_map_parsing(data, line_number);
 }
-

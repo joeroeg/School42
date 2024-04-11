@@ -23,6 +23,13 @@
 # define MAX_MAP_HEIGHT 100
 # define WINDOW_WIDTH 1600
 # define WINDOW_HEIGHT 1000
+# define EMPTY '0'
+# define FILLED '2'
+# define WALL '1'
+# define N 'N'
+# define S 'S'
+# define E 'E'
+# define W 'W'
 
 typedef enum e_parameter_type
 {
@@ -173,6 +180,9 @@ bool		validate_single_start_position(t_cub *data);
 bool		is_player_position_valid(t_cub *data);
 void		printMapWithCoordinates(t_cub *data);
 bool		find_player_position(t_cub *data);
+bool		is_boundary(t_cub *data, int x, int y);
+bool		is_fillable(char cell);
+bool		flood(t_cub *data, int x, int y);
 
 // Rendering
 void		mlx_load(t_cub *data);

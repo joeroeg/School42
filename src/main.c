@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 19:40:32 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/04/10 20:07:23 by hezhukov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	setup(int argc, char **argv, t_cub *data)
@@ -22,7 +34,6 @@ int	main(int argc, char **argv)
 	setup(argc, argv, &data);
 	validate_map_file(&data);
 	parse_map_parameters(&data);
-	print_cub_config(&data);
 	load_player(&data);
 	mlx_load(&data);
 	mlx_loop_hook(data.render.mlx, mlx_render, &data);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map_utils.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 17:37:31 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/04/10 20:03:47 by hezhukov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 bool	is_player_position_valid(t_cub *data)
@@ -15,9 +27,9 @@ bool	is_player_position_valid(t_cub *data)
 			data->map[i][j] == 'E' || data->map[i][j] == 'W')
 			{
 				if (i == 0 || i == data->map_height - 1 || j == 0 || \
-				j == (int)strlen(data->map[i]) - 1 || \
+				j == (int)ft_strlen(data->map[i]) - 1 || \
 				data->map[i - 1][j] == ' ' || \
-				data->map[i + 1][j] == ' ' || data->map[i][j-1] == ' ' ||
+				data->map[i + 1][j] == ' ' || data->map[i][j - 1] == ' ' ||
 				data->map[i][j + 1] == ' ')
 					return (false);
 			}
@@ -56,25 +68,6 @@ bool	validate_single_start_position(t_cub *data)
 	return (start_positions == 1);
 }
 
-void	printMapWithCoordinates(t_cub *data)
-{
-	printf("\n");
-	printf("   ");
-    for (int j = 0; j < data->map_width; j++) {
-        printf("%d ", j);
-    }
-    printf("\n");
-
-    for (int i = 0; i < data->map_height; i++) {
-        // Print row number
-        printf("%d: ", i);
-        for (int j = 0; j < data->map_width; j++) {
-            printf("%c ", data->map[i][j]);
-        }
-        printf("\n");
-    }
-}
-
 bool	find_player_position(t_cub *data)
 {
 	int	i;
@@ -99,4 +92,22 @@ bool	find_player_position(t_cub *data)
 		i++;
 	}
 	return (false);
+}
+
+bool	is_boundary(t_cub *data, int x, int y)
+{
+	return (x < 0 || \
+			x >= data->map_height || \
+			y < 0 || y >= data->map_width || \
+			y >= strlen(data->map[x]) || \
+			data->map[x][y] == ' ');
+}
+
+bool	is_fillable(char cell)
+{
+	return (cell == EMPTY || \
+	cell == NORTH || \
+	cell == SOUTH || \
+	cell == EAST || \
+	cell == WEST);
 }

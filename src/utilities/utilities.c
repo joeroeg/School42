@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utilities.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 17:42:55 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/04/10 20:05:46 by hezhukov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	exit_error_message(char *message, int exit_value)
@@ -73,63 +85,9 @@ char	*trim_space(const char *str)
 		end--;
 	trimmed_length = end - start + 1;
 	trimmed = gc_malloc(trimmed_length + 1);
-	if (!trimmed)
-		exit_error_message(MALLOC_ERROR, EXIT_FAILURE);
-	strncpy(trimmed, start, trimmed_length);
+	ft_strncpy(trimmed, start, trimmed_length);
 	trimmed[trimmed_length] = '\0';
 	return (trimmed);
-}
-
-void	print_cub_config(const t_cub *data)
-{
-	printf("------------------------\n");
-	printf("Data Configuration:\n");
-	printf("File Descriptor: %d\n", data->memory->fd);
-	printf("Found Map: %d\n", data->map_found);
-	printf("Textures:\n");
-	printf("  North: %s\n", data->config.north_texture);
-	printf("  South: %s\n", data->config.south_texture);
-	printf("  West: %s\n", data->config.west_texture);
-	printf("  East: %s\n", data->config.east_texture);
-	printf("Colors:\n");
-	printf("  Floor: R=%d, G=%d, B=%d\n",
-		data->config.floor_color_r, data->config.floor_color_g, \
-			data->config.floor_color_b);
-	printf("  Ceiling: R=%d, G=%d, B=%d\n",
-		data->config.ceiling_color_r, data->config.ceiling_color_g, \
-			data->config.ceiling_color_b);
-	printf(" North Set: %d\n", data->config.north_set);
-	printf(" South Set: %d\n", data->config.south_set);
-	printf(" West Set: %d\n", data->config.west_set);
-	printf(" East Set: %d\n", data->config.east_set);
-	printf(" Floor Set: %d\n", data->config.floor_set);
-	printf(" Ceiling Set: %d\n", data->config.ceiling_set);
-	printf("Map:\n");
-	for (int i = 0; i < data->map_height; i++)
-		printf("%s\n", data->map[i]);
-	printf("------------------------\n");
-}
-
-void print_struct(t_cub *data)
-{
-	printf("File: %s\n", data->file);
-	printf("Memory: %p\n", data->memory);
-	printf("Config:\n");
-	printf("  North: %s\n", data->config.north_texture);
-	printf("  South: %s\n", data->config.south_texture);
-	printf("  East: %s\n", data->config.east_texture);
-	printf("  West: %s\n", data->config.west_texture);
-	printf("  Floor: R=%d, G=%d, B=%d\n",
-		data->config.floor_color_r, data->config.floor_color_g, \
-			data->config.floor_color_b);
-	printf("  Ceiling: R=%d, G=%d, B=%d\n",
-		data->config.ceiling_color_r, data->config.ceiling_color_g, \
-			data->config.ceiling_color_b);
-	printf("Map:\n");
-	for (int i = 0; i < data->map_height; i++)
-		printf("%s\n", data->map[i]);
-	printf("Map Height: %d\n", data->map_height);
-	printf("Found Map: %d\n", data->map_found);
 }
 
 int	prepare_file_descriptor(const char *file_path)

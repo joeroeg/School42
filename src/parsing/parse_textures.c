@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_textures.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 17:35:42 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/04/10 17:35:51 by hezhukov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	parse_texture(t_cub *data, const char *line, int *parsed_parameters)
@@ -31,6 +43,7 @@ void	validate_all_texture_paths_exist(const t_config *config)
 		exit_error_message("Error: One or more texture files cannot be read.", \
 			EXIT_FAILURE);
 }
+
 char	*trim_and_validate_path(const char *line)
 {
 	char	*path;

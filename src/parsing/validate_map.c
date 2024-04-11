@@ -1,27 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 17:36:44 by hezhukov          #+#    #+#             */
+/*   Updated: 2024/04/10 20:03:53 by hezhukov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-bool	flood(t_cub *data, int x, int y, char old, char new)
+bool	flood(t_cub *data, int x, int y)
 {
 	bool	edge;
 	char	original_char;
 
-	if (x < 0 || x >= data->map_height || y < 0 || y >= data->map_width)
+	if (is_boundary(data, x, y))
 		return (true);
-	if (x < 0 || x >= data->map_height || y < 0 || y >= ft_strlen(data->map[x]) || data->map[x][y] == ' ')
-		return (true);
-	if (data->map[x][y] != old && !(data->map[x][y] == 'N' || \
+	if (data->map[x][y] != EMPTY && !(data->map[x][y] == 'N' || \
 		data->map[x][y] == 'S' || \
 		data->map[x][y] == 'E' || \
 		data->map[x][y] == 'W' && data->map[x][y] == ' '))
 		return (false);
-	if (data->map[x][y] == '1')
+	if (data->map[x][y] == WALL)
 		return (false);
 	original_char = data->map[x][y];
-	data->map[x][y] = new;
-	edge = flood(data, x + 1, y, old, new) || flood(data, x - 1, y, old, new) || \
-		flood(data, x, y + 1, old, new) || \
-		flood(data, x, y - 1, old, new);
-	if (original_char == 'N' || original_char == 'S' || original_char == 'E' || original_char == 'W')
+	data->map[x][y] = FILLED;
+	edge = flood(data, x + 1, y) || \
+		flood(data, x - 1, y) || \
+		flood(data, x, y + 1) || \
+		flood(data, x, y - 1);
+	if (original_char == 'N' || original_char == 'S' || \
+		original_char == 'E' || original_char == 'W')
 		data->map[x][y] = original_char;
 	return (edge);
 }
@@ -50,7 +62,7 @@ void	check_player_enclosure(t_cub *data)
 {
 	bool	is_enclosed;
 
-	is_enclosed = flood(data, data->player_x, data->player_y, '0', '2');
+	is_enclosed = flood(data, data->player_x, data->player_y);
 	if (is_enclosed)
 		exit_error_message("Player start position is not properly enclosed.", \
 			true);
@@ -75,5 +87,4 @@ void	validate_map_playability(t_cub *data)
 	if (!find_player_position(data))
 		exit_error_message("Player start position was not found.", true);
 	check_player_enclosure(data);
-	printMapWithCoordinates(data);
 }
