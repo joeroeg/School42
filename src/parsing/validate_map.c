@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:36:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/04/10 20:03:53 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:30:40 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ bool	flood(t_cub *data, int x, int y)
 
 	if (is_boundary(data, x, y))
 		return (true);
-	if (data->map[x][y] != EMPTY && !((data->map[x][y] == 'N' || \
+	if (data->map[x][y] != EMPTY && !(data->map[x][y] == 'N' || \
 		data->map[x][y] == 'S' || \
 		data->map[x][y] == 'E' || \
-		data->map[x][y] == 'W') && data->map[x][y] == ' '))
+		data->map[x][y] == 'W'))
 		return (false);
 	if (data->map[x][y] == WALL)
 		return (false);

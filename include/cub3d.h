@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcrepin <gcrepin@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:36:14 by gcrepin           #+#    #+#             */
-/*   Updated: 2024/04/10 15:54:09 by gcrepin          ###   ########.fr       */
+/*   Updated: 2024/04/11 13:18:51 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ int			gc_open(const char *pathname, int flags, mode_t mode);
 char		*ft_strjoin_gc(char *s1, char *s2);
 char		*ft_strdup_gc(const char *s);
 char		**ft_split_gc(char const *s, char c);
+void		clear_mlx(t_render *cmlx);
+t_cub		*get_cub(void);
 
 // Validation
 void		validate_map_file(t_cub *data);

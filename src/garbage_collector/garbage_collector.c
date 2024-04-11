@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:33:36 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/04/10 17:33:40 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:19:57 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,9 @@ void	gc_free_all(void)
 {
 	t_mblock	*current;
 	t_mblock	*next;
+	t_cub		*cub;
 
+	cub = get_cub();
 	current = garbage_collector()->next;
 	while (current != NULL)
 	{
@@ -121,4 +123,5 @@ void	gc_free_all(void)
 		current = next;
 	}
 	garbage_collector()->next = NULL;
+	clear_mlx(&cub->render);
 }

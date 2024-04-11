@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:35:32 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/04/10 17:35:34 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/04/11 10:59:45 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	initialize_map_parsing(t_cub *data, \
 	int *line_number, int *map_found, int *found_spaces)
 {
 	(void)data;
-
 	*line_number = 0;
 	*map_found = 0;
 	*found_spaces = 0;

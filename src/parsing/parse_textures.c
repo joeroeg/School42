@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:35:42 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/04/10 17:35:51 by hezhukov         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:53:41 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*trim_and_validate_path(const char *line)
 
 void	validate_extension(const char *path)
 {
-	const char	*valid_extensions[] = {".png", ".xpm"};
+	const char	*valid_extensions[] = {".png"};
 
 	if (check_extension(path, valid_extensions, \
 	sizeof(valid_extensions) / sizeof(valid_extensions[0])) == FAILURE)

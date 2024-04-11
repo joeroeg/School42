@@ -24,17 +24,40 @@ endif
 
 
 # Source and object files
-SRC_FILES = $(shell find $(SRC_DIR) -name '*.c')
+SRC_FILES = src/garbage_collector/garbage_collector.c \
+            src/garbage_collector/garbage_collector_functions.c \
+            src/garbage_collector/garbage_collector_functions_extra.c \
+            src/garbage_collector/garbage_collector_utilities.c \
+            src/main.c \
+            src/parsing/parse_colors.c \
+            src/parsing/parse_map.c \
+            src/parsing/parse_map_utils.c \
+            src/parsing/parse_parameters.c \
+            src/parsing/parse_textures.c \
+            src/parsing/parse_textures_utils.c \
+            src/parsing/parse_utilities.c \
+            src/parsing/validate_file.c \
+            src/parsing/validate_map.c \
+            src/parsing/validate_map_utils.c \
+            src/player/player.c \
+            src/player/player_move.c \
+            src/raycasting/raycasting.c \
+            src/rendering/loading.c \
+            src/rendering/mlx.c \
+            src/rendering/mlx_input.c \
+            src/rendering/render_utils.c \
+            src/utilities/utilities.c
+
 OBJ_FILES = $(SRC_FILES:$(SRC_DIR)%.c=$(BIN_DIR)%.o)
 
 # Targets
 all: $(NAME)
 
 $(NAME): $(MLX42) $(LIBFT) $(OBJ_FILES)
-	@$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBFT) $(MLX42) $(MLXFL) $(INCLUDES) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBFT) $(MLX42) $(MLXFL) $(INCLUDES) -o $(NAME)
 
 $(BIN_DIR)%.o: $(SRC_DIR)%.c
-	@mkdir -p $(@D)
+	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(MLX42):
@@ -42,22 +65,23 @@ $(MLX42):
 		git clone https://github.com/codam-coding-college/MLX42.git $(MLX_DIR); \
 		rm -rf $(MLX_DIR)/.git; \
 	fi
-	@cd $(MLX_DIR) && cmake -B build && cmake --build build -j4
+	cd $(MLX_DIR) && cmake -B build && cmake --build build -j4
 
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR)
 
 clean:
 	@$(MAKE) clean -C $(LIBFT_DIR)
 	rm -rf $(OBJ_FILES)
+	rm -rf $(BIN_DIR)
 
 mlx_clean:
-	@make -C $(MLX_BUILD_DIR) clean
+	make -C $(MLX_BUILD_DIR) clean
 
 fclean: clean
-	@rm -f $(NAME)
-	@$(MAKE) fclean -C $(LIBFT_DIR)
-	@# rm -rf $(MLX_DIR) # Optional: Comment this line if you want to keep MLX42 after clean
+	rm -f $(NAME)
+	$(MAKE) fclean -C $(LIBFT_DIR)
+#	rm -rf $(MLX_DIR)
 
 re: fclean all
 
