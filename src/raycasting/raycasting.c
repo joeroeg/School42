@@ -50,12 +50,13 @@ static void	draw(t_cub *data, t_vector x_ray, t_vector y_ray, t_vector dir)
 	if (pythagorean(x_ray.x - data->player.x, x_ray.y - data->player.y)
 		< pythagorean(y_ray.x - data->player.x, y_ray.y - data->player.y))
 		draw_column(data, find_intersection(data, x_ray.x, x_ray.y),
-			data->render.i + WINDOW_WIDTH / 2,
-			dir.x < 0 ? WEST : EAST, x_ray.y - (int) x_ray.y);
+			(dir.x < 0) * WEST + (dir.x >= 0) * EAST,
+			x_ray.y - (int) x_ray.y);
 	else
 		draw_column(data, find_intersection(data, y_ray.x, y_ray.y),
-			data->render.i + WINDOW_WIDTH / 2,
-			dir.y < 0 ? NORTH : SOUTH, y_ray.x - (int) y_ray.x);
+			(dir.y < 0) * NORTH + (dir.y >= 0) * SOUTH,
+			y_ray.x - (int) y_ray.x);
+	data->render.i++;
 }
 
 static double	innit_rays(t_cub *data, t_vector *x_ray, t_vector *y_ray,
@@ -83,22 +84,19 @@ void	draw_rays(t_cub *data)
 	{
 		slope = innit_rays(data, &x_ray, &y_ray, &dir);
 		while (((int) x_ray.x >= 0 && (int) x_ray.x < MAX_MAP_WIDTH
-				&& (int) x_ray.y >= 0
-				&& (int) x_ray.y < MAX_MAP_HEIGHT)
+				&& (int) x_ray.y >= 0 && (int) x_ray.y < MAX_MAP_HEIGHT)
 			&& data->map[(int) x_ray.y][(int) x_ray.x - (dir.x < 0)] != '1')
 		{
 			x_ray.x += dir.x;
 			x_ray.y += dir.x * slope;
 		}
 		while ((int) y_ray.x >= 0 && (int) y_ray.x < MAX_MAP_WIDTH
-			&& (int) y_ray.y >= 0
-			&& (int) y_ray.y < MAX_MAP_HEIGHT
+			&& (int) y_ray.y >= 0 && (int) y_ray.y < MAX_MAP_HEIGHT
 			&& (data->map[(int) y_ray.y - (dir.y < 0)][(int) y_ray.x] != '1'))
 		{
 			y_ray.x += dir.y / slope;
 			y_ray.y += dir.y;
 		}
 		draw(data, x_ray, y_ray, dir);
-		data->render.i++;
 	}
 }

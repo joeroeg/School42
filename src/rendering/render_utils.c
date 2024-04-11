@@ -13,6 +13,20 @@
 #include "cub3d.h"
 #include "render.h"
 
+unsigned int	ceiling_color(t_cub *data)
+{
+	return (data->config.ceiling_color_r << 24
+		| data->config.ceiling_color_g << 16
+		| data->config.ceiling_color_b << 8 | 0xFF);
+}
+
+unsigned int	floor_color(t_cub *data)
+{
+	return (data->config.floor_color_r << 24
+		| data->config.floor_color_g << 16
+		| data->config.floor_color_b << 8 | 0xFF);
+}
+
 double	pythagorean(double a, double b)
 {
 	return (sqrt(pow(a, 2) + pow(b, 2)));
