@@ -16,7 +16,7 @@ GLFW = $(LIB_DIR)glfw/libglfw3.a
 
 # Compiler settings
 CC = gcc
-CFLAGS = -MMD -Wall -Wextra -Werror
+CFLAGS = -MMD #-Wall -Wextra -Werror
 INCLUDES = -I./lib/libft/ -I./lib/MLX42/include/MLX42/ -I./include
 MLXFL = -ldl -lglfw3 -pthread -lm -L./$(LIB_DIR)glfw/build/src/
 ifeq ($(shell uname), Darwin)
@@ -60,8 +60,8 @@ $(BIN_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(GLFW):
-	@git clone git@github.com:Tanker50207/glfw.git $(LIB_DIR)glfw
-	@cd $(LIB_DIR)glfw && cmake -B build && cmake --build build -j4
+	git clone https://github.com/Tanker50207/glfw.git $(LIB_DIR)glfw
+	cd $(LIB_DIR)glfw && cmake -B build && cmake --build build -j4
 
 $(MLX42):
 	@$(MAKE) $(GLFW)
