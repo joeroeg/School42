@@ -13,6 +13,75 @@
 
     Rule of Zero: Suggests that classes should not manage resources directly but use existing classes that handle resource management, like smart pointers (std::unique_ptr, std::shared_ptr). Following this rule, you often don't need to define any special member functions explicitly.
 
+## Constructor
+Using constructors in C++ is not obligatory, but they are highly recommended for initializing objects in a clean, predictable way. Here's how to use them correctly along with best practices:
+
+### When and How to Use Constructors
+- **Declaration and Initialization**: A constructor in C++ is declared within a class and does not have a return type. It can be used to initialize the class's attributes, set up necessary resources, or perform any startup procedures required by the object.
+
+  ```cpp
+  class Contact {
+  public:
+      Contact(std::string fName, std::string lName); // Constructor declaration
+  };
+
+  Contact::Contact(std::string fName, std::string lName)
+      : firstName(fName), lastName(lName) {} // Constructor initialization using an initializer list
+  ```
+
+### Best Practices
+- **Use Initializer Lists**: Prefer initializing members through initializer lists rather than assignment within the constructor body. This is more efficient as it avoids an extra copy operation for non-primitive types.
+
+  ```cpp
+  class Example {
+  private:
+      std::string name;
+      int value;
+  public:
+      Example(std::string n, int v) : name(n), value(v) {}
+  };
+  ```
+
+- **Default Constructors**: If your class has members that will be initialized to a consistent or default state and no resources need dynamic allocation, define a default constructor.
+
+  ```cpp
+  class Example {
+  private:
+      std::string name;
+      int value;
+  public:
+      Example() : name("Default"), value(0) {}
+  };
+  ```
+
+- **Explicit Constructors**: For constructors that take a single argument, consider using the `explicit` keyword to prevent automatic type conversions, which can lead to unexpected bugs.
+
+  ```cpp
+  class Example {
+  public:
+      explicit Example(int val) : value(val) {}
+  };
+  ```
+
+- **Delegating Constructors**: Use delegating constructors to reduce code duplication across multiple constructors that perform similar initializations.
+
+  ```cpp
+  class Example {
+  private:
+      int x, y;
+  public:
+      Example() : Example(0, 0) {}  // Delegates to main constructor
+      Example(int val) : Example(val, val) {}
+      Example(int x, int y) : x(x), y(y) {}
+  };
+  ```
+
+### What Can Be Omitted?
+- **Constructors Are Optional**: If a class has no specific initialization needs and holds only fundamental data types or objects that manage their own initialization, you might not need to explicitly define a constructor.
+- **Avoiding Constructors for PODs**: Plain Old Data (POD) types that don’t require any special initialization logic or resource management can sometimes do without custom constructors, relying instead on default initialization.
+
+Constructors are a fundamental part of C++ that provide control over how objects are initialized and managed. Proper use of constructors can greatly enhance the reliability and performance of your applications.
+
 ## Destructor
 - typically you don't call destructor function. It's called automatically when the program leave the scope.
 
@@ -55,3 +124,8 @@ I didn't understand:
 - What is purely virtual?
 - How to use static
 - How to find a size of a heap allocated array?
+
+
+
+- How to define a header?
+-

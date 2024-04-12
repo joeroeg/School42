@@ -1,4 +1,3 @@
-// Contact.hpp
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
 
