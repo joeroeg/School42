@@ -1,5 +1,20 @@
+<<<<<<< HEAD
 README.md
 *.o
 *.d
 a.out
 .DS_Store
+=======
+.DS_Store
+*.o
+*.d
+cub3D.dSYM
+cub3D
+fractol/*
+lib/MLX42
+lib/libft/libft.a
+.idea/
+*.a
+cub3d.code-workspace
+/normining.txt
+>>>>>>> secondary/main

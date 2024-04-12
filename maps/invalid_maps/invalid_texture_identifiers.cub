@@ -1,0 +1,10 @@
+XO ./textures/redbrick.png
+JO ./textures/redbrick.png
+FE ./textures/redbrick.png
+DA ./textures/redbrick.png
+F 220,100,0
+C 225,30,0
+
+111
+1N1
+111

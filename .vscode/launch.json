@@ -1,5 +1,6 @@
 {
     "configurations": [
+<<<<<<< HEAD
         {
             "name": "(gdb) Launch",
             "type": "cppdbg",
@@ -44,3 +45,19 @@
     ],
 }
 
+=======
+    {
+        "name": "(lldb) Launch",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/cub3D",
+        "args": ["./src/map.cub"],
+        "stopAtEntry": false,
+        "cwd": "${fileDirname}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "lldb"
+    }
+    ]
+}
+>>>>>>> secondary/main
