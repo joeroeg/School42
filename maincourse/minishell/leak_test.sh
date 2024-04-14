@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Manual tests
-# delete directory and try to use cd after
-#
-
 # Define ANSI color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
