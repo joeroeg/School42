@@ -4,9 +4,10 @@
 PhoneBook::PhoneBook() : _contactCount(0) {}
 
 void PhoneBook::addContact(const Contact& contact) {
-    int index = _contactCount % 8;
-    _contacts[index] = contact;
+    static int index = _contactCount % 8;
+    _contacts[index % 8] = contact;
     if (_contactCount < 8) _contactCount++;
+    index++;
 }
 
 void PhoneBook::displayContacts() const {

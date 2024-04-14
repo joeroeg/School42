@@ -11,6 +11,7 @@
 # 1. The text must be right-aligned.
 # 2. If the text is longer than the column, it must be truncated and the last displayable character must be replaced by a dot (’.’).
 # 3. Check valid index with multiple 0s  (e.g. Enter the index of the contact: 0000)
+# 4. Check for overflow
 
 
 PROGRAM="./phonebook"
@@ -69,6 +70,18 @@ Jacksonnnnn
 MJJJJJJJJJJ
 1234567890
 Thrillerrrr
+ADD
+Hanssssssss
+Zimmermannn
+GZZZZZZZZZZ
+0987654321
+Inceptionnn
+ADD
+Christopher
+Nolannnnnnn
+CNNNNNNNNNN
+1234567890
+Inceptionnn
 SEARCH
 0
 EOF
