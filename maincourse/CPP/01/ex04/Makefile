@@ -1,7 +1,7 @@
-TARGET =
+TARGET = a.out
 CXX = g++
 CXXFLAGS= -Wall -Werror -Wextra -std=c++98
-SRCS = main.cpp
+SRCS = main.cpp Sed.cpp
 OBJS=$(SRCS:.cpp=.o)
 
 all: $(TARGET)
@@ -10,7 +10,7 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET) file.replace
 
 fclean: clean
 	rm -f $(TARGET)
