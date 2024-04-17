@@ -1,7 +1,7 @@
-TARGET =
+TARGET = harlFilter
 CXX = g++
 CXXFLAGS= -Wall -Werror -Wextra -std=c++98
-SRCS = main.cpp
+SRCS = main.cpp Harl.cpp
 OBJS=$(SRCS:.cpp=.o)
 
 all: $(TARGET)
