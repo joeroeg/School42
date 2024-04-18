@@ -1,7 +1,7 @@
-TARGET =
+TARGET = a.out
 CXX = g++
 CXXFLAGS= -Wall -Werror -Wextra -std=c++98
-SRCS = main.cpp
+SRCS = main.cpp ClapTrap.cpp
 OBJS=$(SRCS:.cpp=.o)
 
 all: $(TARGET)

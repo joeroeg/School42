@@ -36,15 +36,30 @@ Fixed::Fixed(const int value) {
     _fixed_point_value = value << _fractional_bits;
 }
 
+/**
+ * The constructor takes a float and converts it to a fixed point value.
+ * The float value is multiplied by 2^_fractional_bits and then rounded to the nearest integer.
+ * 1 << _fractional_bits is equivalent to 2^_fractional_bits.
+*/
 Fixed::Fixed(const float value) {
     std::cout << "Float constructor called" << std::endl;
     _fixed_point_value = roundf(value * (1 << _fractional_bits));
 }
 
+/**
+ * The toFloat function converts the fixed point value to a float.
+ * The fixed point value is divided by 2^_fractional_bits to get the float value.
+ * 1 << _fractional_bits is equivalent to 2^_fractional_bits.
+*/
 float Fixed::toFloat(void) const {
     return (float)_fixed_point_value / (1 << _fractional_bits);
 }
 
+/**
+ * The toInt function converts the fixed point value to an integer.
+ * The fixed point value is shifted right by _fractional_bits to get the integer value.
+ * Shifting right by _fractional_bits is equivalent to dividing by 2^_fractional_bits.
+*/
 int Fixed::toInt(void) const {
     return _fixed_point_value >> _fractional_bits;
 }
