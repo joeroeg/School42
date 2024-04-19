@@ -17,7 +17,7 @@ public:
     ClapTrap(std::string name); // parameterized constructor
     ~ClapTrap(); // destructor
     ClapTrap(const ClapTrap &); // copy constructor
-    ClapTrap &operator=(const ClapTrap& other); // assignment operator
+    ClapTrap &operator=(const ClapTrap& rhs); // assignment operator
 
     void    attack(std::string const& target);
     void    takeDamage(unsigned int amount);

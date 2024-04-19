@@ -20,22 +20,22 @@ int main() {
     // Create a ClapTrap
     ClapTrap ct("Clappy");
 
-    std::cout << "Initial Status:";
+    // std::cout << "Initial Status:";
     ct.displayStatus();
 
-    std::cout << "\nTesting Edge Cases:" << std::endl;
+    // std::cout << "\nTesting Edge Cases:" << std::endl;
     ct.takeDamage(0);  // No damage should not alter hit points
     ct.beRepaired(0);  // No repair should not alter hit points
     ct.attack("");     // Attack with empty string target
-    ct.attack("VeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsage");  // Test with long string
+    // ct.attack("VeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsageVeryVeryLongTargetNameThatExceedsNormalUsage");  // Test with long string
 
-    std::cout << "\nTesting Normal Operations:" << std::endl;
+    // std::cout << "\nTesting Normal Operations:" << std::endl;
     ct.attack("Target1");
     ct.takeDamage(1);
     ct.beRepaired(1);
     ct.displayStatus();
 
-    std::cout << "\nTesting Boundary Conditions:" << std::endl;
+    // std::cout << "\nTesting Boundary Conditions:" << std::endl;
     for (int i = 1; i <= 3; i++) {
         ct.attack("Target2");  // This should deplete energy to zero
     }
@@ -43,7 +43,7 @@ int main() {
 
     ct.beRepaired(15);  // Attempt to repair beyond maximum hit points
 
-    std::cout << "Status after boundary tests:";
+    // std::cout << "Status after boundary tests:";
     ct.displayStatus();
 
     ct.takeDamage(12);  // Exceed hit points in damage

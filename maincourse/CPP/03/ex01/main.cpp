@@ -1,36 +1,51 @@
 #include <iostream>
 #include "ScavTrap.hpp"
 
-// int main() {
-//     // Create a ScavTrap instance
-//     ScavTrap scav("Guardian");
-//     scav.attack("intruder");
-//     scav.takeDamage(10);
-//     scav.beRepaired(5);
-//     scav.guardGate();
-
-//     std::cout << "\n--- Copy Constructor Test ---\n";
-//     // Copy constructor test
-//     ScavTrap scavCopy(scav);
-//     scavCopy.attack("enemy");
-
-//     std::cout << "\n--- Assignment Operator Test ---\n";
-//     // Assignment operator test
-//     ScavTrap scavAssigned = scav;
-//     scavAssigned.attack("another intruder");
-
-//     return 0;
-// }
-
 int main( void )
 {
-    ScavTrap ash( "Ash" );
-    ScavTrap ash2( ash );
+    // Create a ScavTrap instance
+    ClapTrap clap1( "Clap" );
+    ScavTrap scav1( "Scav" );
 
-    // ash.attack( "the air" );
-    // ash.takeDamage( 10 );
-    // ash.beRepaired( 10 );
-    // ash.guardGate();
+    // Copy constructor test
+    ClapTrap clap2( clap1 );
+    ScavTrap scav2( scav1 );
 
-    return EXIT_SUCCESS;
+    // Display that attributes are initialized to the requested values.
+    clap1.displayStatus();
+    scav1.displayStatus();
+    clap2.displayStatus();
+    scav2.displayStatus();
+
+    // Assignment operator test
+    ClapTrap clap3 = clap1;
+    ScavTrap scav3 = scav1;
+
+    // Display that attributes are initialized to the requested values.
+    clap3.displayStatus();
+    scav3.displayStatus();
+
+    // Attack
+    clap1.attack( "enemy" );
+    clap2.attack( "enemy" );
+    scav1.attack( "enemy" );
+    scav2.attack( "enemy" );
+
+    // Take damage
+    clap1.takeDamage( 100 );
+    clap2.takeDamage( 5 );
+    scav1.takeDamage( 100 );
+    scav2.takeDamage( 5 );
+
+    // Be repaired
+    clap1.beRepaired( 10 );
+    clap2.beRepaired( 10 );
+    scav1.beRepaired( 10 );
+    scav2.beRepaired( 10 );
+
+    // Guard gate
+    scav1.guardGate();
+    scav2.guardGate();
+
+    return 0;
 }

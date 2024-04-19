@@ -17,18 +17,18 @@ ClapTrap::ClapTrap(const ClapTrap &src)
 }
 
 // Assignment operator
-ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
-    if (this != &other) { // protect against invalid self-assignment
-        _name = other._name;
-        _hit_points = other._hit_points;
-        _energy_points = other._energy_points;
-        _attack_damage = other._attack_damage;
-        std::cout << "[ClapTrap] " << "assignment operator called for " << other._name << std::endl;
+ClapTrap &ClapTrap::operator=(const ClapTrap &rhs) {
+    if (this != &rhs) {
+        _name = rhs._name;
+        _hit_points = rhs._hit_points;
+        _energy_points = rhs._energy_points;
+        _attack_damage = rhs._attack_damage;
+        std::cout << "[ClapTrap] " << "assignment operator called for " << rhs._name << std::endl;
     }
     return *this;
 }
 
-// Getters
+// Member functions
 void ClapTrap::attack(std::string const &target) {
     if (target.empty()) {
         std::cout << "[ClapTrap] " << "No target to attack!" << std::endl;
@@ -49,7 +49,7 @@ void ClapTrap::attack(std::string const &target) {
     }
 }
 
-// Setters
+// Member functions
 void ClapTrap::takeDamage(unsigned int amount) {
     if (amount == 0) {
         std::cout << "[ClapTrap] " << "No damage taken!" << std::endl;
@@ -68,11 +68,10 @@ void ClapTrap::takeDamage(unsigned int amount) {
     }
 }
 
-// Setters
+// Member functions
 void ClapTrap::beRepaired(unsigned int amount) {
     if (_hit_points == 0) {
         std::cout << "[ClapTrap] " << "Repair failed. " << _name << " is dead!" << std::endl;
-        // std::cout << "Repair failed. Clappy is dead!" << std::endl;
         return;
     }
     if (_energy_points > 0) {
