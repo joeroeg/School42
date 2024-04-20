@@ -22,23 +22,23 @@ class Graphic {
 public:
     virtual Graphic* clone() const = 0;
     virtual void draw() const = 0;
-    virtual ~Graphic() { std::cout << "Destroying a Graphic object.\n"; }
+    virtual ~Graphic() { std::cout << "Graphic: Destroying a Graphic object.\n"; }
 };
 
 // Concrete class 1
 class Note : public Graphic {
 public:
     Note() {
-        std::cout << "Creating a Note object.\n";
+        std::cout << "Note: Creating a Note object.\n";
     }
     Note(const Note&) {
-        std::cout << "Cloning a Note object.\n";
+        std::cout << "Note: Cloning a Note object.\n";
     }
     Graphic* clone() const override {
         return new Note(*this);
     }
     void draw() const override {
-        std::cout << "Drawing a musical note.\n";
+        std::cout << "Note: Drawing a musical note.\n";
     }
 };
 
@@ -46,16 +46,16 @@ public:
 class Rest : public Graphic {
 public:
     Rest() {
-        std::cout << "Creating a Rest object.\n";
+        std::cout << "Rest: Creating a Rest object.\n";
     }
     Rest(const Rest&) {
-        std::cout << "Cloning a Rest object.\n";
+        std::cout << "Rest: Cloning a Rest object.\n";
     }
     Graphic* clone() const override {
         return new Rest(*this);
     }
     void draw() const override {
-        std::cout << "Drawing a musical rest.\n";
+        std::cout << "Rest: Drawing a musical rest.\n";
     }
 };
 
@@ -64,15 +64,15 @@ class GraphicTool {
     Graphic* prototype;
 public:
     GraphicTool(Graphic* proto) : prototype(proto) {
-        std::cout << "GraphicTool created with a prototype.\n";
+        std::cout << "GraphicTool: GraphicTool created with a prototype.\n";
     }
     ~GraphicTool() {
-        std::cout << "GraphicTool being destroyed, deleting prototype.\n";
+        std::cout << "GraphicTool: GraphicTool being destroyed, deleting prototype.\n";
         delete prototype;
     }
 
     Graphic* createGraphic() const {
-        std::cout << "Creating a graphic using the prototype.\n";
+        std::cout << "GraphicTool: Creating a graphic using the prototype.\n";
         return prototype->clone();
     }
 };
@@ -81,27 +81,47 @@ public:
 Graphic* createGraphicByName(const std::string& type) {
     if (type == "Note") {
         return new Note();
-    } else if (type == "Rest") {
+    } else if (type == "createGraphicByName: Rest") {
         return new Rest();
     }
     return nullptr;
 }
 
 int main() {
-    std::string inputType;
-    std::cout << "Enter graphic type ('Note' or 'Rest'): ";
-    std::cin >> inputType;
 
-    Graphic* proto = createGraphicByName(inputType);
-    if (!proto) {
-        std::cout << "Invalid graphic type!\n";
-        return 1;
-    }
+    Graphic* proto = new Note();  // Step 1: Create prototype
+    Graphic* newGraphic = proto->clone();  // Step 2: Clone prototype
 
-    GraphicTool tool(proto);
-    Graphic* myGraphic = tool.createGraphic();
-    myGraphic->draw();
-    delete myGraphic;
+    newGraphic->draw();  // Step 3: Use the new object
+
+    delete proto;        // Clean up memory
+    delete newGraphic;   // Clean up memory
+
+
+    // std::string inputType;
+    // inputType = "Note";
+    // // std::cout << "Enter graphic type ('Note' or 'Rest'): ";
+    // // std::cin >> inputType;
+
+    // // A prototype object is created based on user input
+    // // This is done by allocating a prototype object based on the user's choice at runtime
+    // Graphic* proto = createGraphicByName(inputType);
+    // std::cout << "Address of proto: " << proto << "\n";
+    // if (!proto) {
+    //     std::cout << "Invalid graphic type!\n";
+    //     return 1;
+    // }
+
+    // // Then a GraphicTool is created with the prototype
+    // // The prototype object is then passed to the GraphicTool.
+    // // This usually involves storing a pointer to the prototype object within the GraphicTool.\
+    // // At this point, the tool just holds a reference (pointer) to the already allocated prototype object; no new memory for the prototype is allocated here.
+    // GraphicTool tool(proto);
+    // std::cout << "Address of proto: " << proto << "\n";
+    // Graphic* myGraphic = tool.createGraphic();
+    // std::cout << "Address of myGraphic: " << myGraphic << "\n";
+    // myGraphic->draw();
+    // delete myGraphic;
 
     return 0;
 }
