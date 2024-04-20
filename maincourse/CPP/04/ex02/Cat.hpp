@@ -15,9 +15,9 @@ public:
     Cat &operator=(const Cat &copy); // Assignation operator
     virtual ~Cat(); // Destructor
 
+    virtual void makeSound() const;
     void modifyBrainIdea(int index, std::string idea);
     std::string getBrainIdea(int index) const;
-    virtual void makeSound() const;
 };
 
 #endif

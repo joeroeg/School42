@@ -15,10 +15,10 @@ public:
     Dog &operator=(const Dog &copy); // Assignation operator
     virtual ~Dog(); // Destructor
 
-    void modifyBrainIdea(int index, std::string idea);
-    std::string getBrainAddress() const;
-    std::string getBrainIdea(int index) const;
     virtual void makeSound() const;
+    void modifyBrainIdea(int index, std::string idea);
+    std::string getBrainIdea(int index) const;
+    std::string getBrainAddress() const;
 };
 
 #endif

@@ -48,9 +48,23 @@ int main() {
         delete animals[i];
     }
 
-    std::cout << "-------------------" << std::endl;
+    // std::cout << "-------------------" << std::endl;
 
-    testDeepCopy();
+    // // Test deep copy
+    // testDeepCopy();
+
+    // std::cout << "-------------------" << std::endl;
+
+    // // Test deep copy additionally
+    // Dog basic;
+    // basic.modifyBrainIdea(0, "Play");
+
+    // {
+    //     Dog tmp = basic;
+    //     tmp.modifyBrainIdea(0, "Sleep");
+    //      std::cout << "This should output `Sleep` Tmp's idea: " << tmp.getBrainIdea(0) << std::endl;
+    // }
+    // std::cout << "This should output `Play` Basic's idea after tmp is destroyed: " << basic.getBrainIdea(0) << std::endl;
     return 0;
 }
 
