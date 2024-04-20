@@ -13,6 +13,7 @@ Brain::Brain() {
 
 Brain::Brain(const Brain &copy) {
     std::copy(copy.ideas, copy.ideas + 100, ideas);
+    std::cout << "Brain copy constructor called" << std::endl;
 }
 
 // Assignation operator
