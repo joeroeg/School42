@@ -34,8 +34,6 @@
 /*
 The clone() method is particularly associated with the Prototype design pattern, which is part of the Gang of Four (GoF) design patterns.
 The Gang of Four refers to four authors—Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides—who collectively wrote the seminal book "Design Patterns: Elements of Reusable Object-Oriented Software" in 1994. This book is a foundational resource in object-oriented software engineering and describes various software design patterns, including the Prototype pattern.
-
-
 */
 
 /*
