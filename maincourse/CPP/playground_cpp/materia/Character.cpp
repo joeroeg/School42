@@ -13,7 +13,7 @@ std::string const& Character::getName() const {
 Character::~Character() {
     for (int i = 0; i < 4; ++i) {
         delete _inventory[i];  // Free each materia in the inventory
-        _inventory[i] = nullptr;
+        _inventory[i] = NULL;
     }
 }
 
