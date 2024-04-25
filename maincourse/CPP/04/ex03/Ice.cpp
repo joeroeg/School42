@@ -17,7 +17,7 @@ Ice::~Ice() {
     std::cout << "Ice destructor called" << std::endl;
 }
 
-Ice & Ice::operator=(Ice const & src) {
+Ice& Ice::operator=(Ice const & src) {
     std::cout << "Ice assignment operator called" << std::endl;
     if (this != &src) {
         this->_type = src._type;

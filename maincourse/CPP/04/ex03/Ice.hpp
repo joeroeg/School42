@@ -8,10 +8,10 @@
 class Ice : public AMateria {
 public:
     Ice(); // default constructor
-    Ice(std::string const & type); // parameterized constructor
+    Ice(std::string const& type); // parameterized constructor
     virtual ~Ice(); // destructor
-    Ice(Ice const & src); // copy constructor
-    Ice & operator=(Ice const & src); // assignment operator
+    Ice(Ice const& src); // copy constructor
+    Ice& operator=(Ice const& src); // assignment operator
 
     virtual AMateria* clone() const;
     virtual void use(ICharacter& target);

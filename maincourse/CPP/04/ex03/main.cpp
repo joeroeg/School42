@@ -69,8 +69,8 @@ int main()
     me->use(1, *bob);
 
     // // Unequip the materia
-    // me->unequip(0);
-    // me->unequip(1);
+    me->unequip(0);
+    me->unequip(1);
 
     // Use the materia after unequipping
     me->use(0, *bob);
@@ -81,8 +81,8 @@ int main()
     delete bob;
     delete src;
     delete src2;
-    // delete ice;
-    // delete cure;
+    delete ice;
+    delete cure;
 
     return 0;
 }
@@ -98,4 +98,4 @@ int main()
 //     delete me;
 //     delete src;
 //     return 0;
-}
+// }
