@@ -79,7 +79,7 @@ int main(void)
         if (line)
         {
             printf("%s", line);
-            free(line);
+            // free(line);
         }
 
         line = get_next_line(fd2);

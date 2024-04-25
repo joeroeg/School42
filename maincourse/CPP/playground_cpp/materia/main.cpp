@@ -28,36 +28,61 @@ int main()
     // delete clone;
 
     // character creation and inventory test
+    std::cout << "\ncharacter creation and inventory test(Character class)" << std::endl;
     Character hero("Hero");
-    std::cout << hero.getName() << std::endl;
-    hero.printInventory(hero);
+    // std::cout << hero.getName() << std::endl;
+    // hero.printInventory(hero);
 
     // use example
+    std::cout << "\ntest use (Ice class)" << std::endl;
     AMateria* ice = new Ice("ice");
-    Ice iceMateria;
-    iceMateria.use(hero);
+    // Ice iceMateria;
+    // iceMateria.use(hero);
 
-    // test equip
+    // // test equip (Icharacter class)
+    // std::cout << "\ntest equip (Icharacter class)" << std::endl;
+    // hero.equip(ice);
+    // hero.equip(ice);
+    // hero.equip(ice);
+    // hero.equip(ice);
+    // hero.printInventory(hero);
+
+    // // test use on target (Icharacter class)
+    // std::cout << "\ntest use on target (Icharacter class)" << std::endl;
+    // hero.use(0, hero);
+    // hero.use(1, hero);
+    // hero.use(2, hero);
+    // hero.use(3, hero);
+
+    // // test unequip (Icharacter class)
+    // std::cout << "\ntest unequip (Icharacter class)" << std::endl;
+    // hero.unequip(0);
+    // hero.unequip(1);
+    // hero.unequip(2);
+    // hero.unequip(3);
+    // hero.printInventory(hero);
+
+    // test copy constructor of Character
+    std::cout << "\ntest copy constructor (Character class)" << std::endl;
+    std::cout << "hero" << std::endl;
     hero.equip(ice);
     hero.equip(ice);
     hero.equip(ice);
     hero.equip(ice);
-    hero.printInventory(hero);
+    Character hero_copy = hero;
+    // std::cout << "\nhero inventory;" << std::endl;
+    // hero.printInventory(hero);
 
-    // test use target
-    hero.use(0, hero);
-    hero.use(1, hero);
-    hero.use(2, hero);
-    hero.use(3, hero);
+    // std::cout << "\nhero_copy inventory;" << std::endl;
+    // hero_copy.printInventory(hero_copy);
 
-    // test unequip
-    hero.unequip(0);
-    hero.unequip(1);
-    hero.unequip(2);
-    hero.unequip(3);
-    hero.printInventory(hero);
+    // // test assignment operator of Character
+    // std::cout << "\ntest assignment operator of Character (Character class)" << std::endl;
+    // hero_copy = hero;
+    // hero_copy.printInventory(hero_copy);
 
-
+    delete ice;
+    std::cout << "\nDestructors" << std::endl;
 
     return 0;
 }

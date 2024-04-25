@@ -1,5 +1,6 @@
 #include "Character.hpp"
 
+// Parametrized constructor
 Character::Character(std::string const &name) : _name(name)
 {
     std::cout << "Character " << _name << " created" << std::endl;
@@ -7,12 +8,14 @@ Character::Character(std::string const &name) : _name(name)
         _inventory[i] = NULL;
 }
 
+// Copy constructor
 Character::Character(Character const &src)
 {
     std::cout << "Character " << _name << " created" << std::endl;
     *this = src;
 }
 
+// Assignment operator
 Character &Character::operator=(Character const &src)
 {
     _name = src._name;
@@ -26,6 +29,7 @@ Character &Character::operator=(Character const &src)
     return *this;
 }
 
+// Destructor
 Character::~Character()
 {
     std::cout << "Character " << _name << " destroyed" << std::endl;
