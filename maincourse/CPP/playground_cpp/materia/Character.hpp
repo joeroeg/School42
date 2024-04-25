@@ -4,6 +4,7 @@
 #include "ICharacter.hpp"
 #include "AMateria.hpp"
 #include <string>
+#include <vector>
 
 class Character : public ICharacter {
 private:
@@ -22,5 +23,7 @@ public:
     virtual void use(int idx, ICharacter& target);
     void printInventory(const Character& name);
 };
+
+void cleanupDroppedMateria();
 
 #endif

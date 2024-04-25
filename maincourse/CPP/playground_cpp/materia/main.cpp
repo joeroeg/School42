@@ -69,38 +69,59 @@ int main()
     hero.equip(ice);
     hero.equip(ice);
     hero.equip(ice);
+
     Character hero_copy = hero;
-    // std::cout << "\nhero inventory;" << std::endl;
-    // hero.printInventory(hero);
+    std::cout << "\nhero inventory;" << std::endl;
+    hero.printInventory(hero);
 
-    // std::cout << "\nhero_copy inventory;" << std::endl;
-    // hero_copy.printInventory(hero_copy);
+    std::cout << "\nhero_copy inventory;" << std::endl;
+    hero_copy.printInventory(hero_copy);
 
-    // // test assignment operator of Character
-    // std::cout << "\ntest assignment operator of Character (Character class)" << std::endl;
-    // hero_copy = hero;
-    // hero_copy.printInventory(hero_copy);
+    // test assignment operator of Character
+    std::cout << "\ntest assignment operator of Character (Character class)" << std::endl;
+    hero_copy = hero;
+    hero_copy.printInventory(hero_copy);
+
+    // test unequip
+    std::cout << "\ntest unequip (Character class)" << std::endl;
+    hero.printInventory(hero);
+    hero.unequip(0);
+    hero.unequip(1);
+    hero.unequip(2);
+    hero.unequip(3);
+    hero.unequip(0);
+    hero.unequip(1);
+    hero.unequip(2);
+    hero.unequip(3);
+    hero.printInventory(hero);
+    hero_copy.printInventory(hero_copy);
+
+
+    //
 
     delete ice;
+    cleanupDroppedMateria();
     std::cout << "\nDestructors" << std::endl;
 
     return 0;
 }
 
-/*
-    // IMateriaSource* src = new MateriaSource();
-    // src->learnMateria(new Ice());
-    // src->learnMateria(new Cure());
-    // ICharacter* me = new Character("me");
-    // AMateria* tmp;
-    // tmp = src->createMateria("ice");
-    // me->equip(tmp);
-    // tmp = src->createMateria("cure");
-    // me->equip(tmp);
-    // ICharacter* bob = new Character("bob");
-    // me->use(0, *bob);
-    // me->use(1, *bob);
-    // delete bob;
-    // delete me;
-    // delete src;
-*/
+// int main() {
+
+//     IMateriaSource* src = new MateriaSource();
+//     src->learnMateria(new Ice());
+//     src->learnMateria(new Cure());
+//     ICharacter* me = new Character("me");
+//     AMateria* tmp;
+//     tmp = src->createMateria("ice");
+//     me->equip(tmp);
+//     tmp = src->createMateria("cure");
+//     me->equip(tmp);
+//     ICharacter* bob = new Character("bob");
+//     me->use(0, *bob);
+//     me->use(1, *bob);
+//     delete bob;
+//     delete me;
+//     delete src;
+//     return 0;
+// }
