@@ -11,6 +11,10 @@ std::string const& Character::getName() const {
 }
 
 Character::~Character() {
+    for (int i = 0; i < 4; ++i) {
+        delete _inventory[i];  // Free each materia in the inventory
+        _inventory[i] = nullptr;
+    }
 }
 
 // Copy Constructor (Deep copy)
@@ -24,7 +28,7 @@ Character::Character(const Character &src) : _name(src._name) {
         }
         else
         {
-            _inventory[i] = nullptr;
+            _inventory[i] = NULL;
             std::cout << "Copying inventory slot " << i << ": " << _inventory[i] << std::endl;
         }
 }
@@ -50,7 +54,7 @@ Character &Character::operator=(const Character &rhs) {
                 std::cout << "Assigning inventory slot " << i << ": " << _inventory[i] << std::endl;
             }
             else
-                _inventory[i] = nullptr;
+                _inventory[i] = NULL;
         }
     }
     return *this;
@@ -70,7 +74,7 @@ Character &Character::operator=(const Character &rhs) {
 
 void Character::printInventory(const Character& name) {
     for (int i = 0; i < 4; ++i) {
-        if (name._inventory[i] != nullptr)
+        if (name._inventory[i] != NULL)
             std::cout << "Slot " << i << ": " << name._inventory[i]->getType() << " " << name._inventory[i] <<std::endl;
             // std::cout << "Slot " << i << ": " << typeid(*_inventory[i]).name() << " at " << _inventory[i] << std::endl;
         else
@@ -80,8 +84,8 @@ void Character::printInventory(const Character& name) {
 
 void Character::equip(AMateria* m) {
     for (int i = 0; i < 4; ++i) {
-        if (_inventory[i] == nullptr) {
-            _inventory[i] = m;
+        if (_inventory[i] == NULL) {
+            _inventory[i] = m->clone();
             std::cout << "Equipping materia at slot " << i << ": " << m << std::endl;
             break;
         }
@@ -90,7 +94,7 @@ void Character::equip(AMateria* m) {
 
 void Character::unequip(int idx) {
     if (idx >= 0 && idx < 4) {
-        _inventory[idx] = nullptr;
+        _inventory[idx] = NULL;
     }
 }
 

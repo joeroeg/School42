@@ -20,4 +20,7 @@ re: fclean all
 run: all
 	@./$(TARGET)
 
+val: all
+	@ valgrind ./$(TARGET)
+
 .PHONY: all
