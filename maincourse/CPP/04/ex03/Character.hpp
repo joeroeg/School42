@@ -2,6 +2,7 @@
 #define CHARACTER_HPP
 
 #include <iostream>
+#include <vector>
 #include "ICharacter.hpp"
 
 class Character : public ICharacter
@@ -23,5 +24,7 @@ public:
     virtual void use(int idx, ICharacter &target);
     void printInventory(const Character& name);
 };
+
+void cleanupDroppedMateria();
 
 #endif

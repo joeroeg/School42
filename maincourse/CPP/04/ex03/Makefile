@@ -20,4 +20,7 @@ re: fclean all
 run: all
 	@./$(TARGET)
 
+val: all
+	@ valgrind --leak-check=full ./$(TARGET)
+
 .PHONY: all

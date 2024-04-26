@@ -1,5 +1,8 @@
 #include "Character.hpp"
 
+// container for dropped Materia
+std::vector<AMateria*> droppedMateria;
+
 // Parametrized constructor
 Character::Character(std::string const &name) : _name(name)
 {
@@ -87,4 +90,12 @@ void Character::printInventory(const Character& name) {
         else
             std::cout << "Slot " << i << ": Empty" << std::endl;
     }
+}
+
+
+void cleanupDroppedMateria() {
+    for (std::vector<AMateria*>::iterator it = droppedMateria.begin(); it != droppedMateria.end(); ++it) {
+        delete *it;
+    }
+    droppedMateria.clear();
 }
