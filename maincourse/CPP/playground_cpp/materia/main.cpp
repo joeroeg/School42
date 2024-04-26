@@ -33,7 +33,7 @@ void testCharacterOperations() {
     std::cout << hero.getName() << std::endl;
     hero.printInventory(hero);
 
-    AMateria* ice = new Ice("ice");
+    AMateria* ice = new Ice();
     hero.equip(ice);
     hero.equip(ice);
     hero.equip(ice);
@@ -130,10 +130,10 @@ void CreateMateriaLeak()
 int main() {
     // testConstructorsAndOperators();
     // testClone();
-    // testCharacterOperations();
+    testCharacterOperations();
     // testCharacterCopyAndAssignment();
     // testMateriaSource();
-    subjectTestCase();
+    // subjectTestCase();
     // CreateMateriaLeak();
 
 
