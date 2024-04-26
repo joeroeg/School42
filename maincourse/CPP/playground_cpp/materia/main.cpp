@@ -91,7 +91,7 @@ void subjectTestCase()
     src->learnMateria(new Cure());
     ICharacter* me = new Character("me");
     AMateria* tmp;
-    tmp = src->createMateria("ice");
+    tmp = src->createMateria("ice"); // leak occur here
     me->equip(tmp);
     tmp = src->createMateria("cure");
     me->equip(tmp);
@@ -99,10 +99,34 @@ void subjectTestCase()
     me->use(0, *bob);
     me->use(1, *bob);
 
+    delete tmp;
     delete bob;
     delete me;
     delete src;
 }
+
+// void CreateMateriaLeak()
+// {
+//     IMateriaSource* src = new MateriaSource();
+//     src->learnMateria(new Ice());
+//     AMateria* tmp;
+//     tmp = src->createMateria("ice"); // leak occur here
+
+//     delete src;
+// }
+
+void CreateMateriaLeak()
+{
+    IMateriaSource* src = new MateriaSource();
+    src->learnMateria(new Ice());
+    AMateria* tmp;
+    tmp = src->createMateria("ice"); // tmp now points to a cloned Ice object
+    // tmp = src->createMateria("cure");
+
+    delete tmp;  // Correctly delete the cloned Ice object
+    delete src;  // Delete the source after its use
+}
+
 
 int main() {
     // testConstructorsAndOperators();
@@ -110,7 +134,8 @@ int main() {
     // testCharacterOperations();
     // testCharacterCopyAndAssignment();
     // testMateriaSource();
-    subjectTestCase();
+    // subjectTestCase();
+    CreateMateriaLeak();
 
 
     return 0;
