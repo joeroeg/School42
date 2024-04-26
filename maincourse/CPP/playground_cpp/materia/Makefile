@@ -21,6 +21,6 @@ run: all
 	@./$(TARGET)
 
 val: all
-	@ valgrind ./$(TARGET)
+	@ valgrind --leak-check=full ./$(TARGET)
 
 .PHONY: all

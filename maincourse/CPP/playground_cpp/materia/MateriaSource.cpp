@@ -54,7 +54,7 @@ void MateriaSource::learnMateria(AMateria *m)
 
 AMateria* MateriaSource::createMateria(std::string const& type) {
     for (int i = 0; i < 4; ++i) {
-        if (_slot[i] != nullptr && _slot[i]->getType() == type) {
+        if (_slot[i] != NULL && _slot[i]->getType() == type) {
             std::cout << "Creating a new materia of type: " << type << std::endl;
             return _slot[i]->clone();
         }

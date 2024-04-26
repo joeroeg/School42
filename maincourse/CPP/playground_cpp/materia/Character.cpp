@@ -8,10 +8,6 @@ Character::Character(std::string const &name) : _name(name) {
         _inventory[i] = NULL;
 }
 
-std::string const& Character::getName() const {
-    return _name;
-}
-
 /**
  * @note If the destructor or unequip did not properly delete cloned objects,
  * they remained in memory without any references after the Character instance was destroyed or the inventory was altered, leading to leaks.
@@ -20,8 +16,13 @@ std::string const& Character::getName() const {
 */
 Character::~Character() {
     for (int i = 0; i < 4; ++i) {
-        if (_inventory[i] != NULL) delete _inventory[i];
+        if (_inventory[i] != NULL)
+            delete _inventory[i];
     }
+}
+
+std::string const& Character::getName() const {
+    return _name;
 }
 
 // Copy Constructor (Deep copy)
@@ -97,10 +98,13 @@ void Character::equip(AMateria* m) {
         if (_inventory[i] == NULL) {
             _inventory[i] = m->clone();
             std::cout << "Equipping materia at slot " << i << ": " << m << std::endl;
-            break;
+            return;
         }
     }
+    std::cout << "Inventory full. Cannot equip new materia." << std::endl;
+    // delete m;
 }
+
 
 
 void Character::unequip(int idx) {

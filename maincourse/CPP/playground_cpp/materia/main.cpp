@@ -53,20 +53,25 @@ void testCharacterOperations() {
     hero.unequip(3);
     hero.printInventory(hero);
 
+    cleanupDroppedMateria();
     delete ice;
 }
 
 void testCharacterCopyAndAssignment() {
     Character hero("Hero");
-    hero.equip(new Ice("ice"));
-    hero.equip(new Ice("ice"));
-    hero.equip(new Ice("ice"));
-    hero.equip(new Ice("ice"));
+    Ice* ice = new Ice();
+
+    hero.equip(ice);
+    hero.equip(ice);
+    hero.equip(ice);
+    hero.equip(ice);
 
     Character hero_copy = hero;
     hero_copy.printInventory(hero_copy);
     hero_copy = hero;
     hero_copy.printInventory(hero_copy);
+
+    delete ice;
 }
 
 void testMateriaSource() {
@@ -82,12 +87,13 @@ void testMateriaSource() {
 }
 
 int main() {
-    testConstructorsAndOperators();
-    testClone();
-    testCharacterOperations();
-    testCharacterCopyAndAssignment();
-    // testMateriaSource();
+    // testConstructorsAndOperators();
+    // testClone();
+    // testCharacterOperations();
+    // testCharacterCopyAndAssignment();
+    testMateriaSource();
 
+    cleanupDroppedMateria();
     return 0;
 }
 
