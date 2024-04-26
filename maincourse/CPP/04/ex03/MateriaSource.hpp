@@ -10,10 +10,10 @@ private:
     AMateria *_source[4];
 
 public:
-    MateriaSource(); // default constructor
-    MateriaSource(MateriaSource const &src); // copy constructor
+    MateriaSource();                                    // default constructor
+    MateriaSource(MateriaSource const &src);            // copy constructor
     MateriaSource &operator=(MateriaSource const &src); // assignment operator
-    virtual ~MateriaSource(); // destructor
+    virtual ~MateriaSource();                           // destructor
 
     AMateria *getMateria(int idx) const;
     virtual void learnMateria(AMateria *m);
