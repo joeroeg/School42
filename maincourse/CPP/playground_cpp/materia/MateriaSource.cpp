@@ -13,15 +13,11 @@ MateriaSource::~MateriaSource() {
             delete _slot[i];
 }
 
-MateriaSource::MateriaSource(MateriaSource const& other) {
+MateriaSource::MateriaSource(MateriaSource const &src)
+{
     std::cout << "MateriaSource copy constructor" << std::endl;
-    for (int i = 0; i < 4; i++) {
-        _slot[i] = NULL;
-        if(other._slot[i])
-            _slot[i] = other._slot[i]->clone();
-    }
+    *this = src;
 }
-
 
 MateriaSource& MateriaSource::operator=(MateriaSource const& other) {
     std::cout << "MateriaSource assignment operator" << std::endl;

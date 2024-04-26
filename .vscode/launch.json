@@ -1,13 +1,11 @@
 {
     "configurations": [
-<<<<<<< HEAD
+
         {
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            // "program": "${workspaceRoot}",
-            "program": "/home/device/Documents/programming/cub3d/cub3D",
-            "args": ["map.cub"],
+            "program": "/home/device/Documents/programming/42/maincourse/CPP/playground_cpp/materia/a.out",
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
@@ -45,19 +43,3 @@
     ],
 }
 
-=======
-    {
-        "name": "(lldb) Launch",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/cub3D",
-        "args": ["./src/map.cub"],
-        "stopAtEntry": false,
-        "cwd": "${fileDirname}",
-        "environment": [],
-        "externalConsole": false,
-        "MIMode": "lldb"
-    }
-    ]
-}
->>>>>>> secondary/main

@@ -16,7 +16,7 @@ Character::Character(std::string const &name) : _name(name) {
 */
 Character::~Character() {
     for (int i = 0; i < 4; ++i) {
-        if (_inventory[i] != NULL)
+        if (_inventory[i])
             delete _inventory[i];
     }
 }

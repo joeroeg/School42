@@ -12,22 +12,53 @@ Character::Character(std::string const &name) : _name(name)
 }
 
 // Copy constructor
-Character::Character(Character const &src)
-{
-    std::cout << "Character " << _name << " created" << std::endl;
-    *this = src;
+// Character::Character(Character const &src)
+// {
+//     std::cout << "Character " << _name << " created" << std::endl;
+//     *this = src;
+// }
+Character::Character(const Character &src) : _name(src._name) {
+    std::cout << "Creating copy of Character: " << _name << std::endl;
+    for (int i = 0; i < 4; ++i)
+        if (src._inventory[i])
+        {
+            _inventory[i] = src._inventory[i]->clone();
+            std::cout << "Copying inventory slot " << i << ": " << _inventory[i] << std::endl;
+        }
+        else
+        {
+            _inventory[i] = NULL;
+            std::cout << "Copying inventory slot " << i << ": " << _inventory[i] << std::endl;
+        }
 }
 
 // Assignment operator
-Character &Character::operator=(Character const &src)
-{
-    _name = src._name;
-    std::cout << "Character " << _name << " created" << std::endl;
-    for (int i = 0; i < 4; i++)
-    {
-        if (_inventory[i])
+// Character &Character::operator=(Character const &src)
+// {
+//     _name = src._name;
+//     std::cout << "Character " << _name << " created" << std::endl;
+//     for (int i = 0; i < 4; i++)
+//     {
+//         if (_inventory[i])
+//             delete _inventory[i];
+//         _inventory[i] = src._inventory[i]->clone();
+//     }
+//     return *this;
+// }
+
+Character &Character::operator=(const Character &rhs) {
+    if (this != &rhs) {
+        _name = rhs._name;
+        for (int i = 0; i < 4; ++i) {
             delete _inventory[i];
-        _inventory[i] = src._inventory[i]->clone();
+            if (rhs._inventory[i])
+            {
+                _inventory[i] = rhs._inventory[i]->clone();
+                std::cout << "Assigning inventory slot " << i << ": " << _inventory[i] << std::endl;
+            }
+            else
+                _inventory[i] = NULL;
+        }
     }
     return *this;
 }
@@ -59,7 +90,7 @@ void Character::equip(AMateria *m)
         // printf("inventory[%d]: %p\n", i, _inventory[i]);
         if (!_inventory[i])
         {
-            _inventory[i] = m;
+            _inventory[i] = m->clone();
             // printf("inventory[%d]: %p\n", i, _inventory[i]);
             return;
         }

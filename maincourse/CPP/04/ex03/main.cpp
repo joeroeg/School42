@@ -81,8 +81,6 @@ void testMateriaSource() {
     hero.equip(newIce);
     hero.printInventory(hero);
     hero.use(0, hero);
-
-    delete newIce;
 }
 
 void subjectTestCase()
@@ -99,17 +97,18 @@ void subjectTestCase()
     ICharacter* bob = new Character("bob");
     me->use(0, *bob);
     me->use(1, *bob);
-    delete bob;
+
     delete me;
+    delete bob;
     delete src;
 }
 
 int main() {
-    testConstructorsAndOperators();
-    testClone();
-    testCharacterOperations();
-    testCharacterCopyAndAssignment();
-    testMateriaSource();
+    // testConstructorsAndOperators();
+    // testClone();
+    // testCharacterOperations();
+    // testCharacterCopyAndAssignment();
+    // testMateriaSource();
     subjectTestCase();
 
 
