@@ -7,7 +7,6 @@
 #include "MateriaSource.hpp"
 #include <cassert>
 
-
 void testConstructorsAndOperators() {
     Ice original_ice;
     Ice original_ice_2;
@@ -19,7 +18,6 @@ void testConstructorsAndOperators() {
     copy_ice = original_ice_2;
     std::cout << copy_ice.getType() << std::endl;
 }
-
 
 void testClone() {
     Ice* ice = new Ice();
@@ -93,7 +91,6 @@ int main() {
     // testCharacterCopyAndAssignment();
     testMateriaSource();
 
-    cleanupDroppedMateria();
     return 0;
 }
 

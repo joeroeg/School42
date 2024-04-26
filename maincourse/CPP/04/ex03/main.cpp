@@ -8,6 +8,30 @@
 #include "Cure.hpp"
 #include "Character.hpp"
 
+void testMateriaSource() {
+    Character hero("Hero");
+    MateriaSource source;
+    source.learnMateria(new Ice());
+    AMateria* newIce = source.createMateria("ice");
+    hero.equip(newIce);
+    hero.printInventory(hero);
+    hero.use(0, hero);
+
+    // delete newIce;
+}
+
+
+int main() {
+    // testConstructorsAndOperators();
+    // testClone();
+    // testCharacterOperations();
+    // testCharacterCopyAndAssignment();
+    testMateriaSource();
+
+    // cleanupDroppedMateria();
+    return 0;
+}
+
 // int main()
 // {
 // 	std::cout << "---Creating a new MateriaSource---" << std::endl;
@@ -42,50 +66,50 @@
 // 	return 0;
 // }
 
-int main()
-{
-    // Create a character
-    ICharacter *me = new Character("me");
-    Character *bob = new Character("bob");
+// int main()
+// {
+//     // Create a character
+//     ICharacter *me = new Character("me");
+//     Character *bob = new Character("bob");
 
-    // Create a materia source
-    IMateriaSource *src = new MateriaSource();
-    MateriaSource *src2 = new MateriaSource();
+//     // Create a materia source
+//     IMateriaSource *src = new MateriaSource();
+//     MateriaSource *src2 = new MateriaSource();
 
-    // Learn some materia
-    src->learnMateria(new Ice());
-    src->learnMateria(new Cure());
+//     // Learn some materia
+//     src->learnMateria(new Ice());
+//     src->learnMateria(new Cure());
 
-    // Create a materia
-    AMateria *ice = src->createMateria("ice");
-    AMateria *cure = src->createMateria("cure");
+//     // Create a materia
+//     AMateria *ice = src->createMateria("ice");
+//     AMateria *cure = src->createMateria("cure");
 
-    // Equip some materia
-    me->equip(ice);
-    me->equip(cure);
+//     // Equip some materia
+//     me->equip(ice);
+//     me->equip(cure);
 
-    // Use the materia
-    me->use(0, *bob);
-    me->use(1, *bob);
+//     // Use the materia
+//     me->use(0, *bob);
+//     me->use(1, *bob);
 
-    // // Unequip the materia
-    me->unequip(0);
-    me->unequip(1);
+//     // // Unequip the materia
+//     me->unequip(0);
+//     me->unequip(1);
 
-    // Use the materia after unequipping
-    me->use(0, *bob);
-    me->use(1, *bob);
+//     // Use the materia after unequipping
+//     me->use(0, *bob);
+//     me->use(1, *bob);
 
-    // Delete the character
-    delete me;
-    delete bob;
-    delete src;
-    delete src2;
-    delete ice;
-    delete cure;
+//     // Delete the character
+//     delete me;
+//     delete bob;
+//     delete src;
+//     delete src2;
+//     delete ice;
+//     delete cure;
 
-    return 0;
-}
+//     return 0;
+// }
 
 // int main()
 // {

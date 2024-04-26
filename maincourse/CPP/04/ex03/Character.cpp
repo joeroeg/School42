@@ -78,3 +78,13 @@ void Character::use(int idx, ICharacter &target)
         return;
     _inventory[idx]->use(target);
 }
+
+void Character::printInventory(const Character& name) {
+    for (int i = 0; i < 4; ++i) {
+        if (name._inventory[i] != NULL)
+            std::cout << "Slot " << i << ": " << name._inventory[i]->getType() << " " << name._inventory[i] <<std::endl;
+            // std::cout << "Slot " << i << ": " << typeid(*_inventory[i]).name() << " at " << _inventory[i] << std::endl;
+        else
+            std::cout << "Slot " << i << ": Empty" << std::endl;
+    }
+}
