@@ -50,6 +50,15 @@ void MateriaSource::learnMateria(AMateria *m)
         delete m;
 }
 
+// void MateriaSource::learnMateria(AMateria* inst) {
+// 	if (nbMateria < 4) {
+// 		_slot[nbMateria] = inst;
+// 		nbMateria++;
+// 	}
+// 	else
+// 		std::cout << "no space left in the MateriaSource" << std::endl;
+// }
+
 AMateria* MateriaSource::createMateria(std::string const& type) {
     for (int i = 0; i < 4; ++i) {
         if (_slot[i] && _slot[i]->getType() == type) {

@@ -99,7 +99,6 @@ void subjectTestCase()
     me->use(0, *bob);
     me->use(1, *bob);
 
-    delete tmp;
     delete bob;
     delete me;
     delete src;
@@ -121,7 +120,7 @@ void CreateMateriaLeak()
     src->learnMateria(new Ice());
     AMateria* tmp;
     tmp = src->createMateria("ice"); // tmp now points to a cloned Ice object
-    // tmp = src->createMateria("cure");
+    tmp = src->createMateria("cure");
 
     delete tmp;  // Correctly delete the cloned Ice object
     delete src;  // Delete the source after its use
@@ -134,8 +133,8 @@ int main() {
     // testCharacterOperations();
     // testCharacterCopyAndAssignment();
     // testMateriaSource();
-    // subjectTestCase();
-    CreateMateriaLeak();
+    subjectTestCase();
+    // CreateMateriaLeak();
 
 
     return 0;

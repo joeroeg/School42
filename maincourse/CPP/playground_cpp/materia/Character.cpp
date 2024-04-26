@@ -98,13 +98,12 @@ void Character::equip(AMateria* m) {
         return;
     for (int i = 0; i < 4; ++i) {
         if (_inventory[i] == NULL) {
-            _inventory[i] = m->clone();
+            _inventory[i] = m;
             std::cout << "Equipping materia at slot " << i << ": " << m << std::endl;
             return;
         }
     }
     std::cout << "Inventory full. Cannot equip new materia." << std::endl;
-    // delete m;
 }
 
 
