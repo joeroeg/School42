@@ -4,19 +4,26 @@
 std::vector<AMateria*> droppedMateria;
 
 // Parametrized constructor
-Character::Character(std::string const &name) : _name(name)
-{
+Character::Character(std::string const &name) : _name(name) {
     std::cout << "Character " << _name << " created" << std::endl;
     for (int i = 0; i < 4; i++)
         _inventory[i] = NULL;
 }
 
-// Copy constructor
-// Character::Character(Character const &src)
-// {
-//     std::cout << "Character " << _name << " created" << std::endl;
-//     *this = src;
-// }
+// Destructor
+Character::~Character() {
+    std::cout << "Character " << _name << " destroyed" << std::endl;
+    for (int i = 0; i < 4; i++) {
+        if (_inventory[i])
+            delete _inventory[i];
+    }
+}
+
+std::string const &Character::getName() const {
+    return _name;
+}
+
+// Copy Constructor (Deep copy)
 Character::Character(const Character &src) : _name(src._name) {
     std::cout << "Creating copy of Character: " << _name << std::endl;
     for (int i = 0; i < 4; ++i)
@@ -32,20 +39,7 @@ Character::Character(const Character &src) : _name(src._name) {
         }
 }
 
-// Assignment operator
-// Character &Character::operator=(Character const &src)
-// {
-//     _name = src._name;
-//     std::cout << "Character " << _name << " created" << std::endl;
-//     for (int i = 0; i < 4; i++)
-//     {
-//         if (_inventory[i])
-//             delete _inventory[i];
-//         _inventory[i] = src._inventory[i]->clone();
-//     }
-//     return *this;
-// }
-
+// Copy Assignment Operator (deep copy)
 Character &Character::operator=(const Character &rhs) {
     if (this != &rhs) {
         _name = rhs._name;
@@ -61,23 +55,6 @@ Character &Character::operator=(const Character &rhs) {
         }
     }
     return *this;
-}
-
-// Destructor
-Character::~Character()
-{
-    std::cout << "Character " << _name << " destroyed" << std::endl;
-    for (int i = 0; i < 4; i++)
-    {
-        if (_inventory[i])
-            delete _inventory[i];
-    }
-}
-
-std::string const &Character::getName() const
-{
-    // std::cout << "Character getName() method called" << std::endl;
-    return _name;
 }
 
 void Character::equip(AMateria *m)
