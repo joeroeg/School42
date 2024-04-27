@@ -8,10 +8,6 @@ Cure::Cure(std::string const & type) : AMateria(type) {
     std::cout << "Cure parameterized constructor called" << std::endl;
 }
 
-// Cure::Cure(Cure const & src) : AMateria(src._type) {
-//     std::cout << "Cure copy constructor called" << std::endl;
-// }
-
 Cure::Cure(Cure const & src) {
     std::cout << "Cure copy constructor called" << std::endl;
     *this = src;

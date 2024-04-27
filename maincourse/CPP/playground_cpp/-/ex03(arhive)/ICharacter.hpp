@@ -3,10 +3,12 @@
 
 #include <iostream>
 #include <string>
+#include "AMateria.hpp"
 
-class AMateria; // forward declaration
+class AMateria;
 
 class ICharacter {
+
 public:
     virtual ~ICharacter() {}
     virtual std::string const & getName() const = 0;

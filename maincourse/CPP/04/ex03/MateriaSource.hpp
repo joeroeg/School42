@@ -4,19 +4,17 @@
 #include <iostream>
 #include "IMateriaSource.hpp"
 
-class MateriaSource : public IMateriaSource
-{
+class MateriaSource : public IMateriaSource {
 private:
-    AMateria *_source[4];
+    AMateria* _slot[4];
 
 public:
-    MateriaSource();                                    // default constructor
-    MateriaSource(MateriaSource const &src);            // copy constructor
-    MateriaSource &operator=(MateriaSource const &src); // assignment operator
-    virtual ~MateriaSource();                           // destructor
+    MateriaSource();
+    MateriaSource(MateriaSource const &other);
+    MateriaSource &operator=(MateriaSource const &other);
+    virtual ~MateriaSource();
 
-    AMateria *getMateria(int idx) const;
-    virtual void learnMateria(AMateria *m);
+    virtual void learnMateria(AMateria *);
     virtual AMateria *createMateria(std::string const &type);
 };
 

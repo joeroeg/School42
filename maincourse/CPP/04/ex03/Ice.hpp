@@ -1,17 +1,17 @@
 #ifndef ICE_HPP
 #define ICE_HPP
 
+#include "AMateria.hpp"
+#include "ICharacter.hpp"
 #include <iostream>
 #include <string>
-#include "AMateria.hpp"
 
 class Ice : public AMateria {
 public:
-    Ice(); // default constructor
-    Ice(std::string const& type); // parameterized constructor
-    virtual ~Ice(); // destructor
-    Ice(Ice const& src); // copy constructor
-    Ice& operator=(Ice const& src); // assignment operator
+    Ice();
+    virtual ~Ice();
+    Ice(Ice const& other);
+    Ice& operator=(Ice const& src);
 
     virtual AMateria* clone() const;
     virtual void use(ICharacter& target);

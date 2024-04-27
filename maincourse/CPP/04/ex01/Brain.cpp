@@ -6,13 +6,8 @@ Brain::Brain() {
 }
 
 // Copy constructor
-// Brain::Brain(const Brain &copy) {
-//     *this = copy;
-//     std::cout << "Brain copy constructor called" << std::endl;
-// }
-
 Brain::Brain(const Brain &copy) {
-    std::copy(copy.ideas, copy.ideas + 100, ideas);
+    *this = copy;
     std::cout << "Brain copy constructor called" << std::endl;
 }
 

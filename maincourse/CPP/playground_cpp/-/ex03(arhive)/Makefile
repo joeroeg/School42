@@ -1,7 +1,7 @@
 TARGET = a.out
 CXX = g++
-CXXFLAGS= -std=c++98 -g # -Wall -Werror -Wextra
-SRCS = main.cpp AMateria.cpp Ice.cpp Character.cpp MateriaSource.cpp Cure.cpp
+CXXFLAGS= -std=c++98 -g #-Wall -Werror -Wextra
+SRCS = main.cpp AMateria.cpp Cure.cpp Ice.cpp MateriaSource.cpp Character.cpp
 OBJS=$(SRCS:.cpp=.o)
 
 all: $(TARGET)

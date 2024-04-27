@@ -18,6 +18,6 @@ fclean: clean
 re: fclean all
 
 run: all
-	@./$(TARGET)
+	./$(TARGET)
 
 .PHONY: all

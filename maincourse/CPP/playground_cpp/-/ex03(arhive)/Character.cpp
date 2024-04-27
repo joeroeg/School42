@@ -4,7 +4,7 @@
 std::vector<AMateria*> droppedMateria;
 
 // Parametrized constructor
-Character::Character(std::string const &name) : _name(name){
+Character::Character(std::string const &name) : _name(name) {
     std::cout << "Character " << _name << " created" << std::endl;
     for (int i = 0; i < 4; i++)
         _inventory[i] = NULL;
@@ -13,16 +13,13 @@ Character::Character(std::string const &name) : _name(name){
 // Destructor
 Character::~Character() {
     std::cout << "Character " << _name << " destroyed" << std::endl;
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 4; i++) {
         if (_inventory[i])
-        {
             delete _inventory[i];
-            _inventory[i] = NULL;
-        }
     }
 }
 
-std::string const& Character::getName() const {
+std::string const &Character::getName() const {
     return _name;
 }
 
@@ -32,7 +29,7 @@ Character::Character(const Character &src) : _name(src._name) {
     for (int i = 0; i < 4; ++i)
         if (src._inventory[i])
         {
-            _inventory[i] = src._inventory[i]->clone(); // without clone it's shallow copy
+            _inventory[i] = src._inventory[i]->clone();
             std::cout << "Copying inventory slot " << i << ": " << _inventory[i] << std::endl;
         }
         else
@@ -65,7 +62,7 @@ void Character::equip(AMateria* m) {
         return;
     for (int i = 0; i < 4; ++i) {
         if (_inventory[i] == NULL) {
-            _inventory[i] = m->clone();
+            _inventory[i] = m;
             std::cout << "Equipping materia at slot " << i << ": " << m << std::endl;
             return;
         }
@@ -73,33 +70,20 @@ void Character::equip(AMateria* m) {
     std::cout << "Inventory full. Cannot equip new materia." << std::endl;
 }
 
-
-void Character::unequip(int idx) {
-    if (idx >= 0 && idx < 4) {
-        if (_inventory[idx])
-        {
-            std::cout << "Unequipping materia at slot " << _inventory[idx] << std::endl;
-            droppedMateria.push_back(_inventory[idx]); // Move the unequipped Materia to the global container
-            _inventory[idx] = NULL;
-        }
-    } else {
-        std::cout << "Invalid materia at slot " << std::endl;
-    }
-
-
+void Character::unequip(int idx)
+{
+    std::cout << "Character unequip() method called" << std::endl;
+    if (idx < 0 || idx >= 4 || !_inventory[idx])
+        return;
+    _inventory[idx] = NULL;
 }
 
-// void Character::unequip(int idx)
-// {
-//     std::cout << "Character unequip() method called" << std::endl;
-//     if (idx < 0 || idx >= 4 || !_inventory[idx])
-//         return;
-//     _inventory[idx] = NULL;
-// }
-
-void Character::use(int idx, ICharacter& target) {
-    if (idx >= 0 && idx < 4 && _inventory[idx])
-        _inventory[idx]->use(target);
+void Character::use(int idx, ICharacter &target)
+{
+    // std::cout << "Character use() method called" << std::endl;
+    if (idx < 0 || idx >= 4 || !_inventory[idx])
+        return;
+    _inventory[idx]->use(target);
 }
 
 void Character::printInventory(const Character& name) {
@@ -112,10 +96,10 @@ void Character::printInventory(const Character& name) {
     }
 }
 
+
 void cleanupDroppedMateria() {
     for (std::vector<AMateria*>::iterator it = droppedMateria.begin(); it != droppedMateria.end(); ++it) {
         delete *it;
     }
     droppedMateria.clear();
 }
-

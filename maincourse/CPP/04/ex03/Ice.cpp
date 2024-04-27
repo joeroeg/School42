@@ -4,13 +4,12 @@ Ice::Ice() : AMateria("ice") {
     std::cout << "Ice default constructor called" << std::endl;
 }
 
-Ice::Ice(std::string const & type) : AMateria(type) {
-    std::cout << "Ice parameterized constructor called" << std::endl;
-}
+// Ice::Ice(std::string const & type) : AMateria(type) {
+//     std::cout << "Ice parameterized constructor called" << std::endl;
+// }
 
-Ice::Ice(Ice const & src) {
+Ice::Ice(Ice const& other) : AMateria(other._type) {
     std::cout << "Ice copy constructor called" << std::endl;
-    *this = src;
 }
 
 Ice::~Ice() {
