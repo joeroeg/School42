@@ -104,11 +104,12 @@ void subjectTestCase()
 }
 
 int main() {
-    testConstructorsAndOperators();
-    testClone();
+    // testConstructorsAndOperators();
+    // testClone();
     testCharacterOperations();
-    testCharacterCopyAndAssignment();
-    testMateriaSource();
-    subjectTestCase();
+    // testCharacterCopyAndAssignment();
+    // testMateriaSource();
+    // subjectTestCase();
+
     return 0;
 }

@@ -25,7 +25,7 @@ AMateria & AMateria::operator=(AMateria const & src) {
 }
 
 std::string const & AMateria::getType() const {
-    std::cout << "AMateria getType() method called" << std::endl;
+    // std::cout << "AMateria getType() method called" << std::endl;
     return this->_type;
 }
 

@@ -90,7 +90,7 @@ void Character::equip(AMateria *m)
         // printf("inventory[%d]: %p\n", i, _inventory[i]);
         if (!_inventory[i])
         {
-            _inventory[i] = m->clone();
+            _inventory[i] = m;
             // printf("inventory[%d]: %p\n", i, _inventory[i]);
             return;
         }
