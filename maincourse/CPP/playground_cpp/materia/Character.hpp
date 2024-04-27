@@ -5,10 +5,12 @@
 #include "AMateria.hpp"
 #include <string>
 #include <vector>
+#include <memory>
 
 class Character : public ICharacter {
 private:
     std::string _name;
+    // std::shared_ptr<AMateria> _inventory[4];
     AMateria* _inventory[4];
 
 public:

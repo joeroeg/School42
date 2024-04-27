@@ -1,4 +1,5 @@
 #include "MateriaSource.hpp"
+#include <cstdio>
 
 MateriaSource::MateriaSource() {
     std::cout << "MateriaSource default constructor" << std::endl;
@@ -10,7 +11,10 @@ MateriaSource::~MateriaSource() {
     std::cout << "MateriaSource default destructor" << std::endl;
     for (int i = 0; i < 4; i++)
         if (_slot[i])
+        {
             delete _slot[i];
+            _slot[i] = NULL;
+        }
 }
 
 MateriaSource::MateriaSource(MateriaSource const &src)
@@ -41,29 +45,17 @@ void MateriaSource::learnMateria(AMateria *m)
     {
         if (!_slot[i])
         {
-            // printf("---Learning %s\n", m->getType().c_str());
             _slot[i] = m;
             return;
         }
     }
-    if (m != NULL)
-        delete m;
 }
-
-// void MateriaSource::learnMateria(AMateria* inst) {
-// 	if (nbMateria < 4) {
-// 		_slot[nbMateria] = inst;
-// 		nbMateria++;
-// 	}
-// 	else
-// 		std::cout << "no space left in the MateriaSource" << std::endl;
-// }
 
 AMateria* MateriaSource::createMateria(std::string const& type) {
     for (int i = 0; i < 4; ++i) {
         if (_slot[i] && _slot[i]->getType() == type) {
             std::cout << "Creating a new materia of type: " << type << std::endl;
-            return _slot[i]->clone();
+            return _slot[i];
         }
     }
     std::cout << "Failed to create materia: No materia of type " << type << " learned" << std::endl;

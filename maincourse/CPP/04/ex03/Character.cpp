@@ -57,21 +57,17 @@ Character &Character::operator=(const Character &rhs) {
     return *this;
 }
 
-void Character::equip(AMateria *m)
-{
+void Character::equip(AMateria* m) {
     if (!m)
         return;
-    std::cout << "Character equip() method called" << std::endl;
-    for (int i = 0; i < 4; i++)
-    {
-        // printf("inventory[%d]: %p\n", i, _inventory[i]);
-        if (!_inventory[i])
-        {
+    for (int i = 0; i < 4; ++i) {
+        if (_inventory[i] == NULL) {
             _inventory[i] = m;
-            // printf("inventory[%d]: %p\n", i, _inventory[i]);
+            std::cout << "Equipping materia at slot " << i << ": " << m << std::endl;
             return;
         }
     }
+    std::cout << "Inventory full. Cannot equip new materia." << std::endl;
 }
 
 void Character::unequip(int idx)

@@ -52,7 +52,7 @@ void testCharacterOperations() {
     hero.unequip(3);
     hero.printInventory(hero);
 
-    cleanupDroppedMateria();
+    // cleanupDroppedMateria();
     delete ice;
 }
 
@@ -106,8 +106,8 @@ void subjectTestCase()
 int main() {
     // testConstructorsAndOperators();
     // testClone();
-    testCharacterOperations();
-    // testCharacterCopyAndAssignment();
+    // testCharacterOperations();
+    testCharacterCopyAndAssignment();
     // testMateriaSource();
     // subjectTestCase();
 

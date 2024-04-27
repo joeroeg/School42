@@ -5,7 +5,6 @@
 #include "Cure.hpp"
 #include "Character.hpp"
 #include "MateriaSource.hpp"
-#include <cassert>
 
 void testConstructorsAndOperators() {
     Ice original_ice;
@@ -30,10 +29,9 @@ void testClone() {
 
 void testCharacterOperations() {
     Character hero("Hero");
-    std::cout << hero.getName() << std::endl;
     hero.printInventory(hero);
-
     AMateria* ice = new Ice();
+
     hero.equip(ice);
     hero.equip(ice);
     hero.equip(ice);
@@ -57,7 +55,8 @@ void testCharacterOperations() {
 
 void testCharacterCopyAndAssignment() {
     Character hero("Hero");
-    Ice* ice = new Ice();
+    hero.printInventory(hero);
+    AMateria* ice = new Ice();
 
     hero.equip(ice);
     hero.equip(ice);
@@ -67,6 +66,12 @@ void testCharacterCopyAndAssignment() {
     Character hero_copy = hero;
     hero_copy.printInventory(hero_copy);
     hero_copy = hero;
+
+    hero_copy.use(0, hero);
+    hero_copy.use(1, hero);
+    hero_copy.use(2, hero);
+    hero_copy.use(3, hero);
+
     hero_copy.printInventory(hero_copy);
 
     delete ice;
@@ -81,7 +86,6 @@ void testMateriaSource() {
     hero.printInventory(hero);
     hero.use(0, hero);
 
-    delete newIce;
 }
 
 void subjectTestCase()
@@ -91,9 +95,9 @@ void subjectTestCase()
     src->learnMateria(new Cure());
     ICharacter* me = new Character("me");
     AMateria* tmp;
-    tmp = src->createMateria("ice"); // leak occur here
+    tmp = src->createMateria("ice");
     me->equip(tmp);
-    // tmp = src->createMateria("cure");
+    tmp = src->createMateria("cure");
     me->equip(tmp);
     ICharacter* bob = new Character("bob");
     me->use(0, *bob);
@@ -104,14 +108,67 @@ void subjectTestCase()
     delete src;
 }
 
-int main() {
-    // testConstructorsAndOperators();
-    // testClone();
-    testCharacterOperations();
-    // testCharacterCopyAndAssignment();
-    // testMateriaSource();
-    // subjectTestCase();
+void multipleEquipTest() {
+    Character hero("Hero");
+    Character villain("Villain");
+    AMateria* ice = new Ice();
+    AMateria* cure = new Cure();
+    hero.equip(ice);
+    hero.equip(cure);
+    hero.equip(ice);
+    hero.equip(cure);
+    hero.equip(ice);
+    hero.equip(cure);
+    hero.equip(ice);
+    hero.printInventory(hero);
 
+    hero.use(0, villain);
+    hero.use(1, villain);
+    hero.use(2, villain);
+    hero.use(3, villain);
+
+    hero.unequip(0);
+    hero.unequip(1);
+    hero.unequip(2);
+    hero.unequip(3);
+    hero.unequip(4);
+    hero.unequip(5);
+    hero.printInventory(hero);
+
+    cleanupDroppedMateria();
+    delete ice;
+    delete cure;
+}
+
+void materiaFactoryTest() {
+    Character hero("Hero");
+    ICharacter* villain = new Character("Villain");
+    IMateriaSource* factory = new MateriaSource();
+    AMateria* ice = new Ice();
+    factory->learnMateria(ice);
+    factory->learnMateria(new Cure());
+    AMateria* tmp_storage;
+    factory->createMateria("ice");
+    tmp_storage = factory->createMateria("cure");
+
+    hero.equip(ice);
+    hero.equip(tmp_storage);
+    hero.use(0, *villain);
+    hero.use(1, hero);
+
+    delete villain;
+    delete factory;
+}
+
+int main() {
+    testConstructorsAndOperators();
+    testClone();
+    testCharacterOperations();
+    testCharacterCopyAndAssignment();
+    testMateriaSource();
+    multipleEquipTest();
+    materiaFactoryTest();
+    subjectTestCase();
 
     return 0;
 }

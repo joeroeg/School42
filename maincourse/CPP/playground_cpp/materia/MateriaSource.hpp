@@ -7,7 +7,6 @@
 class MateriaSource : public IMateriaSource {
 private:
     AMateria* _slot[4];
-    int nbMateria;
 
 public:
     MateriaSource();

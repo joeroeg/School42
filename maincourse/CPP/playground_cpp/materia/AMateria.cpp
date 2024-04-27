@@ -1,20 +1,19 @@
 #include "AMateria.hpp"
 
 AMateria::AMateria() {
-    std::cout << "Default constructor" << std::endl;
+    std::cout << "AMateria Default constructor" << std::endl;
 }
 
 AMateria::~AMateria() {
-    std::cout << "Default destructor" << std::endl;
+    std::cout << "AMateria destructor called" << std::endl;
 }
 
-AMateria::AMateria(std::string const& type) : _type(type)
-{
-    std::cout << "Parameterized constructor" << std::endl;
+AMateria::AMateria(std::string const& type) : _type(type) {
+    std::cout << "AMateria Parameterized constructor" << std::endl;
 }
 
 AMateria::AMateria(AMateria const& other) : _type(other._type) {
-    std::cout << "Copy constructor" << std::endl;
+    std::cout << "AMateria Copy constructor" << std::endl;
 }
 
 AMateria& AMateria::operator=(AMateria const & src) {
@@ -30,5 +29,5 @@ std::string const& AMateria::getType() const {
 }
 
 void AMateria::use(ICharacter& target) {
-    std::cout << "Default use" << std::endl;
+    std::cout << "AMateria Default use" << std::endl;
 }
