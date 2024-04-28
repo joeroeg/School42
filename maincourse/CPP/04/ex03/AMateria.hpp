@@ -10,11 +10,10 @@ protected:
     std::string _type;
 
 public:
-    AMateria();
-    AMateria(std::string const& type);
+    AMateria(const std::string& type);
     virtual ~AMateria();
     AMateria(AMateria const& other);
-    AMateria& operator=(AMateria const& src);
+    AMateria& operator=(const AMateria& src);
 
     std::string const& getType() const; // Returns the materia type
     virtual AMateria* clone() const = 0;
