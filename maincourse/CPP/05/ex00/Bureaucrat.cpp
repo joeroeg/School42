@@ -1,13 +1,16 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
 
+// Constructor
 Bureaucrat::Bureaucrat(const std::string& name, unsigned int grade) : _name(name), _grade(grade) {
     if (grade < 1) throw GradeTooHighException();
     if (grade > 150) throw GradeTooLowException();
 }
 
+// Destructor
 Bureaucrat::~Bureaucrat() {}
 
+// Copy constructor
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade) {}
 
 // This approach won't work because it won't copy const _name (because it's const), so we need to use a list initializer instead.
@@ -15,6 +18,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(oth
 //     *this = other;
 // }
 
+// Assignment operaotor
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& rhs) {
     if (this != &rhs)
         _grade = rhs._grade;
