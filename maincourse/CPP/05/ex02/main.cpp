@@ -7,28 +7,28 @@
 int main() {
 
     try {
-        Bureaucrat bob("Bob", 1);
-        ShrubberyCreationForm form1("Shrubbery");
-        RobotomyRequestForm form2("Robotomy");
-        PresidentialPardonForm form3("President");
+        Bureaucrat admin("Bob", 1);
+        ShrubberyCreationForm shrubbery("Shrubbery");
+        RobotomyRequestForm robotomy("Robotomy");
+        PresidentialPardonForm pardon("President");
 
         std::cout << "Form 1 Shrubbery" << std::endl;
-        form1.beSigned(bob);
-        bob.executeForm(form1);
-        form1.execute(bob);
+        shrubbery.beSigned(admin);
+        admin.executeForm(shrubbery);
+        shrubbery.execute(admin);
 
         std::cout << "\nForm 2 Robotomy" << std::endl;
-        form2.beSigned(bob);
-        bob.executeForm(form2);
-        bob.executeForm(form2);
-        bob.executeForm(form2);
-        bob.executeForm(form2);
-        form2.execute(bob);
+        robotomy.beSigned(admin);
+        admin.executeForm(robotomy);
+        admin.executeForm(robotomy);
+        admin.executeForm(robotomy);
+        admin.executeForm(robotomy);
+        robotomy.execute(admin);
 
         std::cout << "\nForm 3 President" << std::endl;
-        form3.beSigned(bob);
-        bob.executeForm(form3);
-        form3.execute(bob);
+        pardon.beSigned(admin);
+        admin.executeForm(pardon);
+        pardon.execute(admin);
 
     } catch (const std::exception& e) {
         std::cout << "Exception: " << e.what() << std::endl;
