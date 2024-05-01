@@ -17,28 +17,68 @@ double Converter::stringToDouble() const {
 
 // Conversion functions
 Converter::operator char() const {
-	int value = static_cast<int>(*this);
-	if (value < 0 || value > 255 || !std::isprint(static_cast<unsigned char>(value)))
-		throw std::out_of_range("Non displayable");
-	return static_cast<char>(value);
+    if (_input.length() == 1 && std::isdigit(_input[0]))
+        throw std::out_of_range("Non displayable");
+    int value = static_cast<int>(*this);
+    if (value < 0 || value > 255 || !std::isprint(static_cast<unsigned char>(value))) {
+        throw std::out_of_range("Non displayable");
+    }
+    return static_cast<char>(value);
 }
 
 Converter::operator int() const {
-	double value = stringToDouble();
-	if (isnan(value) || isinf(value))
-		throw std::out_of_range("impossible");
-	if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
-        throw std::out_of_range("Integer overflow");
-	return static_cast<int>(value);
+    if (_input.length() == 1 && std::isprint(_input[0])) {
+        return static_cast<int>(_input[0]);
+    }
+
+    try {
+        return std::stoi(_input);
+    } catch (...) {
+        throw std::out_of_range("impossible");
+    }
 }
 
 Converter::operator float() const {
-	return static_cast<float>(stringToDouble());
+    if (_input.length() == 1 && std::isprint(_input[0])) {
+        return static_cast<float>(_input[0]);
+    }
+
+    try {
+        return std::stof(_input);
+    } catch (...) {
+        throw std::out_of_range("impossible");
+    }
 }
 
 Converter::operator double() const {
-	return stringToDouble();
+    if (_input.length() == 1 && std::isprint(_input[0])) {
+        return static_cast<double>(_input[0]);
+    }
+
+    try {
+        return std::stod(_input);
+    } catch (...) {
+        throw std::out_of_range("impossible");
+    }
 }
+
+
+// Converter::operator int() const {
+// 	double value = stringToDouble();
+// 	if (isnan(value) || isinf(value))
+// 		throw std::out_of_range("impossible");
+// 	if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
+//         throw std::out_of_range("Integer overflow");
+// 	return static_cast<int>(value);
+// }
+
+// Converter::operator float() const {
+// 	return static_cast<float>(stringToDouble());
+// }
+
+// Converter::operator double() const {
+// 	return stringToDouble();
+// }
 
 // Insertion overload
 std::ostream& operator<<(std::ostream& os, Converter& rhs) {
