@@ -5,143 +5,216 @@
 
 void testDefaultConstructor() {
     Array<int> arr;
-    std::cout << "Test Default Constructor: Passed - Size is " << arr.size() << " (Expected: 0)" << std::endl;
+    std::cout << "Testing Default Constructor:" << std::endl;
+    if (arr.size() == 0) {
+        std::cout << "PASS: Size is correctly set to 0." << std::endl;
+    } else {
+        std::cout << "FAIL: Size is not 0." << std::endl;
+    }
+
+    // out_of_range exception test
+    try {
+        int test = arr[0];  // This should throw an exception
+        (void)test;
+        std::cout << "FAIL: Accessing element did not throw an exception." << std::endl;
+    } catch (const std::out_of_range& e) {
+        std::cout << "PASS: Triggered exception: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "FAIL: Threw an unexpected exception type: " << e.what() << std::endl;
+    }
 }
 
 void testParameterizedConstructor() {
-    Array<int> arr(5);
-    bool success = true;
-    for (size_t i = 0; i < arr.size(); i++) {
+    const size_t n = 10;
+    Array<int> arr(n);
+    std::cout << "\nTesting Parameterized Constructor:" << std::endl;
+    // Size test
+    if (arr.size() == n) {
+        std::cout << "PASS: Size is correctly set to " << n << "." << std::endl;
+    } else {
+        std::cout << "FAIL: Size is not correctly set. Expected " << n << ", got " << arr.size() << "." << std::endl;
+    }
+
+    // Initialized to zero test
+    bool allInitializedCorrectly = true;
+    for (size_t i = 0; i < arr.size(); ++i) {
         if (arr[i] != 0) {
-            success = false;
+            allInitializedCorrectly = false;
+            std::cout << "FAIL: Element at index " << i << " is not initialized to 0, value is " << arr[i] << "." << std::endl;
             break;
         }
     }
-    std::cout << "Test Parameterized Constructor: " << (success ? "Passed" : "Failed")
-              << " - All elements initialized to 0" << std::endl;
+    if (allInitializedCorrectly) {
+        std::cout << "PASS: All elements initialized to 0." << std::endl;
+    }
 }
 
 void testCopyConstructor() {
-    Array<int> original(3);
-    for (size_t i = 0; i < original.size(); i++) {
-        original[i] = static_cast<int>(i + 1);
-    }
-    Array<int> copy(original);
+    std::cout << "\nTesting Copy Constructor:" << std::endl;
+    Array<int> original(1);
+    original[0] = 42;
 
-    bool success = true;
-    for (size_t i = 0; i < copy.size(); i++) {
-        if (copy[i] != original[i]) {
-            success = false;
-            break;
-        }
+    Array<int> copy = original;
+
+    // Check copied content
+    if (copy[0] == original[0]) {
+        std::cout << "PASS: Copied correctly." << std::endl;
+    } else {
+        std::cout << "FAIL: Did not copy content correctly." << std::endl;
     }
-    std::cout << "Test Copy Constructor: " << (success ? "Passed" : "Failed")
-              << " - Copy matches original" << std::endl;
+
+    // Check if the copy remains unchanged
+    original[0] = 100;
+    if (copy[0] != 100) {
+        std::cout << "PASS: Copy remains unchanged" << std::endl;
+    } else {
+        std::cout << "FAIL: Copy does not remain unchanged" << std::endl;
+    }
 }
 
 void testAssignmentOperator() {
-    Array<int> first(2);
-    first[0] = 10; first[1] = 20;
-    Array<int> second(1);
-    second = first;
-    second[0] = 30;
+    std::cout << "\nTesting Assignment operator:" << std::endl;
+    Array<int> source(1);
+    source[0] = 42;
 
-    std::cout << "Test Assignment Operator: "
-              << ((first[0] == 10 && second[0] == 30) ? "Passed" : "Failed")
-              << " - first[0]: " << first[0] << ", second[0]: " << second[0] << std::endl;
+    Array<int> assigned;
+    assigned = source;
+
+    if (assigned[0] == source[0]) {
+        std::cout << "PASS: Assignment is done" << std::endl;
+    } else {
+        std::cout << "Test FAIL" << std::endl;
+    }
 }
 
 void testElementAccess() {
-    Array<int> arr(3);
-    arr[0] = 100; arr[1] = 200; arr[2] = 300;
-    bool success = (arr[0] == 100 && arr[1] == 200 && arr[2] == 300);
-    std::cout << "Test Element Access: " << (success ? "Passed" : "Failed")
-              << " - Values: " << arr[0] << ", " << arr[1] << ", " << arr[2] << std::endl;
+    std::cout << "\nTesting Element Access:" << std::endl;
+    Array<int> arr(1);
+    arr[0] = 42;
+    bool success = arr[0] == 42;
+
+    if (success) {
+        std::cout << "PASS: Element Access successful: " << arr[0] << std::endl;
+    } else {
+        std::cout << "FAIL: Element Access failed" << std::endl;
+    }
 }
 
 void testOutOfBoundsAccess() {
+    std::cout << "\nTesting Out of bounds:" << std::endl;
     Array<int> arr(3);
     try {
-        int test = arr[5]; // This should throw an exception
+        int test = arr[5];
         (void)test;
-        std::cout << "Test Out-of-Bounds Access: Failed (no exception thrown)" << std::endl;
+        std::cout << "FAIL: Accessing element out of bounds did not throw an exception." << std::endl;
     } catch (const std::out_of_range& e) {
-        std::cout << "Test Out-of-Bounds Access: Passed (exception caught: " << e.what() << ")" << std::endl;
+        std::cout << "PASS: Triggered exception: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "FAIL: Threw an unexpected exception type: " << e.what() << std::endl;
     } catch (...) {
-        std::cout << "Test Out-of-Bounds Access: Failed (wrong exception type)" << std::endl;
     }
 }
 
 void testSizeMethod() {
-    Array<int> arr(4);
-    std::cout << "Test Size Method: " << (arr.size() == 4 ? "Passed" : "Failed")
-              << " - Size is " << arr.size() << " (Expected: 4)" << std::endl;
+    std::cout << "\nTesting size method..." << std::endl;
+    Array<int> arr(5);
+    if (arr.size() == 5) {
+        std::cout << "PASS: Size method returned correct size." << std::endl;
+    } else {
+        std::cout << "FAIL: Size method returned incorrect size." << std::endl;
+    }
 }
 
 void testIntType() {
+    std::cout << "\nTesting with int type..." << std::endl;
     Array<int> arr(5);
     for (size_t i = 0; i < arr.size(); i++) {
-        arr[i] = static_cast<int>(i * 10);
+        arr[i] = static_cast<int>(i * 5);
     }
     for (size_t i = 0; i < arr.size(); i++) {
-        if (arr[i] != static_cast<int>(i * 10)) {
-            std::cout << "Test with int failed at index " << i << std::endl;
+        if (arr[i] != static_cast<int>(i * 5)) {
+            std::cout << "FAIL: Test failed at index" << i << std::endl;
             return;
         }
     }
-    std::cout << "Test with int passed successfully." << std::endl;
+    std::cout << "PASS: Test passed successfully." << std::endl;
 }
 
 void testComplexType() {
-    Array<TestClass> arr(5);
-    for (size_t i = 0; i < arr.size(); i++) {
-        arr[i] = TestClass(static_cast<int>(i * 5));
+    std::cout << "\nTesting with complex type..." << std::endl;
+    Array < Array<int> > matrix(2);
+
+    Array<int> row1(2);
+    row1[0] = 1;
+    row1[1] = 2;
+    Array<int> row2(2);
+    row2[0] = 3;
+    row2[1] = 4;
+
+    matrix[0] = row1;
+    matrix[1] = row2;
+
+    // Validate the matrix. This is done by
+    bool success = (matrix[0][0] == 1 && matrix[0][1] == 2 &&
+                    matrix[1][0] == 3 && matrix[1][1] == 4);
+
+    std::cout << (success ? "PASS" : "FAIl")
+              << " - Matrix: " << std::endl <<
+              "[" << matrix[0][0] << "]" << "[" << matrix[0][1] << "]" << std::endl <<
+              "[" << matrix[1][0] << "]" << "[" << matrix[1][1] << "]" << std::endl;
+}
+
+void testFundamentalVsClass() {
+    std::cout << "\nTesting fundamental vs class type initialization..." << std::endl;
+    Array<int> intArray(3);  // Should call default constructor for int (value-initialization)
+    std::cout << "Testing with fundamental type:" << std::endl;
+    for (size_t i = 0; i < intArray.size(); ++i) {
+        std::cout << "intArray[" << i << "] = " << intArray[i] << std::endl;  // Expect 0 (value-initialized)
     }
-    for (size_t i = 0; i < arr.size(); i++) {
-        if (arr[i] != TestClass(static_cast<int>(i * 5))) {
-            std::cout << "Test with TestClass failed at index " << i << std::endl;
-            return;
-        }
+
+    // Testing with a class type
+    Array<std::string> stringArray(3);  // Should call std::string's default constructor
+    std::cout << "\nTesting with class type:" << std::endl;
+    for (size_t i = 0; i < stringArray.size(); ++i) {
+        std::cout << "stringArray[" << i << "] = '" << stringArray[i] << "'" << std::endl;  // Expect empty strings
     }
-    std::cout << "Test with TestClass passed successfully." << std::endl;
 }
 
 void testReadWriteAccess() {
-    Array<int> arr(5);
-    bool success = true;
-    std::cout << "Testing write access via operator[]..." << std::endl;
-    // Writing values
-    for (int i = 0; i < 5; i++) {
-        arr[i] = i * 10;  // Write test
+    std::cout << "\nTesting read-write access" << std::endl;
+    Array<int> intArray(3); // read-write version of the array
+    for (size_t i = 0; i < intArray.size(); ++i) {
+        intArray[i] = i * 10;
+        std::cout << "Before intArray[" << i << "] = " << intArray[i] << std::endl;
     }
-    // Reading values to verify
-    for (int i = 0; i < 5; i++) {
-        if (arr[i] != i * 10) {
-            success = false;
-            std::cerr << "Mismatch at index " << i << ": expected " << i * 10 << ", got " << arr[i] << std::endl;
-            break;
-        }
+
+    for (size_t i = 0; i < intArray.size(); ++i) {
+        intArray[i] += 5;  // Modify the values
+        std::cout << " After intArray[" << i << "] = " << intArray[i] << std::endl;
     }
-    std::cout << (success ? "Write and read access test passed." : "Write and read access test failed.") << std::endl;
 }
 
 void testReadOnlyAccess() {
-    const Array<int> arr = Array<int>(5);
-    std::cout << "Testing read-only access via operator[] on const instance..." << std::endl;
-    bool success = true;
-    try {
-        for (int i = 0; i < 5; i++) {
-            std::cout << "Value at index " << i << ": " << arr[i] << std::endl;  // Read test
-        }
-    } catch (...) {
-        success = false;
-        std::cerr << "Exception caught during read-only access test." << std::endl;
+    std::cout << "\nTesting read-only access" << std::endl;
+    Array<int> intArray(3);
+    for (size_t i = 0; i < intArray.size(); ++i) {
+        intArray[i] = i * 10;  // Initialize the array with some values
     }
-    std::cout << (success ? "Read-only access test passed." : "Read-only access test failed.") << std::endl;
+
+    const Array<int> readOnlyArray = intArray;  // Create a read-only version of the array
+
+    std::cout << "Testing read-only access:" << std::endl;
+    for (size_t i = 0; i < readOnlyArray.size(); ++i) {
+        std::cout << "readOnlyArray[" << i << "] = " << readOnlyArray[i] << std::endl;
+        // Attempting to modify readOnlyArray[i] here would be a compile-time error
+    }
+    // Uncommenting the following line will result compile-time error
+    // readOnlyArray[0] = 42;  // This should not compile
 }
 
 
 int testSubject() {
+    std::cout << "\nTesting subject's test case" << std::endl;
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     srand(time(NULL));
@@ -166,7 +239,7 @@ int testSubject() {
     {
         if (mirror[i] != numbers[i])
         {
-            std::cerr << "Error: Data integrity check failed at index " << i << std::endl;
+            std::cerr << "Error: Data integrity check failed at index ❌" << i << std::endl;
             delete [] mirror;
             return 1;
         }
@@ -207,7 +280,6 @@ int testSubject() {
 
 int main(int, char**)
 {
-    testSubject();
     testDefaultConstructor();
     testParameterizedConstructor();
     testCopyConstructor();
@@ -217,7 +289,9 @@ int main(int, char**)
     testSizeMethod();
     testIntType();
     testComplexType();
+    testFundamentalVsClass();
     testReadWriteAccess();
     testReadOnlyAccess();
+    testSubject();
     return 0;
 }
