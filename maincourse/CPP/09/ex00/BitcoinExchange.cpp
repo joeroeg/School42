@@ -98,20 +98,20 @@ void BitcoinExchange::calculateBitcoinValue(const char* filename, BitcoinExchang
         if (line.empty())
             continue;
         line.erase(std::remove_if(line.begin(), line.end(), ::isspace), line.end());
-        std::istringstream iss(line);
+        std::istringstream iss(line); // This creates an input string stream (iss) from the line variable. An input string stream allows you to treat a string as a stream, so you can use stream extraction operators (>>) to extract tokens from it.
         std::string dateStr, valueStr;
-        if (std::getline(iss, dateStr, '|') && std::getline(iss, valueStr, '|')) {
+        if (std::getline(iss, dateStr, '|') && std::getline(iss, valueStr, '|')) { //  This extracts tokens from the iss stream using std::getline.
             float value = ft_stof(valueStr);
             if (!isDateFormatValid(dateStr)) {
                 std::cerr << "Error: invalid date format" << std::endl;
                 continue;
             }
             if (value <= 0) {
-                std::cerr << "Error: not a positive number" << std::endl;
+                std::cerr << "Error: not a positive number." << std::endl;
                 continue;
             }
             else if (value > 1000) {
-                std::cerr << "Error: too large number" << std::endl;
+                std::cerr << "Error: too large number." << std::endl;
                 continue;
             }
             float exchangeRate = exchange.getExchangeRate(dateStr);
