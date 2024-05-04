@@ -1,7 +1,7 @@
-TARGET = a.out
+TARGET = btc
 CXX = g++
 CXXFLAGS= -std=c++98 -g -Wall -Werror -Wextra
-SRCS = main.cpp
+SRCS = main.cpp BitcoinExchange.cpp
 OBJS=$(SRCS:.cpp=.o)
 
 all: $(TARGET)
@@ -18,7 +18,7 @@ fclean: clean
 re: fclean all
 
 run: all
-	@./$(TARGET)
+	@./$(TARGET) input.txt
 
 val: all
 	@valgrind ./$(TARGET)
