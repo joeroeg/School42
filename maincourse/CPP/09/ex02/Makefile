@@ -1,7 +1,7 @@
-TARGET = a.out
+TARGET = PmergeMe
 CXX = g++
 CXXFLAGS= -std=c++98 -g -Wall -Werror -Wextra
-SRCS = main.cpp
+SRCS = main.cpp PmergeMe.cpp
 OBJS=$(SRCS:.cpp=.o)
 
 all: $(TARGET)
@@ -18,9 +18,12 @@ fclean: clean
 re: fclean all
 
 run: all
-	@./$(TARGET)
+	@time ./$(TARGET)
 
 val: all
 	@valgrind ./$(TARGET)
+
+test: all
+	@time ./$(TARGET) `jot -r 3000 1 3000 | tr '\n' ' '` > result
 
 .PHONY: all

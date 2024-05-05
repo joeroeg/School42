@@ -11,6 +11,12 @@ float ft_stof(std::string s) {
     return num;
 }
 
+int ft_stoi(std::string s) {
+    int num;
+    std::istringstream(s) >> num;
+    return num;
+}
+
 BitcoinExchange::BitcoinExchange(void) { return; }
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &src) { *this = src; }
 BitcoinExchange::~BitcoinExchange() { return; }
@@ -77,13 +83,11 @@ bool isDateFormatValid(const std::string& dateStr) {
             return false;
     }
     std::string monthStr = dateStr.substr(5, 2);
-    int month = atoi(monthStr.c_str());
+    int month = ft_stoi(monthStr);
     if (month < 1 || month > 12)
         return false;
     return true;
 }
-
-
 
 void BitcoinExchange::calculateBitcoinValue(const char* filename, BitcoinExchange& exchange) {
     std::ifstream file(filename);

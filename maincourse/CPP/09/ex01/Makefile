@@ -1,7 +1,7 @@
-TARGET = a.out
+TARGET = RPN
 CXX = g++
 CXXFLAGS= -std=c++98 -g -Wall -Werror -Wextra
-SRCS = main.cpp
+SRCS = main.cpp RPN.cpp
 OBJS=$(SRCS:.cpp=.o)
 
 all: $(TARGET)
