@@ -18,12 +18,15 @@ fclean: clean
 re: fclean all
 
 run: all
-	@time ./$(TARGET)
+	@./$(TARGET) 5 4 3 2 1
 
 val: all
-	@valgrind ./$(TARGET)
+	@valgrind ./$(TARGET) `jot -r 3000 1 3000 | tr '\n' ' '`
 
 test: all
-	@time ./$(TARGET) `jot -r 3000 1 3000 | tr '\n' ' '` > result
+	@time ./$(TARGET) `jot -r 3000 1 3000 | tr '\n' ' '`
+
+test2: all
+	@time ./$(TARGET) `jot -r 9000 1 9000 | tr '\n' ' '`
 
 .PHONY: all

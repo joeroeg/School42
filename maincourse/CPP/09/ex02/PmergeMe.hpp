@@ -2,10 +2,13 @@
 #define PMERGEME_HPP
 
 #include "iostream"
-#include "vector"
+#include <vector>
 #include <deque>
+#include <iomanip>
+#include <sys/time.h>
 
 typedef std::vector<int> IntVector;
+typedef std::deque<int> IntDeque;
 
 class PmergeMe {
 public:
@@ -15,19 +18,19 @@ public:
     PmergeMe(const PmergeMe &src); // copy constructor
     PmergeMe &operator=(PmergeMe const &rhs); // assignment operator
 
-    // Simplified Ford-Johnson merge
-    // IntVector merge(const IntVector& left, const IntVector& right);
-    // IntVector mergeSort(IntVector& vec);
-    // void insertionSort(IntVector& vec);
-
-    // Original Ford-Johnson merge
-    void merge(IntVector& vec, size_t start, size_t mid, size_t end);
-    void mergeSort(IntVector& vec, size_t start, size_t end);
+    // Vector sort
+    IntVector merge(const IntVector& left, const IntVector& right);
+    IntVector mergeSort(IntVector& vec, size_t depth);
     void insertionSort(IntVector& vec);
-    void mergeInsertionSort(IntVector& vec);
+
+    // Deque sort
+    IntDeque merge(const IntDeque& left, const IntDeque& right);
+    IntDeque mergeSort(IntDeque& deque, size_t depth);
+    void insertionSort(IntDeque& deque);
 
 private:
     IntVector _vec;
+    IntDeque _deque;
 };
 
 #endif
