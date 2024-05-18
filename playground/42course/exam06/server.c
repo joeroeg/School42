@@ -9,7 +9,7 @@
 #include <sys/types.h>
 
 #define BUFF 4242
-// #define MSG_NOSIGNAL 0
+#define MSG_NOSIGNAL 0
 
 int sockfd, maxfd;
 struct sockaddr_in servaddr;
@@ -28,19 +28,19 @@ void ft_error(char *str){
 	exit(1);
 }
 
-void broadCast(int client, char *msg, int len){
+void broadCast(int client, char *msg, int len) {
 	for (int fd = 0;fd <= maxfd; fd++)
 		if (client != fd)
 			send(fd, msg, len, MSG_NOSIGNAL);
 }
 
-void handleConnection(int client, int opt){
+void handleConnection(int client, int opt) {
 	memset(serverBuf, 0, 100);
 	sprintf(serverBuf, "server: client %d just %s\n", ids[client], !opt ? "arrived" : "left");
 	broadCast(client, serverBuf, strlen(serverBuf));
 }
 
-void sendMsg(int client, int len){
+void sendMsg(int client, int len) {
 	memset(serverBuf, 0, 100);
 	sprintf(serverBuf, "client %d: ", ids[client]);
 	broadCast(client, serverBuf, strlen(serverBuf));
@@ -98,21 +98,21 @@ int main(int ac, char **av) {
 			if (!(FD_ISSET(fd, &read_fd)))					// FD_ISSET is a macro that checks if a file descriptor is part of a set of file descriptors.
 				continue;
 
-			if (sockfd == fd) {							// if sockfd = fd, then a new client is trying to connect to the server.
+			if (sockfd == fd) {								// if sockfd = fd, then a new client is trying to connect to the server.
 				int clientfd = accept(sockfd, 0, 0); 		// accept is a system call that extracts the first connection request on the queue of pending connections for the listening socket, sockfd, creates a new connected socket, and returns a new file descriptor referring to that socket.
-				if (clientfd > 0) {						// if clientfd > 0, then the connection was successful.
-					if (clientfd > maxfd)				// if clientfd > maxfd, then the new client's file descriptor is greater than the current maxfd.
+				if (clientfd > 0) {							// if clientfd > 0, then the connection was successful.
+					if (clientfd > maxfd)					// if clientfd > maxfd, then the new client's file descriptor is greater than the current maxfd.
 						maxfd = clientfd;					// maxfd is updated to the new client's file descriptor.
 					ids[clientfd] = count++;
 					FD_SET(clientfd, &current_fd);			// FD_SET is a macro that adds a file descriptor (clientfd) to a set of file descriptors (&current_fd).
 					handleConnection(clientfd, 0);			// handleConnection is a function that sends a message to all clients that a new client has connected.
 				}
-			} else {									// if sockfd != fd, then a client is trying to send a message to the server.
+			} else {										// if sockfd != fd, then a client is trying to send a message to the server.
 				memset(clientBuf, 0, BUFF);					// memset is a function that fills a block of memory with a particular value.
 				int len = recv(fd, clientBuf, BUFF, 0);		// recv is a system call that receives a message from a socket.
-				if (len > 0)							// if len > 0, then the message was received successfully.
+				if (len > 0)								// if len > 0, then the message was received successfully.
 					sendMsg(fd, len);						// sendMsg is a function that sends a message to all clients.
-				else {									// if len <= 0, then the client has disconnected.
+				else {										// if len <= 0, then the client has disconnected.
 					handleConnection(fd, 1);				// handleConnection is a function that sends a message to all clients that a client has disconnected.
 					FD_CLR(fd, &current_fd);				// FD_CLR is a macro that removes a file descriptor (fd) from a set of file descriptors (&current_fd).
 					close(fd);								// close is a system call that closes a file descriptor.
