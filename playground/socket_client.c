@@ -91,7 +91,6 @@ int main() {
         free(message);
         close(socketFD);
     }
-
     free(serverAddress);
     return 0;
 }
