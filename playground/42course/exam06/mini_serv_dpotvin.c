@@ -10,6 +10,8 @@
 #define MAX_USER_COUNT  1024
 #define BUFFER_SIZE     4096          // real men use real buffer, never forget this one
 
+// David
+
 typedef enum _broadcast_type {
     USER_JOINED,
     USER_LEFT,
