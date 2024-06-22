@@ -9,7 +9,7 @@
 #include <sys/types.h>
 
 #define BUFF 4242
-#define MSG_NOSIGNAL 0
+// #define MSG_NOSIGNAL 0
 
 int sockfd, maxfd;
 struct sockaddr_in servaddr;
