@@ -33,7 +33,7 @@ void ft_error(char *str){
 void broadCast(int client, char *msg, int len) {
 	for (int fd = 0;fd <= maxfd; fd++)
 		if (client != fd)
-			send(fd, msg, len, MSG_NOSIGNAL);
+			send(fd, msg, len, SO_NOSIGPIPE);
 }
 
 void handleConnection(int client, int opt) {
