@@ -1,5 +1,18 @@
 # 42 Cursus Projects Portfolio
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Projects](#projects)
+  - [Core Projects](#core-projects)
+  - [Graphics Projects](#graphics-projects)
+  - [Network Projects](#network-projects)
+  - [C++ Projects](#c-projects)
+- [Installation Instructions](#installation-instructions)
+- [How to explore](#how-to-explore)
+- [Examples](#usage-examples)
+
+## Introduction
 This repository showcases my completed projects during the 42 cursus. Each project is organized in its own subdirectory, containing the source code, relevant documentation, and a brief description.
 
 ## **Projects**
@@ -44,14 +57,17 @@ This repository showcases my completed projects during the 42 cursus. Each proje
 | Module 07  | Understanding the intricacies of templates in C++ including function and class templates. | C++              |
 | Module 08  | Working with templated containers, iterators, algorithms, and functors. | C++              |
 
-## How to Explore
+## How to explore
 
 1. Navigate into each project's subdirectory.
 2. Read the project-specific README for detailed instructions, project goals, and challenges overcome.
 3. Review the source code to understand the implementation.
 
-## Additional Notes
+## Prerequisites
 
-* This repository is actively maintained and will be updated as I complete new projects.
-* Feel free to reach out if you have any questions or feedback.
-****
+- **C Compiler**: GCC or Clang
+- **C++ Compiler**: GCC or Clang
+- **Make**: For building projects
+- **Git**: For version control
+
+## Examples
