@@ -8,7 +8,6 @@
   - [Graphics Projects](#graphics-projects)
   - [Network Projects](#network-projects)
   - [C++ Projects](#c-projects)
-- [Installation Instructions](#installation-instructions)
 - [How to explore](#how-to-explore)
 - [Examples](#usage-examples)
 
