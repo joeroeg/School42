@@ -36,15 +36,15 @@ This repository showcases my completed projects during the 42 cursus. Each proje
 
 | Project Name   | Description                                       | Language         |
 | --------------- | ------------------------------------------------- | ---------------- |
-| CPP Module 00  | Introduction to C++ and basic syntax, variables, data types. | C++              |
-| CPP Module 01  | Learning about memory allocation, pointers, references, and file streams. | C++              |
-| CPP Module 02  | Understanding ad-hoc polymorphism, operator overloading, and canonical classes. | C++              |
-| CPP Module 03  | Exploring inheritance, abstract classes, and interfaces. | C++              |
-| CPP Module 04  | Study of subtyping polymorphism and object-oriented programming principles. | C++              |
-| CPP Module 05  | Learning about exceptions, exception handling, and the Standard Template Library (STL). | C++              |
-| CPP Module 06  | Introduction to casts in C++ including static, dynamic, const, and reinterpret cast. | C++              |
-| CPP Module 07  | Understanding the intricacies of templates in C++ including function and class templates. | C++              |
-| CPP Module 08  | Working with templated containers, iterators, algorithms, and functors. | C++              |
+| Module 00  | Introduction to C++ and basic syntax, variables, data types. | C++              |
+| Module 01  | Learning about memory allocation, pointers, references, and file streams. | C++              |
+| Module 02  | Understanding ad-hoc polymorphism, operator overloading, and canonical classes. | C++              |
+| Module 03  | Exploring inheritance, abstract classes, and interfaces. | C++              |
+| Module 04  | Study of subtyping polymorphism and object-oriented programming principles. | C++              |
+| Module 05  | Learning about exceptions, exception handling, and the Standard Template Library (STL). | C++              |
+| Module 06  | Introduction to casts in C++ including static, dynamic, const, and reinterpret cast. | C++              |
+| Module 07  | Understanding the intricacies of templates in C++ including function and class templates. | C++              |
+| Module 08  | Working with templated containers, iterators, algorithms, and functors. | C++              |
 
 
 ## How to Explore
