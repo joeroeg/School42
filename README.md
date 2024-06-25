@@ -9,7 +9,8 @@
   - [Network Projects](#network-projects)
   - [C++ Projects](#c-projects)
 - [How to explore](#how-to-explore)
-- [Examples](#usage-examples)
+- [Prerequisites](#prerequisites)
+- [Examples](#examples)
 
 ## Introduction
 This repository showcases my completed projects during the 42 cursus. Each project is organized in its own subdirectory, containing the source code, relevant documentation, and a brief description.
