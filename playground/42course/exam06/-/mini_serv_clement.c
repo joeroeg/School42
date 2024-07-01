@@ -105,6 +105,7 @@ int main(int ac, char **av) {
 				if (clientfd > 0) {							// if clientfd > 0, then the connection was successful.
 					if (clientfd > maxfd)					// if clientfd > maxfd, then the new client's file descriptor is greater than the current maxfd.
 						maxfd = clientfd;					// maxfd is updated to the new client's file descriptor.
+					fprintf(stderr, "clientfd: %d\n", clientfd);
 					ids[clientfd] = count++;
 					FD_SET(clientfd, &current_fd);			// FD_SET is a macro that adds a file descriptor (clientfd) to a set of file descriptors (&current_fd).
 					handleConnection(clientfd, 0);			// handleConnection is a function that sends a message to all clients that a new client has connected.
