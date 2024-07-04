@@ -36,46 +36,46 @@ void broadCast(int client, char *msg, int len) {
     }
 }
 
-// void sendMsg(int client, int len) {
-// 	memset(serverBuf, 0, 100);
-// 	sprintf(serverBuf, "client %d: ", ids[client]);
-// 	broadCast(client, serverBuf, strlen(serverBuf));
-
-// 	char send[2] = {};
-
-// 	for (int i = 0; i < len; i++){
-// 		send[0] = clientBuf[i];
-// 		broadCast(client, send, strlen(send));
-
-// 		if (i + 1 < len && send[0] == '\n')
-// 			broadCast(client, serverBuf, strlen(serverBuf));
-
-// 		if (i + 1 == len && len == BUFF){
-// 			memset(clientBuf, 0, BUFF);
-// 			len = recv(client, clientBuf, BUFF, 0);
-// 			i = -1;
-// 		}
-// 	}
-// }
-
 void sendMsg(int client, int len) {
-    // Prepare the prefix
-    char prefix[100];
-    memset(prefix, 0, 100);
-    sprintf(prefix, "client %d: ", ids[client]);
+	memset(serverBuf, 0, 100);
+	sprintf(serverBuf, "client %d: ", ids[client]);
+	broadCast(client, serverBuf, strlen(serverBuf));
 
-    // Send the prefix to all other clients
-    broadCast(client, prefix, strlen(prefix));
+	char send[2] = {};
 
-    // Broadcast the client's message
-    broadCast(client, clientBuf, len);
+	for (int i = 0; i < len; i++){
+		send[0] = clientBuf[i];
+		broadCast(client, send, strlen(send));
 
-    // Ensure new messages start with the client prefix
-    if (clientBuf[len - 1] != '\n') {
-        broadCast(client, "\n", 1);
-        broadCast(client, prefix, strlen(prefix));
-    }
+		if (i + 1 < len && send[0] == '\n')
+			broadCast(client, serverBuf, strlen(serverBuf));
+
+		if (i + 1 == len && len == BUFF){
+			memset(clientBuf, 0, BUFF);
+			len = recv(client, clientBuf, BUFF, 0);
+			i = -1;
+		}
+	}
 }
+
+// void sendMsg(int client, int len) {
+//     // Prepare the prefix
+//     char prefix[100];
+//     memset(prefix, 0, 100);
+//     sprintf(prefix, "client %d: ", ids[client]);
+
+//     // Send the prefix to all other clients
+//     broadCast(client, prefix, strlen(prefix));
+
+//     // Broadcast the client's message
+//     broadCast(client, clientBuf, len);
+
+//     // Ensure new messages start with the client prefix
+//     if (clientBuf[len - 1] != '\n') {
+//         broadCast(client, "\n", 1);
+//         broadCast(client, prefix, strlen(prefix));
+//     }
+// }
 
 
 int main(int argc, char **argv) {
@@ -111,8 +111,7 @@ int main(int argc, char **argv) {
             if (!(FD_ISSET(fd, &readfd)))
                 continue;
 
-            if (sockfd == fd)
-            {
+            if (sockfd == fd) {
                 int clientfd = accept(sockfd, 0, 0);
                 if (clientfd > maxfd)
                     maxfd = clientfd; // important to update a limit of possible clients for a broadcast function
@@ -120,16 +119,11 @@ int main(int argc, char **argv) {
                 FD_SET(clientfd, &currentfd); // Why do we need to add currentfd and not readfd for example?
                 sprintf(serverBuf, "server: client %d just arrived\n", ids[clientfd]);
                 broadCast(clientfd, serverBuf, strlen(serverBuf));
-            }
-            else
-            {
+            } else {
                 int len = recv(fd, clientBuf, 2048, 0);
-                if (len > 0)
-                {
+                if (len > 0) {
                     sendMsg(fd, len);
-                }
-                else
-                {
+                } else {
                     sprintf(serverBuf, "server: client %d just left\n", ids[fd]);
                     broadCast(fd, serverBuf, strlen(serverBuf));
                     FD_CLR(fd, &currentfd);
