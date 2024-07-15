@@ -58,26 +58,6 @@ void sendMsg(int client, int len) {
 	}
 }
 
-// void sendMsg(int client, int len) {
-//     // Prepare the prefix
-//     char prefix[100];
-//     memset(prefix, 0, 100);
-//     sprintf(prefix, "client %d: ", ids[client]);
-
-//     // Send the prefix to all other clients
-//     broadCast(client, prefix, strlen(prefix));
-
-//     // Broadcast the client's message
-//     broadCast(client, clientBuf, len);
-
-//     // Ensure new messages start with the client prefix
-//     if (clientBuf[len - 1] != '\n') {
-//         broadCast(client, "\n", 1);
-//         broadCast(client, prefix, strlen(prefix));
-//     }
-// }
-
-
 int main(int argc, char **argv) {
     if (argc != 2)
         error_message("Wrong number of arguments\n");

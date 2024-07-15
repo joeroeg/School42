@@ -1,0 +1,13 @@
+# docker-compose.yml
+
+services:
+  nginx:
+    build:
+      context: ./nginx # Relative to the location of docker-compose.yml (which is in src/)
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"   # HTTP port 80
+      - "443:443" # SSL port 443
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html
+      - ./certs:/etc/nginx/certs

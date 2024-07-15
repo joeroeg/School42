@@ -1,0 +1,26 @@
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
+
+  backend1:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+  backend2:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+  backend3:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile

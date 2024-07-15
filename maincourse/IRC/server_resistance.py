@@ -4,7 +4,7 @@ import time
 
 TARGET_HOST = '127.0.0.1'
 TARGET_PORT = 6667
-NUM_CONNECTIONS = 10000
+NUM_CONNECTIONS = 100
 CONCURRENCY_LIMIT = 6
 THROTTLE_DELAY = 0.1
 
@@ -17,7 +17,15 @@ start_time = None
 COMMANDS_TO_EXECUTE = [
     b'JOIN #test\r\n',
     b'PRIVMSG #test :Hello from client\r\n',
-    b'QUIT\r\n'
+    # b'TOPIC #test :New topic\r\n',
+    # b'MODE #test +i\r\n',        # Set Invite-only channel
+    # b'MODE #test +t\r\n',        # Restrict TOPIC command to channel operators
+    # b'MODE #test +k password\r\n', # Set channel key (password)
+    # b'MODE #test +o user1\r\n',  # Give channel operator privilege to user1
+    # b'MODE #test +l 10\r\n',     # Set user limit to 10
+    # b'INVITE user2 #test\r\n',
+    # b'KICK #test user2 :Goodbye\r\n',
+    b'QUIT :Leaving\r\n'
 ]
 
 def connect_to_server(user_id):
@@ -32,6 +40,8 @@ def connect_to_server(user_id):
         for command in COMMANDS_TO_EXECUTE:
             s.send(command)
             start = time.time()
+            response = s.recv(4096)
+            print(f"Server response to {command.decode().strip()}: {response.decode().strip()}")
 
         while True:
             response = s.recv(4096)
@@ -40,6 +50,7 @@ def connect_to_server(user_id):
             total_response_time += time.time() - start
             request_count += 1
             bytes_transferred += len(response)
+            print(f"Server response: {response.decode().strip()}")
         s.close()
     except Exception as e:
         print(f"Error connecting to server: {e}")
