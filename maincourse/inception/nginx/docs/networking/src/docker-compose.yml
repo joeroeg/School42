@@ -1,0 +1,22 @@
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html
+    networks:
+      - my_custom_network
+
+  flask_app:
+    build:
+      context: ./flask_app
+      dockerfile: Dockerfile
+    networks:
+      - my_custom_network
+
+networks:
+  my_custom_network:
+    external: true
