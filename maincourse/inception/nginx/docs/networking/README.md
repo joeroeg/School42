@@ -214,4 +214,114 @@ To further explore and understand these concepts, you could try:
 
 4. Using `docker network inspect` to see detailed information about your custom network.
 
+# How to analyze docker inspect file?
 
+Analyzing the output from `docker inspect` involves breaking down the JSON data to understand the container's configuration and state. Here's a detailed analysis:
+
+### 1. **Basic Information**
+- **ID**: The unique identifier of the container.
+- **Created**: The timestamp when the container was created.
+- **Path**: The command used to run the container (in this case, `python`).
+- **Args**: Arguments passed to the command (`app.py`).
+
+### 2. **State**
+- **Status**: Current status of the container (`running`).
+- **Running**: Whether the container is currently running (`true`).
+- **Paused**: Whether the container is paused (`false`).
+- **Restarting**: Whether the container is restarting (`false`).
+- **OOMKilled**: Whether the container was killed due to an out-of-memory issue (`false`).
+- **Dead**: Whether the container is dead (`false`).
+- **Pid**: The process ID of the container's main process (9069).
+- **ExitCode**: The exit code of the container's main process (0 indicates successful execution).
+- **Error**: Any error message (empty in this case).
+- **StartedAt**: Timestamp when the container started.
+- **FinishedAt**: Timestamp when the container finished (not applicable here as it's still running).
+
+### 3. **Image**
+- **Image**: The hash of the image used to create the container (`sha256:b3f2cf96b61c...`).
+
+### 4. **Paths**
+- **ResolvConfPath**: Path to the container's resolv.conf file.
+- **HostnamePath**: Path to the container's hostname file.
+- **HostsPath**: Path to the container's hosts file.
+- **LogPath**: Path to the container's log file.
+
+### 5. **Name**
+- **Name**: Name of the container (`/src-flask_app-1`).
+
+### 6. **Restart Policy**
+- **RestartPolicy**: Configuration for how the container should be restarted (`no` restart policy).
+
+### 7. **Host Configuration**
+- **NetworkMode**: The network mode the container is using (`src_default`).
+- **PortBindings**: Port bindings for the container (empty here).
+- **VolumesFrom**: Volumes mounted from other containers (null here).
+- **ConsoleSize**: Size of the console (0x0).
+
+### 8. **Security**
+- **AppArmorProfile**: The AppArmor profile applied (`docker-default`).
+- **SecurityOpt**: Security options (null).
+
+### 9. **Resource Limits**
+- **CpuShares**, **Memory**, **NanoCpus**: CPU and memory limits (all set to defaults here).
+- **BlkioWeight**, **BlkioDeviceReadBps**, **BlkioDeviceWriteBps**: Block IO settings (defaults).
+
+### 10. **Graph Driver**
+- **GraphDriver**: Information about the storage driver used (`overlay2`).
+
+### 11. **Mounts**
+- **Mounts**: Details of mounted volumes (empty in this case).
+
+### 12. **Configuration**
+- **Hostname**: The hostname inside the container (`2592bd2d4412`).
+- **Env**: Environment variables set inside the container.
+  - Examples: `PATH`, `LANG`, `PYTHON_VERSION`, etc.
+- **Cmd**: The command and arguments to run inside the container (`python app.py`).
+- **Image**: The image used to create the container (`src-flask_app`).
+- **WorkingDir**: The working directory inside the container (`/app`).
+- **Labels**: Metadata labels, especially those related to Docker Compose.
+
+### 13. **Network Settings**
+- **Networks**: Details about the networks the container is connected to.
+  - **NetworkID**: The ID of the network (`8d9a5e021c06...`).
+  - **Gateway**: The gateway IP (`172.18.0.1`).
+  - **IPAddress**: The IP address of the container (`172.18.0.2`).
+  - **Aliases**: Network aliases (`src-flask_app-1`, `flask_app`).
+
+### Steps to Debug Issues
+
+1. **Check the Status and Logs**:
+   - The container is running without errors (`Status: "running"` and `Error: ""`).
+   - Check the logs for any runtime issues: `docker logs src-flask_app-1`.
+
+2. **Verify Network Configuration**:
+   - Ensure the container has the correct IP and is connected to the expected network (`IPAddress: "172.18.0.2"`, `NetworkMode: "src_default"`).
+
+3. **Review Environment Variables**:
+   - Ensure necessary environment variables are correctly set (`PYTHON_VERSION`, `PATH`, etc.).
+
+4. **Check Resource Limits**:
+   - Verify if resource limits are correctly set and sufficient (`CpuShares`, `Memory`).
+
+5. **Examine Volumes and Mounts**:
+   - Check if any volumes are correctly mounted (if applicable).
+
+6. **Inspect File Paths**:
+   - Verify paths for resolv.conf, hostname, hosts, and log files to ensure they are correctly set.
+
+### Example Debugging Commands
+
+- **Real-time Logs**:
+  ```bash
+  docker logs -f src-flask_app-1
+  ```
+
+- **Check Network Connections**:
+  ```bash
+  docker network inspect src_default
+  ```
+
+- **Inspect Specific Settings**:
+  ```bash
+  docker inspect -f '{{.NetworkSettings.IPAddress}}' src-flask_app-1
+  ```
