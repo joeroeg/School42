@@ -1,25 +1,26 @@
-services:
+services:  # Define the services that make up your application
+
+  # NGINX Service
   nginx:
     build:
-      context: ./nginx
-      dockerfile: Dockerfile
+      context: ./nginx  # Location of the Dockerfile for NGINX
+      dockerfile: Dockerfile  # Name of the Dockerfile (optional if it's named Dockerfile)
     ports:
-      - "80:80"
-    depends_on:
+      - "80:80"  # Map host port 80 to container port 80 (HTTP traffic)
+    depends_on:  # Start NGINX after these services are running
       - backend1
       - backend2
       - backend3
 
+  # Backend Services (replicas of the same backend)
   backend1:
     build:
-      context: ./backend
+      context: ./backend  # Location of the Dockerfile for the backend service
       dockerfile: Dockerfile
-
   backend2:
     build:
       context: ./backend
       dockerfile: Dockerfile
-
   backend3:
     build:
       context: ./backend
