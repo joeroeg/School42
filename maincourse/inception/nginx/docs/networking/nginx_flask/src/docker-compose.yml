@@ -19,4 +19,4 @@ services:
 
 networks:
   my_custom_network:
-    external: true
+    # external: true # if no external it will be created by docker

@@ -1,0 +1,12 @@
+services:
+  stormbreaker:  # Name of the service (container)
+    image: nginx  # Use the official NGINX image
+    container_name: stormbreaker  # Set the container name
+    ports:
+      - 80:80  # Map port 80 on the host to port 80 in the container
+    networks:
+      - custom_network
+    restart: always  # Restart the container if it stops
+
+networks:
+  custom_network:
