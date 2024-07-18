@@ -1,5 +1,5 @@
 # Variables
-COMPOSE_FILE := src/docker-compose.yml
+COMPOSE_FILE := srcs/docker-compose.yml
 DOCKER_COMPOSE := docker-compose -f $(COMPOSE_FILE) #--verbose
 
 # Default target
@@ -8,9 +8,7 @@ DOCKER_COMPOSE := docker-compose -f $(COMPOSE_FILE) #--verbose
 .PHONY: help
 help:  ## Show this help message
 	@echo "Usage: make [target]"
-	@echo
-	@echo "Targets:"
-	@awk 'BEGIN {FS = ":.*##"; printf "\033[36m%-20s\033[0m %s\n", "Target", "Description"} /^[a-zA-Z_-]+:.*?##/ { printf "\033[36m%-20s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
+	@awk 'BEGIN {FS = ":.*##"; printf "\033[36m%-20s\033[0m %s\n", "Targets:", " Description:"} /^[a-zA-Z_-]+:.*?##/ { printf "\033[36m%-20s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
 
 .PHONY: build
 build:  ## Build the Docker image
@@ -37,15 +35,69 @@ logs:  ## Show logs of the Docker containers
 ps:  ## List containers
 	$(DOCKER_COMPOSE) ps
 
+stats:
+	@echo "Containers:"
+	@docker ps -a
+	@echo "\nNetworks:"
+	@docker network ls
+	@echo "\nImages:"
+	@docker images
+	@echo "\nVolumes:"
+	@docker volume ls
+
+
 .PHONY: clean
-clean:  ## Remove all stopped containers, networks, and volumes
+clean: ## Remove all stopped containers, networks, and volumes
+    # Stop and remove containers defined in docker-compose.yml along with volumes
 	$(DOCKER_COMPOSE) down -v
+
+    # Clean up unused Docker resources
 	docker system prune -f --volumes
+	docker network prune -f
+	docker volume prune -f
+
+    # Remove unused Docker images if there are any
+	@images=$$(docker image ls -q) && \
+	if [ -n "$$images" ]; then \
+		docker image rm -f $$images; \
+	fi
+
+	# Remove stopped containers if there are any
+	@containers=$$(docker container ls -a -q) && \
+	if [ -n "$$containers" ]; then \
+		docker container rm -f $$containers; \
+	fi
 
 .PHONY: rebuild
 rebuild:  ## Rebuild the Docker image without cache
 	$(DOCKER_COMPOSE) build --no-cache
 	$(DOCKER_COMPOSE) up -d --build --force-recreate --no-deps --remove-orphans
+
+.PHONY: encrypt
+encrypt: ## Encrypt the .env file
+	@echo "Encrypting .env file..."
+	@gpg --symmetric --cipher-algo AES256 srcs/.env || (echo "Encryption failed"; exit 1)
+	@echo "Encryption successful"
+
+.PHONY: decrypt
+decrypt: ## Decrypt the .env file
+	@echo "Decrypting .env file..."
+	@stty -echo; printf "Enter passphrase: "; \
+	read PASSPHRASE; \
+	stty echo; \
+	echo; \
+	echo $$PASSPHRASE | gpg --pinentry-mode loopback --passphrase-fd 0 --batch --yes --decrypt srcs/.env.gpg > srcs/.env || (echo "Decryption failed"; exit 1)
+	@echo "Decryption successful"
+
+.PHONY: clean-env
+clean-env: ## Remove the decrypted .env file
+	@echo "Removing decrypted .env file..."
+	@rm -f srcs/.env
+	@echo "Cleanup complete"
+
+.PHONY: mysql
+mysql: ## Run mysql script
+	./scripts/mysql.sh
 
 .PHONY: check-versions
 check-versions:  ## Check versions of Docker-related packages
