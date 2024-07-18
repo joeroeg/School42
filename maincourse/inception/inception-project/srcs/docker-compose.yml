@@ -52,13 +52,13 @@ services:
 
 secrets:
   db_root_password:
-    file: ./requirements/mariadb/conf/db_root_password.txt
+    file: ../secrets/db_root_password.txt
   db_password:
-    file: ./requirements/mariadb/conf/db_password.txt
+    file: ../secrets/db_password.txt
   wp_root_password:
-    file: ./requirements/wordpress/conf/wp_root_password.txt
+    file: ../secrets/wp_root_password.txt
   wp_password:
-    file: ./requirements/wordpress/conf/wp_password.txt
+    file: ../secrets/wp_password.txt
 
 
 volumes:
