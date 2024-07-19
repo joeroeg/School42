@@ -1,6 +1,8 @@
 # Variables
 COMPOSE_FILE := srcs/docker-compose.yml
 DOCKER_COMPOSE := docker-compose -f $(COMPOSE_FILE) #--verbose
+MARIA_VOL = /home/device/data/mariadb
+WORDPRESS_VOL = /home/device/data/wordpress
 
 # Default target
 .DEFAULT_GOAL := help
@@ -16,7 +18,8 @@ build:  ## Build the Docker image
 
 .PHONY: up
 up:  ## Build and start the containers in detached mode
-	$(DOCKER_COMPOSE) up -d --build
+	@mkdir -p  $(MARIA_VOL) $(WORDPRESS_VOL)
+	$(DOCKER_COMPOSE) up --build
 
 .PHONY: down
 down:  ## Stop and remove the containers
@@ -56,22 +59,25 @@ clean: ## Remove all stopped containers, networks, and volumes
 	docker network prune -f
 	docker volume prune -f
 
-    # Remove unused Docker images if there are any
 	@images=$$(docker image ls -q) && \
 	if [ -n "$$images" ]; then \
 		docker image rm -f $$images; \
 	fi
 
-	# Remove stopped containers if there are any
 	@containers=$$(docker container ls -a -q) && \
 	if [ -n "$$containers" ]; then \
 		docker container rm -f $$containers; \
 	fi
 
+	@sudo rm -rf $(MARIA_VOL) $(WORDPRESS_VOL)
+	@sudo rm -rf /home/device/data/
+
+
 .PHONY: rebuild
 rebuild:  ## Rebuild the Docker image without cache
+	@mkdir -p  $(MARIA_VOL) $(WORDPRESS_VOL)
 	$(DOCKER_COMPOSE) build --no-cache
-	$(DOCKER_COMPOSE) up -d --build --force-recreate --no-deps --remove-orphans
+	$(DOCKER_COMPOSE) up --build --force-recreate --no-deps --remove-orphans
 
 .PHONY: encrypt
 encrypt: ## Encrypt the .env file

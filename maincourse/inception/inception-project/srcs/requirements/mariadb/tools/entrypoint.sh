@@ -5,7 +5,7 @@
 sleep 5
 
 MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
-MYSQL_PASSWORD_FILE=$(cat /run/secrets/db_password)
+MYSQL_PASSWORD=$(cat /run/secrets/db_password)
 
 if ! [ -d "/var/lib/mysql/$MYSQL_DATABASE" ];
 then

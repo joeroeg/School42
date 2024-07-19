@@ -43,9 +43,13 @@ services:
     environment:
       WORDPRESS_PASSWORD_FILE: /run/secrets/wp_password
       WORDPRESS_ROOT_PASSWORD_FILE: /run/secrets/wp_root_password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
     secrets:
       - wp_root_password
       - wp_password
+      - db_root_password
+      - db_password
     depends_on:
       - mariadb
     restart: always
@@ -63,7 +67,16 @@ secrets:
 
 volumes:
   wordpress_vol:
+    driver_opts:
+      o: bind
+      device: /home/device/data/wordpress
+      type: none
+
   mariadb_vol:
+    driver_opts:
+      o: bind
+      device: /home/device/data/mariadb
+      type: none
 
 networks:
   inception:
