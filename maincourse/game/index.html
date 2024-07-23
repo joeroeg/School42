@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Transcendence</title>
+		<style>
+			body, html {
+				margin: 0;
+				overflow: hidden;
+				height: 100%;
+				width: 100%;
+			}
+			#container {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+		<script type="importmap">
+			{
+			  "imports": {
+				"three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+				"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/",
+				"FontLoader": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/loaders/FontLoader.js",
+				"TextGeometry": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/geometries/TextGeometry.js"
+			  }
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script type="module" src="main.js"></script>
+	</body>
+</html>
