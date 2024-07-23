@@ -2,16 +2,18 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Projects](#projects)
-  - [Core Projects](#core-projects)
-  - [Graphics Projects](#graphics-projects)
-  - [Network Projects](#network-projects)
-  - [C++ Projects](#c-projects)
-- [How to explore](#how-to-explore)
-- [Prerequisites](#prerequisites)
-- [Examples](#examples)
-
+- [42 Cursus Projects Portfolio](#42-cursus-projects-portfolio)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [**Projects**](#projects)
+    - [Core Projects](#core-projects)
+    - [Network Projects](#network-projects)
+    - [Graphics Projects](#graphics-projects)
+    - [C++ Projects](#c-projects)
+  - [How to explore](#how-to-explore)
+  - [Prerequisites](#prerequisites)
+  - [Examples](#examples)
+****
 ## Introduction
 This repository showcases my completed projects during the 42 cursus. Each project is organized in its own subdirectory, containing the source code, relevant documentation, and a brief description.
 
