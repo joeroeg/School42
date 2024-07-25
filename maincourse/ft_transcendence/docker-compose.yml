@@ -1,0 +1,51 @@
+services:
+  database:
+    build:
+      context: ./postgre
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    container_name: database
+
+  django:
+    build:
+      context: ./django/
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - ./django/static:/static
+      - ./django/ft_transcendence/mainapp:/django/mainapp
+    depends_on:
+      database:
+        condition: service_healthy
+    restart: unless-stopped
+    entrypoint: /usr/local/bin/wait-for-it.sh database:5432 -- /usr/local/bin/entrypoint.sh
+    container_name: django
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    env_file:
+      - .env
+    volumes:
+     - ./django/static:/static
+    ports:
+     - "443:443"
+     - "80:80"
+    depends_on:
+     - django
+    restart: unless-stopped
+    container_name: nginx
+
+volumes:
+  postgres_data:
