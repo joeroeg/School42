@@ -1,6 +1,3 @@
-**Comparison Table of Fundamental Data Types in Python**
-=====================================================
-
 | **Data Type** | **Description** | **Example** | **Mutable** | **Ordered** | **Indexable** |
 | --- | --- | --- | --- | --- | --- |
 | Int | Whole numbers | `1`, `2`, `3` | No | No | No |

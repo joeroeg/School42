@@ -2,3 +2,4 @@
 *.o
 a.out
 playground/42course/.DS_Store
+env/
