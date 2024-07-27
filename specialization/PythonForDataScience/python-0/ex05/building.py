@@ -1,6 +1,11 @@
+import sys
+
 def main():
-    print("Hello, World!")
-    print("This is a Python script.")
+    if len(sys.argv) == 1:
+        print("What is the text to count?")
+        return
+    text = sys.argv[1]
+
 
 
 if __name__ == "__main__":
