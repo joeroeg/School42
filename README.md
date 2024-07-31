@@ -70,9 +70,8 @@ Leaffliction |  Tackle computer vision tasks by acquiring, processing, and analy
 
 ## How to explore
 
-1. Navigate into each project's subdirectory.
+1. Navigate into each project's subdirectory inside maincourse directory.
 2. Read the project-specific README for detailed instructions, project goals, and challenges overcome.
-3. Review the source code to understand the implementation.
 
 ## Prerequisites
 
