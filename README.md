@@ -24,8 +24,8 @@ This repository showcases my completed projects during the 42 cursus. Each proje
 | Project Name    | Description                                       | Language         |
 | --------------- | ------------------------------------------------- | ---------------- |
 | libft           | Creation of a custom C library, replicating standard library functions for deeper understanding. It's one of the first significant projects, Libft requires students to reimplement several standard C library functions. This project emphasizes a deep understanding of C programming and memory management. | C                |
-| ft_printf       | Implementation of the printf function in C, focusing on variadic functions and formatted output. | C                |
-| get_next_line   | Developing a function to read lines from a file descriptor, managing static variables and buffers. | C                |
+| ft_printf       | Implementation of the printf function in C, focusing on variadic functions and formatted output. In this project, students recreate the printf function, which involves parsing variadic arguments and formatted output. It's a substantial exercise in string manipulation and handling various data types. | C                |
+| get_next_line   | Developing a function to read lines from a file descriptor, managing static variables and buffers. This project involves writing a function that reads a line from a file descriptor, a common task in systems programming. It tests students' ability to handle dynamic memory and file I/O in C. | C                |
 | pipex           | Implementing a pipeline of processes, managing input/output redirection and process chaining. | C                |
 | push_swap       | Creating an efficient algorithm to sort data with a minimal set of operations. | C                |
 | philosophers    | Solving the classic Dining Philosophers problem, exploring threads, mutexes, and concurrency. | C                |
