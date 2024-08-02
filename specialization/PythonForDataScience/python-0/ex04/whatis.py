@@ -1,3 +1,11 @@
+"""Check if the argument is an integer and print if it is even or odd.
+
+ValueError
+Raised when a function receives correct type but an wrong value.
+
+AssertionError
+Raised when an assert statement fails.
+"""
 import sys
 
 if len(sys.argv) == 1:
@@ -21,8 +29,3 @@ if n % 2 == 0:
     print("I'm Even.")
 else:
     print("I'm Odd.")
-
-"""
-ValueError - Raised when an operation or function receives an argument that has the right type but an inappropriate value, and the situation is not described by a more precise exception such as IndexError.
-AssertionError - Raised when an assert statement fails.
-"""

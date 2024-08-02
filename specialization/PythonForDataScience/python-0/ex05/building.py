@@ -1,6 +1,9 @@
+"""Count the number of characters in a text and classify them."""
 import sys
 
+
 def main():
+    """Count the number of characters in a text and classify them."""
     if len(sys.argv) == 1:
         print("What is the text to count?")
         text = sys.stdin.readline()
@@ -35,6 +38,7 @@ def main():
     print(punctuation, "punctuation marks")
     print(space, "spaces")
     print(digit, "digits")
+
 
 if __name__ == "__main__":
     main()
