@@ -3,7 +3,12 @@ import sys
 
 
 def main():
-    """Count the number of characters in a text and classify them."""
+    """Count the number of characters in a text and classify them.
+
+    The text can be passed as an argument or read from the standard input.
+    The program will count the number of upper and lower case letters, digits,
+    spaces and punctuation marks in the text and print the results.
+    """
     if len(sys.argv) == 1:
         print("What is the text to count?")
         text = sys.stdin.readline()

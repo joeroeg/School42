@@ -66,3 +66,70 @@ while x < 10:
     print(x)
 else:
     print('Done!')
+
+print('')
+
+# loop through dictionary
+user = {
+    'name': 'John',
+    'age': 25,
+    'email': 'jhon@mail.com'
+}
+
+for key, value in user.items():
+    print(key, value)
+
+print('')
+
+for key in user.keys():
+    print(key)
+
+print('')
+
+for value in user.values():
+    print(value)
+
+print('')
+
+# loop through string
+for letter in 'hello':
+    print(letter)
+
+print('')
+
+# loop through list
+for i in [1, 2, 3, 4, 5]:
+    print(i)
+
+print('')
+
+# loop through tuple
+for i in (1, 2, 3, 4, 5):
+    print(i)
+
+print('')
+
+# loop through set
+for i in {1, 2, 3, 4, 5}:
+    print(i)
+
+print('')
+
+# loop through range
+for i in range(5):
+    print(i)
+
+print('')
+
+# loop through enumerate
+
+for i, letter in enumerate('hello'):
+    print(i, letter)
+
+print('')
+
+# loop through zip
+names = ['John', 'Doe', 'Jane']
+
+for i, j in zip(range(1, 4), names):
+    print(i, j)

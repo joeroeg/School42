@@ -36,4 +36,4 @@ student_info('Math', 'Art', name = 'John', age = 22) # ('Math', 'Art') {'name': 
 courses = ['Math', 'Art']
 info = {'name': 'John', 'age': 22}
 
-student_info(courses, info) # (['Math', 'Art'], {'name': 'John', 'age': 22}) {}
+student_info(*courses, **info) # (['Math', 'Art'], {'name': 'John', 'age': 22}) {}

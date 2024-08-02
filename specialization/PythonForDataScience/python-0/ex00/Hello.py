@@ -3,7 +3,6 @@
 lists, tuples, sets and dictionaries are mutable and can be modified.
 https://docs.python.org/3/tutorial/datastructures.html#
 """
-
 ft_list = ["Hello", "tata!"]
 ft_tuple = ("Hello", "toto!")
 ft_set = {"Hello", "tutu!"}
