@@ -58,15 +58,25 @@ Leaffliction |  Tackle computer vision tasks by acquiring, processing, and analy
 
 | Project Name   | Description                                       | Language         |
 | --------------- | ------------------------------------------------- | ---------------- |
+
 | Module 00  |  Introduction to C++ basics, covering syntax, data types, and control structures. Learn variable declarations, loops, and conditional statements. Focus on understanding the compilation process and basic I/O operations. | C++              |
+
 | Module 01  |  Dive into dynamic memory allocation with new and delete, pointers, and references. Learn to manage resources, avoid memory leaks, and handle file I/O streams (ifstream, ofstream). Explore RAII (Resource Acquisition Is Initialization) principle. | C++              |
+
 | Module 02  | Understand ad-hoc polymorphism through function and operator overloading. Implement canonical form classes with proper constructors, destructors, copy constructors, and assignment operators. Explore encapsulation and data hiding. | C++              |
+
 | Module 03  | Implement inheritance hierarchies, abstract classes, and interfaces. Study virtual functions and pure virtual functions for achieving runtime polymorphism. Understand the use of base and derived class pointers and object slicing issues. | C++              |
+
 | Module 04  | Focus on subtyping polymorphism and OOP principles like encapsulation, inheritance, and polymorphism. Implement design patterns such as Singleton, Factory, and Observer. Use polymorphic base classes to design flexible and reusable code. | C++              |
+
 | Module 05  |  Learn exception handling with try, catch, and throw statements. Understand standard exceptions and custom exception classes. Utilize the Standard Template Library (STL) for containers (vector, map) and algorithms (sort, find). | C++              |
+
 | Module 06  | Introduction to type casting in C++: static_cast, dynamic_cast, const_cast, and reinterpret_cast. Understand the use cases, safety, and pitfalls of each casting method. Study RTTI (Run-Time Type Information) and its applications. | C++              |
+
 | Module 07  |  Master templates in C++, including function templates and class templates. Implement generic functions and classes for type-independent code. Explore template specialization and the use of typename and template keywords. | C++              |
-| Module 08  | Work with advanced STL features like templated containers (deque, set), iterators, and algorithms. Understand functors, lambda expressions, and their use in algorithm customization. Optimize code using efficient data structures and algorithms. | C++              |
+
+| Module 08  | This project explores advanced C++ concepts, focusing on templated containers, iterators, and algorithms using the Standard Template Library (STL). The module consists of three exercises: EasyFind: Implementation of a templated function to locate an integer within a container, showcasing basic use of STL containers. Span: Development of a class to store a collection of integers and calculate the shortest and longest spans between them. This exercise emphasizes efficient handling of large datasets and the use of iterators for batch operations. MutantStack: Creation of an iterable stack by extending std::stack with iterator functionality, combining the properties of both a stack and a container.Work with advanced STL features like templated containers (deque, set), iterators, and algorithms. | C++              |
+
 | Module 09 | This repository contains my implementations for Module 09 of the C++ curriculum, focused on utilizing the Standard Template Library (STL). Each exercise is designed to demonstrate proficiency in managing complex data structures and algorithms using C++98. **Bitcoin Exchange:** A program that calculates the value of Bitcoin on specific dates using a historical price database. It demonstrates efficient data handling and error management using STL containers. **Reverse Polish Notation (RPN):** An RPN calculator that evaluates expressions with basic arithmetic operations. This project showcases stack management and algorithmic parsing in C++. **PmergeMe:** A sorting program implementing the Ford-Johnson merge-insert sort algorithm. It compares performance across different STL containers, efficiently handling large data sets. |
 
 ## How to explore
