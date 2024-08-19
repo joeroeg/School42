@@ -1,6 +1,6 @@
 # import requests
 
-# api_key = "78fbf9e87c4f31947b9bc9cae990d3b9"
+# api_key = ""
 # base_url = "https://api.crunchbase.com/api/v4/entities/organizations"
 
 # params = {
@@ -36,7 +36,7 @@ url = "https://api.crunchbase.com/v4/data/searches/organizations"
 headers = {
     "accept": "application/json",
     "content-type": "application/json",
-    "X-cb-user-key": "78fbf9e87c4f31947b9bc9cae990d3b9"
+    "X-cb-user-key": ""
 }
 
 response = requests.post(url, headers=headers)
