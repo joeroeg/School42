@@ -54,12 +54,8 @@ make run
 ## Project Structure
 ```
 libft/
-├── includes/
-│   └── libft.h        # Header file containing function prototypes
-├── src/
-│   ├── memory/        # Memory-related functions
-│   ├── string/        # String manipulation functions
-│   ├── list/          # Linked list utilities
+├── libft.h            # Header file containing function prototypes
+├── *.c                # Functions
 ├── Makefile           # Build instructions
 └── README.md          # Project documentation
 ```
