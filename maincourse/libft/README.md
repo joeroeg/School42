@@ -48,17 +48,20 @@ This library implements functions in the following categories:
 To use `libft` in your project, include the library during the compilation step:
 
 ```bash
-gcc your_code.c -L. -lft -o your_program
-
+make run
+```
 
 ## Project Structure
-
-```plaintext
+```
 libft/
-│   libft.h     # Header file containing function prototypes
-├── *.c         # Functions
-├── Makefile    # Build instructions
-└── README.md   # Project documentation
+├── includes/
+│   └── libft.h        # Header file containing function prototypes
+├── src/
+│   ├── memory/        # Memory-related functions
+│   ├── string/        # String manipulation functions
+│   ├── list/          # Linked list utilities
+├── Makefile           # Build instructions
+└── README.md          # Project documentation
 ```
 
 ## Testing

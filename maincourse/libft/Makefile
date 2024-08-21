@@ -36,13 +36,13 @@ RM = /bin/rm -f
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@ar rcs $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(BONUS_OBJS)
+	@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 	@ranlib $(NAME)
 
-bonus: $(BONUS_OBJS)
-	@ar rcs $(NAME) $(BONUS_OBJS)
-	@ranlib $(NAME)
+run: all
+	@$(CC) $(CFLAGS) $(INCLUDES) main.c $(NAME) -o a.out
+	@./a.out
 
 clean:
 	@$(RM) $(OBJS) $(BONUS_OBJS)
