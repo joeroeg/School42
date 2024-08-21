@@ -1,8 +1,3 @@
-The PDF contains detailed documentation for a `libft` project, which seems to be part of a coding course or library implementation. I’ll create a README in markdown format summarizing the key sections and contents of this project, such as the project overview, features, installation, usage, and contributing guidelines.
-
-Here's a draft of the README.md file:
-
-```markdown
 # Libft
 
 Libft is a custom implementation of common C standard library functions as part of the **42** curriculum. It provides a robust foundation of basic functions and utilities that are frequently needed across various C projects. The goal of this project is to gain a deeper understanding of low-level programming and build a personal library that can be reused in future projects.
@@ -54,13 +49,7 @@ To use `libft` in your project, include the library during the compilation step:
 
 ```bash
 gcc your_code.c -L. -lft -o your_program
-```
 
-Make sure to include the appropriate headers in your source files:
-
-```c
-#include "libft.h"
-```
 
 ## Project Structure
 
