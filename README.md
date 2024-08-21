@@ -5,7 +5,7 @@
 - [42 Cursus Projects Portfolio](#42-cursus-projects-portfolio)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
-  - [**Projects**](#projects)
+  - [Projects](#projects)
     - [Specialization Projects](#specialization-projects)
     - [Core Projects](#core-projects)
     - [Network Projects](#network-projects)
@@ -61,6 +61,8 @@ Leaffliction |  Tackle computer vision tasks by acquiring, processing, and analy
 | [Module 00](./maincourse/CPP/00) | In this module, I started my journey with C++, gaining a solid understanding of the basics. I covered the fundamentals such as syntax, data types, and control structures. This module was essential in learning how to declare variables, use loops, and implement conditional statements. Additionally, I explored the compilation process and basic I/O operations, which laid the foundation for more advanced concepts. | C++ |
 | [Module 01](./maincourse/CPP/01) | Here, I delved into dynamic memory allocation, learning how to effectively use `new` and `delete` for managing memory in C++. I also worked with pointers and references, which are crucial for handling resources efficiently. This module introduced me to file I/O streams (`ifstream`, `ofstream`) and the RAII (Resource Acquisition Is Initialization) principle, helping me understand how to manage resources and prevent memory leaks. | C++ |
 | [Module 02](./maincourse/CPP/02) | This module focused on ad-hoc polymorphism through function and operator overloading. I implemented canonical form classes, ensuring that my classes had proper constructors, destructors, copy constructors, and assignment operators. The experience helped me understand encapsulation, data hiding, and the importance of maintaining class invariants in object-oriented programming. | C++ |
+| [Module 03](./maincourse/CPP/03) | | C++ |
+| [Module 04](./maincourse/CPP/04) | | C++ |
 | [Module 05](./maincourse/CPP/05) | In this module, I tackled exception handling in C++, learning to write robust code using `try`, `catch`, and `throw` statements. I gained experience with standard exceptions and even created custom exception classes. Additionally, I explored the powerful features of the Standard Template Library (STL), working with containers like `vector` and `map`, and utilizing algorithms such as `sort` and `find` to handle data efficiently. | C++ |
 | [Module 06](./maincourse/CPP/06) | This module introduced me to type casting in C++, covering `static_cast`, `dynamic_cast`, `const_cast`, and `reinterpret_cast`. I learned to identify the appropriate casting method for different scenarios, while understanding the safety and potential pitfalls of each. I also explored Run-Time Type Information (RTTI) and its practical applications in dynamic type checking and safe downcasting. | C++ |
 | [Module 07](./maincourse/CPP/07) | In this module, I mastered templates in C++, focusing on both function templates and class templates. I learned how to write generic code that can work with any data type, significantly enhancing the flexibility and reusability of my code. The module also covered template specialization and the nuances of the `typename` and `template` keywords, deepening my understanding of C++'s type system. | C++ |
