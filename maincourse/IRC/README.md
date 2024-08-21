@@ -40,8 +40,8 @@ The server should work similarly to a real IRC server, allowing you to connect w
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/ft_irc.git
-    cd ft_irc
+    git clone https://github.com/joeroeg/42.git
+    cd 42/maincourse/IRC
     ```
 
 2. Compile the project:
@@ -60,9 +60,14 @@ The server should work similarly to a real IRC server, allowing you to connect w
 
 1. Connect to the server using an IRC client:
     ```bash
-    irssi -c 127.0.0.1 -p <port> -w <password>
+    nc -c localhost <port> <password>
     ```
-2. Interact with the server using standard IRC commands like `/nick`, `/join`, `/msg`, etc.
+2. Interact with the server using standard IRC commands like
+    ```
+    PASS <password>
+    NICK <nickname>
+    USER <username>
+    ```
 
 ## Bonus Features
 
@@ -83,16 +88,13 @@ IRC/
 
 ## Testing
 
-You can test the server using tools like `netcat` (nc):
+You can test the server using tools like `netcat` (nc) `important to use option -c to add /r/n at the end of each message`:
 ```bash
-nc 127.0.0.1 <port>
+nc -c 127.0.0.1 <port>
 ```
 
 You can also use a real IRC client like `irssi` or `WeeChat` for more extensive testing.
 
-## Contributing
-
-Feel free to open issues or submit pull requests for improvements. Contributions should follow the C++98 standard and maintain compatibility with the project guidelines.
 
 ## License
 
