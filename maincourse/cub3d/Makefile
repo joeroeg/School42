@@ -60,7 +60,7 @@ $(BIN_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(GLFW):
-	@git clone git@github.com:Tanker50207/glfw.git $(LIB_DIR)glfw
+	@git clone https://github.com/Tanker50207/glfw.git $(LIB_DIR)glfw
 	@cd $(LIB_DIR)glfw && cmake -B build && cmake --build build -j4
 
 $(MLX42):
