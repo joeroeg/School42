@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:58:06 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:27:40 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:27:08 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ function: create a new node with content "Hello"
 output: "Hello"
 */
 
-/*
 t_list	*ft_lstnew(void *content)
 {
 	t_list	*new_node;
@@ -30,4 +29,3 @@ t_list	*ft_lstnew(void *content)
 	new_node->next = NULL;
 	return (new_node);
 }
-*/

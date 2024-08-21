@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:30:26 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:29:41 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:24:17 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ function: allocates (with malloc(3)) and returns a new string, which is the
   output: "HelloWorld"
 */
 
-/*
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	len1;
@@ -38,4 +37,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	new_str[len1 + len2] = '\0';
 	return (new_str);
 }
-*/

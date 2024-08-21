@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:24:17 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:47:39 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:18:24 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,7 @@ function: check if '1' is a digit
 		  the result is less than 10 then it is a digit.
 */
 
-/*
 int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
-}
-*/
-
-int ft_isdigit(int c)
-{
-	return(c >= '0' && c <= '9');
 }

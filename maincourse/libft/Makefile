@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hezhukov <hezhukovstudent.42.fr>          +#+  +:+       +#+         #
+#    By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:24:38 by hezhukov          #+#    #+#              #
 #    Updated: 2023/11/03 13:59:11 by hezhukov         ###   ########.fr        #
@@ -31,23 +31,24 @@ CFLAGS = -Wall -Wextra -Werror
 RM = /bin/rm -f
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $
+	@echo "compiling $<"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@ar rcs $(NAME) $(OBJS)
+	@ranlib $(NAME)
 
 bonus: $(BONUS_OBJS)
-	ar rcs $(NAME) $(BONUS_OBJS)
-	ranlib $(NAME)
+	@ar rcs $(NAME) $(BONUS_OBJS)
+	@ranlib $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(BONUS_OBJS)
+	@$(RM) $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 

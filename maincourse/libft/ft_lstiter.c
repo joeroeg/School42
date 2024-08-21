@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:00:28 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:27:02 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:26:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ function: iterate through lst and apply f to each element
 output: NULL
 */
 
-/*
 void	ft_lstiter(t_list *lst, void (*f)(void*))
 {
 	if (!f)
@@ -29,4 +28,3 @@ void	ft_lstiter(t_list *lst, void (*f)(void*))
 		lst = lst->next;
 	}
 }
-*/

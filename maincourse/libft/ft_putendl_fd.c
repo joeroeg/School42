@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:05:38 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:28:44 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:41:26 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ function: writes a string to a file descriptor (fd)
   output: Hello
 */
 
-/*
 void	ft_putendl_fd(char *s, int fd)
 {
 	if (s != NULL)
@@ -27,4 +26,3 @@ void	ft_putendl_fd(char *s, int fd)
 		ft_putchar_fd('\n', fd);
 	}
 }
-*/

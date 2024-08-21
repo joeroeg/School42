@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:26:50 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/13 13:37:25 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:40:36 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ function: memset fills the first n bytes of the memory area
    input: ft_memset("abcde", '-', 3)
   output: "---de"
 */
-
 
 void	*ft_memset(void *s, int c, size_t n)
 {
@@ -36,4 +35,3 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
-

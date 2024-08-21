@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:58:48 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:27:28 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:25:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ function: add new to the front of lst
 output: lst->new
 */
 
-/*
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (lst)
@@ -28,4 +27,3 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 		*lst = new;
 	}
 }
-*/

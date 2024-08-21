@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:05:53 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:28:09 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 22:38:44 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ function: memcpy function copies characters from the source to the destination
   output: ababa // overlap
 */
 
-/*
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char		*dest_ptr;
@@ -37,4 +36,3 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		*dest_ptr++ = *src_ptr++;
 	return (dest);
 }
-*/

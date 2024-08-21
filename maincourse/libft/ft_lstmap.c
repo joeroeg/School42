@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:00:40 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:27:36 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/03 14:54:25 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void (return type) – the function returns nothing.
 (*del) – indicates that del is a pointer to a function.
 (void *) – the function takes one argument: a pointer to void.
 */
-/*
+
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *))
 {
 	t_list	*first;
@@ -45,4 +45,3 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *))
 	}
 	return (first);
 }
-*/

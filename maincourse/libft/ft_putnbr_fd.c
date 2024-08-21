@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:07:51 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:28:48 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:41:41 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ function: writes a number to a file descriptor (fd)
   output: 123
 */
 
-/*
 void	ft_putnbr_fd(int nb, int fd)
 {
 	unsigned int	nbr;
@@ -34,4 +33,3 @@ void	ft_putnbr_fd(int nb, int fd)
 		ft_putnbr_fd(nbr / 10, fd);
 	ft_putchar_fd((char)(nbr % 10 + '0'), fd);
 }
-*/

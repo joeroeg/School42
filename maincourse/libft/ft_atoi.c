@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:09:41 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:25:04 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:33:09 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,4 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	return (number * sign);
-}
-
-int main()
-{
-	char *str = "1234";
-	printf("%d\n", ft_atoi(str));
-	return 0;
 }

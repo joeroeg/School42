@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:24:00 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/19 22:51:52 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/03 13:59:53 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ function: compares not more than (n) characters of the string (str1) to those
   output: 32
 */
 
-/*
 int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
 	if (!str1 || !str2)
@@ -36,4 +35,3 @@ int	ft_strncmp(const char *str1, const char *str2, size_t n)
 	}
 	return (*(unsigned char *) str1 - *(unsigned char *) str2);
 }
-*/

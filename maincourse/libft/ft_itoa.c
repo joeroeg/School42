@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:39:44 by hezhukov          #+#    #+#             */
-/*   Updated: 2023/11/10 19:26:23 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:34:08 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ function: convert integer to string
   output: "-1234"
 */
 
-/*
 static size_t	count_digits(int n)
 {
 	size_t	i;
@@ -59,4 +58,3 @@ char	*ft_itoa(int n)
 		output_string[0] = '-';
 	return (output_string);
 }
-*/

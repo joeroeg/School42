@@ -6,7 +6,7 @@
 /*   By: hezhukov <hezhukov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:52:13 by hezhukov          #+#    #+#             */
-/*   Updated: 2024/01/15 16:35:26 by hezhukov         ###   ########.fr       */
+/*   Updated: 2023/11/03 13:59:48 by hezhukov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ function: allocates (with malloc) and returns a substring from the string
    input: ft_substr("Hello World!", 0, 4)
   output: "Hell"
 */
-
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -45,4 +44,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	substr[i] = '\0';
 	return (substr);
 }
-
