@@ -26,7 +26,7 @@ OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 INCLUDES = -I.
-CC = clang
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = /bin/rm -f
 
