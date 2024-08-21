@@ -1,2 +1,0 @@
-- the message for the time of death is not showing at the right time. Make sure that the philo checks if he dies while he is eating.
-- uint64_t
