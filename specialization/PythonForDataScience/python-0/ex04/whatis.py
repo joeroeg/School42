@@ -6,6 +6,7 @@ Raised when a function receives correct type but an wrong value.
 AssertionError
 Raised when an assert statement fails.
 """
+
 import sys
 
 if len(sys.argv) == 1:
