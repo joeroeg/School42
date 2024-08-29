@@ -20,7 +20,7 @@ def main():
 
     n = int(sys.argv[2])
     words = sys.argv[1].split(" ")
-    print(list(ft_filter(lambda word: len(word) > n, words)))
+    print(ft_filter(lambda word: len(word) > n, words))
 
 
 if __name__ == "__main__":
