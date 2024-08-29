@@ -48,11 +48,8 @@ def string_to_morse(string):
 
     for char in string.upper():
         if char not in NESTED_MORSE:
-            raise ValueError(f"Invalid character in the string: '{char}'")
-
-    for char in string.upper():
+            raise AssertionError("AssertionError: the arguments are bad")
         morse += NESTED_MORSE[char] + " "
-
     morse = morse.strip()
     return morse
 
@@ -60,7 +57,7 @@ def string_to_morse(string):
 def main():
     """Main function for the module."""
     try:
-        assert len(sys.argv) == 2, "Usage: python sos.py <string>"
+        assert len(sys.argv) == 2, "Usage: python sos.py 'string'"
     except AssertionError as e:
         print(e)
         sys.exit(1)
@@ -68,10 +65,9 @@ def main():
     input_string = sys.argv[1]
 
     try:
-        result = string_to_morse(input_string)
-        print(result)
-        sys.exit(0)
-    except ValueError as e:
+        morse_code = string_to_morse(input_string)
+        print(morse_code)
+    except AssertionError as e:
         print(e)
         sys.exit(1)
 
