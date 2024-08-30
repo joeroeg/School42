@@ -5,10 +5,10 @@ BAR = chr(9608)
 
 def get_progress_bar(progress, total, bar_width=40):
     """Returns a string that represents a progress bar."""
-    progressBar = '['
+    progressBar = '|'
     progressBar += BAR * int((progress / total) * bar_width)
     progressBar += ' ' * (bar_width - int((progress / total) * bar_width))
-    progressBar += ']'
+    progressBar += '|'
     progressBar += ' ' + str(round(progress / total * 100, 1)) + '%'
     progressBar += ' ' + str(progress) + '/' + str(total)
     return progressBar
