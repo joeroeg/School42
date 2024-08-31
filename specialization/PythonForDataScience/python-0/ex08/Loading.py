@@ -53,6 +53,7 @@ def ft_tqdm(lst: range):
 
     print()
 
+
 def main():
     """Main function."""
     for elem in ft_tqdm(range(333)):

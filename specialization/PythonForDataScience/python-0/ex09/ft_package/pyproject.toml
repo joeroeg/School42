@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ft_package"
+version = "0.1.0"
+description = "A custom package for counting elements in a list"
+authors = [{name = "Your Name", email = "youremail@example.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+dependencies = []
+
+[tool.setuptools]
+packages = ["ft_package"]
+
+[tool.setuptools.package-data]
+ft_package = ["*.py"]
