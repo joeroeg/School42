@@ -2,6 +2,7 @@
 
 # Define variables
 API_URL=""
+AUTH_TOKEN=""
 PAGE=1
 OUTPUT_FILE="device_logs.json"
 
@@ -14,18 +15,21 @@ while true; do
     -H "Authorization: Bearer $AUTH_TOKEN" \
     -H "accept: application/json")
 
-  # Extract results from the response
-  # Check if the response is an array
-  if echo "$RESPONSE" | jq -e 'type == "array"' > /dev/null; then
-    RESULTS="$RESPONSE"
-  else
-    # If the response is an object, extract the 'results' field
-    RESULTS=$(echo "$RESPONSE" | jq '.results')
+  # Print raw response for debugging
+  echo "Response for page $PAGE: $RESPONSE"
+
+  # Validate if RESPONSE is a non-empty JSON
+  if [ -z "$RESPONSE" ] || ! echo "$RESPONSE" | jq . > /dev/null 2>&1; then
+    echo "Invalid or empty response received."
+    break
   fi
 
-  # Check if results are empty
-  if [ "$RESULTS" == "[]" ]; then
-    echo "No more data found."
+  # Extract results from the response
+  RESULTS=$(echo "$RESPONSE" | jq '.results // empty')
+
+  # Check if results are null or empty
+  if [ -z "$RESULTS" ] || [ "$RESULTS" == "[]" ]; then
+    echo "No more data found or invalid response format."
     break
   fi
 
