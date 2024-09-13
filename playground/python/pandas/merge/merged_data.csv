@@ -1,0 +1,4 @@
+id, age, city, name, state, country, lat, long,Unnamed: 6
+1,25.0, New York, John, NY, USA,40.7128,-74.006,
+2,30.0, London, Doe, England, UK,51.5074,-0.1278,
+3,,, Jane, Ile-de-France, France,48.8566,2.3522,
