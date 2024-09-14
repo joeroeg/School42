@@ -1,8 +1,6 @@
 To create your own Python package, you need to organize your Python code into a structured directory, create a few metadata files, and use a package manager like `setuptools` to handle packaging and distribution.
 more detailes can be found [here](https://packaging.python.org/en/latest/overview/)
 
-Here’s a step-by-step guide to creating a Python package:
-
 ### 1. **Organize Your Code into a Directory Structure**
 
 First, create a directory for your package. For example, let's say your package is named `mypackage`.

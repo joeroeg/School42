@@ -3,26 +3,25 @@ import time
 import shutil
 
 """
-100%|███| 333/333 [00:01<00:00, 170.49it/s]
+    100%|███| 333/333 [00:01<00:00, 170.49it/s]
 
-100%        - progress percentage
-|███|       - progress bar
-333/333     - current iteration
-00:01       - elapsed time (ET)
-00:00       - estimated time remaining (ETA)
-170.49it/s  - iterations per second
-"""
-
-
-def ft_tqdm(lst: range):
-    """This function simulates a progress bar for iterating through a range.
+    100%        - progress percentage
+    |███|       - progress bar
+    333/333     - current iteration
+    00:01       - elapsed time (ET)
+    00:00       - estimated time remaining (ETA)
+    170.49it/s  - iterations per second
 
     tw = terminal width
     pw = progress width
     eta = estimated time remaining
     et = elapsed time
     ips = iterations per second
-    """
+"""
+
+
+def ft_tqdm(lst: range):
+    """This function simulates a progress bar for iterating through a range."""
     total_len = len(lst)
     start_time = time.time()
     tw = shutil.get_terminal_size().columns
