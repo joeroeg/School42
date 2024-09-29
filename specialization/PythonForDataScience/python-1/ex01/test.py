@@ -4,7 +4,6 @@ my_list = [1, 2, 3, 4, 5]
 slice_result = my_list[1:4]  # Get the second to fourth elements
 print(slice_result)
 
-
 # Omitting start and stop
 my_list = [1, 2, 3, 4, 5]
 slice_result = my_list[:3]  # Get the first three elements
