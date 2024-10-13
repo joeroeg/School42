@@ -1,0 +1,26 @@
+{
+  "name": "scala",
+  "argv": [
+    "/home/device/.sdkman/candidates/scala/3.5.1/bin/scala-cli",
+    "--cli-default-scala-version",
+    "3.5.1",
+    "--repository",
+    "file:///home/device/.sdkman/candidates/scala/current/maven2",
+    "--prog-name",
+    "scala",
+    "bsp",
+    "--json-options",
+    "/home/device/Documents/programming/github/42/playground/Scala/.scala-build/ide-options-v2.json",
+    "--json-launcher-options",
+    "/home/device/Documents/programming/github/42/playground/Scala/.scala-build/ide-launcher-options.json",
+    "--envs-file",
+    "/home/device/Documents/programming/github/42/playground/Scala/.scala-build/ide-envs.json",
+    "/home/device/Documents/programming/github/42/playground/Scala/HelloWorld.scala"
+  ],
+  "version": "1.4.3",
+  "bspVersion": "2.1.1",
+  "languages": [
+    "scala",
+    "java"
+  ]
+}
