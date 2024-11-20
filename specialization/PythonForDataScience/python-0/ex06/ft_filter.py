@@ -3,31 +3,21 @@
 
 def ft_filter(func, lst):
     """Filter function."""
-    return [x for x in lst if func(x)]  # list comprehension
+    return [x for x in lst if func(x)]
 
 
 """
 **List Comprehension Summary**
 
-List comprehension is a concise way to create lists in Python. It consists of:
+It takes two arguments:
+    func: A function (in this case, a lambda).
+    lst: A list of elements to filter.
 
-1. Brackets `[]`
-2. An expression
-3. A `for` clause
-4. Optional `for` or `if` clauses
-
-**Key Features:**
-
-* Can create lists with any type of object
-* Always returns a new list
-* Compact way to process all elements of a list
-* Can replace `lambda`, `map()`, `filter()`, and `reduce()` functions
-
-**Example:**
-
-numbers = [1, 2, 3, 4, 5]
-double_numbers = [x * 2 for x in numbers]
-print(double_numbers)  # [2, 4, 6, 8, 10]
+It iterates over each element (x) in lst.
+For each element, it applies func(x).
+If func(x) evaluates to True, x is included in the result.
+If func(x) evaluates to False, x is excluded.
+The result is a new list containing only the elements for which func(x) is True.
 """
 
 # ages = [5, 12, 17, 18, 24, 32]

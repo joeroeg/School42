@@ -7,20 +7,14 @@ from ft_filter import ft_filter
 def main():
     """Takes str and an int and returns words that are longer than the int."""
     try:
-        assert len(sys.argv) == 3
-    except AssertionError:
-        print("AssertionError: the arguments are bad")
-        sys.exit(1)
+        assert len(sys.argv) == 3, "the arguments are bad"
+        n = int(sys.argv[2])
+        words = sys.argv[1].split(" ")
+        print(ft_filter(lambda word: len(word) > n, words))
 
-    try:
-        int(sys.argv[2])
-    except ValueError:
-        print("AssertionError: the arguments are bad")
+    except (AssertionError, ValueError) as e:
+        print(f"AssertionError: {e}")
         sys.exit(1)
-
-    n = int(sys.argv[2])
-    words = sys.argv[1].split(" ")
-    print(ft_filter(lambda word: len(word) > n, words))
 
 
 if __name__ == "__main__":

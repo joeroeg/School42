@@ -21,19 +21,19 @@ epoch_time = time.gmtime(0)
 time_diff = current_time - time.mktime(epoch_time)
 
 # Format the time difference
-time_diff_formatted = "{:.4f}".format(time_diff)
+time_diff_f = "{:,.4f}".format(time_diff)
 
 # Convert in scientific notation
 time_diff_sci = "{:.2e}".format(time_diff)
 
 # Build the formatted string
-formatted = since_text + time_diff_formatted + scientific_text + time_diff_sci
+formatted = since_text + time_diff_f + " or " + time_diff_sci + scientific_text
 
 # Print the formatted string
 print(formatted.format(time_diff, time_diff))
 
 # Get the current date
-current_date = time.strftime("%B %d %Y", time.localtime())
+current_date = time.strftime("%b %d %Y", time.localtime())
 
 # Print the current date
 print(current_date)
