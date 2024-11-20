@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "ft_package"
 version = "0.1.0"
 description = "A custom package for counting elements in a list"
-authors = [{name = "Your Name", email = "youremail@example.com"}]
+authors = [{name = "George", email = "george@example.com"}]
 license = {text = "MIT"}
 readme = "README.md"
 dependencies = []

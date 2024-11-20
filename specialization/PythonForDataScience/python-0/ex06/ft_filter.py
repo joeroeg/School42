@@ -17,7 +17,7 @@ It iterates over each element (x) in lst.
 For each element, it applies func(x).
 If func(x) evaluates to True, x is included in the result.
 If func(x) evaluates to False, x is excluded.
-The result is a new list containing only the elements for which func(x) is True.
+The result is a new list with only the elements for which func(x) is True.
 """
 
 # ages = [5, 12, 17, 18, 24, 32]
