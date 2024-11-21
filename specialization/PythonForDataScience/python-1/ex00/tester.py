@@ -1,5 +1,11 @@
 """Tester."""
 
+
+
+
+
+
+
 from give_bmi import give_bmi, apply_limit
 
 height = [2.71, 1.15]
@@ -12,9 +18,3 @@ print(apply_limit(bmi, 26))
 bmi = give_bmi([180, 170, 12], [70, 80, 12])
 bmi = give_bmi([180, "a"], [70, 80])
 bmi = give_bmi([0, 0], [0, 0])
-
-"""
-$> python tester.py[22.507863455018317, 29.0359168241966] <class'list'>
-[False, True]
-$>
-"""

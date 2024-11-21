@@ -3,8 +3,12 @@
 
 def slice_me(family: list, start: int, end: int) -> list:
     """Slices a 2D list from start index to end index (exclusive)."""
+    f = family  # for flake8
+    if not isinstance(f, list) or (isinstance(f, list) and not f):
+        raise ValueError("Error: Please enter a non-empty list (2D).")
+
     if not isinstance(family, list):
-        raise ValueError("Error: Please enter a list.")
+        raise ValueError("Error: Please enter a 2D list.")
 
     if not isinstance(start, int) or not isinstance(end, int):
         raise ValueError("Error: Please enter integers for all parameters.")
