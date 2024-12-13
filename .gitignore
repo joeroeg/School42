@@ -5,3 +5,4 @@ a.out
 venv/
 .venv/
 *.pyc
+gitignore_dir/
