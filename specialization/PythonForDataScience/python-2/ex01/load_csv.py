@@ -2,12 +2,17 @@ import pandas as pd
 
 
 def load_csv(path: str) -> pd.DataFrame:
-    if path is None:
-        raise ValueError("Path is None")
-        exit(1)
-    pd.read_csv(path)
-    if pd.read_csv(path) is None:
-        raise ValueError("Path is None")
-        exit(1)
-    print("Loading dataset dimensions", pd.read_csv(path).shape)
-    return pd.read_csv(path)
+    """Load a CSV file from a given path and return a pandas DataFrame."""
+    try:
+        dataset = pd.read_csv(path)
+        if dataset.empty:
+            print("Warning: The dataset is empty.")
+        print(f"Loading dataset of dimensions {dataset.shape}")
+        return dataset
+    except FileNotFoundError as e:
+        print(f"FileNotFoundError: {e}")
+    except pd.errors.EmptyDataError as e:
+        print(f"EmptyDataError: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+    return None
