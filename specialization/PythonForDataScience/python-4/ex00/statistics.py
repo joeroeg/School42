@@ -1,68 +1,100 @@
-def __len__(*args: int) -> int:
-    length = 0
-    for arg in args:
-        length += 1
-    return length
 
 
-def __sum__(*args: int) -> int:
+def length(*args: int) -> int:
+    """Length is the number of elements in a list."""
+    count = 0
+    for _ in args:
+        count += 1
+    return count
+
+
+def summation(*args: int) -> int:
+    """Summation is the total of a list of numbers."""
     summation = 0
     for arg in args:
         summation += arg
     return summation
 
 
-def __sort__(*args: int) -> list:
-    sorted_list = []
-    for arg in args:
-        sorted_list.append(arg)
-        if __len__(sorted_list) > 1:
-            for i in range(__len__(sorted_list) - 1):
-                if sorted_list[i] > sorted_list[i + 1]:
-                    sorted_list[i], sorted_list[i + 1] = sorted_list[i + 1], sorted_list[i]
-    return sorted_list
+def sorting(*args: float) -> list:
+    sl = list(args)
+    n = length(*args)
+    for i in range(n):
+        swapped = False
+        for j in range(n - i - 1):
+            if sl[j] > sl[j + 1]:
+                sl[j], sl[j + 1] = sl[j + 1], sl[j]
+                swapped = True
+        if not swapped:
+            break
+    return sl
 
 
-def __mean__(*args: int) -> float:
-    return __sum__(*args) / __len__(*args)
+def arithmetic_mean(*args: int) -> float:
+    """Mean is the average of a list of numbers."""
+    if not args:
+        raise ValueError("Cannot compute mean of an empty list")
+    return summation(*args) / length(*args)
 
 
-def __median__(*args: int) -> float:
-    pass
+def arithmetic_median(*args: int) -> float:
+    """Median is the middle value of a sorted list."""
+    sorted_list = sorting(*args)
+    n = length(*args)
+    if n % 2 == 0:
+        return (sorted_list[n // 2 - 1] + sorted_list[n // 2]) / 2
+    return sorted_list[n // 2]
 
 
-def __variance__(*args: int) -> float:
-    mean = __mean__(*args)
-    return sum((x - mean) ** 2 for x in args) / __len__(*args)
+def variance(*args: int) -> float:
+    """Variance is the average of the squared differences from the Mean."""
+    mean = arithmetic_mean(*args)
+    return arithmetic_mean(*[(x - mean) ** 2 for x in args])
 
 
-def __std__(*args: int) -> float:
-    return __variance__(*args) ** 0.5
+def standard_deviation(*args: int) -> float:
+    """Standard deviation is the square root of variance."""
+    return variance(*args) ** 0.5
 
 
-def __quartile__(*args: int) -> list:
-    pass
+def quartile(*args: float) -> dict:
+    """Quartile is the median of the lower and upper half of a sorted list."""
+    sorted_data = sorting(*args)
+    n = length(*sorted_data)
+
+    def interpolate(p):
+        position = p * (n - 1)
+        k = int(position)
+        f = position - k
+        if k + 1 < n:
+            return sorted_data[k] + f * (sorted_data[k + 1] - sorted_data[k])
+        return sorted_data[k]
+
+    q1 = interpolate(0.25)
+    q3 = interpolate(0.75)
+
+    return [q1, q3]
+
 
 def ft_statistics(*args: int, **kwargs: str) -> None:
-    if not args or not kwargs:
-        print("ERROR")
+    """Prints the statistics of a list of numbers."""
+    valid_stats = {"mean", "median", "quartile", "std", "var"}
+
+    if not set(kwargs.values()).issubset(valid_stats):
         return
 
-    valid_stats = {"mean", "median", "quartile", "std", "var"}
-    invalid_stats = set(kwargs.values()) - valid_stats
-
-    if invalid_stats:
-        for _ in invalid_stats:
+    if not args or not kwargs:
+        for _ in kwargs.values():
             print("ERROR")
         return
 
     if "mean" in kwargs.values():
-        print(f"mean: {__mean__(*args)}")
+        print(f"mean : {arithmetic_mean(*args)}")
     if "median" in kwargs.values():
-        pass
+        print(f"median : {arithmetic_median(*args)}")
     if "quartile" in kwargs.values():
-        pass
+        print(f"quartile : {quartile(*args)}")
     if "std" in kwargs.values():
-        print(f"std: {__std__(*args)}")
+        print(f"std : {standard_deviation(*args)}")
     if "var" in kwargs.values():
-        print(f"var: {__variance__(*args)}")
+        print(f"var : {variance(*args)}")
