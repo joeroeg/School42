@@ -1,5 +1,3 @@
-
-
 def length(*args: int) -> int:
     """Length is the number of elements in a list."""
     count = 0
@@ -56,6 +54,7 @@ def standard_deviation(*args: int) -> float:
     """Standard deviation is the square root of variance."""
     return variance(*args) ** 0.5
 
+# [1 11] [42] [64 360]
 
 def quartile(*args: float) -> dict:
     """Quartile is the median of the lower and upper half of a sorted list."""

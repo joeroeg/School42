@@ -1,6 +1,6 @@
 from statistics import ft_statistics
-# import pandas as pd
-# import random
+import pandas as pd
+import random
 
 
 ft_statistics(1, 42, 360, 11, 64, toto="mean", tutu="median", tata="quartile")

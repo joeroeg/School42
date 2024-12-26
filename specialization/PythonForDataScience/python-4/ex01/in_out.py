@@ -11,8 +11,10 @@ def pow(x: int | float) -> int | float:
 def outer(x: int | float, function) -> object:
     """Return the result of calling the function with the argument x."""
     count = 0
+
     def inner() -> float:
         nonlocal x
+        nonlocal count
         count = function(x)
         x = count
         return count
