@@ -6,3 +6,4 @@ venv/
 .venv/
 *.pyc
 gitignore_dir/
+specialization/manim/*
